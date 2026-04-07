@@ -1,0 +1,179 @@
+name: Update IGRS Database
+
+on:
+  schedule:
+    - cron: "0 */12 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: update-igrs-db
+  cancel-in-progress: false
+
+jobs:
+  update-db:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Ensure jq is available
+        run: |
+          if ! command -v jq >/dev/null 2>&1; then
+            sudo apt-get update
+            sudo apt-get install -y jq
+          fi
+
+      - name: Download latest IGRS public database
+        run: |
+          set -euo pipefail
+
+          PROBE_URL="https://api.igrs.id/public/games?page=888888&size=2000"
+          PAGE_DIR=".tmp-igrs-pages"
+
+          curl --fail --show-error --silent --location "$PROBE_URL" -o "probe.json"
+          jq empty "probe.json"
+
+          TOTAL_PAGES="$(jq -r '.page.totalPages // 0' "probe.json")"
+          if ! [[ "$TOTAL_PAGES" =~ ^[0-9]+$ ]] || [[ "$TOTAL_PAGES" -lt 1 ]]; then
+            echo "ERROR: Invalid totalPages from probe response: $TOTAL_PAGES" >&2
+            cat "probe.json"
+            exit 1
+          fi
+
+          LAST_PAGE=$((TOTAL_PAGES - 1))
+          echo "Detected totalPages=$TOTAL_PAGES, downloading pages ${LAST_PAGE}..0"
+
+          rm -rf "$PAGE_DIR"
+          mkdir -p "$PAGE_DIR"
+
+          for ((p=LAST_PAGE; p>=0; p--)); do
+            PAGE_URL="https://api.igrs.id/public/games?page=${p}&size=2000"
+            PAGE_FILE="${PAGE_DIR}/page-${p}.json"
+
+            echo "→ Downloading page ${p}"
+            curl --fail --show-error --silent --location "$PAGE_URL" -o "$PAGE_FILE"
+            jq empty "$PAGE_FILE"
+
+            if ! jq -e 'has("_embedded") and (._embedded.publicGameResultList | type == "array")' "$PAGE_FILE" >/dev/null; then
+              echo "ERROR: Page ${p} response looks broken (missing _embedded.publicGameResultList)." >&2
+              jq '{_links, page}' "$PAGE_FILE" || true
+              exit 1
+            fi
+          done
+
+          jq -s '{
+            _embedded: {
+              publicGameResultList: (map(._embedded.publicGameResultList) | add)
+            }
+          }' "${PAGE_DIR}"/page-*.json > "igrs.pubdb.json"
+
+          GAME_COUNT="$(jq '._embedded.publicGameResultList | length' "igrs.pubdb.json")"
+          echo "Merged ${GAME_COUNT} games into igrs.pubdb.json"
+
+      - name: Validate assembled JSON
+        run: |
+          jq -e '._embedded.publicGameResultList | type == "array"' "igrs.pubdb.json" >/dev/null
+
+      - name: Normalize and split database
+        run: |
+          set -euo pipefail
+
+          OUTPUT_DIR="frontend/data/json"
+          mkdir -p "$OUTPUT_DIR"
+
+          PLATFORM_NORMALIZE='def normalize_platform:
+            gsub("^\\s+|\\s+$"; "")
+            | if . == "P C" then "PC"
+              elif . == "Xbox Series X S" then "Xbox Series X|S"
+              else .
+              end;'
+
+          RATINGS_QUERY="${PLATFORM_NORMALIZE}
+          [._embedded.publicGameResultList[].ratings[]]
+          | unique_by(.id)
+          | map({
+              key: (.id | tostring),
+              value: {
+                name,
+                weight,
+                titleEn,
+                titleId,
+                contentEn,
+                contentId
+              }
+            })
+          | from_entries"
+
+          DESCRIPTORS_QUERY="${PLATFORM_NORMALIZE}
+          [._embedded.publicGameResultList[].descriptors[]]
+          | unique_by(.id)
+          | map({
+              key: (.id | tostring),
+              value: {
+                nameId,
+                nameEn,
+                description
+              }
+            })
+          | from_entries"
+
+          GAMES_QUERY="${PLATFORM_NORMALIZE}
+          ._embedded.publicGameResultList
+          | map({
+              id,
+              name,
+              releaseYear,
+              publisherName,
+              platformsName: (.platformsName | map(normalize_platform) | unique),
+              description,
+              videoUrl,
+              inGameUrl,
+              ratings: [.ratings[].id],
+              descriptors: [.descriptors[].id]
+            })"
+
+          RATINGS="$(jq "$RATINGS_QUERY" "igrs.pubdb.json")"
+          DESCRIPTORS="$(jq "$DESCRIPTORS_QUERY" "igrs.pubdb.json")"
+          GAME_COUNT="$(jq '._embedded.publicGameResultList | length' "igrs.pubdb.json")"
+          GENERATED_AT="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+
+          jq -n \
+            --argjson ratings "$RATINGS" \
+            --argjson descriptors "$DESCRIPTORS" \
+            --argjson totalGames "$GAME_COUNT" \
+            --arg generatedAt "$GENERATED_AT" \
+            '{
+              meta: {
+                generatedAt: $generatedAt,
+                totalGames: $totalGames,
+                source: "https://api.igrs.id/public/game/result"
+              },
+              ratings: $ratings,
+              descriptors: $descriptors
+            }' > "${OUTPUT_DIR}/igrs.meta.json"
+
+          jq "$GAMES_QUERY" "igrs.pubdb.json" > "${OUTPUT_DIR}/igrs.games.json"
+
+      - name: Remove raw dump file
+        run: |
+          rm -f "igrs.pubdb.json"
+          rm -f "probe.json"
+          rm -rf ".tmp-igrs-pages"
+
+      - name: Commit and push changes
+        run: |
+          if git diff --quiet -- frontend/data/json/igrs.meta.json frontend/data/json/igrs.games.json; then
+            echo "No data changes detected."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add frontend/data/json/igrs.meta.json frontend/data/json/igrs.games.json
+          git commit -m "chore(data): refresh IGRS dataset"
+          git push

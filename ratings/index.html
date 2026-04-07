@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="../">
+  <title>IGRSDB | Ratings</title>
+  <meta name="description" content="Unofficial open database of games in the IGRS registry. But the backend isnt slow.">
+  <link rel="icon" type="image/svg+xml" href="data/images/favicon.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="./" class="site-logo">
+        <img src="data/images/favicon.svg" alt="Logo" class="logo-mark" width="36" height="36">
+        <div class="logo-text">IGRS<span>DB</span></div>
+      </a>
+      <div class="header-actions">
+        <a href="search/" class="btn" data-i18n="nav.search">Search Games</a>
+        <button class="btn" id="lang-toggle" type="button" aria-label="Switch language">
+          🌐 <span id="lang-label">ID</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-container ratings-page">
+    <h1 class="page-title" data-i18n="ratings.title">Age Ratings Guide</h1>
+    <p class="page-subtitle" data-i18n="ratings.subtitle">The Indonesian Game Rating System (IGRS) classifies games into five age categories based on content criteria.</p>
+
+    <section id="ratings-list">
+      <div class="loading">
+        <div class="loading-spinner"></div>
+        <div data-i18n="loading">Loading...</div>
+      </div>
+    </section>
+
+    <section class="descriptors-section">
+      <h2 class="page-title" style="font-size:1.2rem;" data-i18n="descriptors.title">Content Descriptors</h2>
+      <p class="page-subtitle" data-i18n="descriptors.subtitle">Descriptors indicate specific types of content present in a game.</p>
+      <div class="descriptor-grid" id="descriptor-grid"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <span data-i18n="footer.text">Data scraped from</span> <a href="https://igrs.id" target="_blank" rel="noopener">igrs.id</a>
+      · <span data-i18n="footer.disclaimer">A MadeByMyID Project</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
