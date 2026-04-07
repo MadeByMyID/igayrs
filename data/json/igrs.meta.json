@@ -43,6 +43,14 @@
       "titleId": "Rating Usia 15 Tahun Keatas",
       "contentEn": "Game content suitable for ages 15 and above (15+) does not include references to cigarettes, alcohol, drugs, mutilation, cannibalism, nudity, pornography, gambling, or intense horror; may include limited animated violence without hatred, online interactions with language filters, blood elements, and non-sexual adult humor.",
       "contentId": "Kriteria konten gim untuk umur 15 tahun keatas (15+)\n\n1. Tidak menampilkan tulisan atau gambar yang berhubungan dengan rokok dan/atau rokok elektronik, minuman beralkohol, narkotika, psikotropika, dan/atau zat adiktif lainnya\n2. Tidak menampilkan mutilasi dan kanibalisme pada manusia, namun dapat menampilkan unsur darah\n3. Tidak menampilkan tokoh menyerupai manusia yang memperlihatkan sebagian anggota tubuh meliputi alat vital, payudara, dan/atau bokong\n4. Tidak memuat pornografi\n5. Tidak mengandung simulasi dan/atau kegiatan judi\n6. Tidak mengandung horor yang berusaha menimbulkan perasaan ngeri dan/atau takut yang amat sangat\n7. Boleh menampilkan unsur kekerasan yang hanya terbatas pada tokoh animasi yang dapat menyerupai manusia tetapi tidak melakukan kekerasan yang bertubi-tubi disertai rasa benci, amarah\n8. Boleh memiliki interaksi dalam jaringan berupa percakapan, dengan ketentuan harus memiliki fitur penapisan bahasa kasar, umpatan, dan/atau istilah seksual\n9. Boleh mengandung humor dewasa yang tidak berkonotasi seksual\n"
+    },
+    "35": {
+      "name": "RC",
+      "weight": 6,
+      "titleEn": "Refused Classification",
+      "titleId": "Konten Terlarang",
+      "contentEn": "The RC rating is a rating for games that contain prohibited content. The criteria for content in a game that could result in this rating include the following:\n1. Displaying and/or featuring pornography\n2. Having gameplay activities based solely on chance or any form of gambling (betting) that involves real and legal currency, foreign currency, electronic money, or intangible commodities such as digital assets that can be traded and exchanged for legal tender, and providing/supporting/facilitating a cash-out feature.\n3. Violating the laws and regulations in Indonesia.\n",
+      "contentId": "Rating RC adalah rating untuk gim yang mengandung konten terlarang. Adapun kriteria konten pada suatu gim yang dapat membuat gim mendapatkan rating ini mencakup dari:\n1. Menampilkan dan/atau memperdengarkan pornografi.\n2. Memiliki kegiatan permainan yang didasarkan pada peruntungan belaka atau segala pertaruhan (judi) yang dapat menggunakan alat pembayaran yang sah, mata uang asing, uang elektronik, atau komoditi tidak berwujud berupa aset digital yang dapat diperdagangkan dan ditukarkan menjadi alat pembayaran yang sah dan menyediakan/mendukung/memfasilitasi adanya fitur pencarian (cash out).\n3. Melanggar ketentuan peraturan perundang-undangan di Indonesia.\n"
     }
   },
   "descriptors": {
@@ -85,6 +93,11 @@
       "nameId": "Kekerasan",
       "nameEn": "Violence",
       "description": "Deskriptor kekerasan diberikan kepada gim yang memiliki konten kekerasan"
+    },
+    "36": {
+      "nameId": "Sexualitas/Pornografi",
+      "nameEn": "Sexuality/Pornography",
+      "description": "Contents that contain sexuality / pornography"
     }
   }
 }

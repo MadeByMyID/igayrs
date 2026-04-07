@@ -54,7 +54,7 @@ jobs:
             PAGE_URL="https://api.igrs.id/public/games?page=${p}&size=2000"
             PAGE_FILE="${PAGE_DIR}/page-${p}.json"
 
-            echo "→ Downloading page ${p}"
+            echo "Downloading page ${p}"
             curl --fail --show-error --silent --location "$PAGE_URL" -o "$PAGE_FILE"
             jq empty "$PAGE_FILE"
 
@@ -78,6 +78,20 @@ jobs:
         run: |
           jq -e '._embedded.publicGameResultList | type == "array"' "igrs.pubdb.json" >/dev/null
 
+      - name: Download ratings and descriptors
+        run: |
+          set -euo pipefail
+
+          echo "Fetching ratings from https://api.igrs.id/public/ratings"
+          curl --fail --show-error --silent --location "https://api.igrs.id/public/ratings" -o "ratings-api.json"
+          jq empty "ratings-api.json"
+
+          echo "Fetching descriptors from https://api.igrs.id/public/descriptors"
+          curl --fail --show-error --silent --location "https://api.igrs.id/public/descriptors" -o "descriptors-api.json"
+          jq empty "descriptors-api.json"
+
+          echo "Downloaded ratings and descriptors successfully"
+
       - name: Normalize and split database
         run: |
           set -euo pipefail
@@ -92,26 +106,30 @@ jobs:
               else .
               end;'
 
-          RATINGS_QUERY="${PLATFORM_NORMALIZE}
-          [._embedded.publicGameResultList[].ratings[]]
-          | unique_by(.id)
-          | map({
-              key: (.id | tostring),
-              value: {
-                name,
-                weight,
-                titleEn,
-                titleId,
-                contentEn,
-                contentId
-              }
-            })
-          | from_entries"
+          RATINGS_TRANSFORM='def assign_weight:
+            if .id == 7 then 1
+            elif .id == 4 then 2
+            elif .id == 5 then 3
+            elif .id == 28 then 4
+            elif .id == 6 then 5
+            elif .id == 35 then 6
+            else 0
+            end;
+            
+          map({
+            key: (.id | tostring),
+            value: {
+              name,
+              weight: assign_weight,
+              titleEn,
+              titleId,
+              contentEn,
+              contentId
+            }
+          })
+          | from_entries'
 
-          DESCRIPTORS_QUERY="${PLATFORM_NORMALIZE}
-          [._embedded.publicGameResultList[].descriptors[]]
-          | unique_by(.id)
-          | map({
+          DESCRIPTORS_TRANSFORM='map({
               key: (.id | tostring),
               value: {
                 nameId,
@@ -119,7 +137,7 @@ jobs:
                 description
               }
             })
-          | from_entries"
+            | from_entries'
 
           GAMES_QUERY="${PLATFORM_NORMALIZE}
           ._embedded.publicGameResultList
@@ -136,8 +154,8 @@ jobs:
               descriptors: [.descriptors[].id]
             })"
 
-          RATINGS="$(jq "$RATINGS_QUERY" "igrs.pubdb.json")"
-          DESCRIPTORS="$(jq "$DESCRIPTORS_QUERY" "igrs.pubdb.json")"
+          RATINGS="$(jq "$RATINGS_TRANSFORM" "ratings-api.json")"
+          DESCRIPTORS="$(jq "$DESCRIPTORS_TRANSFORM" "descriptors-api.json")"
           GAME_COUNT="$(jq '._embedded.publicGameResultList | length' "igrs.pubdb.json")"
           GENERATED_AT="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 
@@ -157,10 +175,12 @@ jobs:
 
           jq "$GAMES_QUERY" "igrs.pubdb.json" > "${OUTPUT_DIR}/igrs.games.json"
 
-      - name: Remove raw dump file
+      - name: Remove raw dump files
         run: |
           rm -f "igrs.pubdb.json"
           rm -f "probe.json"
+          rm -f "ratings-api.json"
+          rm -f "descriptors-api.json"
           rm -rf ".tmp-igrs-pages"
 
       - name: Commit and push changes
