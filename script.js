@@ -32,7 +32,7 @@
       'detail.noDescriptors': 'No content descriptors',
       'card.viewDetail': 'View Detail ›',
       'ratings.title': 'Age Ratings Guide',
-      'ratings.subtitle': 'The Indonesian Game Rating System (IGRS) classifies games into five age categories based on content criteria.',
+      'ratings.subtitle': 'The Indonesian Game Rating System (IGRS) classifies games into age categories based on content criteria.',
       'descriptors.title': 'Content Descriptors',
       'descriptors.subtitle': 'Descriptors indicate specific types of content present in a game.',
       'page.prev': '‹ Prev',
@@ -79,7 +79,7 @@
       'detail.noDescriptors': 'Tidak ada deskriptor konten',
       'card.viewDetail': 'Lihat Detail ›',
       'ratings.title': 'Panduan Rating Usia',
-      'ratings.subtitle': 'Indonesian Game Rating System (IGRS) mengklasifikasikan game ke dalam lima kategori usia berdasarkan kriteria konten.',
+      'ratings.subtitle': 'Indonesian Game Rating System (IGRS) mengklasifikasikan game ke dalam berbagai kategori usia berdasarkan kriteria konten.',
       'descriptors.title': 'Deskriptor Konten',
       'descriptors.subtitle': 'Deskriptor menunjukkan jenis konten tertentu yang ada dalam game.',
       'page.prev': '‹ Sblm',
@@ -111,7 +111,7 @@
   let currentDetailId = null;
   let filterStates = null;
 
-  const RATING_ORDER = [7, 4, 5, 28, 6];
+  const RATING_ORDER = [7, 4, 5, 28, 6, 35];
 
   // toggle lang x times to reveal hidden fields
   const SECRET_KEY = 'igrs-dev';
