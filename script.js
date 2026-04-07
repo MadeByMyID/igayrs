@@ -127,7 +127,7 @@
   }
 
   const IMG_RATING = id => `data/images/ratings/${id}.png`;
-  const DESC_EXT = { 11: 'jpeg' };
+  const DESC_EXT = {};
   const IMG_DESCRIPTOR = id => `data/images/descriptors/cc-${id}.${DESC_EXT[id] || 'png'}`;
 
   async function loadData() {
@@ -167,9 +167,9 @@
       let score = 0;
       if (gq) { const s = fuzzyScore(gq, game.name); if (s <= 15) continue; score = s; }
       if (pq) { const s = fuzzyScore(pq, game.publisherName); if (s <= 15) continue; score = Math.max(score, s * 0.8); }
-      if (activeRatings.size > 0 && !game.ratings.some(r => activeRatings.has(r))) continue;
-      if (activePlatforms.size > 0 && !game.platformsName.some(p => activePlatforms.has(p))) continue;
-      if (activeDescriptors.size > 0 && !game.descriptors.some(d => activeDescriptors.has(d))) continue;
+      if (activeRatings.size > 0 && ![...activeRatings].every(r => game.ratings.includes(r))) continue;
+      if (activePlatforms.size > 0 && ![...activePlatforms].every(p => game.platformsName.includes(p))) continue;
+      if (activeDescriptors.size > 0 && ![...activeDescriptors].every(d => game.descriptors.includes(d))) continue;
       results.push({ game, score });
     }
     if (gq || pq) results.sort((a, b) => b.score - a.score);

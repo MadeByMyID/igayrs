@@ -1,8 +1,7 @@
 {
   "meta": {
     "generatedAt": "2026-04-07T04:37:36Z",
-    "totalGames": 568,
-    "source": "https://api.igrs.id/public/game/result"
+    "totalGames": 568
   },
   "ratings": {
     "4": {

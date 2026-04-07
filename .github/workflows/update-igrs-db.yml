@@ -149,8 +149,7 @@ jobs:
             '{
               meta: {
                 generatedAt: $generatedAt,
-                totalGames: $totalGames,
-                source: "https://api.igrs.id/public/game/result"
+                totalGames: $totalGames
               },
               ratings: $ratings,
               descriptors: $descriptors
