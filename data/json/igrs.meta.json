@@ -1,9 +1,17 @@
 {
   "meta": {
-    "generatedAt": "2026-04-07T04:37:36Z",
-    "totalGames": 568
+    "generatedAt": "2026-04-08T08:00:19Z",
+    "totalGames": 592
   },
   "ratings": {
+    "7": {
+      "name": "3+",
+      "weight": 1,
+      "titleEn": "Age Rating 3 Years Above",
+      "titleId": "Rating Usia 3 Tahun Keatas",
+      "contentEn": "Game content suitable for ages 3 and above (3+) does not display references to cigarettes, alcohol, drugs, violence, blood, mutilation, cannibalism, coarse language, swearing, adult humor, nudity, pornography, gambling, or horror, and does not include online interaction features such as conversations.",
+      "contentId": "Kriteria konten gim untuk umur 3 tahun keatas (3+)\n\n1. Tidak menampilkan tulisan atau gambar yang berhubungan dengan rokok dan/atau rokok elektronik, minuman beralkohol, narkotika, psikotropika, dan/atau zat adiktif lainnya\n2. Tidak menampilkan kekerasan\n3. Tidak menampilkan darah, mutilasi, dan/atau kanibalisme\n4. Tidak menggunakan bahasa kasar, umpatan, dan/atau humor dewasa\n5. Tidak menampilkan tokoh menyerupai manusia yang memperlihatkan alat vital, payudara, dan/atau bokong\n6. Tidak memuat pornografi\n7. Tidak mengandung simulasi dan/atau kegiatan judi\n8. Tidak mengandung horor yang berusaha menimbulkan perasaan ngeri dan/atau takut yang amat sangat\n9. Tidak memiliki fasilitas interaksi dalam jaringan berupa percakapan\n"
+    },
     "4": {
       "name": "7+",
       "weight": 2,
@@ -20,22 +28,6 @@
       "contentEn": "Game content suitable for ages 13 and above (13+) does not display references to cigarettes, alcohol, or drugs; human mutilation or cannibalism (though blood elements may appear); adult humor with sexual connotations; nudity or pornography; gambling or intense horror, and may include limited non-hateful animated violence with unrealistic weapons and filtered online conversations.",
       "contentId": "Kriteria konten gim untuk umur 13 tahun keatas (13+)\n\n1. Tidak menampilkan tulisan atau gambar yang berhubungan dengan rokok dan/atau rokok elektronik, minuman beralkohol, narkotika, psikotropika, dan/atau zat adiktif lainnya\n2. Tidak menampilkan mutilasi dan kanibalisme pada manusia, namun dapat menampilkan unsur darah\n3. Tidak mengandung humor dewasa dan/atau tidak berkonotasi seksual\n4. Tidak menampilkan tokoh menyerupai manusia yang memperlihatkan sebagian anggota tubuh meliputi alat vital, payudara, dan/atau bokong\n5. Tidak memuat pornografi\n6. Tidak mengandung simulasi dan/atau kegiatan judi\n7. Tidak mengandung horor yang berusaha menimbulkan perasaan ngeri dan/atau takut yang amat sangat\n8. Boleh menampilkan unsur kekerasan yang hanya terbatas pada tokoh animasi yang dapat menyerupai manusia tetapi tidak melakukan kekerasan yang bertubi-tubi disertai rasa benci, amarah, dan/atau penggunaan senjata yang tidak menyerupai senjata realistis\n9. Boleh memiliki fasilitas interaksi dalam jaringan berupa percakapan, dengan ketentuan harus memiliki fitur penapisan bahasa kasar, umpatan, dan/atau istilah seksual.\n"
     },
-    "6": {
-      "name": "18+",
-      "weight": 5,
-      "titleEn": "Age Rating 18 Years Above",
-      "titleId": "Rating Usia 18 Tahun Keatas",
-      "contentEn": "Game content suitable for ages 18 and over (18+) does not contain pornography, but may display references to cigarettes, alcohol, or drugs; animated violence, blood, mutilation, and cannibalism; adult humor with sexual connotations; human-like characters without showing genitals, breasts, or buttocks; gambling activities that do not involve real or digital currency; horror elements intended to provoke fear; and online conversation features.",
-      "contentId": "Kriteria konten gim untuk umur 18 tahun keatas (18+)\n\n1. Tidak memuat pornografi\n2. Boleh menampilkan tulisan atau gambar yang berhubungan dengan rokok dan/atau rokok elektronik, minuman beralkohol, narkotika, psikotropika, dan/atau zat adiktif lainnya\n3. Boleh menampilkan unsur kekerasan pada tokoh animasi yang dapat menyerupai manusia\n4. Boleh menampilkan unsur atau konten darah, mutilasi, dan/atau kanibalisme\n5. Boleh mengandung unsur humor dewasa yang berkonotasi seksual\n6. Boleh menampilkan tokoh menyerupai manusia tetapi tidak memperlihatkan alat vital, payudara, dan/atau bokong\n7. Boleh memperlihatkan kegiatan permainan yang didasarkan pada peruntungan belaka atau segala pertaruhan sepanjang tidak menggunakan alat pembayaran yang sah, mata uang asing, uang elektronik, atau komoditi tidak berwujud berupa aset digital yang dapat diperdagangkan dan ditukarkan menjadi alat pembayaran yang sah\n8. Boleh Menampilkan produk mengandung horor yang berusaha menimbulkan perasaan ngeri dan/atau takut yang amat sangat\n9. Boleh memiliki fasilitas interaksi dalam jaringan berupa percakapan\n"
-    },
-    "7": {
-      "name": "3+",
-      "weight": 1,
-      "titleEn": "Age Rating 3 Years Above",
-      "titleId": "Rating Usia 3 Tahun Keatas",
-      "contentEn": "Game content suitable for ages 3 and above (3+) does not display references to cigarettes, alcohol, drugs, violence, blood, mutilation, cannibalism, coarse language, swearing, adult humor, nudity, pornography, gambling, or horror, and does not include online interaction features such as conversations.",
-      "contentId": "Kriteria konten gim untuk umur 3 tahun keatas (3+)\n\n1. Tidak menampilkan tulisan atau gambar yang berhubungan dengan rokok dan/atau rokok elektronik, minuman beralkohol, narkotika, psikotropika, dan/atau zat adiktif lainnya\n2. Tidak menampilkan kekerasan\n3. Tidak menampilkan darah, mutilasi, dan/atau kanibalisme\n4. Tidak menggunakan bahasa kasar, umpatan, dan/atau humor dewasa\n5. Tidak menampilkan tokoh menyerupai manusia yang memperlihatkan alat vital, payudara, dan/atau bokong\n6. Tidak memuat pornografi\n7. Tidak mengandung simulasi dan/atau kegiatan judi\n8. Tidak mengandung horor yang berusaha menimbulkan perasaan ngeri dan/atau takut yang amat sangat\n9. Tidak memiliki fasilitas interaksi dalam jaringan berupa percakapan\n"
-    },
     "28": {
       "name": "15+",
       "weight": 4,
@@ -44,26 +36,24 @@
       "contentEn": "Game content suitable for ages 15 and above (15+) does not include references to cigarettes, alcohol, drugs, mutilation, cannibalism, nudity, pornography, gambling, or intense horror; may include limited animated violence without hatred, online interactions with language filters, blood elements, and non-sexual adult humor.",
       "contentId": "Kriteria konten gim untuk umur 15 tahun keatas (15+)\n\n1. Tidak menampilkan tulisan atau gambar yang berhubungan dengan rokok dan/atau rokok elektronik, minuman beralkohol, narkotika, psikotropika, dan/atau zat adiktif lainnya\n2. Tidak menampilkan mutilasi dan kanibalisme pada manusia, namun dapat menampilkan unsur darah\n3. Tidak menampilkan tokoh menyerupai manusia yang memperlihatkan sebagian anggota tubuh meliputi alat vital, payudara, dan/atau bokong\n4. Tidak memuat pornografi\n5. Tidak mengandung simulasi dan/atau kegiatan judi\n6. Tidak mengandung horor yang berusaha menimbulkan perasaan ngeri dan/atau takut yang amat sangat\n7. Boleh menampilkan unsur kekerasan yang hanya terbatas pada tokoh animasi yang dapat menyerupai manusia tetapi tidak melakukan kekerasan yang bertubi-tubi disertai rasa benci, amarah\n8. Boleh memiliki interaksi dalam jaringan berupa percakapan, dengan ketentuan harus memiliki fitur penapisan bahasa kasar, umpatan, dan/atau istilah seksual\n9. Boleh mengandung humor dewasa yang tidak berkonotasi seksual\n"
     },
+    "6": {
+      "name": "18+",
+      "weight": 5,
+      "titleEn": "Age Rating 18 Years Above",
+      "titleId": "Rating Usia 18 Tahun Keatas",
+      "contentEn": "Game content suitable for ages 18 and over (18+) does not contain pornography, but may display references to cigarettes, alcohol, or drugs; animated violence, blood, mutilation, and cannibalism; adult humor with sexual connotations; human-like characters without showing genitals, breasts, or buttocks; gambling activities that do not involve real or digital currency; horror elements intended to provoke fear; and online conversation features.",
+      "contentId": "Kriteria konten gim untuk umur 18 tahun keatas (18+)\n\n1. Tidak memuat pornografi\n2. Boleh menampilkan tulisan atau gambar yang berhubungan dengan rokok dan/atau rokok elektronik, minuman beralkohol, narkotika, psikotropika, dan/atau zat adiktif lainnya\n3. Boleh menampilkan unsur kekerasan pada tokoh animasi yang dapat menyerupai manusia\n4. Boleh menampilkan unsur atau konten darah, mutilasi, dan/atau kanibalisme\n5. Boleh mengandung unsur humor dewasa yang berkonotasi seksual\n6. Boleh menampilkan tokoh menyerupai manusia tetapi tidak memperlihatkan alat vital, payudara, dan/atau bokong\n7. Boleh memperlihatkan kegiatan permainan yang didasarkan pada peruntungan belaka atau segala pertaruhan sepanjang tidak menggunakan alat pembayaran yang sah, mata uang asing, uang elektronik, atau komoditi tidak berwujud berupa aset digital yang dapat diperdagangkan dan ditukarkan menjadi alat pembayaran yang sah\n8. Boleh Menampilkan produk mengandung horor yang berusaha menimbulkan perasaan ngeri dan/atau takut yang amat sangat\n9. Boleh memiliki fasilitas interaksi dalam jaringan berupa percakapan\n"
+    },
     "35": {
       "name": "RC",
       "weight": 6,
       "titleEn": "Refused Classification",
       "titleId": "Konten Terlarang",
-      "contentEn": "The RC rating is a rating for games that contain prohibited content. The criteria for content in a game that could result in this rating include the following:\n1. Displaying and/or featuring pornography\n2. Having gameplay activities based solely on chance or any form of gambling (betting) that involves real and legal currency, foreign currency, electronic money, or intangible commodities such as digital assets that can be traded and exchanged for legal tender, and providing/supporting/facilitating a cash-out feature.\n3. Violating the laws and regulations in Indonesia.\n",
+      "contentEn": "The RC rating is a rating for games that contain prohibited content. The criteria for content in a game that could result in this rating include the following:\n1. Displaying and/or featuring pornography\n2. Having gameplay activities based solely on chance or any form of gambling (betting) that involves real and legal currency, foreign currency, electronic money, or intangible commodities such as digital assets that can be traded and exchanged for legal tender, and providing/supporting/facilitating a cash-out feature.\n3. Violating the laws and regulations in Indonesia.\n\n    .\n    \n    ",
       "contentId": "Rating RC adalah rating untuk gim yang mengandung konten terlarang. Adapun kriteria konten pada suatu gim yang dapat membuat gim mendapatkan rating ini mencakup dari:\n1. Menampilkan dan/atau memperdengarkan pornografi.\n2. Memiliki kegiatan permainan yang didasarkan pada peruntungan belaka atau segala pertaruhan (judi) yang dapat menggunakan alat pembayaran yang sah, mata uang asing, uang elektronik, atau komoditi tidak berwujud berupa aset digital yang dapat diperdagangkan dan ditukarkan menjadi alat pembayaran yang sah dan menyediakan/mendukung/memfasilitasi adanya fitur pencarian (cash out).\n3. Melanggar ketentuan peraturan perundang-undangan di Indonesia.\n"
     }
   },
   "descriptors": {
-    "2": {
-      "nameId": "Bahasa Kasar",
-      "nameEn": "Language",
-      "description": ""
-    },
-    "3": {
-      "nameId": "Darah, Mutilasi, dan/atau Kanibalisme",
-      "nameEn": "Blood",
-      "description": ""
-    },
     "5": {
       "nameId": "Horor",
       "nameEn": "Horror",
@@ -79,16 +69,6 @@
       "nameEn": "Character Appearance",
       "description": ""
     },
-    "12": {
-      "nameId": "Rokok, Narkotika, Minuman Beralkohol",
-      "nameEn": "Drugs",
-      "description": ""
-    },
-    "15": {
-      "nameId": "Simulasi Judi",
-      "nameEn": "Gambling",
-      "description": ""
-    },
     "26": {
       "nameId": "Kekerasan",
       "nameEn": "Violence",
@@ -98,6 +78,26 @@
       "nameId": "Sexualitas/Pornografi",
       "nameEn": "Sexuality/Pornography",
       "description": "Contents that contain sexuality / pornography"
+    },
+    "12": {
+      "nameId": "Rokok, Narkotika, Minuman Beralkohol",
+      "nameEn": "Drugs",
+      "description": ""
+    },
+    "3": {
+      "nameId": "Darah, Mutilasi, dan/atau Kanibalisme",
+      "nameEn": "Blood",
+      "description": ""
+    },
+    "2": {
+      "nameId": "Bahasa Kasar",
+      "nameEn": "Language",
+      "description": ""
+    },
+    "15": {
+      "nameId": "Simulasi Judi",
+      "nameEn": "Gambling",
+      "description": ""
     }
   }
 }

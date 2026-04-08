@@ -1,321 +1,5 @@
 [
   {
-    "id": 4262,
-    "name": "Obey Me! Anime Otome Sim Game",
-    "releaseYear": 2019,
-    "publisherName": "NTT Solmare Corporation",
-    "platformsName": [
-      "Android",
-      "iOS"
-    ],
-    "description": "▶▷▶Experience a Brand New Game◀◁◀\nWhat if the characters could be by your side, laugh and cry together with you, and become your friend? - or even fall in love with you?\nObey Me! is a brand new otome dating simulation game in which the characters become a part of your everyday life.",
-    "videoUrl": "https://apps.apple.com/jp/app/obey-me-anime-otome-sim/id1477167654",
-    "inGameUrl": "https://apps.apple.com/jp/app/obey-me-anime-otome-sim/id1477167654",
-    "ratings": [
-      7
-    ],
-    "descriptors": []
-  },
-  {
-    "id": 4263,
-    "name": "Otome Games Obey Me! NB",
-    "releaseYear": 2023,
-    "publisherName": "NTT Solmare Corporation",
-    "platformsName": [
-      "Android",
-      "iOS"
-    ],
-    "description": "Otome game \"Obey Me! Nightbringer\"\nFrom the otome game series with over 8 million downloads that took the world by storm comes the latest installment, Obey Me! NB!\nIn an all-new story, take on adventures in the Devildom with seven unique ikemen demon brothers and try to find a way back to the world from where you came!",
-    "videoUrl": "https://apps.apple.com/jp/app/id1638272826",
-    "inGameUrl": "https://apps.apple.com/jp/app/id1638272826",
-    "ratings": [
-      7
-    ],
-    "descriptors": []
-  },
-  {
-    "id": 4264,
-    "name": "Selera Nusantara",
-    "releaseYear": 2021,
-    "publisherName": "Gambir Studio",
-    "platformsName": [
-      "Android",
-      "iOS"
-    ],
-    "description": "Ikuti petualangan Siska menjadi MASTER CHEF di Selera Nusantara, game masak-masak pemenang penghargaan. Simulator masak yang mudah dimainkan, cukup hanya mengetuk dengan satu jari.\n\nMasak berbagai masakan kuliner asli Indonesia di game ini. Pecel Lele, Nasi Goreng, Sate Ayam & Kambing, Mi Rebus, Mie Goreng, Bakso, Mie Ayam, Bubur, Ketupat, Martabak, Seblak, dan banyak lagi.",
-    "videoUrl": "https://drive.google.com/drive/folders/1pqEelAGyFxoQuxViFH-vWsso18lTvj7u?usp=sharing",
-    "inGameUrl": "https://drive.google.com/drive/folders/1iYu8OWZBvpi-hgiMz808arNhbYvNIZWh?usp=drive_link",
-    "ratings": [
-      7
-    ],
-    "descriptors": []
-  },
-  {
-    "id": 4266,
-    "name": "Warung Angkringan Nusantara",
-    "releaseYear": 2024,
-    "publisherName": "Gambir Studio",
-    "platformsName": [
-      "Android",
-      "iOS"
-    ],
-    "description": "Rasakan kehangatan angkringan tradisional bersama Nenek, wanita bijak yang siap membantumu mengelola warungnya. Siapkan hidangan khas Nusantara, temui pelanggan unik dari seluruh Indonesia, dan dengarkan kisah hidup mereka. Kumpulkan resep rahasia, hiasi warungmu dengan sentuhan tradisional, dan ikuti event spesial untuk mendapatkan hadiah menarik. Nikmati grafik menawan dan musik tradisional yang menenangkan.",
-    "videoUrl": "https://drive.google.com/drive/folders/16kiuWaL6IGLpBKNp0Dey4CZMkR_ctQDw?usp=sharing",
-    "inGameUrl": "https://drive.google.com/drive/folders/1p3xvXrAFZ80_-PsiQYVSO1MCfxD9rB4h?usp=sharing",
-    "ratings": [
-      7
-    ],
-    "descriptors": []
-  },
-  {
-    "id": 4300,
-    "name": "Summoners War: Chronicles",
-    "releaseYear": 2023,
-    "publisherName": "Com2uS",
-    "platformsName": [
-      "Android",
-      "PC",
-      "iOS"
-    ],
-    "description": "Summoners War: Chronicles adalah MMORPG aksi berlatar dunia fantasi, di mana pemain menjelajahi berbagai wilayah, memanggil Monster ikonik, dan bertarung bersama dalam petualangan epik penuh strategi.",
-    "videoUrl": "https://drive.google.com/drive/folders/1ui2eqZoiSFLL2RXYSBNUArHIEGS2x2tK?usp=drive_link",
-    "inGameUrl": "https://drive.google.com/drive/folders/1_HM3Ni-gs11Nr-2dpf1aosp2kyhDJOq1?usp=sharing",
-    "ratings": [
-      5
-    ],
-    "descriptors": [
-      10,
-      26
-    ]
-  },
-  {
-    "id": 4315,
-    "name": "Minion Rumble",
-    "releaseYear": 2025,
-    "publisherName": "Com2uS",
-    "platformsName": [
-      "Android",
-      "iOS"
-    ],
-    "description": "Minion Rumble adalah game strategi dan aksi ringan dengan fokus pada manajemen minion lucu dan petualangan yang membuat tiap sesi berbeda.",
-    "videoUrl": "https://drive.google.com/drive/folders/19-3jnzzzY3TiUPHHL3oXS3RX4eKy6in3?usp=drive_link",
-    "inGameUrl": "https://drive.google.com/drive/folders/1oeDGM38kWi-HjIrSMRX6motBAYEi8BkN?usp=drive_link",
-    "ratings": [
-      5
-    ],
-    "descriptors": [
-      26
-    ]
-  },
-  {
-    "id": 4331,
-    "name": "Summoners War: Rush",
-    "releaseYear": 2025,
-    "publisherName": "Com2uS",
-    "platformsName": [
-      "Android",
-      "PC",
-      "iOS"
-    ],
-    "description": "Summoners War: Rush adalah perpaduan idle game yang ramah untuk pemain santai dengan strategi lewat mode tower defense dan sistem upgrade yang mendalam, cocok buat yang suka RPG strategis tanpa harus main terus-menerus.",
-    "videoUrl": "https://drive.google.com/drive/folders/1CZGnVa3w20i5tXmlky6f8ByUO-xdPs71?usp=sharing",
-    "inGameUrl": "https://drive.google.com/drive/folders/1p0ehW5AnON8lKDFS4T8u0C5hmsq6LSbP?usp=sharing",
-    "ratings": [
-      6
-    ],
-    "descriptors": [
-      10,
-      11,
-      26
-    ]
-  },
-  {
-    "id": 4428,
-    "name": "Tomb Raider",
-    "releaseYear": 2026,
-    "publisherName": "Feral Interactive",
-    "platformsName": [
-      "Android",
-      "iOS"
-    ],
-    "description": "Before there was the Tomb Raider, there was Lara Croft; twenty-one years old and shipwrecked on her first archaeological expedition. To escape the mysterious isle of Yamatai, she must push far beyond her limits, leave innocence behind and be reborn a legend.\n\nExplore Yamatai’s ancient ruins, unlock its riddles and fight for survival against its murderous inhabitants. ",
-    "videoUrl": "https://cloud.feralinteractive.com/d/4bb1c308a5e245f898f5/",
-    "inGameUrl": "https://cloud.feralinteractive.com/d/4ef0fa72e781453299df/",
-    "ratings": [
-      6
-    ],
-    "descriptors": [
-      5,
-      26,
-      3,
-      2
-    ]
-  },
-  {
-    "id": 4500,
-    "name": "The World of Magic: IMO",
-    "releaseYear": 2011,
-    "publisherName": "Com2uS",
-    "platformsName": [
-      "Android",
-      "iOS"
-    ],
-    "description": "The World of Magic: IMO adalah game MMORPG klasik bergaya pixel yang membawa pemain ke dunia fantasi penuh petualangan. Pilih karakter serta kelasnya, jelajahi berbagai area, lawan monster, dan berinteraksi dengan pemain lain secara online dalam dunia terbuka yang penuh nostalgia.",
-    "videoUrl": "https://drive.google.com/drive/folders/1tTIMPhGRhhUiGKVPPSLpe9wRbBKH5bS3?usp=drive_link",
-    "inGameUrl": "https://drive.google.com/drive/folders/1NvtegRA4GXbKsHOhHV4I7p0xcDvYO7Fs?usp=drive_link",
-    "ratings": [
-      5
-    ],
-    "descriptors": [
-      10,
-      26
-    ]
-  },
-  {
-    "id": 4513,
-    "name": "Fatal Claw",
-    "releaseYear": 2025,
-    "publisherName": "Com2uS",
-    "platformsName": [
-      "PC"
-    ],
-    "description": "Fatal Claw, sebuah game Metroidvania dengan visual 2D yang penuh warna. Jelajahi dunia bawah misterius dengan caramu sendiri bersama Kisha. Tujuan utamamu adalah menemukan kunci menuju dunia permukaan bersama para penyintas lainnya, sambil mengalahkan musuh yang terinfeksi dan menyerap kekuatan mereka. Mulai petualangan “clawsome”-mu sekarang!",
-    "videoUrl": "https://drive.google.com/drive/folders/19jfYednPO1IbhsZO8RL74MhsgUUUKpFy?usp=drive_link",
-    "inGameUrl": "https://drive.google.com/drive/folders/18Hy9brBCit4CwfxW1lA6vQPidTTU8If9?usp=drive_link",
-    "ratings": [
-      5
-    ],
-    "descriptors": [
-      26
-    ]
-  },
-  {
-    "id": 4515,
-    "name": "Rise of Kingdoms",
-    "releaseYear": 2018,
-    "publisherName": "LilithGames",
-    "platformsName": [
-      "Android",
-      "PC",
-      "iOS"
-    ],
-    "description": "Rise of Kingdoms is a mobile MMO real-time strategy game inspired by history.",
-    "videoUrl": "https://www.youtube.com/watch?v=vK_hgicsn_M&feature=youtu.be",
-    "inGameUrl": "https://www.youtube.com/watch?v=ZsIC5z_q1W8",
-    "ratings": [
-      5
-    ],
-    "descriptors": [
-      10,
-      26
-    ]
-  },
-  {
-    "id": 4517,
-    "name": "Guidus Zero",
-    "releaseYear": 2025,
-    "publisherName": "Com2uS",
-    "platformsName": [
-      "PC"
-    ],
-    "description": "Guidus Zero adalah game roguelike aksi real-time berbasis grid. Jelajahi lubang runtuhan yang dikenal sebagai “Scar” untuk mencari roh dan peti harta, serta kalahkan musuh. Teruslah menembus hingga lantai terdalam Scar, tempat sumber kekacauan menanti.",
-    "videoUrl": "https://drive.google.com/drive/folders/16BX_KMhwLgbpAaeJuulUiFATQuF7xfbN?usp=drive_link",
-    "inGameUrl": "https://drive.google.com/drive/folders/1yypjOBlG-TxBzcAR6HJ2vjaqc6W5lHwE?usp=sharing",
-    "ratings": [
-      5
-    ],
-    "descriptors": [
-      26
-    ]
-  },
-  {
-    "id": 4519,
-    "name": "Rise of Kingdoms: Lost Crusade",
-    "releaseYear": 2018,
-    "publisherName": "LilithGames",
-    "platformsName": [
-      "Android",
-      "PC",
-      "iOS"
-    ],
-    "description": "Rise of Kingdoms is a mobile MMO real-time strategy game inspired by history.",
-    "videoUrl": "https://www.youtube.com/watch?v=vK_hgicsn_M&feature=youtu.be",
-    "inGameUrl": "https://www.youtube.com/watch?v=ZsIC5z_q1W8",
-    "ratings": [
-      5
-    ],
-    "descriptors": [
-      10,
-      26
-    ]
-  },
-  {
-    "id": 4524,
-    "name": "Lone Chef",
-    "releaseYear": 2026,
-    "publisherName": "Com2uS",
-    "platformsName": [
-      "PC"
-    ],
-    "description": "Mulailah petualangan penuh cita rasa di Lone Chef, sebuah game Metroidvania aksi yang memadukan hunting, memasak, dan eksplorasi. Jelajahi dunia yang luas, temui rekan-rekan yang tak terlupakan, dan kejar hidangan paling menggugah selera yang pernah ada.",
-    "videoUrl": "https://drive.google.com/drive/folders/1q4SyvqB82Yx4jeDXxhWJPXpzK_bwqg1h?usp=drive_link",
-    "inGameUrl": "https://drive.google.com/drive/folders/1dmHpoo2SXBJMOLoiM2SL-5zTdrRDuqPM?usp=drive_link",
-    "ratings": [
-      5
-    ],
-    "descriptors": [
-      26
-    ]
-  },
-  {
-    "id": 4525,
-    "name": "Arrow Escape 3D",
-    "releaseYear": 2026,
-    "publisherName": "PT Hicloud Technology Indonesia",
-    "platformsName": [
-      "Web Based"
-    ],
-    "description": "A fun casual puzzle game where the scene consists of stacked mini-cubes with arrows pointing every which way; remove each arrow cube only when its path forward is clear, and wipe out all cubes to conquer each stage",
-    "videoUrl": "https://drive.google.com/file/d/1Kn8Q8c0N9Rt8vYUpWhY2L9lUsEnqsXwg/view?usp=drive_link",
-    "inGameUrl": "https://drive.google.com/file/d/1YS6CoHJgyYGx7Z-gMSszCFOSvDa5ci4e/view?usp=sharing",
-    "ratings": [
-      7
-    ],
-    "descriptors": []
-  },
-  {
-    "id": 4528,
-    "name": "Arrow Escape 3D",
-    "releaseYear": 2026,
-    "publisherName": "PT Hicloud Technology Indonesia",
-    "platformsName": [
-      "Web Based"
-    ],
-    "description": "A fun casual puzzle game where the scene consists of stacked mini-cubes with arrows pointing every which way; remove each arrow cube only when its path forward is clear, and wipe out all cubes to conquer each stage",
-    "videoUrl": "https://drive.google.com/file/d/1Kn8Q8c0N9Rt8vYUpWhY2L9lUsEnqsXwg/view?usp=drive_link",
-    "inGameUrl": "https://drive.google.com/file/d/1YS6CoHJgyYGx7Z-gMSszCFOSvDa5ci4e/view?usp=sharing",
-    "ratings": [
-      7
-    ],
-    "descriptors": []
-  },
-  {
-    "id": 4531,
-    "name": "Space Revolver",
-    "releaseYear": 2026,
-    "publisherName": "Com2uS",
-    "platformsName": [
-      "PC"
-    ],
-    "description": "SPACE REVOLVER adalah game petualangan puzzle yang mengikuti perjalanan seorang protagonis yang terjebak dalam black hole yang dahsyat. Dengan pesawat luar angkasa yang rusak parah, kamu harus menjelajahi planet-planet yang belum dipetakan, memecahkan berbagai teka-teki, memperbaiki kapalmu, dan menemukan jalan pulang.",
-    "videoUrl": "https://drive.google.com/drive/folders/1EKmIqFOkLWkgEb4lR3iMHl7x0COrkWva?usp=drive_link",
-    "inGameUrl": "https://drive.google.com/drive/folders/13ZceTnyHWPF_gtW5UlS9ILFBm5LTN42K?usp=drive_link",
-    "ratings": [
-      7
-    ],
-    "descriptors": []
-  },
-  {
     "id": 4645,
     "name": "ZED BLADE ACA NEOGEO",
     "releaseYear": 2022,
@@ -425,11 +109,11 @@
       6
     ],
     "descriptors": [
-      11,
-      26,
-      12,
       3,
-      2
+      26,
+      2,
+      12,
+      11
     ]
   },
   {
@@ -1174,10 +858,10 @@
     ],
     "descriptors": [
       26,
-      15,
       12,
       3,
-      2
+      2,
+      15
     ]
   },
   {
@@ -2186,10 +1870,10 @@
       5,
       11,
       26,
-      15,
       12,
       3,
-      2
+      2,
+      15
     ]
   },
   {
@@ -2375,8 +2059,8 @@
       10,
       11,
       26,
-      15,
-      12
+      12,
+      15
     ]
   },
   {
@@ -5839,9 +5523,9 @@
     ],
     "descriptors": [
       26,
-      15,
       12,
-      2
+      2,
+      15
     ]
   },
   {
@@ -6409,8 +6093,8 @@
       6
     ],
     "descriptors": [
-      15,
-      12
+      12,
+      15
     ]
   },
   {
@@ -6827,8 +6511,8 @@
       6
     ],
     "descriptors": [
-      15,
-      12
+      12,
+      15
     ]
   },
   {
@@ -7130,8 +6814,8 @@
       6
     ],
     "descriptors": [
-      15,
-      12
+      12,
+      15
     ]
   },
   {
@@ -7204,8 +6888,8 @@
       6
     ],
     "descriptors": [
-      15,
-      12
+      12,
+      15
     ]
   },
   {
@@ -7374,8 +7058,8 @@
       6
     ],
     "descriptors": [
-      15,
-      12
+      12,
+      15
     ]
   },
   {
@@ -7410,8 +7094,8 @@
       6
     ],
     "descriptors": [
-      15,
-      12
+      12,
+      15
     ]
   },
   {
@@ -7546,8 +7230,8 @@
       6
     ],
     "descriptors": [
-      15,
-      12
+      12,
+      15
     ]
   },
   {
@@ -10521,5 +10205,783 @@
     "descriptors": [
       26
     ]
+  },
+  {
+    "id": 3516,
+    "name": "Overdox",
+    "releaseYear": 2018,
+    "publisherName": "Haegin",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Intense close-up action Battle Royale! Be the last one standing in OVERDOX!\nSurvive! Become the Champion! \n- Explore various maps including the Ancient Temple, Land of Solitude, Downtown and more! \n- Enjoy the thrill of the fight and scavenge around the closing play zone! ",
+    "videoUrl": "https://drive.google.com/drive/folders/1RwHPmZ6pI0hMzrBir4G3IaaYMlspUR2l",
+    "inGameUrl": "https://drive.google.com/drive/folders/1S2aQw9bZREieh2gBx9c1cPvfCNuJGzvi",
+    "ratings": [
+      28
+    ],
+    "descriptors": [
+      26
+    ]
+  },
+  {
+    "id": 3557,
+    "name": "Mafia City",
+    "releaseYear": 2017,
+    "publisherName": "VOYAGERONE PTE. LTD.",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "“Mafia City” is a SLG mobile game that is mafia themed. Players can invest in contracts, train Crews, recruit Vigilantes, explore City Maps, attack other players’ Turfs, gather Resources, and participate in combat and non-combat events. Players can join different Families and grow Gardens and Islands. Players can connect with like-minded individuals by creating Clans to participate in Clan battles and cross-server events.",
+    "videoUrl": "https://drive.google.com/drive/folders/1bbZ5Wit5K986JjUP8DkNRVNAU6CW8-4x?usp=drive_link",
+    "inGameUrl": "https://drive.google.com/drive/folders/1WTIb_5r1M7IELWwkfKCUgh9H0YCxT49i?usp=drive_link",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      10,
+      11,
+      26,
+      12,
+      3,
+      2,
+      15
+    ]
+  },
+  {
+    "id": 3579,
+    "name": "The Grand Mafia",
+    "releaseYear": 2019,
+    "publisherName": "VOYAGERONE PTE. LTD.",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "The Grand Mafia is a hardcore mafia-themed strategy game. Step into the shoes of a mafia boss, take over turfs, rally your crew, seek revenge for your old man, reclaim the respect that once was yours, and ultimately become the city overlord!\nIf you're a fan of mafia movies or games, you have to play The Grand Mafia!",
+    "videoUrl": "https://drive.google.com/drive/u/0/folders/1T7wuGuw9BSBW-ueWOXHsm96jXSZUbuKy",
+    "inGameUrl": "https://drive.google.com/drive/u/0/folders/192D_OioJFjuf4gV1TxPshpdBYLbCFaZb",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      10,
+      11,
+      26,
+      12,
+      3,
+      2,
+      15
+    ]
+  },
+  {
+    "id": 3581,
+    "name": "Super Baseball League",
+    "releaseYear": 2022,
+    "publisherName": "Haegin",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Real-time, speedy, exciting PVP\n- Duke it out 1vs1 against ballers worldwide\n- One shot to lose, and one shot to win!",
+    "videoUrl": "https://drive.google.com/drive/folders/1VksZx23xg_oSX8h2YaqcUCby4bqzk5tm",
+    "inGameUrl": "https://drive.google.com/drive/folders/1w7J4bqwZdy_pY6GjMo2t369trrMA-JLS",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      10
+    ]
+  },
+  {
+    "id": 3618,
+    "name": "Hollywood Crush",
+    "releaseYear": 2024,
+    "publisherName": "VOYAGERONE DISTRIBUTION LIMITED",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Hollywood Crush is a match-3 + dress-up mobile game set against the backdrop of pursuing dreams in Hollywood. The game incorporates elements of Hollywood movies, grassroots dream chasing, romance, handsome men and women, high-end fashion, and jewelry accessories. Players can advance the plot by completing match-3 puzzles to earn resources and interact with NPCs. Additionally, the game offers the enjoyment of styling outfits and decorating homes. ",
+    "videoUrl": "https://drive.google.com/drive/folders/1L7V_RK27dHOsvmz4V3g_rPc-Wt7i1QBH?usp=drive_link",
+    "inGameUrl": "https://drive.google.com/drive/folders/12YnVMksgX5nCil-IoVPiyeBGC7La_CVZ?usp=drive_link",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      10
+    ]
+  },
+  {
+    "id": 3631,
+    "name": "AFK Arena",
+    "releaseYear": 2020,
+    "publisherName": "LilithGames",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "AFK Arena is a globally acclaimed idle RPG distinguished by its unique stained-glass aesthetic and deep strategic combat, allowing players to collect heroes and progress effortlessly without the grind.",
+    "videoUrl": "https://www.youtube.com/watch?v=fKFgXfFhP9I",
+    "inGameUrl": "https://www.youtube.com/watch?v=fKFgXfFhP9I",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      10,
+      26
+    ]
+  },
+  {
+    "id": 3627,
+    "name": "World League Baseball",
+    "releaseYear": 2023,
+    "publisherName": "Haegin",
+    "platformsName": [
+      "PC"
+    ],
+    "description": "World League Baseball is a baseball game everyone can easily enjoy.\nIt offers a new style of casual graphics and a highly flexible growth system.\nWith simple controls, anyone can easily throw fastballs and hit home runs.",
+    "videoUrl": "https://drive.google.com/drive/folders/1wxFRiH2rcalsYKRYnZx9ku8lJHCYR5DV",
+    "inGameUrl": "https://drive.google.com/drive/folders/1NKY4TkIo5RqTGnoHLrUCpCezVuOhQGGt",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 3648,
+    "name": "Ace Fishing: Wild Catch",
+    "releaseYear": 2014,
+    "publisherName": "Com2uS",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Ace Fishing: Wild Catch adalah game memancing kasual dengan grafis 3D, menghadirkan pengalaman memancing di berbagai lokasi dunia. Tangkap beragam jenis ikan menggunakan teknik sederhana, perlengkapan unik, dan skill khusus untuk mendapatkan hasil terbaik.",
+    "videoUrl": "https://drive.google.com/drive/folders/1oIgLtFHQmlFtuECyazo2KV8nY1FB3A4Q?usp=sharing",
+    "inGameUrl": "https://drive.google.com/drive/folders/1PF5OlvP4U90aVGC5-xPtYQ1C-5zwHVbt?usp=sharing",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      10
+    ]
+  },
+  {
+    "id": 3651,
+    "name": "Minilax: Antistress Games",
+    "releaseYear": 2025,
+    "publisherName": "Muhammad Afzaal",
+    "platformsName": [
+      "iOS"
+    ],
+    "description": "Step into a world where every tap, swipe, and pop is designed to feel smooth, satisfying and stress free.\n\nFrom punch-to-break challenges to the quirky fun of  stretch-able monkeys, every moment brings something new. With easy controls, charming visuals, soothing sounds and anti stress gameplay, you’ll always find something new to keep your hands busy and your mind calm.\nhis game contains no violence, blood, horror, gambling, smoking, or adult content.\n",
+    "videoUrl": "https://apps.apple.com/us/app/minilax-antistress-games/id6749765850",
+    "inGameUrl": "https://apps.apple.com/us/app/minilax-antistress-games/id6749765850",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 3663,
+    "name": "Savage Survival:Jurassic Isle",
+    "releaseYear": 2024,
+    "publisherName": "VOYAGERONE PTE. LTD.",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Savage Survival is a strategy mobile game set in the primitive era. Players can manage their own Tribe, tame wild Beasts, train troops, explore the map, and attack other Players' territories, simulating the development and warfare of tribes in the primitive age. Additionally, by creating Clans and engaging in cross-map battles, the game offers both strategic depth and social interaction.",
+    "videoUrl": "https://drive.google.com/drive/folders/1DdyVp6uxTbc_8B2XBFhBxGxBM9-ZqN0b",
+    "inGameUrl": "https://drive.google.com/drive/folders/1tTjiPCdbtMhNVr_5MCmvvV_QgzVmQ1bd",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      10,
+      11,
+      26
+    ]
+  },
+  {
+    "id": 3740,
+    "name": "Color Cube Match: Sort Puzzle",
+    "releaseYear": 2025,
+    "publisherName": "Samfinaco LLC",
+    "platformsName": [
+      "iOS"
+    ],
+    "description": "Color Cube Match is a casual puzzle game where players sort colored cubes using a conveyor system and crates. With simple tap controls, no time limits, and strategic mechanics such as locked crates, hidden colors, and shape matching, the game offers a calm and thoughtful experience suitable for all ages.",
+    "videoUrl": "https://drive.google.com/drive/folders/11YtZKqNg_loa3YHDmtLp3q8IkfPyxTEw?usp=sharing",
+    "inGameUrl": "https://drive.google.com/drive/folders/1ABohQOVntSzcc0ikztWtuQ0nLAudSmjw?usp=sharing",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 3767,
+    "name": "Brilliant Sort: Diamond Puzzle",
+    "releaseYear": 2025,
+    "publisherName": "Samfinaco LLC",
+    "platformsName": [
+      "iOS"
+    ],
+    "description": "Brilliant Sort is a casual puzzle game where players sort colored diamonds on shelves to reveal pixel art images. Combining relaxing gameplay with time-based challenges, themed levels, and optional power-ups, the game offers a calm yet engaging experience that rewards planning, speed, and visual creativity, suitable for all ages.",
+    "videoUrl": "https://drive.google.com/drive/folders/16haJYLUoYqnCQxQOJYpTyltvc3G5x402?usp=sharing",
+    "inGameUrl": "https://drive.google.com/drive/folders/1lBc_9_7kkvGRcs9E-r1wHX-ze3h4MhTR?usp=sharing",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 3780,
+    "name": "GrowStone Online",
+    "releaseYear": 2017,
+    "publisherName": "Supercat",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "GrowStone Online is a charming 2D pixel-art MMORPG developed by SUPERCAT. Players embark on an adventure to mine various stones and combine them to create increasingly powerful legendary stones.\nThe game features a unique 'merge and grow' mechanic where players collect and upgrade stones to battle monsters and conquer challenging boss raids with friends.",
+    "videoUrl": "https://drive.google.com/drive/folders/1THHETdT8rYI2GepPtQfYAgsjFeY1G-d3?usp=sharing",
+    "inGameUrl": "https://drive.google.com/drive/folders/1PyWS6ItvjioCbkAgpfvlSH4-GdAeKvnX?usp=sharing",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      10,
+      26
+    ]
+  },
+  {
+    "id": 3746,
+    "name": "SEGA POCKET CLUB MANAGER",
+    "releaseYear": 2018,
+    "publisherName": "SEGA CORPORATION",
+    "platformsName": [
+      "iOS"
+    ],
+    "description": "Build and lead your own football club in SEGA’s Pocket Club Manager, a mobile remake of the classic “Let’s Make a Professional Soccer Club” series. Recruit real-life stars, train players, manage finances, and compete through leagues using an in-depth football simulation engine. With over 2,000 licensed players and international tournaments, create your dream team and rise from a small local club to the world’s best manager.",
+    "videoUrl": "https://segajp.box.com/s/er92urt9st8zhy9jb94cjw38sie6w62t",
+    "inGameUrl": "https://segajp.box.com/s/b516u4kzeyz88k2mczlmx0donxt0g20x",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 3802,
+    "name": "SEGA FOOTBALL CLUB CHAMPIONS",
+    "releaseYear": 2026,
+    "publisherName": "SEGA CORPORATION",
+    "platformsName": [
+      "PC",
+      "iOS"
+    ],
+    "description": "SEGA Football Club Champions is a free‑to‑play football management game where you build and lead your own club from local leagues to the world stage. Make strategic decisions in scouting, transfers, and squad building, with every choice shaping your team’s future. Featuring over 10,000 real players from major leagues and full crossplay support, you can manage your club anytime and rise to become the world’s top manager.",
+    "videoUrl": "https://segajp.box.com/s/d5211nxco4ldopjwu0sfa2fdz5pc0kqe",
+    "inGameUrl": "https://segajp.box.com/s/wglgbz5ow7ec8bhjp6i3u85k599554rr",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      10
+    ]
+  },
+  {
+    "id": 3827,
+    "name": "SHIN MEGAMI TENSEI D×２",
+    "releaseYear": 2018,
+    "publisherName": "SEGA CORPORATION",
+    "platformsName": [
+      "iOS"
+    ],
+    "description": "From the makers of the Persona series, Shin Megami Tensei Liberation Dx2 is the latest entry in the three-decade-long Megami Tensei video game franchise; bringing its dark themes, thrilling battles and mysterious storylines to life, to mobile platforms! Take on the role of a Devil Downloader, also known as a Dx2. Dx2s are able to summon and command demons using a special smartphone app.",
+    "videoUrl": "https://segajp.box.com/s/vu1hiolx0341qvna802kz910a97gkq01",
+    "inGameUrl": "https://segajp.box.com/s/nuxc6nujnj9x8oevr20u99rek5115bnq",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      10,
+      11,
+      26,
+      12
+    ]
+  },
+  {
+    "id": 3833,
+    "name": "Star Sailors",
+    "releaseYear": 2026,
+    "publisherName": "Com2uS",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Adrenaline Rush! Rasakan sensasi mendebarkan di ujung jarimu!\nLepaskan kekuatan yang dahsyat bersama timmu dalam pertarungan turn-based yang dinamis.\nRPG turn-based kolektibel Star Sailors!",
+    "videoUrl": "https://drive.google.com/drive/folders/1k3ps2lzXIcvXvQNJlUusbQfL7BtjGi-6?usp=drive_link",
+    "inGameUrl": "https://drive.google.com/drive/folders/1Djdu6Vrs-wXMoESPS1C22x2n2WWC690L?usp=drive_link",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      10,
+      11,
+      26
+    ]
+  },
+  {
+    "id": 3862,
+    "name": "Pawpop Match",
+    "releaseYear": 2026,
+    "publisherName": "Com2uS",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Pawpop Match adalah game puzzle match yang seru dan menggemaskan, di mana kamu membantu karakter-karakter lucu menyelesaikan level penuh warna dengan mencocokkan item dan menggunakan power-up unik. Mudah dimainkan, santai, dan cocok untuk semua usia.",
+    "videoUrl": "https://drive.google.com/drive/folders/1Dcb8ht6ecUvtKPDhCEa1MJsiHMvhTPnV?usp=sharing",
+    "inGameUrl": "https://drive.google.com/drive/folders/1I1Y5ev5_5rkkmdY8ycI8KPYtQ8Kl8gGt?usp=sharing",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 3868,
+    "name": "Sonic Rumble",
+    "releaseYear": 2025,
+    "publisherName": "SEGA CORPORATION",
+    "platformsName": [
+      "PC",
+      "iOS"
+    ],
+    "description": "Sonic Rumble is a fast, chaotic multiplayer party game for up to 32 players. Dash through varied stages and modes like races, survival challenges, and ring battles in short, action-packed matches. Team up in squads of four, play as classic Sonic characters, and customize them with skins and effects. Enter Dr. Eggman’s toy world, overcome wild obstacles, and compete to become the top Rumbler.",
+    "videoUrl": "https://segajp.box.com/s/dn040qssrq46cbgit7e0czk5mkoflryc",
+    "inGameUrl": "https://segajp.box.com/s/y8er73no3pv1pnpg41khpboy6bq3wim2",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      26
+    ]
+  },
+  {
+    "id": 3875,
+    "name": "Citampi Stories: RPG Love Life",
+    "releaseYear": 2019,
+    "publisherName": "Noctua Games",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Citampi Stories adalah game simulasi kehidupa, bercerita tentang perjuangan anak muda yang rela pergi merantau untuk membantu orang tuanya membayar hutang ke desa bernama Citampi, Dalam permainan ini kamu akan merasakan langsung kehidupan dikampung citampi mulai yang penuh petualangan, bekerja mencari uang, bersosialisasi dengan seluruh warga citampi hingga kehidupan asmara yang mendebarkan dengan karakter wanita di Citampi.",
+    "videoUrl": "https://drive.google.com/drive/folders/1EZxk2MyQTJ-T2FIjskzmomHntDsV45Bo",
+    "inGameUrl": "https://drive.google.com/drive/folders/1it95pVjKPBedTJN-sTSGpkU-O7VfPmtw",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 4076,
+    "name": "Sunday City: Life Simulator",
+    "releaseYear": 2025,
+    "publisherName": "Kefir",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Sunday City is an eternal summer simulator, where each day is like a weekend, and the city hums to the rhythm of your desires. You don't need to wait for a vacation here — ocean, sun, and neon city lights are always right there with you. Choose your lifestyle: calm and relaxed or full of drive and adventure. Experience that unparalleled vibe and become a success!",
+    "videoUrl": "https://drive.google.com/drive/folders/1uzik5BBObNEYI7thqZuXJs1OIo67xNGm?usp=drive_link",
+    "inGameUrl": "https://drive.google.com/drive/folders/16gPVvF2HNWvhxEN7LoEGNblNCtDJZlBA?usp=drive_link",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      10,
+      15
+    ]
+  },
+  {
+    "id": 4150,
+    "name": "Last Day on Earth: Survival",
+    "releaseYear": 2017,
+    "publisherName": "Kefir",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Last Day on Earth is a multiplayer zombie survival action game with base building, crafting, and shooting zombies in a brutal post-apocalyptic world. Your life depends on how well you loot, craft, and build, turning whatever you find into weapons, gear, and a fortified shelter. Explore hostile lands, shoot zombies, and fight to protect everything you’ve worked for. In this zombie survival world, every piece of loot matters, every wall you build matters, and every mistake may be your last.",
+    "videoUrl": "https://drive.google.com/drive/folders/1KfftO2AolCMGy2xZXEuGiwQby0cFUvgu?usp=drive_link",
+    "inGameUrl": "https://drive.google.com/drive/folders/1GckV6eH5biDCZsZvcF-vb7-hC6Mb87d4?usp=drive_link",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      10,
+      26,
+      12,
+      3
+    ]
+  },
+  {
+    "id": 4152,
+    "name": "Frostborn: Survival RPG",
+    "releaseYear": 2020,
+    "publisherName": "Kefir",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Subdue the powers of the gods and confront the army of the dead together with your friends. Make the lands of Vikings great again by building a new capital town from scratch and set off for treasures and new victories to the unexplored shores. All of this and more awaits you in the new online survival action RPG Frostborn!",
+    "videoUrl": "https://drive.google.com/drive/folders/17GaPX9NW2u3jdtNLe5e7ojsIjw-bmy9q?usp=drive_link",
+    "inGameUrl": "https://drive.google.com/drive/folders/18AJR_06GSWjPNyff9D-8U3_U-O3B3bDY?usp=drive_link",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      10,
+      26,
+      12,
+      3
+    ]
+  },
+  {
+    "id": 4166,
+    "name": "Quiz Blitz: Test Brain Game",
+    "releaseYear": 2025,
+    "publisherName": "MNO GO APPS LTD.",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Quiz Blitz is a puzzle-first trivia game packed with visual logic challenges and satisfying “aha!” moments. Solve image-based riddles across topics like music, animals, geography, science, art, and pop culture. Swipe, tap, drag, and think your way through interactive quiz tasks and themed puzzle packs. Play casually at your own pace or aim for 100% completion, earn stars, unlock achievements, and train your brain with every level.",
+    "videoUrl": "https://drive.google.com/file/d/1A0w6DDZ4jJQ15Xa2iDs-h7k3FgcTcOCE/view?usp=sharing",
+    "inGameUrl": "https://drive.google.com/drive/folders/19DkNJw318ELppFxoktyj3UKK3Y9aOnqZ?usp=sharing",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 4262,
+    "name": "Obey Me! Anime Otome Sim Game",
+    "releaseYear": 2019,
+    "publisherName": "NTT Solmare Corporation",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "▶▷▶Experience a Brand New Game◀◁◀\nWhat if the characters could be by your side, laugh and cry together with you, and become your friend? - or even fall in love with you?\nObey Me! is a brand new otome dating simulation game in which the characters become a part of your everyday life.",
+    "videoUrl": "https://apps.apple.com/jp/app/obey-me-anime-otome-sim/id1477167654",
+    "inGameUrl": "https://apps.apple.com/jp/app/obey-me-anime-otome-sim/id1477167654",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 4263,
+    "name": "Otome Games Obey Me! NB",
+    "releaseYear": 2023,
+    "publisherName": "NTT Solmare Corporation",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Otome game \"Obey Me! Nightbringer\"\nFrom the otome game series with over 8 million downloads that took the world by storm comes the latest installment, Obey Me! NB!\nIn an all-new story, take on adventures in the Devildom with seven unique ikemen demon brothers and try to find a way back to the world from where you came!",
+    "videoUrl": "https://apps.apple.com/jp/app/id1638272826",
+    "inGameUrl": "https://apps.apple.com/jp/app/id1638272826",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 4264,
+    "name": "Selera Nusantara",
+    "releaseYear": 2021,
+    "publisherName": "Gambir Studio",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Ikuti petualangan Siska menjadi MASTER CHEF di Selera Nusantara, game masak-masak pemenang penghargaan. Simulator masak yang mudah dimainkan, cukup hanya mengetuk dengan satu jari.\n\nMasak berbagai masakan kuliner asli Indonesia di game ini. Pecel Lele, Nasi Goreng, Sate Ayam & Kambing, Mi Rebus, Mie Goreng, Bakso, Mie Ayam, Bubur, Ketupat, Martabak, Seblak, dan banyak lagi.",
+    "videoUrl": "https://drive.google.com/drive/folders/1pqEelAGyFxoQuxViFH-vWsso18lTvj7u?usp=sharing",
+    "inGameUrl": "https://drive.google.com/drive/folders/1iYu8OWZBvpi-hgiMz808arNhbYvNIZWh?usp=drive_link",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 4266,
+    "name": "Warung Angkringan Nusantara",
+    "releaseYear": 2024,
+    "publisherName": "Gambir Studio",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Rasakan kehangatan angkringan tradisional bersama Nenek, wanita bijak yang siap membantumu mengelola warungnya. Siapkan hidangan khas Nusantara, temui pelanggan unik dari seluruh Indonesia, dan dengarkan kisah hidup mereka. Kumpulkan resep rahasia, hiasi warungmu dengan sentuhan tradisional, dan ikuti event spesial untuk mendapatkan hadiah menarik. Nikmati grafik menawan dan musik tradisional yang menenangkan.",
+    "videoUrl": "https://drive.google.com/drive/folders/16kiuWaL6IGLpBKNp0Dey4CZMkR_ctQDw?usp=sharing",
+    "inGameUrl": "https://drive.google.com/drive/folders/1p3xvXrAFZ80_-PsiQYVSO1MCfxD9rB4h?usp=sharing",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 4300,
+    "name": "Summoners War: Chronicles",
+    "releaseYear": 2023,
+    "publisherName": "Com2uS",
+    "platformsName": [
+      "Android",
+      "PC",
+      "iOS"
+    ],
+    "description": "Summoners War: Chronicles adalah MMORPG aksi berlatar dunia fantasi, di mana pemain menjelajahi berbagai wilayah, memanggil Monster ikonik, dan bertarung bersama dalam petualangan epik penuh strategi.",
+    "videoUrl": "https://drive.google.com/drive/folders/1ui2eqZoiSFLL2RXYSBNUArHIEGS2x2tK?usp=drive_link",
+    "inGameUrl": "https://drive.google.com/drive/folders/1_HM3Ni-gs11Nr-2dpf1aosp2kyhDJOq1?usp=sharing",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      10,
+      26
+    ]
+  },
+  {
+    "id": 4315,
+    "name": "Minion Rumble",
+    "releaseYear": 2025,
+    "publisherName": "Com2uS",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Minion Rumble adalah game strategi dan aksi ringan dengan fokus pada manajemen minion lucu dan petualangan yang membuat tiap sesi berbeda.",
+    "videoUrl": "https://drive.google.com/drive/folders/19-3jnzzzY3TiUPHHL3oXS3RX4eKy6in3?usp=drive_link",
+    "inGameUrl": "https://drive.google.com/drive/folders/1oeDGM38kWi-HjIrSMRX6motBAYEi8BkN?usp=drive_link",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      26
+    ]
+  },
+  {
+    "id": 4331,
+    "name": "Summoners War: Rush",
+    "releaseYear": 2025,
+    "publisherName": "Com2uS",
+    "platformsName": [
+      "Android",
+      "PC",
+      "iOS"
+    ],
+    "description": "Summoners War: Rush adalah perpaduan idle game yang ramah untuk pemain santai dengan strategi lewat mode tower defense dan sistem upgrade yang mendalam, cocok buat yang suka RPG strategis tanpa harus main terus-menerus.",
+    "videoUrl": "https://drive.google.com/drive/folders/1CZGnVa3w20i5tXmlky6f8ByUO-xdPs71?usp=sharing",
+    "inGameUrl": "https://drive.google.com/drive/folders/1p0ehW5AnON8lKDFS4T8u0C5hmsq6LSbP?usp=sharing",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      10,
+      11,
+      26
+    ]
+  },
+  {
+    "id": 4428,
+    "name": "Tomb Raider",
+    "releaseYear": 2026,
+    "publisherName": "Feral Interactive",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Before there was the Tomb Raider, there was Lara Croft; twenty-one years old and shipwrecked on her first archaeological expedition. To escape the mysterious isle of Yamatai, she must push far beyond her limits, leave innocence behind and be reborn a legend.\n\nExplore Yamatai’s ancient ruins, unlock its riddles and fight for survival against its murderous inhabitants. ",
+    "videoUrl": "https://cloud.feralinteractive.com/d/4bb1c308a5e245f898f5/",
+    "inGameUrl": "https://cloud.feralinteractive.com/d/4ef0fa72e781453299df/",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      5,
+      26,
+      3,
+      2
+    ]
+  },
+  {
+    "id": 4500,
+    "name": "The World of Magic: IMO",
+    "releaseYear": 2011,
+    "publisherName": "Com2uS",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "The World of Magic: IMO adalah game MMORPG klasik bergaya pixel yang membawa pemain ke dunia fantasi penuh petualangan. Pilih karakter serta kelasnya, jelajahi berbagai area, lawan monster, dan berinteraksi dengan pemain lain secara online dalam dunia terbuka yang penuh nostalgia.",
+    "videoUrl": "https://drive.google.com/drive/folders/1tTIMPhGRhhUiGKVPPSLpe9wRbBKH5bS3?usp=drive_link",
+    "inGameUrl": "https://drive.google.com/drive/folders/1NvtegRA4GXbKsHOhHV4I7p0xcDvYO7Fs?usp=drive_link",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      10,
+      26
+    ]
+  },
+  {
+    "id": 4513,
+    "name": "Fatal Claw",
+    "releaseYear": 2025,
+    "publisherName": "Com2uS",
+    "platformsName": [
+      "PC"
+    ],
+    "description": "Fatal Claw, sebuah game Metroidvania dengan visual 2D yang penuh warna. Jelajahi dunia bawah misterius dengan caramu sendiri bersama Kisha. Tujuan utamamu adalah menemukan kunci menuju dunia permukaan bersama para penyintas lainnya, sambil mengalahkan musuh yang terinfeksi dan menyerap kekuatan mereka. Mulai petualangan “clawsome”-mu sekarang!",
+    "videoUrl": "https://drive.google.com/drive/folders/19jfYednPO1IbhsZO8RL74MhsgUUUKpFy?usp=drive_link",
+    "inGameUrl": "https://drive.google.com/drive/folders/18Hy9brBCit4CwfxW1lA6vQPidTTU8If9?usp=drive_link",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      26
+    ]
+  },
+  {
+    "id": 4515,
+    "name": "Rise of Kingdoms",
+    "releaseYear": 2018,
+    "publisherName": "LilithGames",
+    "platformsName": [
+      "Android",
+      "PC",
+      "iOS"
+    ],
+    "description": "Rise of Kingdoms is a mobile MMO real-time strategy game inspired by history.",
+    "videoUrl": "https://www.youtube.com/watch?v=vK_hgicsn_M&feature=youtu.be",
+    "inGameUrl": "https://www.youtube.com/watch?v=ZsIC5z_q1W8",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      10,
+      26
+    ]
+  },
+  {
+    "id": 4517,
+    "name": "Guidus Zero",
+    "releaseYear": 2025,
+    "publisherName": "Com2uS",
+    "platformsName": [
+      "PC"
+    ],
+    "description": "Guidus Zero adalah game roguelike aksi real-time berbasis grid. Jelajahi lubang runtuhan yang dikenal sebagai “Scar” untuk mencari roh dan peti harta, serta kalahkan musuh. Teruslah menembus hingga lantai terdalam Scar, tempat sumber kekacauan menanti.",
+    "videoUrl": "https://drive.google.com/drive/folders/16BX_KMhwLgbpAaeJuulUiFATQuF7xfbN?usp=drive_link",
+    "inGameUrl": "https://drive.google.com/drive/folders/1yypjOBlG-TxBzcAR6HJ2vjaqc6W5lHwE?usp=sharing",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      26
+    ]
+  },
+  {
+    "id": 4519,
+    "name": "Rise of Kingdoms: Lost Crusade",
+    "releaseYear": 2018,
+    "publisherName": "LilithGames",
+    "platformsName": [
+      "Android",
+      "PC",
+      "iOS"
+    ],
+    "description": "Rise of Kingdoms is a mobile MMO real-time strategy game inspired by history.",
+    "videoUrl": "https://www.youtube.com/watch?v=vK_hgicsn_M&feature=youtu.be",
+    "inGameUrl": "https://www.youtube.com/watch?v=ZsIC5z_q1W8",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      10,
+      26
+    ]
+  },
+  {
+    "id": 4524,
+    "name": "Lone Chef",
+    "releaseYear": 2026,
+    "publisherName": "Com2uS",
+    "platformsName": [
+      "PC"
+    ],
+    "description": "Mulailah petualangan penuh cita rasa di Lone Chef, sebuah game Metroidvania aksi yang memadukan hunting, memasak, dan eksplorasi. Jelajahi dunia yang luas, temui rekan-rekan yang tak terlupakan, dan kejar hidangan paling menggugah selera yang pernah ada.",
+    "videoUrl": "https://drive.google.com/drive/folders/1q4SyvqB82Yx4jeDXxhWJPXpzK_bwqg1h?usp=drive_link",
+    "inGameUrl": "https://drive.google.com/drive/folders/1dmHpoo2SXBJMOLoiM2SL-5zTdrRDuqPM?usp=drive_link",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      26
+    ]
+  },
+  {
+    "id": 4525,
+    "name": "Arrow Escape 3D",
+    "releaseYear": 2026,
+    "publisherName": "PT Hicloud Technology Indonesia",
+    "platformsName": [
+      "Web Based"
+    ],
+    "description": "A fun casual puzzle game where the scene consists of stacked mini-cubes with arrows pointing every which way; remove each arrow cube only when its path forward is clear, and wipe out all cubes to conquer each stage",
+    "videoUrl": "https://drive.google.com/file/d/1Kn8Q8c0N9Rt8vYUpWhY2L9lUsEnqsXwg/view?usp=drive_link",
+    "inGameUrl": "https://drive.google.com/file/d/1YS6CoHJgyYGx7Z-gMSszCFOSvDa5ci4e/view?usp=sharing",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 4528,
+    "name": "Arrow Escape 3D",
+    "releaseYear": 2026,
+    "publisherName": "PT Hicloud Technology Indonesia",
+    "platformsName": [
+      "Web Based"
+    ],
+    "description": "A fun casual puzzle game where the scene consists of stacked mini-cubes with arrows pointing every which way; remove each arrow cube only when its path forward is clear, and wipe out all cubes to conquer each stage",
+    "videoUrl": "https://drive.google.com/file/d/1Kn8Q8c0N9Rt8vYUpWhY2L9lUsEnqsXwg/view?usp=drive_link",
+    "inGameUrl": "https://drive.google.com/file/d/1YS6CoHJgyYGx7Z-gMSszCFOSvDa5ci4e/view?usp=sharing",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 4531,
+    "name": "Space Revolver",
+    "releaseYear": 2026,
+    "publisherName": "Com2uS",
+    "platformsName": [
+      "PC"
+    ],
+    "description": "SPACE REVOLVER adalah game petualangan puzzle yang mengikuti perjalanan seorang protagonis yang terjebak dalam black hole yang dahsyat. Dengan pesawat luar angkasa yang rusak parah, kamu harus menjelajahi planet-planet yang belum dipetakan, memecahkan berbagai teka-teki, memperbaiki kapalmu, dan menemukan jalan pulang.",
+    "videoUrl": "https://drive.google.com/drive/folders/1EKmIqFOkLWkgEb4lR3iMHl7x0COrkWva?usp=drive_link",
+    "inGameUrl": "https://drive.google.com/drive/folders/13ZceTnyHWPF_gtW5UlS9ILFBm5LTN42K?usp=drive_link",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
   }
 ]
