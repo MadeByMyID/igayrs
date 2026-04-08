@@ -96,7 +96,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          OUTPUT_DIR="frontend/data/json"
+          OUTPUT_DIR="data/json"
           mkdir -p "$OUTPUT_DIR"
 
           PLATFORM_NORMALIZE='def normalize_platform:
@@ -185,7 +185,7 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git add frontend/data/json/igrs.meta.json frontend/data/json/igrs.games.json
+          git add data/json/igrs.meta.json data/json/igrs.games.json
           
           if git diff --cached --quiet; then
             echo "No data changes detected."
