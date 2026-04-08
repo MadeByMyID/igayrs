@@ -1,79 +1,5 @@
 [
   {
-    "id": 4645,
-    "name": "ZED BLADE ACA NEOGEO",
-    "releaseYear": 2022,
-    "publisherName": "SNK CORPORATION",
-    "platformsName": [
-      "iOS"
-    ],
-    "description": "ZED BLADE is a horizontal-scrolling shoot 'em up released by NMK in 1994.\nWith the ability to select aircraft weaponry, you can battle in a way that fits your play style.\nJoin Operation Ragnarok to destroy the giant runaway fortress Yggdrasil.",
-    "videoUrl": "https://snkcorp-my.sharepoint.com/:f:/g/personal/t_kida_snk-corp_co_jp/IgCYh0e_3YLmS53uuBwlzaV8AbvU77dsZmgyHX8zqOGWjWY?e=tdY904",
-    "inGameUrl": "https://snkcorp-my.sharepoint.com/:f:/g/personal/t_kida_snk-corp_co_jp/IgBcksQ_8GMfQaMrlLm57uv7AeGbtPpznM34G0ckWfXjors?e=EGglx3",
-    "ratings": [
-      5
-    ],
-    "descriptors": [
-      26
-    ]
-  },
-  {
-    "id": 4672,
-    "name": "Cartoon Wars 3",
-    "releaseYear": 2016,
-    "publisherName": "Com2uS",
-    "platformsName": [
-      "Android",
-      "iOS"
-    ],
-    "description": "Cartoon Wars 3 adalah game mobile berbasis strategi yang berfokus pada pengumpulan dan pengembangan berbagai unit. Pemain dapat mengembangkan lebih dari 300 unit berbeda melalui sistem peningkatan level, upgrade, dan fusi, serta menikmati berbagai mode permainan, termasuk konten petualangan dan pertempuran antar pemain (PvP).",
-    "videoUrl": "https://drive.google.com/drive/folders/1xFNAerzO277w_x6lIwWsl4avsbDQq1Iw?usp=drive_link",
-    "inGameUrl": "https://drive.google.com/drive/folders/1pT5e-6tUmT5elJxXkv48N3rhrQagMuH8?usp=drive_link",
-    "ratings": [
-      5
-    ],
-    "descriptors": [
-      26,
-      3
-    ]
-  },
-  {
-    "id": 4696,
-    "name": "Slime Hunter : Wild Impact",
-    "releaseYear": 2021,
-    "publisherName": "Com2uS",
-    "platformsName": [
-      "Android",
-      "iOS"
-    ],
-    "description": "Game ini adalah RPG 2D side-scrolling bergaya pixel art yang berfokus pada progres karakter dan pertarungan yang cepat.\nPemain dapat membentuk party bersama rekan, membuat perlengkapan, dan mengembangkan karakter sambil mengikuti raid boss serta berbagai mode permainan yang berorientasi pada pertempuran.",
-    "videoUrl": "https://drive.google.com/drive/folders/1eIcfKzFmImxJwEtE9nyTWNHTlm8yClG8?usp=drive_link",
-    "inGameUrl": "https://drive.google.com/drive/folders/1bw3pbb74S1NjiqCoCB7iyBGdJl6XLz5j?usp=drive_link",
-    "ratings": [
-      5
-    ],
-    "descriptors": [
-      26
-    ]
-  },
-  {
-    "id": 4704,
-    "name": "Baseball Superstars 2024",
-    "releaseYear": 2019,
-    "publisherName": "Com2uS",
-    "platformsName": [
-      "Android",
-      "iOS"
-    ],
-    "description": "Baseball Superstars 2024 adalah game bisbol fantasi yang terinspirasi dari seri game olahraga.\nKembangkan pemain unik dan rasakan kembali nostalgia seri Baseball Superstars klasik bersama Baseball Superstars 2024! Pamerkan kemampuan lemparan dan pukulan luar biasa dengan Elite Player hasil ciptaanmu!\nLatih para pemain fantastismu bersama para pelatih ikonik dari seri ini!\nIkuti berbagai event seru dan raih segudang hadiah menarik—ayo bergabung sekarang dan nikmati keseruannya!",
-    "videoUrl": "https://drive.google.com/drive/folders/1-985GcDMyQHnEsRC2byQXBxP-ZbE3Qx5?usp=drive_link",
-    "inGameUrl": "https://drive.google.com/drive/folders/1AmwDLKCaICyEtaLQn0_gu0Bd21_bjuAh?usp=drive_link",
-    "ratings": [
-      7
-    ],
-    "descriptors": []
-  },
-  {
     "id": 4877,
     "name": "Altalis",
     "releaseYear": 2026,
@@ -10979,6 +10905,80 @@
     "description": "SPACE REVOLVER adalah game petualangan puzzle yang mengikuti perjalanan seorang protagonis yang terjebak dalam black hole yang dahsyat. Dengan pesawat luar angkasa yang rusak parah, kamu harus menjelajahi planet-planet yang belum dipetakan, memecahkan berbagai teka-teki, memperbaiki kapalmu, dan menemukan jalan pulang.",
     "videoUrl": "https://drive.google.com/drive/folders/1EKmIqFOkLWkgEb4lR3iMHl7x0COrkWva?usp=drive_link",
     "inGameUrl": "https://drive.google.com/drive/folders/13ZceTnyHWPF_gtW5UlS9ILFBm5LTN42K?usp=drive_link",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 4645,
+    "name": "ZED BLADE ACA NEOGEO",
+    "releaseYear": 2022,
+    "publisherName": "SNK CORPORATION",
+    "platformsName": [
+      "iOS"
+    ],
+    "description": "ZED BLADE is a horizontal-scrolling shoot 'em up released by NMK in 1994.\nWith the ability to select aircraft weaponry, you can battle in a way that fits your play style.\nJoin Operation Ragnarok to destroy the giant runaway fortress Yggdrasil.",
+    "videoUrl": "https://snkcorp-my.sharepoint.com/:f:/g/personal/t_kida_snk-corp_co_jp/IgCYh0e_3YLmS53uuBwlzaV8AbvU77dsZmgyHX8zqOGWjWY?e=tdY904",
+    "inGameUrl": "https://snkcorp-my.sharepoint.com/:f:/g/personal/t_kida_snk-corp_co_jp/IgBcksQ_8GMfQaMrlLm57uv7AeGbtPpznM34G0ckWfXjors?e=EGglx3",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      26
+    ]
+  },
+  {
+    "id": 4672,
+    "name": "Cartoon Wars 3",
+    "releaseYear": 2016,
+    "publisherName": "Com2uS",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Cartoon Wars 3 adalah game mobile berbasis strategi yang berfokus pada pengumpulan dan pengembangan berbagai unit. Pemain dapat mengembangkan lebih dari 300 unit berbeda melalui sistem peningkatan level, upgrade, dan fusi, serta menikmati berbagai mode permainan, termasuk konten petualangan dan pertempuran antar pemain (PvP).",
+    "videoUrl": "https://drive.google.com/drive/folders/1xFNAerzO277w_x6lIwWsl4avsbDQq1Iw?usp=drive_link",
+    "inGameUrl": "https://drive.google.com/drive/folders/1pT5e-6tUmT5elJxXkv48N3rhrQagMuH8?usp=drive_link",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      26,
+      3
+    ]
+  },
+  {
+    "id": 4696,
+    "name": "Slime Hunter : Wild Impact",
+    "releaseYear": 2021,
+    "publisherName": "Com2uS",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Game ini adalah RPG 2D side-scrolling bergaya pixel art yang berfokus pada progres karakter dan pertarungan yang cepat.\nPemain dapat membentuk party bersama rekan, membuat perlengkapan, dan mengembangkan karakter sambil mengikuti raid boss serta berbagai mode permainan yang berorientasi pada pertempuran.",
+    "videoUrl": "https://drive.google.com/drive/folders/1eIcfKzFmImxJwEtE9nyTWNHTlm8yClG8?usp=drive_link",
+    "inGameUrl": "https://drive.google.com/drive/folders/1bw3pbb74S1NjiqCoCB7iyBGdJl6XLz5j?usp=drive_link",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      26
+    ]
+  },
+  {
+    "id": 4704,
+    "name": "Baseball Superstars 2024",
+    "releaseYear": 2019,
+    "publisherName": "Com2uS",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Baseball Superstars 2024 adalah game bisbol fantasi yang terinspirasi dari seri game olahraga.\nKembangkan pemain unik dan rasakan kembali nostalgia seri Baseball Superstars klasik bersama Baseball Superstars 2024! Pamerkan kemampuan lemparan dan pukulan luar biasa dengan Elite Player hasil ciptaanmu!\nLatih para pemain fantastismu bersama para pelatih ikonik dari seri ini!\nIkuti berbagai event seru dan raih segudang hadiah menarik—ayo bergabung sekarang dan nikmati keseruannya!",
+    "videoUrl": "https://drive.google.com/drive/folders/1-985GcDMyQHnEsRC2byQXBxP-ZbE3Qx5?usp=drive_link",
+    "inGameUrl": "https://drive.google.com/drive/folders/1AmwDLKCaICyEtaLQn0_gu0Bd21_bjuAh?usp=drive_link",
     "ratings": [
       7
     ],
