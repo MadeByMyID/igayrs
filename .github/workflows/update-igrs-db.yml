@@ -29,7 +29,8 @@ jobs:
           WORKER_SCRIPT=".github/scripts/fetch-igrs-game.sh"
 
           CHUNK_SIZE="${CHUNK_SIZE:-2000}"
-          CONCURRENCY="${CONCURRENCY:-30}"
+          CONCURRENCY="${CONCURRENCY:-15}"
+          BATCH_DELAY_SEC="${BATCH_DELAY_SEC:-20}"
           CURRENT_START=0
 
           echo "Setting up parallel fetching..."
@@ -37,7 +38,7 @@ jobs:
           mkdir -p "$RAW_DIR"
           : > "$JSONL_FILE"
 
-          echo "Starting parallel fetch in chunks of ${CHUNK_SIZE} (concurrency: ${CONCURRENCY})"
+          echo "Starting parallel fetch in chunks of ${CHUNK_SIZE} (concurrency: ${CONCURRENCY}, batch delay: ${BATCH_DELAY_SEC}s)"
 
           while true; do
             CURRENT_END=$((CURRENT_START + CHUNK_SIZE - 1))
@@ -55,6 +56,11 @@ jobs:
             if [ "$GAMES_ADDED" -eq 0 ]; then
               echo "No games found in batch ${CURRENT_START}-${CURRENT_END}. Assuming end."
               break
+            fi
+
+            if [ "$BATCH_DELAY_SEC" -gt 0 ]; then
+              echo "Sleeping ${BATCH_DELAY_SEC}s before next batch..."
+              sleep "$BATCH_DELAY_SEC"
             fi
 
             CURRENT_START=$((CURRENT_START + CHUNK_SIZE))
