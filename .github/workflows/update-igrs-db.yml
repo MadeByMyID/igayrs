@@ -2,7 +2,7 @@ name: Update IGRS Database
 
 on:
   schedule:
-    - cron: "0 */12 * * *"
+    - cron: "0 0 * * *"
   workflow_dispatch:
 
 permissions:
@@ -20,63 +20,79 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Ensure jq is available
-        run: |
-          if ! command -v jq >/dev/null 2>&1; then
-            sudo apt-get update
-            sudo apt-get install -y jq
-          fi
-
       - name: Download latest IGRS public database
         run: |
           set -euo pipefail
 
-          PROBE_URL="https://api.igrs.id/public/games?page=888888&size=2000"
-          PAGE_DIR=".tmp-igrs-pages"
+          RAW_DIR=".tmp-igrs-raw"
 
-          curl --fail --show-error --silent --location "$PROBE_URL" -o "probe.json"
-          jq empty "probe.json"
+          CHUNK_SIZE=2000
+          CONCURRENCY=30
+          CURRENT_START=0
 
-          TOTAL_PAGES="$(jq -r '.page.totalPages // 0' "probe.json")"
-          if ! [[ "$TOTAL_PAGES" =~ ^[0-9]+$ ]] || [[ "$TOTAL_PAGES" -lt 1 ]]; then
-            echo "ERROR: Invalid totalPages from probe response: $TOTAL_PAGES" >&2
-            cat "probe.json"
+          rm -rf "$RAW_DIR"
+          mkdir -p "$RAW_DIR"
+
+          echo "Starting parallel fetch in chunks of ${CHUNK_SIZE} (concurrency: ${CONCURRENCY})"
+
+          while true; do
+            CURRENT_END=$((CURRENT_START + CHUNK_SIZE - 1))
+            echo ">>> Fetching batch: IDs ${CURRENT_START} to ${CURRENT_END}"
+
+            FILES_BEFORE="$(find "$RAW_DIR" -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')"
+
+            seq "$CURRENT_START" "$CURRENT_END" | xargs -P "$CONCURRENCY" -I {} bash -c '
+              set -euo pipefail
+              ID="$1"
+              RAW_DIR="$2"
+              API_URL="https://api.igrs.id/public/games/${ID}"
+              TEMP_FILE="${RAW_DIR}/${ID}.json"
+
+              HTTP_STATUS="$(curl \
+                --silent \
+                --show-error \
+                --location \
+                --retry 3 \
+                --retry-delay 1 \
+                --max-time 20 \
+                --output "$TEMP_FILE" \
+                --write-out "%{http_code}" \
+                "$API_URL")"
+
+              if [ "$HTTP_STATUS" -eq 200 ] && jq -e '.id != null' "$TEMP_FILE" > /dev/null 2>&1; then
+                jq -c '.' "$TEMP_FILE" > "${TEMP_FILE}.min"
+                mv "${TEMP_FILE}.min" "$TEMP_FILE"
+              else
+                rm -f "$TEMP_FILE"
+              fi
+            ' _ {} "$RAW_DIR"
+
+            FILES_AFTER="$(find "$RAW_DIR" -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')"
+            GAMES_ADDED=$((FILES_AFTER - FILES_BEFORE))
+
+            echo ">>> Batch complete. Games found in this chunk: ${GAMES_ADDED}"
+
+            if [ "$GAMES_ADDED" -eq 0 ]; then
+              echo "No games found in batch ${CURRENT_START}-${CURRENT_END}. Assuming end."
+              break
+            fi
+
+            CURRENT_START=$((CURRENT_START + CHUNK_SIZE))
+          done
+
+          if ! find "$RAW_DIR" -maxdepth 1 -type f -name '*.json' | grep -q .; then
+            echo "ERROR: No games fetched." >&2
             exit 1
           fi
 
-          LAST_PAGE=$((TOTAL_PAGES - 1))
-          echo "Detected totalPages=$TOTAL_PAGES, downloading pages ${LAST_PAGE}..0"
+          find "$RAW_DIR" -maxdepth 1 -name '*.json' -print0 | xargs -0 cat | jq -s 'sort_by(.id)' > "igrs.pubdb.json"
 
-          rm -rf "$PAGE_DIR"
-          mkdir -p "$PAGE_DIR"
-
-          for ((p=LAST_PAGE; p>=0; p--)); do
-            PAGE_URL="https://api.igrs.id/public/games?page=${p}&size=2000"
-            PAGE_FILE="${PAGE_DIR}/page-${p}.json"
-
-            echo "Downloading page ${p}"
-            curl --fail --show-error --silent --location "$PAGE_URL" -o "$PAGE_FILE"
-            jq empty "$PAGE_FILE"
-
-            if ! jq -e 'has("_embedded") and (._embedded.publicGameResultList | type == "array")' "$PAGE_FILE" >/dev/null; then
-              echo "ERROR: Page ${p} response looks broken (missing _embedded.publicGameResultList)." >&2
-              jq '{_links, page}' "$PAGE_FILE" || true
-              exit 1
-            fi
-          done
-
-          jq -s '{
-            _embedded: {
-              publicGameResultList: (map(._embedded.publicGameResultList) | add)
-            }
-          }' "${PAGE_DIR}"/page-*.json > "igrs.pubdb.json"
-
-          GAME_COUNT="$(jq '._embedded.publicGameResultList | length' "igrs.pubdb.json")"
+          GAME_COUNT="$(jq 'unique_by(.id) | length' "igrs.pubdb.json")"
           echo "Merged ${GAME_COUNT} games into igrs.pubdb.json"
 
       - name: Validate assembled JSON
         run: |
-          jq -e '._embedded.publicGameResultList | type == "array"' "igrs.pubdb.json" >/dev/null
+          jq -e 'type == "array"' "igrs.pubdb.json" >/dev/null
 
       - name: Download ratings and descriptors
         run: |
@@ -115,8 +131,9 @@ jobs:
             elif .id == 35 then 6
             else 0
             end;
-            
-          map({
+
+          (if type == "array" then . else [] end)
+          | map({
             key: (.id | tostring),
             value: {
               name,
@@ -129,7 +146,8 @@ jobs:
           })
           | from_entries'
 
-          DESCRIPTORS_TRANSFORM='map({
+          DESCRIPTORS_TRANSFORM='(if type == "array" then . else [] end)
+            | map({
               key: (.id | tostring),
               value: {
                 nameId,
@@ -140,23 +158,25 @@ jobs:
             | from_entries'
 
           GAMES_QUERY="${PLATFORM_NORMALIZE}
-          ._embedded.publicGameResultList
+            unique_by(.id)
+            | sort_by(.id)
+            | reverse
           | map({
               id,
               name,
               releaseYear,
               publisherName,
-              platformsName: (.platformsName | map(normalize_platform) | unique),
+              platformsName: ((.platformsName // []) | map(normalize_platform) | unique),
               description,
               videoUrl,
               inGameUrl,
-              ratings: [.ratings[].id],
-              descriptors: [.descriptors[].id]
+              ratings: ((.ratings // []) | map(.id)),
+              descriptors: ((.descriptors // []) | map(.id))
             })"
 
           RATINGS="$(jq "$RATINGS_TRANSFORM" "ratings-api.json")"
           DESCRIPTORS="$(jq "$DESCRIPTORS_TRANSFORM" "descriptors-api.json")"
-          GAME_COUNT="$(jq '._embedded.publicGameResultList | length' "igrs.pubdb.json")"
+          GAME_COUNT="$(jq 'unique_by(.id) | length' "igrs.pubdb.json")"
           GENERATED_AT="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 
           jq -n \
@@ -178,10 +198,9 @@ jobs:
       - name: Remove raw dump files
         run: |
           rm -f "igrs.pubdb.json"
-          rm -f "probe.json"
           rm -f "ratings-api.json"
           rm -f "descriptors-api.json"
-          rm -rf ".tmp-igrs-pages"
+          rm -rf ".tmp-igrs-raw"
 
       - name: Commit and push changes
         run: |
