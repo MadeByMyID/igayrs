@@ -421,6 +421,10 @@ body {
   overflow-y: auto;
 }
 
+:is(#filter-year, #filter-platform) .filter-panel-body {
+  max-height: 126px;
+}
+
 .filter-panel-body::-webkit-scrollbar {
   width: 4px;
 }

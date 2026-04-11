@@ -17,6 +17,7 @@
       'filter.rating': 'Rating',
       'filter.platform': 'Platform',
       'filter.descriptor': 'Content',
+      'filter.year': 'Year',
       'filter.clear': 'Clear all filters',
       'detail.back': '← Back to list',
       'detail.publisher': 'Publisher',
@@ -64,6 +65,7 @@
       'filter.rating': 'Rating',
       'filter.platform': 'Platform',
       'filter.descriptor': 'Konten',
+      'filter.year': 'Tahun',
       'filter.clear': 'Hapus semua filter',
       'detail.back': '← Kembali ke daftar',
       'detail.publisher': 'Penerbit',
@@ -105,6 +107,7 @@
   let activeRatings = new Set();
   let activePlatforms = new Set();
   let activeDescriptors = new Set();
+  let activeYears = new Set();
 
   const PER_PAGE = 30;
   let currentPage = 1;
@@ -168,9 +171,10 @@
       let score = 0;
       if (gq) { const s = fuzzyScore(gq, game.name); if (s <= 15) continue; score = s; }
       if (pq) { const s = fuzzyScore(pq, game.publisherName); if (s <= 15) continue; score = Math.max(score, s * 0.8); }
-      if (activeRatings.size > 0 && ![...activeRatings].every(r => game.ratings.includes(r))) continue;
+      if (activeRatings.size > 0 && ![...activeRatings].some(r => game.ratings.includes(r))) continue;
       if (activePlatforms.size > 0 && ![...activePlatforms].every(p => game.platformsName.includes(p))) continue;
       if (activeDescriptors.size > 0 && ![...activeDescriptors].every(d => game.descriptors.includes(d))) continue;
+      if (activeYears.size > 0 && !activeYears.has(String(game.releaseYear))) continue;
       results.push({ game, score });
     }
     if (gq || pq) results.sort((a, b) => b.score - a.score);
@@ -242,21 +246,24 @@
     const ratingCounts = {};
     const platformCounts = {};
     const descriptorCounts = {};
+    const yearCounts = {};
     games.forEach(g => {
       g.ratings.forEach(r => { ratingCounts[r] = (ratingCounts[r] || 0) + 1; });
       g.platformsName.forEach(p => { platformCounts[p] = (platformCounts[p] || 0) + 1; });
       g.descriptors.forEach(d => { descriptorCounts[d] = (descriptorCounts[d] || 0) + 1; });
+      yearCounts[g.releaseYear] = (yearCounts[g.releaseYear] || 0) + 1;
     });
 
     const topP = ['PC', 'Android', 'iOS', 'PlayStation 5', 'Nintendo Switch 2', 'Nintendo Switch', 'Web Based'];
     const allPlatforms = [...new Set(games.flatMap(g => g.platformsName))];
     const platforms = [...topP.filter(p => allPlatforms.includes(p)), ...allPlatforms.filter(p => !topP.includes(p)).sort()];
     const descriptorIds = [...new Set(games.flatMap(g => g.descriptors))].sort((a, b) => dname(a).localeCompare(dname(b)));
-    const hasActive = activeRatings.size + activePlatforms.size + activeDescriptors.size > 0;
+    const years = [...new Set(games.map(g => g.releaseYear))].sort((a, b) => b - a);
+    const hasActive = activeRatings.size + activePlatforms.size + activeDescriptors.size + activeYears.size > 0;
 
     if (!filterStates) {
       const initC = window.innerWidth <= 900;
-      filterStates = { r: initC, p: initC, d: initC };
+      filterStates = { r: initC, p: initC, d: initC, y: initC };
     }
 
     sidebar.innerHTML = `
@@ -296,6 +303,18 @@
           `).join('')}
         </div>
       </div>
+      <div class="filter-panel${filterStates.y ? ' collapsed' : ''}" id="filter-year">
+        <div class="filter-panel-header">${t('filter.year')} <span class="toggle-icon">▼</span></div>
+        <div class="filter-panel-body">
+          ${years.map(year => `
+            <label class="filter-checkbox">
+              <input type="checkbox" data-year="${year}" ${activeYears.has(String(year)) ? 'checked' : ''}>
+              ${esc(String(year))}
+              <span class="count">${yearCounts[year] || 0}</span>
+            </label>
+          `).join('')}
+        </div>
+      </div>
       <button class="filter-clear-btn${hasActive ? '' : ' hidden'}" id="filter-clear" type="button">${t('filter.clear')}</button>
     `;
 
@@ -308,8 +327,11 @@
     sidebar.querySelectorAll('[data-descriptor]').forEach(cb => {
       cb.addEventListener('change', () => { toggle(activeDescriptors, parseInt(cb.dataset.descriptor)); currentPage = 1; renderFilterSidebar(); renderResults(); });
     });
+    sidebar.querySelectorAll('[data-year]').forEach(cb => {
+      cb.addEventListener('change', () => { toggle(activeYears, cb.dataset.year); currentPage = 1; renderFilterSidebar(); renderResults(); });
+    });
     sidebar.querySelectorAll('.filter-panel-header').forEach((h, i) => {
-      const keys = ['r', 'p', 'd'];
+      const keys = ['r', 'p', 'd', 'y'];
       h.addEventListener('click', () => {
         filterStates[keys[i]] = !filterStates[keys[i]];
         h.parentElement.classList.toggle('collapsed');
@@ -317,7 +339,7 @@
     });
     const clearBtn = document.getElementById('filter-clear');
     if (clearBtn) clearBtn.addEventListener('click', () => {
-      activeRatings.clear(); activePlatforms.clear(); activeDescriptors.clear();
+      activeRatings.clear(); activePlatforms.clear(); activeDescriptors.clear(); activeYears.clear();
       currentPage = 1; renderFilterSidebar(); renderResults();
     });
   }
@@ -388,7 +410,7 @@
     }
 
     if (stats) {
-      const filtered = activeRatings.size + activePlatforms.size + activeDescriptors.size > 0 || gq || pq;
+      const filtered = activeRatings.size + activePlatforms.size + activeDescriptors.size + activeYears.size > 0 || gq || pq;
       stats.innerHTML = filtered
         ? t('search.stats.filtered').replace('{count}', `<strong>${all.length}</strong>`).replace('{total}', `<strong>${games.length}</strong>`)
         : t('search.stats').replace('{count}', `<strong>${games.length}</strong>`);
