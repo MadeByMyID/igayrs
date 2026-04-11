@@ -1,5 +1,1869 @@
 [
   {
+    "id": 6884,
+    "name": "Suduku Farms",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "SudukuFarms is not traditional Sudoku, but an engaging “fill-in” puzzle that challenges your deduction and spatial reasoning. The numbers along the grid edges indicate how many cells in that row or column should be filled. Your task is to use pure logic—no guessing needed—to determine exactly which cells must be filled, step by step.\nHow to Play:\nEach clue number tells you the count of consecutive filled cells in that row or column.\nBetween separate blocks of filled cells, there must be at least one empty cell.\nCross-referencing horizontal and vertical clues will lead you to the one unique solution.\nHandy Tools to Help You Solve:\n1、 Detector Hammer: Tap any cell to reveal whether it should be filled or left empty—perfect for checking key positions.\n2、Triple Rocket: Instantly reveals the state of three random cells, helping you break through tricky spots.\n3、Clear Rake: Highlights all necessarily filled cells in an entire row or column, giving you a clearer local overview.\nFrom gentle warm-ups to mind-bending challenges, each puzzle is a satisfying workout for your brain. Welcome to SudukuFarms—cultivate your logic, harvest your insights, and enjoy the joy of pure deduction!",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6883,
+    "name": "WinaVelarPlay",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6882,
+    "name": "SlingShot Pro",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Shoot the bats, ghosts and monsters with different slingshots, on various stages!\n\nOn the initial stage of the game, you have 45 seconds to kill as many bats as you can. Each time you shoot a bat you get extra seconds with a maximum of 60 seconds per game. But if you miss the shot, you lose 5 seconds.\n\nAvoid hitting pigeons and achieve high scores to unlock the next stage of the game.\n\nFeatures:\n• 4 stages of increasing difficulty\n• Classic, Advanced and Ghost game modes\n• Multiple slingshot and rock choices\n• Simple one-touch controls\n• Free to play",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6881,
+    "name": "WinaAstraPlay",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6880,
+    "name": "Fish And Catch",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      4
+    ],
+    "descriptors": [
+      3
+    ]
+  },
+  {
+    "id": 6879,
+    "name": "Pixel Beats",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Step into a retro-inspired musical adventure in Pixel Beats, a challenging pixel-art platformer that takes you on a stylistic journey through hip-hop history. Play as evolving musical personas—from a classic vibrant style to a darker, mask-wearing aesthetic—while running, jumping, and grabbing power-boosts across 8 distinctly themed worlds and 32 action-packed levels.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6878,
+    "name": "ABC Rummy",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "joy a fun and engaging gaming experience with scratch cards, spin games, and daily rewards. This app is designed for entertainment purposes where users can collect coins, unlock rewards, and enjoy exciting mini-games.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6877,
+    "name": "OBBY GRUMPY GRAN Game",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Get ready for a fun and challenging parkour adventure! In OBBY GRUMPY GRAN Game, you must run, jump, and avoid tricky obstacles while escaping the grumpy gran.\n\nTest your timing and skills as you move through creative obby levels filled with moving platforms, jumps, and surprises. Stay focused, avoid falling, and keep progressing to reach the finish line.\n\nEach level brings new challenges that require quick reactions and smart movement. Whether you're a beginner or a skilled player, the game offers exciting gameplay.\n\nGame Features:\n\nFun and engaging obby parkour gameplay\n1.Multiple levels with increasing difficulty\n2.Smooth controls and responsive movement\n3.Colorful environments and creative obstacles\n4.Easy to play, challenging to master\n\nRun fast, jump smart, and complete every level to escape the grumpy gran!",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      5
+    ]
+  },
+  {
+    "id": 6876,
+    "name": "Yono Rummy",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Enjoy the classic thrill of Rummy anytime, anywhere with the ultimate offline rummy experience designed purely for fun and skill-building!\nPlay this traditional Indian rummy card game offline with no internet required. Challenge smart\nCompletely Offline – Play without Wi-Fi or data – perfect for travel, breaks, or anytime fun!\nClassic Gameplay – to declare and .\nFun Features – Spin the wheel  and high scores.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6875,
+    "name": "Bus Racer",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6874,
+    "name": "7U7 Peachy Pairing",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6873,
+    "name": "Ballistics",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Play against friends and random opponents in a head-to-head game of 8 ball pool. Try our \"crazy\" mode, adding an item shop system to turn the classic game on its head!",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6872,
+    "name": "The Scary Creepy Boy",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      5
+    ]
+  },
+  {
+    "id": 6871,
+    "name": "Spin 777",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "joy a fun and engaging gaming experience with scratch cards, spin games, and daily rewards. This app is designed for entertainment purposes where users can collect coins, unlock rewards, and enjoy exciting mini-games.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6870,
+    "name": "Volcano Drop",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Volcano Drop\n🌋 Harness the power of the volcano and uncover ancient secrets! Dive into the fiery heart of the mountain in Volcano Drop, an engaging arcade challenge where bravery meets legendary treasures. Journey through glowing lava chambers, gather golden resources, and use them to empower mystical relics. Can you master the heat and complete every trial the volcano throws your way?\n\n🔥 How to Play:\n • Gather Volcanic Gold: Activate the ancient reels to collect coins and hidden treasures. Every successful turn brings you closer to your next big discovery.\n\n • Empower Mystical Relics: Use your accumulated wealth to upgrade a collection of ancient artifacts. These relics grant you special bonuses, making your resource gathering even more efficient.\n\n • Complete Trials: Take on various in-game achievements. Proving your mastery over the volcanic elements unlocks new heights of progress.\n\n • Evolve Your Strategy: As you play, your artifacts grow stronger, creating a more rewarding and dynamic experience with every session.\n\n✨ Game Highlights:\n • 🌋 Immersive Lava Theme: Experience a world of glowing magma, rising smoke, and golden sparks.\n\n • 🏺 Artifact Progression: Strategically enhance your relics to gain unique advantages and boost your score.\n\n • 🏆 Goal-Oriented Gameplay: Stay motivated with a list of achievements that reward your dedication and skill.\n\n • 🕹️ Intuitive Mechanics: Simple tap-and-spin controls designed for quick, satisfying gaming breaks.\n\n • 📈 Legendary Growth: Watch your power expand as you transform from a novice explorer into a master treasure hunter.\n\nDo you have the courage to face the flames and claim the mountain's riches?",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      15
+    ]
+  },
+  {
+    "id": 6869,
+    "name": "Arrow Puzzle: Tap Away & Clear",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6868,
+    "name": "Hi Rummy",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Enjoy the timeless fun of Rummy with Hi Rummy  Card Game!\nPlay a smooth and engaging card game experience designed for casual and competitive player's.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6867,
+    "name": "Packer Marvel Goo",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "## Main Functions\n\n### Core Game Functions\n\n- **Classic Sudoku Gameplay**: 9x9 standard Sudoku grid\n\n- **Multiple Difficulty Levels**:\n\n- Easy: Remove 30 numbers\n\n- Medium: Remove 40 numbers\n\n- Hard: Remove 50 numbers\n\n- **Smart Hint System**: Provides helpful hints when cells are not selected or fixed numbers are selected\n\n- **Game Statistics**: Records game time, number of moves, and best score\n\n### Customization Options\n\n- **Symbol Selection**:\n\n- Number Mode: Uses numbers 1-9\n\n- Letter Mode: Uses letters A-I\n\n- **Background Themes**:\n\n- Default gradient background\n\n- Pattern Background 1\n\n- Pattern Background 2\n\n- Game-Specific Background\n\n### User Experience\n\n- **Immersive Status Bar**: Full-screen game experience\n\n- **Smooth Animations**: Button click feedback, title animation, decorative element animation\n\n- **Game History**: Saves the last 5 game attempts\n\n- **Success/Failure Dialog Box**: Beautiful message interface when the game ends\n\n## Gameplay\n\n### Basic Rules\n1. **Objective:** Fill a 9x9 grid with numbers (or letters) so that each row, each column, and each 3x3 grid contains 1-9 (or A-I).\n\n2. **Rules:**\n\n- Each row can only contain 1-9 (or A-I) once.\n\n- Each column can only contain 1-9 (or A-I) once.\n\n- Each 3x3 grid can only contain 1-9 (or A-I) once.\n\n- The initial number (black) cannot be modified.\n\n- The user-entered number (blue) can be modified.\n\n### Operation Method\n1. **Select Cell:** Click on any cell in the Sudoku grid.\n\n2. **Fill in Number/Letter:** Click the number/letter button at the bottom.\n\n3. **Clear Content:** Click the clear button to delete the content of the selected cell.\n\n4. **Game Over:** All cells are filled or an error occurs.\n\n### Game Flow\n1. Start the game and select the difficulty level.\n\n2. Click on an empty cell to select.\n\n3. 4. Use the bottom buttons to fill in the corresponding numbers/letters.\n\n5. Continue filling until the entire grid is complete.\n\n6. A completion dialog box and statistics will be displayed when the game is successful.\n\n## ⚙️ Settings Options\n\n### Difficulty Settings\n\n- **Easy**: Suitable for beginners, removes 30 numbers.\n\n- **Medium**: Standard difficulty, removes 40 numbers.\n\n- **Hard**: Challenge mode, removes 50 numbers.\n\n### Symbol Settings\n\n- **Number Mode**: Traditional numbers 1-9.\n\n- **Letter Mode**: Letters A-I, adding variety to the game.\n\n### Background Settings\n\n- **Default Background**: Classic gradient background.\n\n- **Pattern Background 1**: Simple geometric pattern.\n\n- **Pattern Background 2**: Soft gradient colors.\n\n- **Game Background**: Dedicated game-themed background.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6866,
+    "name": "Across Inauthoritative",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Core Functions\n\n**News Category Browsing:** Curated news, technology, health, finance, culture, lifestyle, and more.\n\nDaily updates, concise and clear content, supports quick preview and full-text expansion.\n\nSupports favorites, history, and local caching for offline reading.\n\n**Interactive Knowledge Quiz:** Each news article can be linked to a set of related questions, allowing you to answer while reading and improve memory.\n\nQuestion types include true/false and multiple choice, with immediate feedback and explanations after answering.\n\nA separate \"Daily Knowledge Challenge\" module is provided to test your daily knowledge.\n\n**Question Records and Points:** Records your score and accuracy for each quiz, with support for reviewing incorrect answers.\n\nAccumulated points allow you to view your ranking (optional expansion).\n\nYou can view your performance by news type to help you improve precisely.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6865,
+    "name": "Reload Punily",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Gameplay:\nTap a square to start detecting mines; the number indicates the number of mines nearby.\n\nLong press to mark a mine to avoid accidentally stepping on it.\n\nWin by revealing all safe squares.\n\nStepping on a mine results in game over and you must try again.\n\nScoring and Rules (Supports Points Mode):\n\nEach revealed safe square: +1 point\n\nEach correctly marked mine: +2 points\n\nIncorrectly marked mine: -1 point; canceling the mark refunds the score.\n\nStepping on a mine: Game over, 50 points deducted.\n\nThe game ends with the total score and time.\n\nFeatures:\n\n⏱️ Timer and score displayed simultaneously for a more challenging experience.\n\nSupports three difficulty levels: Easy, Medium, and Hard.\n\nAutomatically reveals mine-free areas for a faster pace.\n\nLeaderboard (optional), recording fastest times and highest scores.\n\nSupports turning off sound effects for quiet environments.\n\nPlayable offline; no internet connection required.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6864,
+    "name": "Dark Content Warning Escape",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Enter the terrifying world of Dark Content Warning Escape, a spooky horror adventure filled with mystery, dark rooms, hidden secrets, and dangerous surprises.\n\nYou are trapped inside a strange place where every hallway, room, and corner hides something unexpected. Explore carefully, collect useful items, solve puzzles, and find a way to escape before it is too late.\n\nStay alert while moving through creepy locations filled with locked doors, hidden clues, strange sounds, and scary enemies. Use your thinking skills to survive dangerous situations and uncover the mystery behind the dark place.\n\nEach level becomes more difficult with new puzzles, secret paths, and more intense horror moments. Search for keys, unlock doors, and avoid dangers as you continue your escape adventure.\n\nDark Content Warning Escape is perfect for players who enjoy horror games, scary escape adventures, survival challenges, mystery puzzles, and creepy environments.\n\nGame Features\nDark horror environment\nPuzzle-solving escape gameplay\nHidden clues and secret rooms\nCreepy enemies and scary surprises\nMultiple levels and missions\nSmooth and easy controls\nSpooky sounds and effects\nColorful 3D graphics\nSurvival horror adventure\nExciting mystery gameplay",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      5
+    ]
+  },
+  {
+    "id": 6863,
+    "name": "Jdisplay Fructify",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "## Game Instructions\n\n- The game continuously generates blocks from the top of the screen. **Each row contains only one black block**, with the rest being transparent or white blocks.\n\n- Players must **click the black block** before it reaches the bottom of the screen.\n\n- **Clicking the wrong block (clicking a white block) or missing a block** will result in immediate game failure.\n\n- As the score increases, **the black block's falling speed gradually increases**.\n\n- Supports **three difficulty levels**:\n\n- Easy: 4 columns, slow speed, larger blocks;\n\n- Normal: 6 columns, medium speed, medium blocks;\n\n- Hard: 8 columns, fast speed, smaller blocks;",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6862,
+    "name": "Cesspit Cognoscible Mata",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Add Notes\n\nQuickly jot down inspirations, to-do lists, meeting minutes, or daily thoughts.\n\nSupports title and content editing; a clean and uncluttered interface.\n\nAutomatic saving prevents content loss.\n\nBrowse Note List\n\nAll notes are clearly displayed in chronological order.\n\nSupports sorting by creation and modification time.\n\nSimple interface for quick browsing and locating content.\n\nKeyword Search\n\nEnter keywords to quickly find related notes.\n\nSupports fuzzy matching for improved search efficiency.\n\nSearch results highlight keywords for a more intuitive viewing experience.\n\n⭐ Save Important Notes\n\nOne-click saving of high-priority notes.\n\nSeparate grouping of favorites for centralized management of important content.\n\nSupports unsaving and quick access to frequently used information.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6861,
+    "name": "Total Casino",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Total Casino is a user—friendly application for relaxation and attention training that combines two popular game formats: classic Mahjong and dynamic match-3. Total Casino allows you to choose a rhythm to suit your mood: calm and thoughtful passing or fast, intense combo sessions. In Mahjong, it is important to find free pairs of tiles, think ahead and enjoy the gradual progress, while in match-3 it is important to create chains, trigger cascades and get maximum points in one turn.\n\nTotal Casino makes the gameplay clear from the very first minutes thanks to simple rules and an intuitive interface. You can track your best scores, set up an avatar profile, and return to the game with a sense of personal progress. Vivid graphics and pleasant tactile feedback make every action more exciting. The game is great for home, trips, or short breaks, helping you relax and switch things up.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6860,
+    "name": "Safe Chicken",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6859,
+    "name": "Darner Grey",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Gameplay Design\n\nCore Gameplay: Players click on two identical blocks. If the line connecting them consists of no more than three zigzag lines (i.e., two turns), the connection is successful and the blocks are eliminated.\n\nAfter elimination, the empty space can be filled by surrounding blocks, or the blocks themselves may remain stationary.\n\nThe player who clears all blocks within the time limit wins.\n\nGame Interface Design\nThe main interface includes the following elements:\n\nGame Area: Grid layout (e.g., 8x10), with one icon displayed in each square.\n\nTop Bar:\n\nTimer (e.g., 60-second countdown)\n\nScore\n\nRemaining hints (e.g., 3)\n\nBack/Pause Button\n\nBottom Bar:\n\nRearrange Button\n\nHint Button\n\nSound Controls\n\nGame Logic Design\n\nTile Generation: The number of tile types varies according to difficulty (6 for beginner, 8 for intermediate, and 10 for advanced).\n\nEnsure all tiles are initially paired to avoid unsolvable problems.\n\nConnection Judgment: Implement a \"pathfinding algorithm\" to determine if two tiles can be connected (0-2 turns).\n\nBreadth-First Search (BFS) + direction indicators can be used.\n\nDetermine if points can be \"walked\" between in the current grid state.\n\nElimination Animation: Use a connection effect (line drawing animation), then the two tiles gradually become transparent and disappear.\n\nEach connection can have special sound effects + score jump animation.\n\n⚙️ Difficulty Design\nDifficulty | Grid Size | Icon Types | Time Limit | Rearrangement Required\nEasy | 6x8 | 6 types | 90 seconds ✅\nMedium | 8x10 | 8 types | 75 seconds ✅\nHard | 10x12 | 10 types | 60 seconds ✅\n\nUI/UX Style Suggestions: Fresh colors; icons can use cartoon fruits, animals, or symbols.\n\nSlight shadows can be added to the tile borders to enhance their three-dimensionality.\n\nConnection effects can be set to colored rays or particle-effect trails.\n\nSound Effects & Special Effects:\n\nBackground Music: Light and lively style.\n\nSound Effects:\n\nClick Sound\n\nCancel Sound (Simulates crisp sound effects such as \"ding,\" \"click,\" etc.)\n\nCombo sound effect for consecutive successful connections.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6858,
+    "name": "Cursely Vallum",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "## Gameplay\n\n1. **Control the Mouse**:\n\n- Use the virtual controller buttons to control the mouse's movement.\n\n2. **Collect Bombs**:\n\n- Find and collect bomb items in the maze.\n\n3. **Plant Bombs**:\n\n- Press the designated key (e.g., spacebar) to plant the bomb.\n\n- Note: Bombs explode 3 seconds after being planted; maintain a safe distance.\n\n4. **Avoid Harm**:\n\n- Being caught by the cat or damaged by bombs will result in game over; stay alert.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6857,
+    "name": "Insipient Unspliced Gal",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "## Gameplay Instructions\n\n1. **Gravity Sensor Control**:\n\n- Tilt your phone to control the ball's movement through the maze.\n\n- The ball will automatically roll according to the direction of gravity.\n\n2. **Objective**:\n\n- Control the ball to avoid walls and collect stars, coins, energy balls, and other items.\n\n- Reach the end of the maze within the time limit to clear the level.\n\n3. **Item Descriptions**:\n\n- Stars: +100 points\n\n- Coins: +200 points\n\n- Energy Balls: +300 points\n\n- Collecting items will increase your score; some items may affect the ball's speed or provide special effects.\n\n4. **Failure Conditions**:\n\n- Failure to reach the end within the time limit.\n\n- The ball gets stuck or collides with a danger zone (if any).\n\n## Game Modes\n\n- **Classic Mode**:\n\n- An infinitely randomized maze with gradually increasing difficulty.\n\n- Records your highest score and fastest completion time.\n\n- **Adventure Mode**:\n\n- Level-based gameplay, with each level featuring a different maze structure and increasing difficulty.\n\n- Clearing levels unlocks new levels and skins.\n\n## Key Features\n\n- Randomly generated, guaranteed solvable mazes.\n\n- Modern art style, supporting multiple skins and backgrounds.\n\n- Rich leaderboard system, supporting different difficulty levels.\n\n- Smooth gravity sensor experience, compatible with multiple devices.\n\n- Automatic level saving, allowing you to continue your challenge at any time.\n\n## Controls\n\n- Tilt your phone: Control the ball's movement.\n\n- Tap buttons: Switch modes, difficulties, skins, etc.\n\n- Level selection: Freely select unlocked levels in challenge mode.\n\n## Other Notes\n\n- The game supports Chinese and English interfaces.\n\n- All data is saved locally, no internet connection required.\n\n- If you encounter any problems, you can reset your data in the settings.\n\nHave fun and challenge for higher scores!",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6856,
+    "name": "Elicitation Cutlas 2025",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Game Rules and Scoring:\n\nInitial score: 0 points\n\nEach successful flip of an unmarked safe square: +1 point\n\nEach successful marking of a mine: +2 points\n\nEach incorrectly marked mine: -1 point\n\nUnmarking a mine will reset the corresponding score to ensure fairness\n\nStepping on a mine: Game ends immediately, and 50 points are deducted\n\nInterface and Functions:\n\nScoreboard and timer are displayed simultaneously at the top for easy viewing.\n\nScore and time are updated in real time during the game.\n\nA summary pop-up appears after the game ends, displaying:\n\nFinal Score\n\nTotal Time\n\nSupports one-click restart of the challenge\n\nFeatures:\n\nClassic Minesweeper gameplay + strategic scoring system, combining deduction and challenge\n\nSmooth operation, timely feedback, supports quick marking and undoing\n\nPlay offline, enjoy a pure gaming experience without an internet connection\n\nSimple design, clean visual style, adaptable to various devices and screens\n\nSuitable for: Players who enjoy puzzle and logic-based games\n\nUsers who want to train their focus and brainpower during short breaks\n\nMinesweeper enthusiasts who pursue strategy and challenge high scores",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6855,
+    "name": "MoveSensei QB Training",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6854,
+    "name": "Draw game line draw offline 3d",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Draw game line draw offline 3d.\nGet ready to immerse yourself with the stunning gameplay of this line draw game. This draw game 3d is an offline game and you can play this game without internet. Complete all the levels of this draw line game which has a lot of fun for all draw games lovers.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [],
+    "descriptors": []
+  },
+  {
+    "id": 6853,
+    "name": "Cypriot Voluptuously",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Gameplay:\nTap a square to start detecting mines; the number indicates the number of mines nearby.\n\nLong press to mark a mine to avoid accidentally stepping on it.\n\nWin by revealing all safe squares.\n\nStepping on a mine results in game over and you must try again.\n\nScoring and Rules (Supports Points Mode):\n\nEach revealed safe square: +1 point\n\nEach correctly marked mine: +2 points\n\nIncorrectly marked mine: -1 point; canceling the mark refunds the score.\n\nStepping on a mine: Game over, 50 points deducted.\n\nThe game ends with the total score and time.\n\nFeatures:\n\n⏱️ Timer and score displayed simultaneously for a more challenging experience.\n\nSupports three difficulty levels: Easy, Medium, and Hard.\n\nAutomatically reveals mine-free areas for a faster pace.\n\nLeaderboard (optional), recording fastest times and highest scores.\n\nSupports turning off sound effects for quiet environments.\n\nPlayable offline; no internet connection required.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6852,
+    "name": "Antiquate Unslaked",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6851,
+    "name": "Sensory Overdrive",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Sensory Overdrive is a parkour experience designed to push your senses and test your balance. Navigate through ever-shifting obstacles and contend with mind-bending walls as you seek equilibrium in a world of chaos. Overcome the odds and reach your destination.\nSo, are you ready? See you at the end!\nKey Features:\nVisually punishing game\nVolatile, twisting tunnels\nSurreal wall patterns\nPlay more, balance better",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6850,
+    "name": "Choo Choo Spider Train Game 3D",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "In Cho-Cho Scary Charles Spider Train you’re given the task of eradicating a monster known by the locals as “Charles\" horror 3d games.” Nobody knows where he came from, but they know why; to eat the flesh of puny humans in this horror games. In this spooky game, Cho-Cho Scary Charles-Spider Train, you have a small yellow train, with a map, mounted hunting machine gun, and an exquisite collection of bobbleheads on the dashboard. Cho-Cho Scary Charles-Spider Train You’ll use this train to get from one horror games place to another scary place, while you complete the horror & scary games missions for the townspeople or loot scraps in Juegos de terror from around the ghost survival horror games island escape. Over time mr meat you’ll use your scraps to upgrade your train’s speed, armor, and damage in creepy horror games. In Cho-Cho Scary Charles-Spider Train You’ll grow your arsenal, and (hopefully) become an unstoppable shooting games hunting force, ready to take on the great and mighty free horror games Charles.\n\nChoo Choo train Charles 2023 game is a horror game with a character of train, and it's also an action game. The game will take you to a faraway place where the monster train is haunting players around the world. It's an extremely scary yet enjoyable experience choo-choo charles that you can only get when playing this game.\n\nThe train in this choo choo charles game has some awesome features such as the ability to jump off choo-choo train and run away from the monster train, which makes it very challenging to play. The monster train also cannot be stopped by any means and will always keep chasing choo choo charles its target until it catches them up or they manage to escape from choo choo charles clutches.\n\nThe player will have to use their reflexes and wits to survive against choo-choo charles and relentless killer machine.\nThe choo-choo charles game is a horror game with a character of train and a monster train is haunting players. The game has some features like:\nThe choo-choo charles monsters will attack you if you are close to them, so be careful!\nThere are several kinds of monsters in this choo choo charles game and they are all different from each other choo trains.\n\nCho-Cho Scary Charles-Spider Train is a survival horror game, open world, shooter games. Navigate an island in an old horror train, upgrade it over time, and use it to fight an evil sentient train that terrorizes your home. Clown games Charles is hungry; don’t be his next dunkin.\nThe massive open-world sounds like a player’s dream, but stay alert because horror Cho Cho Scary Charles train could always be lurking around the corner. Honestly, we just hope you don't get scared and can grow your bobblehead collection over time! How about some Funko Pops to keep it interesting? We also think the horror clown games Cho-Cho Scary Charles evil nun absolutely deserves its own scary games movie. Horror Clown faces scary eyes spider train will keep following you until you hunt him down by using the power of hunting machine gun.\n\nJoin us today with your friends to play choo choo train Charles, using spider choo spider legs to finish him off as he chases you.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      5
+    ]
+  },
+  {
+    "id": 6849,
+    "name": "Malism Epistasis CoCo",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "## Gameplay\n\n1. **Control the Mouse**:\n\n- Use the virtual controller buttons to control the mouse's movement.\n\n2. **Collect Bombs**:\n\n- Find and collect bomb items in the maze.\n\n3. **Plant Bombs**:\n\n- Press the designated key (e.g., spacebar) to plant the bomb.\n\n- Note: Bombs explode 3 seconds after being planted; maintain a safe distance.\n\n4. **Avoid Harm**:\n\n- Being caught by the cat or damaged by bombs will result in game over; stay alert.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6848,
+    "name": "Rogatory Tomium",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6847,
+    "name": "Formula Car: Real Racing 2026",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Push the limits of speed in the most authentic Formula racing experience of 2026!\n\nWelcome to Formula Car: Real Racing 2026, where the asphalt burns and only the fastest survive. If you are a fan of high-octane car racing and extreme driving simulators, get ready to take the wheel of the world’s most powerful open-wheel machines.\n\nWhy Choose Formula Car: Real Racing 2026? This isn't just another driving game; it’s a precision-engineered racing simulator designed for speed enthusiasts. From the roar of the engines to the smoke from your tires, every detail is crafted for a real racing feel.\n\nGame Features:\n\nReal Racing Physics: Experience authentic aerodynamics and car handling. Feel the G-force on every sharp turn.\n\nExtreme Driving Missions: Take on challenging tracks that test your precision and reflexes at 300+ km/h.\n\nNext-Gen 2026 Graphics: High-definition visuals and realistic weather effects bring the Grand Prix tracks to life.\n\nCustom Supercars: Unlock and upgrade a fleet of high-performance formula cars. Tune your engine for maximum velocity.\n\nGlobal Tracks: Race across iconic international circuits, from neon city streets to professional desert tracks.\n\nMaster the Track Whether you are a casual fan of car driving games or a hardcore racing pro, our intuitive controls allow you to drift, overtake, and dominate the leaderboard with ease. This is the ultimate evolution of formula car racing.\n\nDownload Formula Car: Real Racing 2026 now and start your journey to become a racing legend!",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      5
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6846,
+    "name": "Water boat simulator games 3d",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Water boat simulator games 3d.\nGet ready for play this boat game and drive the boat in the water and then take the boat at the finish point to complete the level of this boat game. This boat simulator 3d is an offline game and you can play this game without internet. Complete all the levels of this game which has a lot of fun for all boat games 3d lovers.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6845,
+    "name": "Desert jeep driving 3d game",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Desert jeep driving 3d game.\nGet ready for play this jeep car game and drive the jeep in the desert and then take the jeep car at the finish point to complete the level of this game. This jeep game 3d is an offline game and you can play this game without internet. Drive jeep in the desert and learn the jeep driving skills to become the expert jeep car driver.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6844,
+    "name": "Car parking game simulator 3d",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Car parking game simulator 3d.\nDrive car in this car parking game and learn the car parking skills to become the expert car driver of this car driving game. This car game has a challenging and well designed parking mode. Drive car in the parking levels and complete the level of this car game 3d.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6843,
+    "name": "Polyphyodont Intervenor",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Game Rules:\n\nSuccessfully match all cards within the time limit.\n\nSuccessfully match two identical cards consecutively.\n\nDifferent cards will be automatically flipped back after a brief display, testing your memory and concentration.\n\nFailure to match within the time limit results in failure and no score.\n\nThree Difficulty Modes:\n\nEasy Mode: 60 seconds | 4x4 card layout\n\nNormal Mode: 80 seconds | 4x5 card layout\n\nHard Mode: 100 seconds | 5x6 card layout\n\nLeaderboard: Automatically records time and steps for each level.\n\nView your best scores by difficulty mode.\n\nContinue to challenge yourself with fewer steps and faster completion times to improve your ranking!\n\n⚙️ Settings: Adjust the default game difficulty (Easy / Normal / Hard).\n\nOne-click toggle game sound effects to suit different usage scenarios.\n\nSettings take effect instantly and are easy to switch.\n\nApp Features:\n\nEasy to learn and play, suitable for all ages\n\nSmooth controls and natural animations\n\nSupports offline play, no ad interruptions\n\nA great helper for cultivating concentration and improving memory\n\nSuitable for: Players who enjoy puzzle and memory challenge games\n\nUsers who want to relax their brain and train their thinking skills in short intervals\n\nSuitable for parent-child interaction and students practicing memory after school",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6842,
+    "name": "Bus parking bus game offline",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Bus parking bus game offline.\nGet ready for learn the bus parking skills and become the expert bus driver of this bus game. This bus parking 3d game is an offline game and you can play this game without internet. Drive bus in the parking levels and avoid the bus from hurdles and barriers to complete the level of this bus game 3d.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6841,
+    "name": "Deer animal hunting sniper 3d",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Deer animal hunting sniper 3d.\nGet ready for play this deer animal game and hunt the deer animal with the sniper gun to complete the level of this game. This deer hunting game is an offline game and you can play this game without internet. Complete all the levels of this game which has a lot of fun for all deer sniper hunting games lovers.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6840,
+    "name": "Happy Fish Catch",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6839,
+    "name": "Sweep  Jungle Casino",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Step into the wild and thrilling world of Sweep Jungle Casino, where adventure meets excitement in a vibrant social casino experience. Explore the depths of the jungle while spinning immersive slot machines, enjoying high-quality slot games, and chasing massive Jackpot wins. Whether you're a fan of free slots, online slots, or classic Las Vegas slots, this game brings the full casino atmosphere right to your fingertips.\n\nIn Jungle Sweep, every spin takes you deeper into a world filled with rewards and surprises. Unlock new and powerful slots as you progress through levels, each offering unique themes and bigger opportunities to win. The more you play, the more features you unlock, giving you access to advanced slot machines and enhanced gameplay designed for true fans of casino entertainment.\n\nBuild and grow your very own fortune in this engaging sweepstakes casino adventure. As you collect rewards and hit exciting Jackpot moments, you can expand your Fortune City and create thriving casino hubs that generate passive income. This allows you to keep spinning, betting, and enjoying more free slots while steadily growing your empire in the jungle.\n\nDesigned for both casual players and dedicated slot games enthusiasts, Sweep Jungle Casino delivers nonstop fun with smooth gameplay and visually rich environments. Compete, progress, and immerse yourself in a premium social casino journey inspired by the energy of Las Vegas slots and the thrill of online slots, all in one dynamic experience.\n\nDisclaimer: This game is intended for entertainment purposes only. Sweep Jungle Casino does not offer Real Money or Real Cash winnings. No real-world currency or prizes can be earned. It is a risk-free social casino experience designed purely for fun, allowing players to enjoy free slots, slot machines, and sweepstakes casino gameplay without any financial risk.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      15
+    ]
+  },
+  {
+    "id": 6838,
+    "name": "Edda Zunyi",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6837,
+    "name": "Balloon survival 3d games 2026",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Balloon survival 3d games 2026.\nGet ready to immerse yourself with the stunning gameplay of this balloon survival game. Download now this game and left and right the balloons from hurdles to complete the level of this balloon game. Complete all the levels of this game which has a lot of fun for all balloon survival games lovers.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6836,
+    "name": "Dahlak Explanate Go",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "1. Game Rules\nBlack blocks slide downwards from the screen;\n\nPlayers must accurately tap the black blocks;\n\nTaking a white area or missing a black block will immediately result in game over;\n\nDepending on the mode, the game sets speed, time limit, or block count limit;\n\nThe speed gradually increases as the game progresses.\n\n2. Game Objectives\nAchieve higher scores;\n\nImprove reaction speed and concentration;\n\nTry to tap the black blocks as continuously and accurately as possible to challenge your record.\n\nIV. Functional Requirements\n1. Game Modes\nMode Description\nClassic Mode\nTap 50 black blocks in as little time as possible. Fixed speed, suitable for speed challenges and leaderboards.\nEndless Mode\nInfinite black blocks fall continuously, the speed gradually increases, and the score accumulates based on the number of taps.\nZen Mode\n30-second time limit. Tap as many black blocks as possible within the time limit to score points, testing rhythm and hand speed.\n\n2. Game Interface\nTop: Score display, current mode, pause/return button;\n\nMiddle: Main game area, black and white block falling area;\n\nBottom: Timer, status bar, theme prompts.\n\n3. Main Functional Modules\n\nModule | Function Description\n\nBlock Generation | Generates black/white block combinations based on the pattern, supporting different speeds and spacing strategies.\n\nFalling Animation | Blocks fall smoothly from the top of the screen, supporting speed changes at any time.\n\nClick Judgment | Detects if a black block has been clicked; clicking a white block or missing a black block triggers failure.\n\nScoring System | Successfully clicking a black block adds points; consecutive clicks grant combo rewards.\n\nMode Management | Supports switching between different rules, time limits, and speeds.\n\nSettings Function | Supports switching themes, backgrounds, custom sound effects, and resetting scores.\n\nGame End Judgment | Displays a score statistics page when the game is lost; supports replaying or exiting.\n\nV. Non-Functional Requirements\n\n1. UI Style\n\nFlat, modern style\n\nBlack and white main color scheme, supports switching to vibrant and night themes.\n\nLarge buttons and a simple interface, suitable for different age groups.\n\n2. Sound Feedback\n\nBlack block click sound effect (customizable piano sound)\n\nSuccessful combo reward sound effect\n\nGame end failure notification sound\n\nSupports mute toggle option",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6835,
+    "name": "African Buffalo",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "African Buffalo is a fast and secure app for accessing your favorite content. Features include lightning-fast loading, social media integration (Telegram & Messenger), file upload support, offline detection, and smooth navigation. No personal data collected. Simply install and enjoy quick access with an app-like experience. Perfect for users who prefer dedicated apps over browsers. Download African Buffalo today!",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6834,
+    "name": "Incredible Monster Hero Battle",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      5
+    ]
+  },
+  {
+    "id": 6833,
+    "name": "Dice colr board match game 3d",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Dice colr board match game 3d.\nGet ready to immerse yourself with the stunning gameplay of this dice game 3d. This dice match game is an offline game and you download now this game and you can play this game without internet. In this dice match game you match the colrs of dices and complete the level.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6832,
+    "name": "Arabesque Unpronounced 2025",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6831,
+    "name": "OneButtonWorldGame",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Welcome to OneButtonWorldGame, a simple yet incredibly fun and satisfying game where all the magic happens with just one button! Tap, hold, and interact to experience a world full of colorful particles, relaxing sounds, and endless entertainment.\n\nDesigned for players of all ages, this game delivers instant fun with easy controls and engaging feedback. Whether you want to relax, pass time, or enjoy satisfying visuals and sounds, this one-button experience is perfect for you.\n\n🎮 Simple One-Button Gameplay\nNo complicated controls—just tap or long press to explore different effects. Every interaction creates a unique and enjoyable response that keeps you coming back for more.\n\n✨ Satisfying Visual Effects\nEnjoy a variety of stunning particle effects that react beautifully to your touch:\n\nColorful explosions and smooth animations\nDynamic visual feedback on every tap\nRelaxing and eye-catching designs\n\n🔊 Immersive Sound Experience\nEach tap and hold produces satisfying sounds designed to relax your mind and enhance gameplay:\n\nSmooth and calming audio effects\nResponsive sound feedback\nPerfect for stress relief and casual play\n\n⏱️ Tap & Hold Mechanics\nExperience different outcomes with different actions:\n\nTap for quick effects\nLong press for extended animations\nDiscover hidden variations and surprises\n\n🌈 Endless Fun & Relaxation\nThere are no rules, no pressure—just pure fun. Play anytime, anywhere and enjoy a peaceful, satisfying experience.\n\n📱 Game Features\n\nOne-button easy gameplay\nBeautiful particle effects\nRelaxing sound design\nTap and long press interactions\nSmooth performance\nLightweight and offline play\n\nIf you love casual games, stress-relief apps, or satisfying interactions, OneButtonWorldGame is the perfect choice for you.\n\nDownload now and enjoy the magic of a single button! 🎉",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      5
+    ]
+  },
+  {
+    "id": 6830,
+    "name": "Bird Merge Frenzy",
+    "releaseYear": 2023,
+    "publisherName": "Lorescape",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Casual game where have 4 unique birds that can upgrade by merging them, while protecting their territory from enemies.",
+    "videoUrl": "https://1drv.ms/u/c/8e6131caacaf619a/IQDpfrjdf-neQaCYJRVVPpt3Ab0ubRfJuYyiDUvhFS1SpxM?e=a1mDML",
+    "inGameUrl": "https://1drv.ms/u/c/8e6131caacaf619a/IQDpfrjdf-neQaCYJRVVPpt3Ab0ubRfJuYyiDUvhFS1SpxM?e=a1mDML",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6829,
+    "name": "CodeBreaker Champions",
+    "releaseYear": 2026,
+    "publisherName": "Lorescape",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Game is a simple code breaking board/puzzle game with 2 modes and 5 different skill levels. along with a leader board so players can see how they rank against other players.",
+    "videoUrl": "https://1drv.ms/u/c/8e6131caacaf619a/IQAuRKSjNHq9RpX2dR2k-ZRlAY6qaubhJi4WMPdJur_Lj9w?e=rV7ffU",
+    "inGameUrl": "https://1drv.ms/u/c/8e6131caacaf619a/IQAuRKSjNHq9RpX2dR2k-ZRlAY6qaubhJi4WMPdJur_Lj9w?e=rV7ffU",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6828,
+    "name": "P-Fusion Galaxy",
+    "releaseYear": 2026,
+    "publisherName": "Mihhwan",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "A relaxing casual puzzle game where you merge planets to create a perfect Earth.",
+    "videoUrl": "https://play.google.com/store/apps/details?id=com.planet.company",
+    "inGameUrl": "https://play.google.com/store/apps/details?id=com.planet.company",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6827,
+    "name": "SutraSteps_Game",
+    "releaseYear": 2025,
+    "publisherName": "Mihhwan",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Help a young monk climb sacred steps in this serene and fast-paced arcade game.",
+    "videoUrl": "https://play.google.com/store/apps/details?id=com.sutra.compan",
+    "inGameUrl": "https://play.google.com/store/apps/details?id=com.sutra.compan",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6826,
+    "name": "Skyangel",
+    "releaseYear": 2023,
+    "publisherName": "Mihhwan",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Exciting vertical jumping action for all ages. How high can you go?",
+    "videoUrl": "https://play.google.com/store/apps/details?id=com.Angel.Company",
+    "inGameUrl": "https://play.google.com/store/apps/details?id=com.Angel.Company",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6825,
+    "name": "Los Angeles Crimes",
+    "releaseYear": 2018,
+    "publisherName": "Mohammad Alizade",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Open-world sandbox game where you play, create and explore.",
+    "videoUrl": "https://www.youtube.com/watch?v=Rllj2xhzTDE&pp=0gcJCdoKAYcqIYzv",
+    "inGameUrl": "https://www.youtube.com/watch?v=aN3eL6LXBxA&pp=0gcJCdoKAYcqIYzv",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      26
+    ]
+  },
+  {
+    "id": 6824,
+    "name": "Polyfield",
+    "releaseYear": 2022,
+    "publisherName": "Mohammad Alizade",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Low-poly WW2 based multiplayer shooting game",
+    "videoUrl": "https://www.youtube.com/watch?v=V6j-mHjWYJA",
+    "inGameUrl": "https://www.youtube.com/watch?v=V4E6Je9fbmE",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      26
+    ]
+  },
+  {
+    "id": 6823,
+    "name": "Wall to Walls game",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      28
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6822,
+    "name": "Zeus Bolt Catch",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Unleash the power of lightning in Zeus Bolt Catch, a fast-paced arcade challenge where precision and speed decide your fate! Strike the right gems, collect vibrant energy, and avoid the cursed ones that can ruin your run. Every second counts as you chase the highest score within the time limit, testing your reflexes and decision-making under pressure. As the pace intensifies, staying focused becomes the key to victory. With simple yet addictive mechanics and a dynamic flow of action, each round delivers a thrilling rush of excitement. Can you harness the power of Zeus and become the ultimate gem catcher?",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6821,
+    "name": "I Am Cat Game",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6820,
+    "name": "Stellar Eclipse",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6819,
+    "name": "比特派",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6818,
+    "name": "Allodium Adjuration",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Core Functions\n\n**News Category Browsing:** Curated news, technology, health, finance, culture, lifestyle, and more.\n\nDaily updates, concise and clear content, supports quick preview and full-text expansion.\n\nSupports favorites, history, and local caching for offline reading.\n\n**Interactive Knowledge Quiz:** Each news article can be linked to a set of related questions, allowing you to answer while reading and improve memory.\n\nQuestion types include true/false and multiple choice, with immediate feedback and explanations after answering.\n\nA separate \"Daily Knowledge Challenge\" module is provided to test your daily knowledge.\n\n**Question Records and Points:** Records your score and accuracy for each quiz, with support for reviewing incorrect answers.\n\nAccumulated points allow you to view your ranking (optional expansion).\n\nYou can view your performance by news type to help you improve precisely.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6817,
+    "name": "Dot Shooter offline game",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Players control a central dot that shoots bullets at approaching foes in the quick and entertaining shooting game Dot Shooter Offline. The primary goal is to avoid waves of moving targets by accurately aiming and timing your bullets. In addition to shooting in different directions and destroying adversaries before they get to the center, players can rotate the dot. The enemy's speed and patterns increase in difficulty as the game goes on, putting reflexes and strategic thinking to the test. Power-ups could seem to improve range, damage, or shooting speed. Players are motivated to increase their scores, sharpen their precision, and become proficient at quick, accurate shooting under duress by endless playtime.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      28
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6816,
+    "name": "ဖဲဂိမ်း",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "High Stakes Trio is a fast-paced, high-energy card game designed for two players. It strips away the complexity of poker and focuses on pure momentum and the luck of the draw. Using a standard 52-card deck, players go head-to-head in a three-round battle where every card counts toward a final point total.\n\nHow to Play\nThe Deal: Both players are dealt three cards face down.\n\nThe Showdown: The game consists of three rounds. In each round, both players flip over one card simultaneously.\n\nThe Scoring: The player with the higher card value wins the round and adds that card’s value to their total score.\n\nNote: If there is a tie, neither player receives points for that round.\n\nThe Victory: After all three cards have been played, the player with the highest cumulative score is declared the winner.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      15
+    ]
+  },
+  {
+    "id": 6815,
+    "name": "Pixelords",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "[Pixelords!]\n\nBuild your deck before the battle begins!\nPixelords is a 2D pixel art autobattler where victory is decided not during combat, but in the preparation phase.\nAssemble your squad, freely place your units on a gridless battlefield, and watch your strategy unfold.\nRead your opponent’s composition, create synergies, and turn the tide with a single placement.\n\n\n[Strategic Unit Placement]\nCommand 35 units across 10 different elements.\nIn Pixelords, there are no fixed tiles on the battlefield. You can place units anywhere you want, and every position becomes part of your strategy.\nFrontline units hold the line, Rangers attack from the rear, and Guardians protect key allies.\n\nThe flow of battle changes completely depending on how you arrange your formation.\n• 3 Roles — Attacker, Ranger, Guardian\nEach role behaves differently in combat.\n• 3 Traits — Hasty, Daring, Cunning\nThey determine which enemies your units prioritize.\n• 3 Cost Tiers\nStronger units require more resources. Managing your coins is also a key part of strategy.\n\n\n[Elemental Synergies]\nPlace units of the same element together to make them even stronger.\nEach element has its own unique synergy effect, and the combinations you choose can completely change your battle style.\nCombine elemental advantages and synergies to create your own formation.\n\n\n[Various Game Modes]\n• Arena — Real-time 1v1 ranked battles\nRead your opponent’s composition, outplay them with positioning, and climb to higher tiers.\n• Expedition — A PvE mode with 5 chapters and 11 stages each\nEarn up to 3 stars on every stage, where unit management and coin economy are the keys to victory.\n• Trials — A 1–4 player co-op endless survival mode\nA shared battlefield, separate economies, and blessings granted on each floor create a new strategy every run.\n\n\n[4-Player Co-op]\nIn Trials, up to 4 players fight together on a single battlefield.\nCover each other’s weaknesses, coordinate your builds, and see how far you can survive together.\nBosses appear every 10 floors to test your teamwork.\n\n\n[SPELLS]\nYou can bring up to 3 spells into battle.\nHealing, shields, stuns, and direct damage — use them at the right moment to turn the tide.\nBut spells use the same coins as unit placement.\nEvery choice comes at a cost.\n\n\n[RELICS]\nA permanent progression system exclusive to PvE mode. Grow 4 distinct Relics — melee unit power, ranged unit power, spell potency, and economic strength — to forge your own playstyle. Level up through play, earn points, and strengthen your Relics one by one.\n\n\n[COLLECTION]\nYour one-stop guide to everything in the game — units, spells, elements, skins, and more. See what you've uncovered and track down what's still waiting to be found.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      26
+    ]
+  },
+  {
+    "id": 6814,
+    "name": "Caravel Amphidromia Gal",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "✅ Multi-domain Question Bank\nCovering 5+ knowledge topics, including natural sciences, social sciences, literature and art, etc.\n\nContinuously updated question bank, authoritative and rigorous content, rich and interesting.\n\nSupports both random question generation and categorized question answering modes, allowing you to flexibly choose your challenge direction.\n\n?? Multiple Difficulty Challenges\nEasy / Medium / Hard difficulty settings to suit different knowledge levels.\n\nAs the difficulty increases, the depth and breadth of the questions gradually increase.\n\nEach round of questions has a scoring system; correct answers earn points, incorrect answers do not deduct points, and you can view the correct answer and explanation.\n\n?? Local Performance Records\nAutomatically saves each question's performance, including score, time taken, and correct answer rate.\n\nView your history and track your progress.\n\nNo registration or login required; all data is stored locally for enhanced privacy.\n\n?? Additional Features:\n\n?? Daily Challenge: 10 questions per day to maintain a consistent question-answering habit.\n\n?? Offline Operation: Can be used without internet; continue learning even when offline.\n\n?? Night Mode: Comfortable for extended use without eye strain.\n\n?? Answer Statistics: Supports viewing personal learning data such as number of questions answered, accuracy rate, preferred areas, etc.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6813,
+    "name": "Arena Plus",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      5
+    ]
+  },
+  {
+    "id": 6812,
+    "name": "Apple Raise",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Put your focus to the ultimate test in Apple Raise! Every correct move earns you points and pushes the challenge even further, keeping you constantly on edge. Stay sharp as the pace shifts unpredictably—sometimes slow and steady, sometimes fast and intense. You’ll need quick thinking, precision, and strong concentration to keep up with the changing rhythm. Each round becomes more demanding, turning simple actions into a thrilling battle of reflexes and control. Easy to start but hard to master, Apple Raise delivers an engaging experience where every decision matters. Can you keep up and reach the highest score?",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6811,
+    "name": "Arena Plus",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      5
+    ]
+  },
+  {
+    "id": 6810,
+    "name": "Laigh Fleckless",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "## Gameplay Instructions\n\n1. **Objective:** Connect all pairs of dots of the same color, ensuring the lines do not intersect, until the entire grid is filled.\n\n2. **Controls:** Press and hold a colored dot, then drag it to another dot of the same color to form a line.\n\n3. **Limitations:**\n\n- Lines cannot intersect or overlap.\n\n- All squares must be filled to complete the level.\n\n4. **Levels:** Each level features different dot and color combinations, with increasing difficulty. Some levels contain obstacles.\n\n## Main Features\n\n- **Level System:** 50 meticulously designed levels with selectable difficulty (easy/medium/hard). Each level has a star rating and best time record.\n\n- **Dynamic Main Interface:** The main interface features various dynamic backgrounds such as particles, bubbles, and energy waves. The four main buttons each have a unique style and rich animations.\n\n- **Game Interface:** Customizable GameView supports smooth touch-based connection, undo, reset, hints, and victory checks. **Level Selection:** The level page displays all levels in a card grid format, showing completion status, star rating, and best time. Clicking to jump to the next level is supported.\n\n**Leaderboard:** The local leaderboard displays player progress, star rating, and best score. A helpful notification appears when the leaderboard is empty.\n\n**Settings:** Supports vibration, hints, auto-save, dark theme, progress reset, and an \"About\" section. The interface is clean and animated.\n\n**About Page:** Provides game information and supports a back animation.\n\n**Immersive Experience:** A globally transparent status bar and navigation bar with white status bar icons for a more modern look.\n\n**Animations and Enhancements:** All main and game interfaces feature rich animations; buttons, cards, stars, etc., have dynamic feedback.\n\n## Highlights and Features\n\n- Pure Java implementation, strong compatibility, and excellent performance.\n\n- Beautiful UI, delicate animations, and smooth interaction.\n\n- Level generation algorithm guarantees a solution for every level, supporting obstacles and multiple difficulty levels.\n\n- Local data saving, supports progress reset and statistics.\n\n- Suitable for casual entertainment, mental exercise, and parent-child interaction.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6809,
+    "name": "Karol Dawning",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "## ✨ Main Functions\n\n### ?? Daily Horoscope\n\n- **Daily Horoscope Card**: Displays today's lucky color, lucky number, and daily proverb.\n\n- **Quick Operations**: One-click access to Tarot cards and zodiac compatibility features.\n\n- **Dynamic Effects**: Twinkling star animation and gradient background effects.\n\n### ♈ Zodiac Horoscope\n\n- **Complete Information for 12 Zodiac Signs**: Includes zodiac icon, name, elements, and date range.\n\n- **Multi-Period Horoscopes**: Supports daily, weekly, monthly, and yearly horoscopes.\n\n- **Detailed Analysis**: Comprehensive horoscope interpretation covering love, career, wealth, and health.\n\n- **Star Rating**: Intuitive star rating system.\n\n- **Lucky Elements**: Lucky color, lucky number, lucky direction, and suggestions.\n\n### ?? Zodiac Compatibility\n\n- **Intelligent Compatibility Analysis**: Compatibility calculation based on elements and forms.\n\n- **Detailed Analysis Report**: Element analysis and form analysis.\n\n- **Compatibility Rating**: Compatibility rating in percentage format.\n\n- **Pop-up Selection**: Beautiful zodiac selection pop-up interface. **Full Card Display:** Displays the complete zodiac information card after selection.\n\n### Tarot Cards\n\n- **Classic Tarot Cards:** Includes all 78 tarot cards.\n\n- **Card Interpretation:** Detailed explanations of tarot card meanings.\n\n- **Interactive Experience:** Click on the card to view a detailed interpretation.\n\n## Design Features\n\n### Visual Design\n\n- **Starry Sky Theme:** Dark gradient background with gold accents.\n\n- **Modern UI:** Material Design style, rounded corner card design.\n\n- **Dynamic Animations:** Twinkling stars, card scaling, gradient effects.\n\n- **Immersive Experience:** Transparent status bar, full-screen layout.\n\n### Interactive Experience\n\n- **Smooth Animations:** Smooth animations for page transitions and card selection.\n\n- **Intuitive Operation:** Click to select, swipe to browse, pop-up interaction.\n\n- **Instant Feedback:** Results and animation effects are displayed immediately after selection.\n\n## How to Use\n\n### Main Page\n1. View today's horoscope card to understand today's lucky elements.\n\n2. Click on any zodiac sign in the list to enter its detailed horoscope page.\n\n3. Use quick action cards to access the Tarot or pairing functions.\n\n### Horoscope Page\n\n1. Select a zodiac sign in the top horizontal selector.\n\n2. Use the time period selector to switch between daily/weekly/monthly/yearly horoscopes.\n\n3. View detailed horoscope analysis and lucky elements.\n\n4. Observe the star rating to understand the overall fortune.\n\n### Zodiac Pairing Page\n\n1. Click the \"Select Zodiac\" button to bring up the zodiac selection pop-up window.\n\n2. Select the first person's zodiac sign in the pop-up window.\n\n3. Select the second person's zodiac sign.\n\n4. View the pairing analysis results and detailed report.\n\n5. Use the reset button to select again.\n\n### Tarot Page\n\n1. Browse the Tarot cards.\n\n2. Click on any card to view a detailed interpretation.\n\n3. Understand the meaning and guidance of the Tarot cards.\n\n### Animation Effects\n\n- **Attribute Animation**: Use ObjectAnimator to achieve various animation effects.\n\n- **Combined Animation**: AnimatorSet combines multiple animations.\n\n- **Custom Animation**: Effects such as twinkling stars and card scaling.\n\n### Data Management\n\n- **Local Data**: Horoscope information and tarot card data are stored locally.\n\n- **Random Generation**: Horoscope content is randomly generated based on an algorithm.\n\n- **Status Management**: Management of selected and displayed statuses.\n\n## Target Users\n\n- Horoscope enthusiasts\n\n- Horoscope query users\n\n- Tarot card enthusiasts\n\n- Couple compatibility analysis users\n\n- Users who appreciate beautiful UI design\n\n## Future Plans\n\n- [ ] Add more horoscope content\n\n- [ ] Support personalized settings\n\n- [ ] Add social sharing function\n\n- [ ] Add push notifications\n\n- [ ] Support multiple languages\n\n---\"",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6808,
+    "name": "Fashion Battle - Girl Dress up",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6807,
+    "name": "Supraliminal Flavomycin",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "**Slide Controls, Easy to Learn**\n\nSlide your finger up, down, left, or right to control the snake's movement.\n\nNo virtual buttons needed, intuitive and smooth controls.\n\nSuitable for players of all ages; you'll understand the gameplay after just one game.\n\n**Three Difficulty Modes**\n\nEasy Mode: Slower speed, comfortable pace, suitable for beginners.\n\nMedium Mode: Moderate speed, tests reaction time and movement skills.\n\nHard Mode: High speed + high-density challenge, suitable for advanced players pushing their limits.\n\n**Classic Eat-and-Eat Gameplay**\n\nEat food on the map to make your snake grow longer.\n\nBe careful not to hit yourself or the walls, or the game will end.\n\nThe more you eat, the higher your score, and the difficulty increases accordingly.\n\n**Local Score Record**\n\nEach difficulty level has its own independent high score record.\n\nAutomatically saves your best scores to motivate you to constantly improve.\n\nScores are calculated based on the number of foods eaten and survival time.\n\n**Completely Offline Playable**\n\nNo internet connection required, play anytime, anywhere.\n\nZero ad interruptions, focus on the gaming experience.\n\nSmall size, fast startup, low power consumption.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6806,
+    "name": "Indian Bridal Wedding Dress up",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6805,
+    "name": "Live or Die: Survival Pro",
+    "releaseYear": 2018,
+    "publisherName": "GemJam llc",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "A post-apocalyptic survival action game set in a zombie-infested wasteland. Players must gather resources, craft items, and build a secure base to defend against undead threats. Featuring open-world exploration, quest-driven gameplay, and intense combat, survivors must level up their skills and gear to endure the apocalypse.",
+    "videoUrl": "https://drive.google.com/drive/folders/1iKX0lCLftWTY0qUGna7xGZ8mVwtxN6fo",
+    "inGameUrl": "https://drive.google.com/drive/folders/1xNSAqVJ4AQpnsOA8TRyKs3L6u1aU1sav",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      11,
+      26,
+      12,
+      3,
+      15
+    ]
+  },
+  {
+    "id": 6804,
+    "name": "Arrow Color Out",
+    "releaseYear": 2026,
+    "publisherName": "Tripledot Studios Limited",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "A puzzle game where players clear arrow tiles by tapping them in a valid sequence. Each tile can only be removed if it can move freely in the direction it points. Levels increase in complexity, requiring planning and logical decision-making. Includes multiple levels, simple controls, and optional in-game aids to assist with progression",
+    "videoUrl": "https://app-server.tripledotapi.com/compliance/igrs/9cc3cda8-57d0-414b-a4f3-a1a77e94fec6/video",
+    "inGameUrl": "https://app-server.tripledotapi.com/compliance/igrs/9cc3cda8-57d0-414b-a4f3-a1a77e94fec6/image",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6803,
+    "name": "Toca Kitchen Sushi",
+    "releaseYear": 2020,
+    "publisherName": "Toca Boca AB",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "With Toca Kitchen Sushi, you’re the chef of a busy seaside restaurant. Customers come in, and you decide what they’re going to eat. Feel like slicing up squid, asparagus, and candy canes, and rolling it all up into a cone of seaweed? Go right ahead. With a fantastic array of ingredients, condiments, tools, serving dishes and some hidden surprises, you’re set for some serious play. ",
+    "videoUrl": "https://galaxystore.samsung.com/detail/com.tocaboca.tocakitchensushi.samsung?langCd=tr",
+    "inGameUrl": "https://galaxystore.samsung.com/detail/com.tocaboca.tocakitchensushi.samsung?langCd=tr",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6802,
+    "name": "Toca Builders",
+    "releaseYear": 2020,
+    "publisherName": "Toca Boca AB",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "This creative building game for kids allows you to make a whole new world in one fun app! Join your new Toca Builders friends on an island far away and create a whole new world with blocks. Jump, walk, roll and rotate the builders to use their unique skills, and they will help to build whatever you can imagine!",
+    "videoUrl": "https://galaxystore.samsung.com/detail/com.tocaboca.tocabuilders.samsung?langCd=en",
+    "inGameUrl": "https://galaxystore.samsung.com/detail/com.tocaboca.tocabuilders.samsung?langCd=en",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6801,
+    "name": "Toca Hair Salon 3",
+    "releaseYear": 2017,
+    "publisherName": "Toca Boca AB",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Welcome to Toca Hair Salon 3! Our most popular app series returns, better than ever! What do you feel like creating today — something quirky, pretty or edgy? Choose your character from dozens of looks that you can customize — characters have randomized styles and personalities, which creates endless play opportunities! Grab your tools and get styling!",
+    "videoUrl": "https://galaxystore.samsung.com/detail/com.tocaboca.tocahairsalon3",
+    "inGameUrl": "https://galaxystore.samsung.com/detail/com.tocaboca.tocahairsalon3",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6800,
+    "name": "Vampires in Space",
+    "releaseYear": 2024,
+    "publisherName": "Adam Stępiński",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Bullet hell with spaceships.",
+    "videoUrl": "https://play.google.com/store/apps/details?id=com.AdamStepinski.VampiresinSpace",
+    "inGameUrl": "https://play.google.com/store/apps/details?id=com.AdamStepinski.VampiresinSpace",
+    "ratings": [
+      35
+    ],
+    "descriptors": [
+      26,
+      36
+    ]
+  },
+  {
+    "id": 6799,
+    "name": "Exile: Wasteland Survival RPG",
+    "releaseYear": 2019,
+    "publisherName": "GemJam llc",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "A survival action-RPG set in a primitive, post-apocalyptic wasteland. The core gameplay revolves around survival mechanics: the player must manage their character's vital stats (such as hunger and thirst), gather resources, construct shelters, and craft tools and armor. The game features real-time combat where the player uses crafted melee weapons to fight against hostile humanoid enemies and aggressive wild animals (e.g., tigers, hyenas, scorpions).",
+    "videoUrl": "https://drive.google.com/drive/folders/1t9B9yCE6vw7iNirsyjU2YGvuGnH5iRX_",
+    "inGameUrl": "https://drive.google.com/drive/folders/15cIBMEydnTXAhaXjS_cn-3rA8o6Gkqi3",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      11,
+      26,
+      3
+    ]
+  },
+  {
+    "id": 6798,
+    "name": "Little Nightmares III",
+    "releaseYear": 2025,
+    "publisherName": "BANDAI NAMCO ENTERTAINMENT ASIA PTE LTD",
+    "platformsName": [
+      "Nintendo Switch",
+      "Nintendo Switch 2",
+      "PC",
+      "PlayStation 4",
+      "PlayStation 5",
+      "XBOX",
+      "Xbox Series X|S"
+    ],
+    "description": "Embark on a new adventure in the unique world of Little Nightmares.\nIn Little Nightmares III, you follow the journey of Low & Alone, as they search for a path that could lead them out of the Nowhere.\nTrapped within the Spiral, a cluster of disturbing places, the two friends will have to work together to survive in a dangerous world full of delusions and escape the grasp of an even greater threat lurking in the shadows. ",
+    "videoUrl": "https://app.box.com/s/jqcb5e5uviq7kmpzgiv7cb8odlolydmv",
+    "inGameUrl": "https://app.box.com/s/jqcb5e5uviq7kmpzgiv7cb8odlolydmv",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      5,
+      26,
+      3
+    ]
+  },
+  {
+    "id": 6797,
+    "name": "Borderlands 4",
+    "releaseYear": 2025,
+    "publisherName": "Take-Two Interactive UK Limited",
+    "platformsName": [
+      "PC",
+      "PlayStation 5",
+      "XBOX"
+    ],
+    "description": "Borderlands 4 is the latest instalment in the Borderlands franchise. Explore a new planet and enemies as one of four brand new Vault Hunters each with deep skill trees, abilities and customization. Play solo or join with friends for up to 4 player co-op.",
+    "videoUrl": "https://drive.google.com/drive/folders/1FCGgRJjczCLSawRlLwIG2ZG9Z9cO27sr?usp=sharing",
+    "inGameUrl": "https://drive.google.com/drive/folders/1FCGgRJjczCLSawRlLwIG2ZG9Z9cO27sr?usp=sharing",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      5,
+      10,
+      11,
+      26,
+      12,
+      3,
+      2
+    ]
+  },
+  {
+    "id": 6796,
+    "name": "Live or Die: Zombie Survival",
+    "releaseYear": 2018,
+    "publisherName": "GemJam llc",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "A post-apocalyptic survival action game set in a zombie-infested wasteland. Players must gather resources, craft items, and build a secure base to defend against undead threats. Featuring open-world exploration, quest-driven gameplay, and intense combat, survivors must level up their skills and gear to endure the apocalypse.",
+    "videoUrl": "https://drive.google.com/drive/folders/1iKX0lCLftWTY0qUGna7xGZ8mVwtxN6fo?usp=sharing",
+    "inGameUrl": "https://drive.google.com/drive/folders/1xNSAqVJ4AQpnsOA8TRyKs3L6u1aU1sav?usp=sharing",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      11,
+      26,
+      12,
+      3,
+      15
+    ]
+  },
+  {
+    "id": 6795,
+    "name": "Single sports — slots",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Welcome to our new casino simulator, a free sports-themed slot machine that's always at your fingertips! Your goal is to assemble a winning combination of athletes with the help of your luck! The game is completely free and uses game points. Every day, you can receive a bonus in the form of game points, which are available every 24 hours. Our game also offers tasks that also earn points, such as winning 2 games or playing 3 days in a row. The bet size is 5 game points, and winning combinations can earn you between 5 and 100 points, but you can also lose. The game features a win history.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      15
+    ]
+  },
+  {
+    "id": 6794,
+    "name": "Conveyor Association Puzzle",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Match, Sort & Master the Carousel Puzzle!\n\nWelcome to Conveyor Association Puzzle — a unique sorting puzzle game that combines card matching, category sorting, and a dynamic rotating carousel.\n\nIf you love brain games, logic puzzles, matching games, and sorting challenges, this game delivers a fresh and addictive experience.\n\n🎮 How to Play\nMove Cards with identical properties\nMatch them into Category Cards with the same Topic\nPlan your moves and clear all Cards to complete the level\n🌀 Rotating Carousel Mechanic\n\nThis isn’t just another match game.\n\nCategories are placed on a rotating carousel\nNew categories appear as it spins\nOld categories disappear when they rotate out\n\nThe board is always changing, forcing you to adapt your strategy in real time.\n\n🎯 Win & Lose Conditions\n\nWin: Place all Cards into the correct Categories\n\nLose: Run out of Moves before clearing all Categories\n\nEvery move matters — one mistake can cost the game.\n\n🔥 Features\n🧠 Challenging puzzle gameplay with increasing difficulty\n🃏 Satisfying card matching & sorting mechanics\n🌀 Dynamic rotating system for fresh gameplay every level\n⚡ Easy to learn, hard to master\n🎯 Perfect for fans of sorting games, match games, and logic puzzles\n💡 Why You’ll Love It\nA fresh mix of matching + sorting + strategy\nConstantly evolving puzzles with the carousel system\nGreat for improving focus, memory, and problem-solving skills\n🚀 Ready for the Challenge?\n\nDownload Conveyor Association Puzzle now and test your brain with a new kind of puzzle game.\nCan you keep up with the carousel and clear every level?",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      36,
+      12,
+      15
+    ]
+  },
+  {
+    "id": 6793,
+    "name": "Kiddo AI- Kids AI Photo Editor",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "<p><strong>Kiddo AI- Kids AI Photo Editor</strong> is an innovative and fun-filled photo editing app designed specifically for kids! With our advanced AI technology, your children can unleash their creativity with stunning photo edits. Whether they want to create whimsical art or simply enhance their selfies, <strong>Kiddo AI- Kids AI Photo Editor</strong> is the perfect tool! Let your little ones embark on a magical editing journey today with the best <strong>Kids AI Photo Editor</strong> available!</p><br>\n<h2>Key Features of Kiddo AI- Kids AI Photo Editor</h2>\n<ul>\n<li><strong>AI-Powered Editing Tools</strong> - Automatic enhancements tailored for kids.</li>\n<li><strong>User-Friendly Interface</strong> - Simple and intuitive design children can navigate easily.</li>\n<li><strong>Fun Filters and Effects</strong> - Explore a wide variety of exciting filters and effects.</li>\n<li><strong>Stickers and Frames</strong> - Add fun stickers and frames to personalize photos.</li>\n<li><strong>Collage Maker</strong> - Create stunning collages with just a few taps.</li>\n<li><strong>Share Directly</strong> - Effortlessly share edited photos with friends and family.</li>\n<li><strong>Frequent Updates</strong> - Regularly updated with new features and tools to explore.</li>\n<li><strong>Safe and Fun</strong> - Designed with kids' safety in mind; no inappropriate content.</li>\n<li><strong>Offline Editing</strong> - Edit photos anytime, anywhere without the need for Wi-Fi.</li>\n<li><strong>Customizable Art Kit</strong> - Kids can explore their creativity with a wide array of art tools.</li>\n</ul><br>\n<h2>Also Known As</h2>\n<p>This app is also searched as: AI Kids Photo Editor, Kids AI Photo Editing App, AI Photo Editor for Kids, Kiddo Photo Creator, Fun Photo Editor for Kids, Creative AI Photo Editor, Kiddo AI Photo Maker, Kids Editing App, Photo Editing for Kids.</p><br>\n<h2>How It Works</h2>\n<p>Using <strong>Kiddo AI- Kids AI Photo Editor</strong>, children can take a photo or choose an existing image from their gallery. The powerful AI analyzes their creations and provides tailored images with fun modifications. Parents can rest assured knowing their kids are utilizing this <strong>Kids AI Photo Editor</strong> in a safe environment that inspires creativity and artistic expression.</p><br>\n<h2>Perfect For Players Searching</h2>\n<p>If you are searching for a <strong>Kids AI Photo Editor</strong> that is:<br>\n- Safe<br>\n- Easy to Use<br>\n- Full of Fun Features<br>\n- Offers Endless Creativity<br>\n- Provides Engaging Visual Art Experiences<br>\nThen <strong>Kiddo AI- Kids AI Photo Editor</strong> is the ultimate choice!</p><br>\n<h3>Disclaimer</h3>\n<p>Please note that <strong>Kiddo AI- Kids AI Photo Editor</strong> is designed for kids, and parental guidance is recommended to ensure safe online practices.</p><br>\n<p>Transform your child’s photos into beautiful artworks with <strong>Kiddo AI- Kids AI Photo Editor</strong>! Download now and watch their creativity soar with this amazing <strong>AI Photo Editor for Kids</strong>. Give your children the tools they need to express themselves artistically!</p>",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6792,
+    "name": "ABC Merge Blocks: 88 Alphabets",
+    "releaseYear": 2024,
+    "publisherName": "GRAVITIN",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "ABC Merge Blocks - Learn 88 World Alphabets Through Puzzles!",
+    "videoUrl": "https://www.youtube.com/watch?v=_SWa-otb7D8",
+    "inGameUrl": "https://www.youtube.com/watch?v=sHVWwzuXZJQ",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6791,
+    "name": "麻雀一番街",
+    "releaseYear": 2022,
+    "publisherName": " Deep Rover Digital Tech Limited",
+    "platformsName": [
+      "Android",
+      "PC",
+      "iOS"
+    ],
+    "description": "Embark on the ultimate mahjong adventure with Riichi City! Featuring lovely female characters, a thrilling global matchmaking system, and a variety of creative game modes, this free-to-play app blends classic mahjong fun with unique twists, designed for both novices and seasoned players alike.",
+    "videoUrl": "https://www.mahjong-jp.com/content-preview.html?type=video",
+    "inGameUrl": "https://www.mahjong-jp.com/content-preview.html?type=image",
+    "ratings": [
+      35
+    ],
+    "descriptors": [
+      11,
+      36,
+      2,
+      15
+    ]
+  },
+  {
+    "id": 6790,
+    "name": "WWE 2K25",
+    "releaseYear": 2025,
+    "publisherName": "Take-Two Interactive UK Limited",
+    "platformsName": [
+      "Nintendo Switch",
+      "Nintendo Switch 2",
+      "PC",
+      "PlayStation 4",
+      "PlayStation 5",
+      "XBOX"
+    ],
+    "description": "WWE 2K25 brings an unparalleled lineup of 300+ current Superstars, Legends, and Hall of Famers, expanding the action-packed gameplay you love. For the first time, step outside the ropes, beyond the ring, and onto The Island—a WWE-themed world",
+    "videoUrl": "https://drive.google.com/drive/folders/1MyMSMSZGj4LXF4sthr6BeXe066uDRwB4?usp=sharing",
+    "inGameUrl": "https://drive.google.com/drive/folders/1MyMSMSZGj4LXF4sthr6BeXe066uDRwB4?usp=sharing",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      10,
+      11,
+      26,
+      12,
+      3,
+      2
+    ]
+  },
+  {
+    "id": 6789,
+    "name": "Diablo IV Lord of Hatred",
+    "releaseYear": 2026,
+    "publisherName": "Blizzard Entertainment ",
+    "platformsName": [
+      "Nintendo Switch",
+      "PC",
+      "PlayStation 5",
+      "Xbox Series X|S"
+    ],
+    "description": "Lord of Hatred is the second expansion for Diablo IV. Players create a character from one of eight playable classes and use their skills to complete quests through combat. The character will encounter monsters and complete dungeons on their journey. The game has optional multiplayer and cannot be played offline.",
+    "videoUrl": "https://drive.google.com/drive/folders/1oMVKBnJISWcrLr2O07nJzCm_t76HvNWE?usp=drive_link",
+    "inGameUrl": "https://drive.google.com/drive/folders/1oMVKBnJISWcrLr2O07nJzCm_t76HvNWE?usp=drive_link",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      5,
+      10,
+      11,
+      26
+    ]
+  },
+  {
+    "id": 6788,
+    "name": "NBA 2K26",
+    "releaseYear": 2025,
+    "publisherName": "Take-Two Interactive UK Limited",
+    "platformsName": [
+      "Nintendo Switch",
+      "Nintendo Switch 2",
+      "PC",
+      "PlayStation 4",
+      "PlayStation 5",
+      "XBOX"
+    ],
+    "description": "Bragging rights are on the line in MyCAREER, MyTEAM, MyNBA, The W, and Play Now. Showcase your bag of moves with hyper realism, Powered by ProPLAY™, and challenge your friends, or rivals, in NBA 2K26’s competitive modes—and leave no doubt that you wear the crown.",
+    "videoUrl": "https://drive.google.com/drive/folders/11m8iv0iLxZCsVfB3o5Ih6lSpZ-BU2jKJ?usp=sharing",
+    "inGameUrl": "https://drive.google.com/drive/folders/11m8iv0iLxZCsVfB3o5Ih6lSpZ-BU2jKJ?usp=sharing",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      10
+    ]
+  },
+  {
+    "id": 6787,
+    "name": "SpinCraft Studio",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      15
+    ]
+  },
+  {
+    "id": 6786,
+    "name": "Speedway Mobile",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Speedway Mobile brings the raw intensity of oval-track speedway racing to\nyour phone with dead-simple one-button controls and instant pick-up-and-play\naction. No tutorials. No grinding. Just the roar of engines and four\nriders fighting through the corners.\n\n━━━━━━━━━━━━━━━━━━━━━━━\nHOW IT PLAYS\n━━━━━━━━━━━━━━━━━━━━━━━\n\nHold to lean into the corner. Release to run straight. That's it.\n\nEach race is a four-rider sprint around a classic oval speedway track.\nYour throttle is automatic — what you control is the LINE. Press and\nhold your corner button to lean your bike into the turn; let go to\nstraighten up on the exit. Master the timing on all four turns and\nyou'll leave the pack behind. Hold too long and you'll spiral out.\nRelease too early and the other riders will cut inside you.\n\n━━━━━━━━━━━━━━━━━━━━━━━\nFEATURES\n━━━━━━━━━━━━━━━━━━━━━━━\n\n• SIMPLE ONE-BUTTON CONTROLS\n  Hold to turn, release to run straight. Pick up and play in seconds,\n  easy to learn, satisfying to master.\n\n• UP TO 4 PLAYERS ON ONE DEVICE\n  Pass-and-play multiplayer with friends, or race against smart bots\n  that actually know how to take a line.\n\n• TOURNAMENT MODE\n  Run a full heat schedule with multiple rounds and a final standings\n  screen. Track your progression across the evening.\n\n• FULLY OFFLINE\n  No internet required. No servers to connect to. Race on a plane, in\n  a tunnel, anywhere.\n\n• NO ADS. NO TRACKING. NO IN-APP PURCHASES.\n  Buy once (free), play forever. We don't show you ads, we don't sell\n  your data, and we don't nag you for upgrades — because there aren't\n  any. Just the game.\n\n• POLISH AND ENGLISH\n  Full localization in both languages.\n\n━━━━━━━━━━━━━━━━━━━━━━━\nWHO IS THIS FOR?\n━━━━━━━━━━━━━━━━━━━━━━━\n\nSpeedway Mobile is for anyone who wants a short, pure, honest racing\nfix. Commute races. Lunch-break tournaments. Quick matches with a friend\nwhen you've got five minutes. No cinematic cutscenes, no microtransactions,\nno grinding — just racing.\n\nFans of classic arcade racers, speedway enthusiasts, and anyone who\nmisses the days when a mobile game respected your time and didn't ask\nyou for $4.99 every five minutes will feel right at home.\n\n━━━━━━━━━━━━━━━━━━━━━━━\nTECHNICAL\n━━━━━━━━━━━━━━━━━━━━━━━\n\nBuilt in Godot Engine 4. Native ARM64. Runs smooth on anything from\nmid-range to flagship. Portrait orientation only — designed for one-handed\nplay.\n\nRequires Android 5.0 (API 21) or higher.\n\n━━━━━━━━━━━━━━━━━━━━━━━\n\nRace smart. Race fast. See you on the track.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6785,
+    "name": "Zeus Maze Swipe",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      5
+    ]
+  },
+  {
+    "id": 6784,
+    "name": "Foxfire Field",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Foxfire Field throws you into a chaotic barnyard survival challenge where quick reflexes are your only defense. You control a brave chicken dodging relentless waves of stones thrown by three cunning foxes, each with its own attack style. One strikes rapidly, another keeps a steady pace, and the third unleashes bursts of multiple stones at once. As danger rains down from all sides, you must also rescue wandering chicks that appear across the field—because if even one chick gets hit, the game ends instantly.\nEvery 45 seconds, the action shifts as a wolf storms into the field and engages one of the foxes in a temporary battle. While distracted, that fox stops attacking, creating brief moments of relief—and new strategic opportunities. With constantly changing threats, unpredictable attack patterns, and the added pressure of protecting vulnerable chicks, Foxfire Field delivers an intense and fast-paced arcade experience. Stay alert, move fast, and see how long you can survive the chaos.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      4
+    ],
+    "descriptors": [
+      3
+    ]
+  },
+  {
+    "id": 6783,
+    "name": "SІоts Cіtу Secret Rooms",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      2
+    ]
+  },
+  {
+    "id": 6782,
+    "name": "ReflexBlitz",
+    "releaseYear": 2025,
+    "publisherName": "Lupiya Mujala",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "These game is about testing your reflexes against the clock.",
+    "videoUrl": "https://www.youtube.com/watch?v=0LMvlyAxdfg",
+    "inGameUrl": "https://www.youtube.com/watch?v=0LMvlyAxdfg",
+    "ratings": [
+      35
+    ],
+    "descriptors": [
+      36
+    ]
+  },
+  {
+    "id": 6781,
+    "name": "ACE COMBAT 8: WINGS OF THEVE",
+    "releaseYear": 2026,
+    "publisherName": "BANDAI NAMCO ENTERTAINMENT ASIA PTE LTD",
+    "platformsName": [
+      "PC",
+      "PlayStation 5",
+      "Xbox Series X|S"
+    ],
+    "description": "Step into the cockpit and take flight as an elite pilot across stunning skies. Enter intense dogfights, eliminate threats, and rise through gripping missions to earn your wings. The game is developed by PROJECT ACES, the acclaimed team behind the franchise.",
+    "videoUrl": "https://app.box.com/s/64e8bmjcw3xde792x7jxm25l4va95wyo",
+    "inGameUrl": "https://app.box.com/s/64e8bmjcw3xde792x7jxm25l4va95wyo",
+    "ratings": [
+      28
+    ],
+    "descriptors": [
+      10,
+      26,
+      3,
+      2
+    ]
+  },
+  {
+    "id": 6780,
+    "name": "WW2 Frontline Strategy Warfare",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Step into the chaos of World War 2 and command your troops with precision. Plan strategies, deploy units, and conquer enemy territories. Experience realistic battles, intense campaigns, and the thrill of frontline warfare!",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      28
+    ],
+    "descriptors": [
+      26
+    ]
+  },
+  {
+    "id": 6779,
+    "name": "Hide in Backrooms Escape Mod",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Hide in Backrooms Escape Mod is a spooky and exciting adventure game where you must explore strange rooms, avoid danger, and find a way to escape.\n\nYou wake up inside a mysterious place full of endless hallways, dark rooms, strange sounds, and hidden secrets. Every area looks different, and every corner can lead to a new surprise. Stay alert, move carefully, and try not to get lost.\n\nYour mission is simple: explore the backrooms, solve puzzles, collect useful items, and survive until you find the exit. But it will not be easy. Strange creatures are hiding in the shadows, and they are always looking for you.\n\nUse your flashlight to explore dark places, search for keys, unlock doors, and discover hidden paths. You must be smart, fast, and brave if you want to escape.\n\nEach level is filled with different challenges, scary rooms, secret passages, and new dangers. Some places are quiet and empty, while others are full of strange sounds and creepy surprises.\n\nAs you play, you can unlock new areas, discover hidden clues, and learn more about the mystery of the backrooms. Every level brings new puzzles, harder missions, and more exciting adventures.\n\nHide in Backrooms Escape Mod is perfect for players who enjoy spooky games, puzzle adventures, survival challenges, and mystery escape games.\n\nGame Features:\n\nCreepy backrooms environment\nPuzzle-solving escape gameplay\nHidden clues and secret paths\nStrange creatures and scary surprises\nDark rooms and mysterious hallways\nSmooth and easy controls\nFun survival and adventure missions\nMultiple levels with different challenges\nColorful 3D graphics\nExciting horror escape experience",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      5
+    ]
+  },
+  {
+    "id": 6778,
+    "name": "Solitair SaikiranCard ShowGame",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Solitair SaikiranCard ShowGame is a card type game and braing fun entertainment game.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      36
+    ]
+  },
+  {
+    "id": 6777,
+    "name": "Knives Out",
+    "releaseYear": 2017,
+    "publisherName": "香港网易互动娱乐有限公司",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "射击战术竞技手游",
+    "videoUrl": "https://drive.google.com/drive/folders/1XZAb3AKIW_KzDgVtag9o2sBRgIEtWdt7?usp=sharing",
+    "inGameUrl": "https://drive.google.com/drive/folders/13hUSTlKW7EVXViacsB0KNOr2kh82HMch?usp=sharing",
+    "ratings": [
+      28
+    ],
+    "descriptors": [
+      10,
+      26
+    ]
+  },
+  {
     "id": 6776,
     "name": "DecodeeReverse",
     "releaseYear": 2026,
@@ -90242,11 +92106,11 @@
       6
     ],
     "descriptors": [
-      10,
-      11,
+      15,
       26,
+      10,
       12,
-      15
+      11
     ]
   },
   {
@@ -90931,11 +92795,11 @@
       6
     ],
     "descriptors": [
-      5,
       26,
-      36,
+      2,
       12,
-      2
+      5,
+      36
     ]
   },
   {
@@ -90995,14 +92859,14 @@
       6
     ],
     "descriptors": [
-      2,
+      5,
+      10,
+      11,
       26,
       12,
-      5,
-      15,
-      11,
-      10,
-      3
+      3,
+      2,
+      15
     ]
   },
   {
@@ -91297,11 +93161,11 @@
       6
     ],
     "descriptors": [
-      10,
-      11,
       26,
+      2,
+      10,
       12,
-      2
+      11
     ]
   },
   {
@@ -91320,11 +93184,11 @@
       6
     ],
     "descriptors": [
-      26,
-      2,
       10,
+      11,
+      26,
       12,
-      11
+      2
     ]
   },
   {
@@ -91766,12 +93630,12 @@
       6
     ],
     "descriptors": [
-      10,
-      11,
-      26,
-      12,
       3,
-      2
+      26,
+      2,
+      10,
+      12,
+      11
     ]
   },
   {
@@ -92081,11 +93945,11 @@
       6
     ],
     "descriptors": [
-      26,
-      12,
       3,
+      15,
+      26,
       2,
-      15
+      12
     ]
   },
   {
@@ -92350,11 +94214,11 @@
       35
     ],
     "descriptors": [
-      5,
-      10,
-      11,
       26,
-      2
+      11,
+      2,
+      5,
+      10
     ]
   },
   {
@@ -92441,11 +94305,11 @@
       35
     ],
     "descriptors": [
-      10,
-      26,
+      15,
       3,
+      26,
       2,
-      15
+      10
     ]
   },
   {
@@ -92499,11 +94363,11 @@
       6
     ],
     "descriptors": [
-      10,
-      11,
       26,
+      2,
+      10,
       12,
-      2
+      11
     ]
   },
   {
@@ -92553,11 +94417,11 @@
       35
     ],
     "descriptors": [
-      11,
-      26,
-      12,
       3,
-      2
+      26,
+      11,
+      2,
+      12
     ]
   },
   {
