@@ -27,7 +27,9 @@
       'detail.descriptors': 'Content Flags',
       'detail.video': 'Video',
       'detail.ingame': 'In-Game',
-      'detail.share': '🔗 Copy Link',
+      'detail.share': '☍  Copy Link',
+      'detail.openIgrs': 'Open in IGRS.id',
+      'detail.searchGoogle': '🔍︎  Search on Google',
       'detail.copied': 'Copied!',
       'detail.noDesc': 'No description available.',
       'detail.noDescriptors': 'No content descriptors',
@@ -75,7 +77,9 @@
       'detail.descriptors': 'Deskriptor Konten',
       'detail.video': 'Video',
       'detail.ingame': 'Dalam Game',
-      'detail.share': '🔗 Salin Link',
+      'detail.share': '☍  Salin Link',
+      'detail.openIgrs': 'Buka di IGRS.id',
+      'detail.searchGoogle': '🔍︎  Cari di Google',
       'detail.copied': 'Tersalin!',
       'detail.noDesc': 'Tidak ada deskripsi.',
       'detail.noDescriptors': 'Tidak ada deskriptor konten',
@@ -478,6 +482,13 @@
         <div class="detail-grid">${gridRows}</div>
         <div class="detail-actions">
           <button class="detail-share-btn" id="detail-share" type="button">${t('detail.share')}</button>
+          <a class="detail-link-btn" href="https://igrs.id/game-detail/${game.id}" target="_blank" rel="noopener">
+            <img src="data/images/igrs.svg" alt="" aria-hidden="true">
+            <span>${t('detail.openIgrs')}</span>
+          </a>
+          <a class="detail-link-btn" href="https://www.google.com/search?q=${encodeURIComponent(`${game.name} by ${game.publisherName}`)}" target="_blank" rel="noopener">
+            <span>${t('detail.searchGoogle')}</span>
+          </a>
         </div>
       </div>
     `;
