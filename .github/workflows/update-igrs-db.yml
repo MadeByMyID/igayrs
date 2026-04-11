@@ -25,7 +25,6 @@ jobs:
           set -euo pipefail
 
           RAW_DIR=".tmp-igrs-raw"
-          JSONL_FILE="igrs_all_games.jsonl"
           WORKER_SCRIPT=".github/scripts/fetch-igrs-game.sh"
 
           CHUNK_SIZE="${CHUNK_SIZE:-2000}"
@@ -36,7 +35,6 @@ jobs:
           echo "Setting up parallel fetching..."
           rm -rf "$RAW_DIR"
           mkdir -p "$RAW_DIR"
-          : > "$JSONL_FILE"
 
           echo "Starting parallel fetch in chunks of ${CHUNK_SIZE} (concurrency: ${CONCURRENCY}, batch delay: ${BATCH_DELAY_SEC}s)"
 
@@ -44,12 +42,12 @@ jobs:
             CURRENT_END=$((CURRENT_START + CHUNK_SIZE - 1))
             echo ">>> Fetching batch: IDs ${CURRENT_START} to ${CURRENT_END}"
 
-            LINES_BEFORE="$(wc -l < "$JSONL_FILE" | tr -d ' ')"
+            FILES_BEFORE="$(find "$RAW_DIR" -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')"
 
-            seq "$CURRENT_START" "$CURRENT_END" | xargs -P "$CONCURRENCY" -I {} bash "$WORKER_SCRIPT" {} "$RAW_DIR" >> "$JSONL_FILE"
+            seq "$CURRENT_START" "$CURRENT_END" | xargs -P "$CONCURRENCY" -I {} bash "$WORKER_SCRIPT" {} "$RAW_DIR"
 
-            LINES_AFTER="$(wc -l < "$JSONL_FILE" | tr -d ' ')"
-            GAMES_ADDED=$((LINES_AFTER - LINES_BEFORE))
+            FILES_AFTER="$(find "$RAW_DIR" -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')"
+            GAMES_ADDED=$((FILES_AFTER - FILES_BEFORE))
 
             echo ">>> Batch complete. Games found in this chunk: ${GAMES_ADDED}"
 
@@ -66,13 +64,16 @@ jobs:
             CURRENT_START=$((CURRENT_START + CHUNK_SIZE))
           done
 
-          if [ ! -s "$JSONL_FILE" ]; then
+          if ! find "$RAW_DIR" -maxdepth 1 -type f -name '*.json' | grep -q .; then
             echo "ERROR: No games fetched." >&2
             exit 1
           fi
 
           echo "Merging records into JSON array..."
-          jq -s 'sort_by(.id)' "$JSONL_FILE" > "igrs.pubdb.json"
+          find "$RAW_DIR" -maxdepth 1 -type f -name '*.json' -print0 \
+            | sort -z \
+            | xargs -0 cat \
+            | jq -s 'sort_by(.id)' > "igrs.pubdb.json"
 
           jq -e 'type == "array"' "igrs.pubdb.json" >/dev/null
 
@@ -173,7 +174,6 @@ jobs:
 
           echo "Cleaning up raw dump files..."
           rm -f "igrs.pubdb.json"
-          rm -f "$JSONL_FILE"
           rm -f "ratings-api.json"
           rm -f "descriptors-api.json"
           rm -rf "$RAW_DIR"

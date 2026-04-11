@@ -29,9 +29,9 @@ CURL_EXIT=$?
 set -e
 
 if [ "$CURL_EXIT" -eq 0 ] && [ "$HTTP_STATUS" -eq 200 ] && jq -e '.id != null' "$TEMP_FILE" >/dev/null 2>&1; then
-  jq -c '.' "$TEMP_FILE"
+  jq -c '.' "$TEMP_FILE" > "${TEMP_FILE}.min"
+  mv "${TEMP_FILE}.min" "$TEMP_FILE"
 else
   printf 'Failed to fetch IGRS game: id=%s url=%s curl_exit=%s http_status=%s\n' "$ID" "$API_URL" "$CURL_EXIT" "$HTTP_STATUS" >&2
+  rm -f "$TEMP_FILE"
 fi
-
-rm -f "$TEMP_FILE"
