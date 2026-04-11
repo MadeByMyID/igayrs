@@ -320,15 +320,21 @@
     return String(value) === '1' || value === true;
   }
   function steamRatingToIgrsId(steamRating) {
-    const rating = String(steamRating?.rating || '').toUpperCase();
+    const rating = String(steamRating?.rating || '').trim().toUpperCase();
     if (!rating) return null;
     if (rating === 'BANNED' || parseSteamRatingFlag(steamRating?.banned)) return 35;
 
     const byRating = {
+      '0': 7,
+      '3': 7,
       '3+': 7,
+      '7': 4,
       '7+': 4,
+      '13': 5,
       '13+': 5,
+      '15': 28,
       '15+': 28,
+      '18': 6,
       '18+': 6,
       'RC': 35
     };
@@ -909,7 +915,7 @@
             <div class="rating-card-subtitle">${esc(generated ? t('steamchecker.generated') : t('steamchecker.noMatch'))}</div>
           </div>
         </div>
-        ${renderDescriptorIcons(steamRatingDescriptorIds, 'steamchecker.noSteamRating')}
+        ${renderDescriptorIcons(steamRatingDescriptorIds, 'steamchecker.noDescriptors')}
       `;
 
       const oursCard = `
