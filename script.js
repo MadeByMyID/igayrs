@@ -502,7 +502,7 @@
       else hideDetail();
     });
     document.getElementById('detail-share').addEventListener('click', function () {
-      const url = `${location.origin}${location.pathname}#${game.id}`;
+      const url = `${location.origin}/game/${game.id}`;
       navigator.clipboard.writeText(url).then(() => {
         this.textContent = t('detail.copied');
         this.classList.add('copied');

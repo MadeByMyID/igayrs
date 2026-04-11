@@ -1,0 +1,10 @@
+name = "igayrsbackend"
+main = "worker.js"
+compatibility_date = "2026-04-11"
+
+[vars]
+SITE_ORIGIN = "https://igrs.madeby.my.id"
+
+[[routes]]
+pattern = "igrs.madeby.my.id/game/*"
+zone_name = "madeby.my.id"
