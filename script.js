@@ -109,6 +109,7 @@
   const PER_PAGE = 30;
   let currentPage = 1;
   let currentDetailId = null;
+  let lastListScrollY = 0;
   let filterStates = null;
 
   const RATING_ORDER = [7, 4, 5, 28, 6, 35];
@@ -395,12 +396,17 @@
     if (pag) renderPagination(pag, total);
   }
 
-  function showDetail(id) {
+  function showDetail(id, options = {}) {
+    const { updateHistory = true } = options;
     const game = games.find(g => g.id === id);
     if (!game) return;
 
+    if (updateHistory) {
+      lastListScrollY = window.scrollY;
+      history.pushState({ detailId: id, listScrollY: lastListScrollY }, '', `search#${id}`);
+    }
+
     currentDetailId = id;
-    history.replaceState(null, '', `search#${id}`);
 
     const dp = document.getElementById('detail-page');
     const lv = document.getElementById('list-view');
@@ -458,7 +464,10 @@
 
     window.scrollTo({ top: 0, behavior: 'smooth' });
 
-    document.getElementById('detail-back').addEventListener('click', hideDetail);
+    document.getElementById('detail-back').addEventListener('click', () => {
+      if (history.state?.detailId === id) history.back();
+      else hideDetail();
+    });
     document.getElementById('detail-share').addEventListener('click', function () {
       const url = `${location.origin}${location.pathname}#${game.id}`;
       navigator.clipboard.writeText(url).then(() => {
@@ -470,6 +479,7 @@
   }
 
   function hideDetail() {
+    const scrollY = lastListScrollY;
     currentDetailId = null;
     history.replaceState(null, '', location.pathname);
 
@@ -486,6 +496,15 @@
     if (appLayout) appLayout.classList.remove('detail-active');
 
     renderFilterSidebar();
+    requestAnimationFrame(() => {
+      const root = document.documentElement;
+      const previousBehavior = root.style.scrollBehavior;
+      root.style.scrollBehavior = 'auto';
+      window.scrollTo(0, scrollY);
+      requestAnimationFrame(() => {
+        root.style.scrollBehavior = previousBehavior;
+      });
+    });
   }
 
   function renderPagination(el, total) {
@@ -515,9 +534,12 @@
 
   function handleHash() {
     const m = location.hash.match(/^#(\d+)$/);
-    if (!m) return;
+    if (!m) {
+      if (currentDetailId !== null) hideDetail();
+      return;
+    }
     const id = parseInt(m[1]);
-    if (games && games.find(g => g.id === id)) showDetail(id);
+    if (games && games.find(g => g.id === id)) showDetail(id, { updateHistory: false });
   }
 
   function renderRatingsPage() {
@@ -623,6 +645,7 @@
     } else if (isRatings) {
       renderRatingsPage();
     } else if (isSearch) {
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
       renderFilterSidebar();
       renderResults();
       const dr = debounce(() => { currentPage = 1; renderResults(); }, 120);
@@ -643,7 +666,7 @@
       if (isHome) { renderHomePage(); }
       else if (isRatings) { renderRatingsPage(); }
       else if (isSearch) {
-        if (currentDetailId !== null) showDetail(currentDetailId);
+        if (currentDetailId !== null) showDetail(currentDetailId, { updateHistory: false });
         else { renderFilterSidebar(); renderResults(); }
       }
     });
