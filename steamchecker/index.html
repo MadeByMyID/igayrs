@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <base href="../">
+  <title>IGRSDB | Steam Game Checker</title>
+  <meta name="description" content="Check Steam game details against IGRS ratings and content descriptors.">
+  <link rel="icon" type="image/svg+xml" href="data/images/favicon.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="./" class="site-logo">
+        <img src="data/images/favicon.svg" alt="Logo" class="logo-mark" width="36" height="36">
+        <div class="logo-text">IGRS<span>DB</span></div>
+      </a>
+      <div class="header-actions">
+        <a href="search/" class="btn" data-i18n="nav.search">Search Games</a>
+        <a href="ratings/" class="btn" data-i18n="nav.ratings">Ratings Guide</a>
+        <a href="steamchecker/" class="btn" data-i18n="nav.steamchecker">Steam Game Checker</a>
+        <button class="btn" id="lang-toggle" type="button" aria-label="Switch language">
+          🌐 <span id="lang-label">ID</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="page-container steam-checker-page" id="steam-checker-page">
+    <section class="steam-checker-hero">
+      <div>
+        <h1 class="page-title" data-i18n="steamchecker.title">Steam Game Checker</h1>
+      </div>
+    </section>
+
+    <section class="steam-checker-shell">
+      <form class="steam-checker-form" id="steam-checker-form">
+        <label class="steam-checker-label" for="steam-appid-input" data-i18n="steamchecker.appid">App ID</label>
+        <div class="steam-checker-input-row">
+          <input
+            type="text"
+            id="steam-appid-input"
+            inputmode="numeric"
+            autocomplete="off"
+            placeholder="Enter a Steam app ID, like 3557620"
+            data-i18n-placeholder="steamchecker.appid.placeholder"
+          >
+          <button class="steam-checker-submit" type="submit" data-i18n="steamchecker.check">Check Steam game</button>
+        </div>
+      </form>
+
+      <div class="steam-checker-status" id="steam-checker-status"></div>
+      <div class="steam-checker-layout">
+        <div class="steam-checker-main" id="steam-checker-results"></div>
+        <aside class="steam-checker-sidebar" id="steam-checker-sidebar"></aside>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div>
+      <span data-i18n="footer.text">Data scraped from</span> <a href="https://igrs.id" target="_blank" rel="noopener">igrs.id</a>
+      · <span data-i18n="footer.disclaimer">A MadeByMyID Project</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

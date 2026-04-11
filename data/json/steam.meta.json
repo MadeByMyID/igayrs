@@ -1,0 +1,29 @@
+{
+  "contentDescriptors": {
+    "1": {
+      "label": "Nudity or Sexual Content (General)",
+      "igrsDescriptorIds": [36, 11],
+      "ratingId": 6
+    },
+    "2": {
+      "label": "Frequent Violence or Gore",
+      "igrsDescriptorIds": [26, 3],
+      "ratingId": 6
+    },
+    "3": {
+      "label": "Adult Only Sexual Content",
+      "igrsDescriptorIds": [36],
+      "ratingId": 35
+    },
+    "4": {
+      "label": "General Mature Content",
+      "igrsDescriptorIds": [2, 11],
+      "ratingId": 28
+    },
+    "5": {
+      "label": "Restricted / Extreme Content",
+      "igrsDescriptorIds": [36, 26, 3],
+      "ratingId": 35
+    }
+  }
+}
