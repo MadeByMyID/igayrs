@@ -1,5 +1,15 @@
 [
   {
+    "id": 6911,
+    "videoUrl": "https://1drv.ms/u/c/ce354df78b45b51e/IQB-Vi3IdR9VQ7rM6ncqRUWrAVWm3NzuIoUnK9bL8D0rj1U?e=MBZYu3",
+    "inGameUrl": "https://1drv.ms/u/c/ce354df78b45b51e/IQCBGWIuLY5CSYz0uiBXfph0ASOJozbsNEWa7yyMQn79ADE?e=qeYbP4"
+  },
+  {
+    "id": 6910,
+    "videoUrl": "https://play.google.com/store/apps/details?id=com.zoo.zoologicard&hl=sv",
+    "inGameUrl": "https://play.google.com/store/apps/details?id=com.zoo.zoologicard&hl=sv"
+  },
+  {
     "id": 6909,
     "videoUrl": "https://play.google.com/store/apps/details?id=com.fastemulator.gbc",
     "inGameUrl": "https://play.google.com/store/apps/details?id=com.fastemulator.gbc"
@@ -8,6 +18,11 @@
     "id": 6908,
     "videoUrl": "https://play.google.com/store/apps/details?id=com.fastemulator.gba",
     "inGameUrl": "https://play.google.com/store/apps/details?id=com.fastemulator.gba"
+  },
+  {
+    "id": 6907,
+    "videoUrl": "https://youtu.be/4NlVN4Hd8iU?si=QLpKbqMETkeC-gEz",
+    "inGameUrl": "https://youtu.be/ngniyUGX_2I?si=MDTDh-4MC8wlw--n"
   },
   {
     "id": 6906,
@@ -448,11 +463,6 @@
     "id": 6657,
     "videoUrl": "https://play.google.com/store/apps/details?id=com.Skylabsoft.wlk_log",
     "inGameUrl": "https://play.google.com/store/apps/details?id=com.Skylabsoft.wlk_log"
-  },
-  {
-    "id": 6655,
-    "videoUrl": "https://play.google.com/store/apps/details?id=com.paintwars.game",
-    "inGameUrl": "https://play.google.com/store/apps/details?id=com.paintwars.game"
   },
   {
     "id": 6654,
@@ -12970,11 +12980,6 @@
     "inGameUrl": "https://www.dropbox.com/scl/fi/tmos48loxb2kfysih63dy/Slot-Games_Quick-Hit-Slots.png?rlkey=0ret67seei40ai8m7uvy4jw8h&st=a582xpzw&dl=0"
   },
   {
-    "id": 4139,
-    "videoUrl": "https://sie.box.com/s/cgsgmsrw37p4hrcovz9g9gfehcv08722",
-    "inGameUrl": "https://sie.box.com/s/cgsgmsrw37p4hrcovz9g9gfehcv08722"
-  },
-  {
     "id": 4138,
     "videoUrl": "https://www.dropbox.com/scl/fi/7zucdnuacy3kh1dq496w2/Slot-Game-Play_Gold-Fish-Slots-Casino.mov?rlkey=16ts2gtbpb5qw1vf7g9midsnn&st=mt1q0ebs&dl=0",
     "inGameUrl": "https://www.dropbox.com/scl/fo/ojqux381v1c97xwvh22lg/AOH6XWSVT2HPluQBr1A_fZ0?rlkey=8101cx9rjzpbe2dfgnkg77p8w&st=rhx07mov&dl=0"
@@ -16265,11 +16270,6 @@
     "inGameUrl": "https://www.halfbrick.com/games/chameleonrun"
   },
   {
-    "id": 3479,
-    "videoUrl": "https://youtu.be/hZnlLn4XtTo?si=VhfVCmev_zgPeBog",
-    "inGameUrl": "https://youtu.be/hZnlLn4XtTo?si=VhfVCmev_zgPeBog"
-  },
-  {
     "id": 3478,
     "videoUrl": "https://www.halfbrick.com/games/brickle",
     "inGameUrl": "https://www.halfbrick.com/games/brickle"
@@ -18253,11 +18253,6 @@
     "id": 3078,
     "videoUrl": "https://drive.google.com/file/d/1SU8Q0F2sp_3YGjcnfE-9u7qLOvRdqNOQ/view?usp=drive_link",
     "inGameUrl": "https://drive.google.com/drive/folders/1LZvf_jvvfFMAlJpOVf-XZzI0-cX37prW?usp=drive_link"
-  },
-  {
-    "id": 3077,
-    "videoUrl": "https://apps.apple.com/app/id1392881154",
-    "inGameUrl": "https://apps.apple.com/app/id1392881154"
   },
   {
     "id": 3076,
@@ -21000,11 +20995,6 @@
     "inGameUrl": "https://apps.apple.com/id/app/id1437417835"
   },
   {
-    "id": 2524,
-    "videoUrl": "https://gabama.com/monoposto/assets/img/hero-img.jpg",
-    "inGameUrl": "https://gabama.com/monoposto/assets/img/hero-img.jpg"
-  },
-  {
     "id": 2523,
     "videoUrl": "https://play.google.com/store/apps/details?id=com.coloring.toddlers&gl=id",
     "inGameUrl": "https://play.google.com/store/apps/details?id=com.coloring.toddlers&gl=id"
@@ -22253,11 +22243,6 @@
     "id": 2274,
     "videoUrl": "https://drive.google.com/drive/folders/1XOFKh06p7iefRIpNEgmaBCB6yehbgf9M?usp=sharing",
     "inGameUrl": "https://drive.google.com/drive/folders/1XOFKh06p7iefRIpNEgmaBCB6yehbgf9M?usp=sharing"
-  },
-  {
-    "id": 2273,
-    "videoUrl": "https://friendsgame.online/",
-    "inGameUrl": "https://friendsgame.online/"
   },
   {
     "id": 2272,
