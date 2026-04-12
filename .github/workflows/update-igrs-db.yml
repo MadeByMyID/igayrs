@@ -26,6 +26,7 @@ jobs:
 
           RAW_DIR=".tmp-igrs-raw"
           WORKER_SCRIPT=".github/scripts/fetch-igrs-game.sh"
+          FAILED_IDS_FILE=".failed-fetch-ids"
 
           CHUNK_SIZE="${CHUNK_SIZE:-2000}"
           CONCURRENCY="${CONCURRENCY:-15}"
@@ -35,6 +36,7 @@ jobs:
           echo "Setting up parallel fetching..."
           rm -rf "$RAW_DIR"
           mkdir -p "$RAW_DIR"
+          > "$FAILED_IDS_FILE"
 
           echo "Starting parallel fetch in chunks of ${CHUNK_SIZE} (concurrency: ${CONCURRENCY}, batch delay: ${BATCH_DELAY_SEC}s)"
 
@@ -44,7 +46,7 @@ jobs:
 
             FILES_BEFORE="$(find "$RAW_DIR" -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')"
 
-            seq "$CURRENT_START" "$CURRENT_END" | xargs -P "$CONCURRENCY" -I {} bash "$WORKER_SCRIPT" {} "$RAW_DIR"
+            seq "$CURRENT_START" "$CURRENT_END" | xargs -P "$CONCURRENCY" -I {} bash "$WORKER_SCRIPT" {} "$RAW_DIR" 2>> "$FAILED_IDS_FILE" || true
 
             FILES_AFTER="$(find "$RAW_DIR" -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')"
             GAMES_ADDED=$((FILES_AFTER - FILES_BEFORE))
@@ -53,6 +55,8 @@ jobs:
 
             if [ "$GAMES_ADDED" -eq 0 ]; then
               echo "No games found in batch ${CURRENT_START}-${CURRENT_END}. Assuming end."
+              echo "Purging failed IDs from this final empty batch..."
+              > "$FAILED_IDS_FILE"
               break
             fi
 
@@ -63,6 +67,20 @@ jobs:
 
             CURRENT_START=$((CURRENT_START + CHUNK_SIZE))
           done
+
+          echo ">>> Testing previously failed IDs..."
+          if [ -s "$FAILED_IDS_FILE" ]; then
+            FAILED_IDS="$(sed -En 's/.*id=([0-9]+).*/\1/p' "$FAILED_IDS_FILE" | sort -u | awk '$1 >= 1000')"
+            if [ -n "$FAILED_IDS" ]; then
+              echo "Found $(echo "$FAILED_IDS" | wc -l) unique failed IDs. Retesting..."
+              echo "$FAILED_IDS" | xargs -P "$CONCURRENCY" -I {} bash "$WORKER_SCRIPT" {} "$RAW_DIR" 2>&1 | grep -E 'Failed to fetch|Skipping' || true
+              echo "Retest complete"
+            else
+              echo "No failed IDs found"
+            fi
+          else
+            echo "No failed IDs to retest"
+          fi
 
           TOTAL_FETCHED="$(find "$RAW_DIR" -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')"
           if [ "$TOTAL_FETCHED" -eq 0 ]; then
@@ -82,13 +100,17 @@ jobs:
           echo "Merged ${GAME_COUNT} games into igrs.pubdb.json"
 
           echo "Downloading ratings and descriptors..."
-          curl --fail --show-error --silent --location "https://api.igrs.id/public/ratings" -o "ratings-api.json"
-          jq empty "ratings-api.json"
-
-          curl --fail --show-error --silent --location "https://api.igrs.id/public/descriptors" -o "descriptors-api.json"
-          jq empty "descriptors-api.json"
-
-          echo "Downloaded ratings and descriptors successfully"
+          if curl --fail --show-error --silent --location --max-time 120 "https://api.igrs.id/public/ratings" -o "ratings-api.json" && \
+             curl --fail --show-error --silent --location --max-time 120 "https://api.igrs.id/public/descriptors" -o "descriptors-api.json" && \
+             jq empty "ratings-api.json" && \
+             jq empty "descriptors-api.json"; then
+            echo "Downloaded ratings and descriptors successfully"
+          else
+            echo "Failed to fetch ratings/descriptors API. Using existing."
+            rm -f "ratings-api.json" "descriptors-api.json"
+            echo "Skipping metadata regeneration."
+            SKIP_META=1
+          fi
 
           echo "Normalizing and splitting database..."
           OUTPUT_DIR="data/json"
@@ -152,7 +174,7 @@ jobs:
                   | map(normalize_platform)
                   | map(select(length > 0))
                   | unique
-                  | map($platformNameToId[.] // empty))
+                  | map(\$platformNameToId[.] // empty))
               })"
 
           EXTRA_QUERY="${PLATFORM_NORMALIZE}
@@ -181,25 +203,27 @@ jobs:
             | from_entries
           ')"
 
-          RATINGS="$(jq "$RATINGS_TRANSFORM" "ratings-api.json")"
-          DESCRIPTORS="$(jq "$DESCRIPTORS_TRANSFORM" "descriptors-api.json")"
-          GENERATED_AT="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+          if [ "${SKIP_META:-0}" -ne 1 ]; then
+            RATINGS="$(jq "$RATINGS_TRANSFORM" "ratings-api.json")"
+            DESCRIPTORS="$(jq "$DESCRIPTORS_TRANSFORM" "descriptors-api.json")"
+            GENERATED_AT="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 
-          jq -n \
-            --argjson ratings "$RATINGS" \
-            --argjson descriptors "$DESCRIPTORS" \
-            --argjson platforms "$PLATFORMS_JSON" \
-            --argjson totalGames "$GAME_COUNT" \
-            --arg generatedAt "$GENERATED_AT" \
-            '{
-              meta: {
-                generatedAt: $generatedAt,
-                totalGames: $totalGames
-              },
-              ratings: $ratings,
-              descriptors: $descriptors,
-              platforms: $platforms
-            }' > "${OUTPUT_DIR}/igrs.meta.json"
+            jq -n \
+              --argjson ratings "$RATINGS" \
+              --argjson descriptors "$DESCRIPTORS" \
+              --argjson platforms "$PLATFORMS_JSON" \
+              --argjson totalGames "$GAME_COUNT" \
+              --arg generatedAt "$GENERATED_AT" \
+              '{
+                meta: {
+                  generatedAt: $generatedAt,
+                  totalGames: $totalGames
+                },
+                ratings: $ratings,
+                descriptors: $descriptors,
+                platforms: $platforms
+              }' > "${OUTPUT_DIR}/igrs.meta.json"
+          fi
 
           jq --argjson platformNameToId "$PLATFORM_NAME_TO_ID" "$GAMES_QUERY" "igrs.pubdb.json" > "${OUTPUT_DIR}/igrs.games.json"
           jq "$EXTRA_QUERY" "igrs.pubdb.json" > "${OUTPUT_DIR}/igrs.extra.json"
@@ -208,6 +232,7 @@ jobs:
           rm -f "igrs.pubdb.json"
           rm -f "ratings-api.json"
           rm -f "descriptors-api.json"
+          rm -f "$FAILED_IDS_FILE"
           rm -rf "$RAW_DIR"
 
           echo "Done"
