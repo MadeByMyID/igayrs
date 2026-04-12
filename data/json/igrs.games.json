@@ -1,5 +1,425 @@
 [
   {
+    "id": 6909,
+    "name": "My OldBoy! - GBC Emulator",
+    "releaseYear": 2012,
+    "publisherName": "Pixel Respawn LLC",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "My OldBoy! is a GB/GBC emulator, allowing to run GB/GBC games on your mobile devices.",
+    "videoUrl": "https://play.google.com/store/apps/details?id=com.fastemulator.gbc",
+    "inGameUrl": "https://play.google.com/store/apps/details?id=com.fastemulator.gbc",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6908,
+    "name": "My Boy! - GBA emulator",
+    "releaseYear": 2012,
+    "publisherName": "Pixel Respawn LLC",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "My Boy! is a GBA emulator, allowing to run GBA games on your mobile devices.",
+    "videoUrl": "https://play.google.com/store/apps/details?id=com.fastemulator.gba",
+    "inGameUrl": "https://play.google.com/store/apps/details?id=com.fastemulator.gba",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6907,
+    "name": "Emergency HQ",
+    "releaseYear": 2018,
+    "publisherName": "Mon",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "Sebuah Game Manajemen Simulasi berbasis pada keadaan darurat",
+    "videoUrl": "https://youtu.be/4NlVN4Hd8iU?si=QLpKbqMETkeC-gEz",
+    "inGameUrl": "https://youtu.be/ngniyUGX_2I?si=MDTDh-4MC8wlw--n",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      26
+    ]
+  },
+  {
+    "id": 6906,
+    "name": "Skill Sudoku",
+    "releaseYear": 2026,
+    "publisherName": "Everest Puzzles",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Classic Sudoku with a clean interface and zero distractions.",
+    "videoUrl": "https://everestpuzzles.github.io/videos/skillsudoku-recording.mp4",
+    "inGameUrl": "https://everestpuzzles.github.io/images/skill-sudoku/index.html",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6905,
+    "name": "JOYit",
+    "releaseYear": 2022,
+    "publisherName": "Matrix",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Play fun games, collect points, and redeem in-game rewards.",
+    "videoUrl": "https://youtube.com/shorts/Ct6vHTnD19I?feature=share",
+    "inGameUrl": "https://youtube.com/shorts/kUkLXGK-iaU?feature=share",
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6904,
+    "name": "Undercover",
+    "releaseYear": 2017,
+    "publisherName": "Yanstar Studio OÜ",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Undercover is a group party game.\n\nThe goal is to find out the other players' identities (and yours!) as fast as possible to eliminate your enemies.\n\n1- Each player receives a secret word (Civilians all receive the same word, the Undercover gets a slightly different word, and Mr. White gets the ^^ sign)\n\n2- Players take turn giving a short clue about their secret word\n\n3- After discussion, players vote to eliminate the person that seems to have a different word from theirs.",
+    "videoUrl": "https://drive.google.com/drive/folders/1cUrUNnNfceGewSlo8uFkKWNrdaEAX62a?usp=drive_link",
+    "inGameUrl": "https://drive.google.com/drive/folders/18TphMls0FI1poWskZmMR3H2_GDJqCJo3?usp=drive_link",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      10,
+      12
+    ]
+  },
+  {
+    "id": 6903,
+    "name": "Bingo Maker",
+    "releaseYear": 2021,
+    "publisherName": "Brother Project",
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Create custom Bingo games, share them, call them and play them with your friends",
+    "videoUrl": "https://drive.google.com/file/d/1qVZsERbZ0oGyVmwjc1GCUTL8XU9IDOnG/view?usp=sharing",
+    "inGameUrl": "https://drive.google.com/file/d/1lGZ7BfqT5uIxoFrGvzmC-gbmAXzT1lKk/view?usp=sharing",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      15
+    ]
+  },
+  {
+    "id": 6902,
+    "name": "Strange Case: The Alchemist",
+    "releaseYear": 2019,
+    "publisherName": "Labeledman",
+    "platformsName": [
+      "Android",
+      "iOS"
+    ],
+    "description": "In Strange Case: The Alchemist you need to investigate the mysterious case about crime named 'Alchemist'. He defiled a graves and nobody knows the reason.",
+    "videoUrl": "https://youtu.be/INjBEH3Jydk",
+    "inGameUrl": "https://play.google.com/store/apps/details?id=com.labeledman.strangecase.alchemist",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      26
+    ]
+  },
+  {
+    "id": 6901,
+    "name": "Juwa 777",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Juwa777 is a hypnotizing online casino game that offers a conclusive gaming experience to players who partake in the excitement of the juwa casino 999. As a piece of the Juwa Online Casino, Juwa777 should outfit players with a wide blend of games to investigate, ensuring that there is something for everyone.The game components splendid Juwa casino games like spaces, blackjack, and roulette, as well as extra novel and drawing in games like baccarat and craps. The portrayals and audio effects of Juwa777 are top of the line, causing a sensible experience for players as they to investigate through the different games.With its smooth and present day plan, game Juwa casino is easy to research and play, settling casino 999 on it a stunning choice for both experienced and new players. As players progress through the game, they can get never-endingly repays casino 999 that can be used to extra further encourage their interminable cooperation Juwa casino.Whether you're looking for a quick and clear game or a more unusual gaming experience, Juwa777 has something for everyone. So why hold tight? Come and join the fun at Juwa Online Casino and seek after Juwa777 today take part in this famous game !",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      15
+    ]
+  },
+  {
+    "id": 6900,
+    "name": "OTP Arena: Memory Game",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Train your memory. Beat the clock.\nWelcome to OTP Arena — a fast-paced memory training game designed to challenge your brain and improve your focus.\n\nTest your ability to remember and quickly input sequences under pressure. The longer you survive, the harder it gets!\n\n🔥 Game Features:\n\nMultiple game modes: Classic, Time Attack, Endless & more\nFast-paced gameplay that sharpens memory and reaction\nIncreasing difficulty as you progress\nTrack your stats, streaks, and high scores\nCompete on the global leaderboard\n\n🧠 Train Your Brain\nImprove your short-term memory, focus, and mental speed while having fun.\n\n⚡ Challenge Yourself\nCan you keep up as the speed increases? Can you reach the top of the leaderboard?\n\n🎯 Simple but Addictive\nEasy to play, hard to master. Perfect for quick sessions or long challenges.\n\nDownload OTP Arena now and see how far your memory can go!",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6899,
+    "name": "bau cua tet 2026",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      15
+    ]
+  },
+  {
+    "id": 6898,
+    "name": "AdmVelarPlay",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6897,
+    "name": "AdmVelarPlay",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6896,
+    "name": "Neon Sprint",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6895,
+    "name": "Shiba Story Go! RPG Idle Game",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Be the Shiba. Shape the Story. \n\nShiba Story Go is a roguelike RPG where every run is different. Step into the paws of a brave (and slightly chaotic) Shiba Inu and explore a world full of surprises, tough choices, and tail-wagging trouble. Each run is shaped by your decisions, random events, and a bit of Shiba luck. \n\nTrain, customize, survive and grow - then do it all again. Every adventure makes your Shiba stronger and unlocks new possibilities. The more you play, the more there is to discover. \n\nFeatures: \n- Roguelite RPG Gameplay: Short, replayable runs with procedural events and branching choices. No two adventures are the same. \n\n- Customize Your Shiba: Unlock cute, silly, and powerful gear that changes both your look and playstyle. \n\n- Collect and advance Pets, Mounts, Artifacts & Gear: Unlock unique game allies and items that aid your journey and grow stronger the more you invest in them. \n\n- Create or Join a Guild: Team up with your Shiba pack to tackle shared challenges, support each other, and earn powerful group bonuses. \n\n- Meaningful Choices: Your decisions affect the story, encounters, and outcomes - sometimes in surprising ways. \n\nFunny, unpredictable, and full of heart, Shiba Story Go delivers bite-sized RPG adventures with endless replay value. Start your adventure today!",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      5
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6894,
+    "name": "Marble Vertigo Blast",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Step into a world of pure vertical challenge and classic arcade excitement. Welcome to Marble Vertigo Blast, a retro-inspired physics-platformer built for precision, momentum, and vertigo-inducing thrills.\n\nYour core directive is simple: Guide the marble. Find the exit. Above all else, DON’T TOUCH THE GROUND.\nExperience a meticulously crafted arcade experience where victory is defined by skill, timing, and mastering subtle shifts in gravity.\nThe True Premium, No-Distractions Experience\nWe believe that high-stakes arcade gaming demands absolute focus. Marble Vertigo Blast is a tribute to the golden age of gaming, focusing solely on player experience without interruptions.\n\n    ❌ Zero Ads: The challenge is constant, and so is your immersion. No pop-ups will break your flow as you navigate treacherous paths.\n\n    ❌ No In-App Purchases: You cannot buy victory. There are no energy boosters, time skips, or shortcut unlocks.\n\n    ✅ Skill-Based Progression: Every unlockable cosmetic, new marble design, and the ability to conquer the final levels must be earned through dedication and skill.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6893,
+    "name": "Chick Friends Memory",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6892,
+    "name": "Iceland Fishes",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Dive into the relaxing and rewarding world of Iceland Fishes, a fishing adventure where every catch helps you build and grow your own lake ecosystem. Catch a wide variety of fish using intuitive casting and reeling mechanics. \nIn addition to active fishing, you can place traps in strategic locations and return later to see what you have caught. Manage your resources and make thoughtful decisions to maximize your results.\nCollect fish fry and raise them in your personal lake by feeding and taking care of them as they grow into valuable fish over time. Balance your activities between catching, growing, and managing your fish to create a thriving environment.\n\nUse the in-game market to trade fish, manage your inventory, and progress further. Customize your avatar and enjoy a calm yet engaging experience that combines active gameplay with passive progression. Iceland Fishes offers a unique blend of fishing, management, and collection systems for players who enjoy both relaxation and steady growth.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      5
+    ]
+  },
+  {
+    "id": 6891,
+    "name": "WinaOrionPlay",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6890,
+    "name": "WinaLumoPlay",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6889,
+    "name": "WinaZenoPlay",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6888,
+    "name": "Mini Soccer: Cup League 2026",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Mini Soccer: Cup League 2026 is a game where you can play football with many national teams, score goals, and win the cup.\n\nIn this game, you choose your favorite country among many nations.  \n\nHow to play:\n\nUse the buttons to jump and dash.\n\nKick the ball into the goal.\n\nWin the match to get the trophy",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6887,
+    "name": "WinaNovaPlay",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6886,
+    "name": "Quantum Racers",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "Quantum Racers is a digital vector racing game built on strategy, prediction, and nerve. Forget button mashing and twitch reflexes; every race is a tactical showdown where the smartest decision wins.\n\nRace head-to-head against rivals on neon-lit vector tracks. Before each turn, choose your route: which racing line to take, where to commit, and when to push. But your opponents are making their moves at the same time. Victory isn’t about speed; it’s about reading the situation better than anyone else.\n\nThe core mechanic is simple: pick a line, anticipate your rival, and watch the outcome unfold. Beneath that simplicity lies deep strategy. Do you take the fastest line and risk a collision? Or bait your opponent into overcommitting and outmaneuver them? Every corner is a high-stakes decision.\n\nInspired by classic vector racing board games, Quantum Racers reimagines the genre for the digital age. The result is a modern, competitive racing experience that rewards tactical thinking, prediction, and mind games.\n\nThe game features a bold neon aesthetic, with glowing grids, sharp geometry, and a clean futuristic style that stands out on mobile.\n\nStart instantly in your browser, with no download or account required. Learn the rules in seconds and complete races in just a few minutes. Perfect for quick sessions, but with enough depth to master over time. The more you play, the more patterns you’ll recognize and exploit.\n\nOn mobile, unlock the full experience with ranked multiplayer competition, a progression system with upgrades, cross-platform progression from browser to mobile, and skill-based matchmaking.\n\nWhat sets Quantum Racers apart from other racing games is its focus on strategy over reflexes. It’s closer to poker than a traditional racer, a game of incomplete information where reading your opponent matters more than raw speed.\n\nDesigned for players who enjoy competitive mind games, Quantum Racers rewards patience, observation, and bold decision-making.\n\nShort races. No easy wins. Every corner tests your nerve.\n\nStart your first race in the browser, and stay if you can keep winning.",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      7
+    ],
+    "descriptors": []
+  },
+  {
+    "id": 6885,
+    "name": "BigFish Royal",
+    "releaseYear": 2026,
+    "publisherName": null,
+    "platformsName": [
+      "Android"
+    ],
+    "description": "\"Master thy memory. Document every pair. Build a masterpiece of a focused record.\" BigFish Royal is a professional and high-focus cognitive utility designed for individuals who value world-class concentration and absolute awareness of their mental patterns. Step into a specialized arena where Ice Fishing depths meet tactical memory calibration, helping you maintain a masterpiece of a clear mind. This experience serves as a fast arcade game with simple rules and intense moments, bridging the gap between casual play and ice fishing online mastery. Follow the Road BigFish Royal to achieve peak mental clarity.\n\nThe Mechanics: Precise Memory Calibration\nExperience a high-focus visual ritual for managing thy mental breakthroughs. Test your reaction in a quick and dynamic arcade game logic to ensure thy performance remains world-class:\n\nThe Pairing Registry: Flip two cards at a time to reveal the specialized ice fish hidden beneath. If the cards match, the pair is documented in the Ice Fishing game ledger and cleared from the field.\n\nSpatial Awareness Logic: If they don't match, they flip back—requiring you to maintain absolute awareness of their positions for thy next move on the Road BigFish Royal.\n\nTime-Bound Mastery: Secure thy progress by clearing the entire board before the countdown expires. Use as few moves as possible to ensure thy data integrity remains world-class.\n\nProgressive Level Sovereignty: Advance through 15 specialized levels. As you climb, the grid expands, providing a legendary challenge for thy steady tactical discipline.\n\nInsights and Record Management\nManage thy professional evolution with analytical tools that rival ice fishing live tracking:\n\nThe \"How to Play\" Ledger: Benefit from the app's foresight by accessing the specialized rules module. Understand thy pairing logic and scoring to reach thy world-class potential.\n\nSystem Calibration: Visit the Settings menu to tune thy experience. Use specialized toggles for Sound and Music to align the environment with thy focus.\n\nVisual Performance Tracking: Monitor thy success in real-time. Every match—from the legendary Goldfish to the vibrant Blue Beta—is a documented step toward thy goal.\n\nZero-Friction Interface: Enjoy a minimalist, distraction-free environment—designed for relentless organizational focus and absolute memory mastery.\n\nYour digital ledger is open and the cards are waiting—do you have the focus and foresight to build a masterpiece of a mental record on the Road BigFish Royal? Download BigFish Royal today!",
+    "videoUrl": null,
+    "inGameUrl": null,
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      5,
+      15
+    ]
+  },
+  {
     "id": 6884,
     "name": "Suduku Farms",
     "releaseYear": 2026,
@@ -92106,11 +92526,11 @@
       6
     ],
     "descriptors": [
-      15,
-      26,
       10,
+      11,
+      26,
       12,
-      11
+      15
     ]
   },
   {
@@ -92795,11 +93215,11 @@
       6
     ],
     "descriptors": [
-      26,
-      2,
-      12,
       5,
-      36
+      26,
+      36,
+      12,
+      2
     ]
   },
   {
@@ -93161,11 +93581,11 @@
       6
     ],
     "descriptors": [
-      26,
-      2,
       10,
+      11,
+      26,
       12,
-      11
+      2
     ]
   },
   {
@@ -93588,11 +94008,11 @@
       6
     ],
     "descriptors": [
-      26,
-      2,
       10,
+      11,
+      26,
       12,
-      11
+      2
     ]
   },
   {
@@ -93630,12 +94050,12 @@
       6
     ],
     "descriptors": [
-      3,
-      26,
-      2,
       10,
+      11,
+      26,
       12,
-      11
+      3,
+      2
     ]
   },
   {
@@ -93827,12 +94247,12 @@
       6
     ],
     "descriptors": [
-      26,
-      3,
-      2,
       5,
+      11,
+      26,
       12,
-      11
+      3,
+      2
     ]
   },
   {
@@ -93945,11 +94365,11 @@
       6
     ],
     "descriptors": [
-      3,
-      15,
       26,
+      12,
+      3,
       2,
-      12
+      15
     ]
   },
   {
@@ -94191,11 +94611,11 @@
       35
     ],
     "descriptors": [
-      26,
-      11,
-      2,
       5,
-      10
+      10,
+      11,
+      26,
+      2
     ]
   },
   {
@@ -94214,11 +94634,11 @@
       35
     ],
     "descriptors": [
-      26,
-      11,
-      2,
       5,
-      10
+      10,
+      11,
+      26,
+      2
     ]
   },
   {
@@ -94305,11 +94725,11 @@
       35
     ],
     "descriptors": [
-      15,
-      3,
+      10,
       26,
+      3,
       2,
-      10
+      15
     ]
   },
   {
@@ -94363,11 +94783,11 @@
       6
     ],
     "descriptors": [
-      26,
-      2,
       10,
+      11,
+      26,
       12,
-      11
+      2
     ]
   },
   {
@@ -94417,11 +94837,11 @@
       35
     ],
     "descriptors": [
-      3,
-      26,
       11,
-      2,
-      12
+      26,
+      12,
+      3,
+      2
     ]
   },
   {
