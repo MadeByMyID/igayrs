@@ -82,6 +82,10 @@ body {
   flex-wrap: wrap;
 }
 
+.header-top {
+  display: contents;
+}
+
 .site-logo {
   display: flex;
   align-items: center;
@@ -111,6 +115,20 @@ body {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  flex: 1 1 420px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  order: 2;
+}
+
+.site-logo {
+  order: 1;
+}
+
+.header-lang-toggle {
+  flex-shrink: 0;
+  order: 3;
+  margin-left: auto;
 }
 
 .btn {
@@ -914,6 +932,41 @@ body {
   flex-wrap: wrap;
 }
 
+.pagination-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  flex: 0 1 auto;
+  flex-wrap: wrap;
+}
+
+.page-jump {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.page-jump-input {
+  width: 3.15rem;
+  height: 31px;
+  padding: 0 0.35rem;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  appearance: textfield;
+  -moz-appearance: textfield;
+}
+
+.page-jump-input:focus {
+  border-color: var(--primary);
+}
+
 .page-btn {
   display: inline-flex;
   align-items: center;
@@ -949,6 +1002,10 @@ body {
 }
 
 .page-ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
   color: var(--text-light);
   font-weight: 600;
   padding: 0 0.2rem;
@@ -1372,6 +1429,46 @@ body {
 @media (max-width: 600px) {
   html {
     font-size: 14px;
+  }
+
+  .header-inner {
+    align-items: stretch;
+  }
+
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    order: 1;
+  }
+
+  .header-actions {
+    justify-content: flex-start;
+    order: 2;
+    width: 100%;
+  }
+
+  .header-actions .btn,
+  .header-lang-toggle {
+    font-size: 0.72rem;
+    padding: 0.42rem 0.68rem;
+  }
+
+  .page-jump {
+    margin-top: 0.15rem;
+  }
+
+  .page-jump-input {
+    width: 2.85rem;
+    height: 29px;
+    font-size: 0.7rem;
+  }
+
+  .pagination-center {
+    width: 100%;
+    order: 2;
   }
 
   .search-row {

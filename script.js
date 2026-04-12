@@ -70,6 +70,8 @@
       'steamchecker.unknown': 'Unknown',
       'page.prev': '‹ Prev',
       'page.next': 'Next ›',
+      'page.jump': 'Jump to page',
+      'page.go': 'Go',
       'home.title': 'Indonesian <span style="color: var(--primary)">Gay</span>me<br>Rating System',
       'home.subtitle': 'Unofficial open database of games in the IGRS registry. But the backend isnt slow.',
       'home.stat.games': 'Games',
@@ -154,6 +156,8 @@
       'steamchecker.unknown': 'Tidak diketahui',
       'page.prev': '‹ Sblm',
       'page.next': 'Slnjt ›',
+      'page.jump': 'Loncat ke halaman',
+      'page.go': 'Buka',
       'home.title': 'Indonesian <span style="color: var(--primary)">Gay</span>me<br>Rating System',
       'home.subtitle': 'Database terbuka tidak resmi untuk game yang terdaftar di IGRS. Tapi gak lemot backendnya.',
       'home.stat.games': 'Game',
@@ -773,16 +777,85 @@
   function renderPagination(el, total) {
     if (total <= 1) { el.innerHTML = ''; return; }
     let h = `<button class="page-btn" data-p="${currentPage - 1}" ${currentPage === 1 ? 'disabled' : ''} type="button">${t('page.prev')}</button>`;
+    h += '<div class="pagination-center">';
+    let jumpInserted = false;
+    let skipNextEllipsis = false;
     for (const p of pageRange(currentPage, total)) {
-      h += p === '...' ? '<span class="page-ellipsis">…</span>'
-        : `<button class="page-btn${p === currentPage ? ' active' : ''}" data-p="${p}" type="button">${p}</button>`;
+      if (p === '...') {
+        if (skipNextEllipsis) {
+          skipNextEllipsis = false;
+          continue;
+        }
+        if (!jumpInserted) {
+          h += `
+            <p class="page-ellipsis">…</p>
+            <form class="page-jump" id="page-jump-form">
+              <input
+                class="page-jump-input"
+                id="page-jump-input"
+                type="text"
+                inputmode="numeric"
+                pattern="[0-9]*"
+                maxlength="4"
+                value="${currentPage}"
+                aria-label="${t('page.jump')}"
+              >
+            </form>
+            <p class="page-ellipsis">…</p>
+          `;
+          jumpInserted = true;
+          skipNextEllipsis = true;
+        } else {
+          h += '<p class="page-ellipsis">…</p>';
+        }
+      } else {
+        h += `<button class="page-btn${p === currentPage ? ' active' : ''}" data-p="${p}" type="button">${p}</button>`;
+      }
     }
+    if (!jumpInserted) {
+      h += `
+        <form class="page-jump" id="page-jump-form">
+          <input
+            class="page-jump-input"
+            id="page-jump-input"
+            type="text"
+            inputmode="numeric"
+            pattern="[0-9]*"
+            maxlength="4"
+            value="${currentPage}"
+            aria-label="${t('page.jump')}"
+          >
+        </form>
+      `;
+    }
+    h += '</div>';
     h += `<button class="page-btn" data-p="${currentPage + 1}" ${currentPage === total ? 'disabled' : ''} type="button">${t('page.next')}</button>`;
     el.innerHTML = h;
     el.querySelectorAll('[data-p]').forEach(b => b.addEventListener('click', () => {
       if (b.disabled) return; currentPage = parseInt(b.dataset.p); renderResults();
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }));
+
+    const jumpForm = el.querySelector('#page-jump-form');
+    const jumpInput = el.querySelector('#page-jump-input');
+    if (jumpForm && jumpInput) {
+      jumpForm.addEventListener('submit', event => {
+        event.preventDefault();
+        const value = parseInt(jumpInput.value, 10);
+        if (!Number.isFinite(value)) return;
+        const nextPage = Math.min(total, Math.max(1, value));
+        if (nextPage === currentPage) return;
+        currentPage = nextPage;
+        renderResults();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+      jumpInput.addEventListener('input', () => {
+        jumpInput.value = jumpInput.value.replace(/\D+/g, '');
+      });
+      jumpInput.addEventListener('keydown', event => {
+        if (event.key === 'Escape') jumpInput.blur();
+      });
+    }
   }
 
   function pageRange(c, t) {
