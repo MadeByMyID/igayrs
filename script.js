@@ -569,12 +569,24 @@
     const descriptorCounts = {};
     const yearCounts = {};
     const gameList = Array.isArray(games) ? games : [];
-    gameList.forEach(g => {
-      ratingIdsFromGame(g).forEach(r => { ratingCounts[r] = (ratingCounts[r] || 0) + 1; });
-      platformIdsFromGame(g).forEach(p => { platformCounts[p] = (platformCounts[p] || 0) + 1; });
-      descriptorIdsFromGame(g).forEach(d => { descriptorCounts[d] = (descriptorCounts[d] || 0) + 1; });
-      yearCounts[g.releaseYear] = (yearCounts[g.releaseYear] || 0) + 1;
-    });
+    for (const game of gameList) {
+      const ratingIds = Array.isArray(ratingIdsFromGame(game)) ? ratingIdsFromGame(game) : [];
+      const platformIds = Array.isArray(platformIdsFromGame(game)) ? platformIdsFromGame(game) : [];
+      const descriptorIds = Array.isArray(descriptorIdsFromGame(game)) ? descriptorIdsFromGame(game) : [];
+
+      for (const ratingId of ratingIds) {
+        ratingCounts[ratingId] = (ratingCounts[ratingId] || 0) + 1;
+      }
+      for (const platformId of platformIds) {
+        platformCounts[platformId] = (platformCounts[platformId] || 0) + 1;
+      }
+      for (const descriptorId of descriptorIds) {
+        descriptorCounts[descriptorId] = (descriptorCounts[descriptorId] || 0) + 1;
+      }
+      if (game?.releaseYear !== undefined && game?.releaseYear !== null) {
+        yearCounts[game.releaseYear] = (yearCounts[game.releaseYear] || 0) + 1;
+      }
+    }
 
     const topP = ['PC', 'Android', 'iOS', 'PlayStation 5', 'Nintendo Switch 2', 'Nintendo Switch', 'Web Based']
       .map(platformIdFromName)
@@ -645,19 +657,19 @@
       <button class="filter-clear-btn${hasActive ? '' : ' hidden'}" id="filter-clear" type="button">${t('filter.clear')}</button>
     `;
 
-    sidebar.querySelectorAll('[data-rating]').forEach(cb => {
+    Array.from(sidebar.querySelectorAll('[data-rating]')).forEach(cb => {
       cb.addEventListener('change', () => { toggle(activeRatings, parseInt(cb.dataset.rating)); currentPage = 1; renderFilterSidebar(); renderResults(); });
     });
-    sidebar.querySelectorAll('[data-platform]').forEach(cb => {
+    Array.from(sidebar.querySelectorAll('[data-platform]')).forEach(cb => {
       cb.addEventListener('change', () => { toggle(activePlatforms, parseInt(cb.dataset.platform, 10)); currentPage = 1; renderFilterSidebar(); renderResults(); });
     });
-    sidebar.querySelectorAll('[data-descriptor]').forEach(cb => {
+    Array.from(sidebar.querySelectorAll('[data-descriptor]')).forEach(cb => {
       cb.addEventListener('change', () => { toggle(activeDescriptors, parseInt(cb.dataset.descriptor)); currentPage = 1; renderFilterSidebar(); renderResults(); });
     });
-    sidebar.querySelectorAll('[data-year]').forEach(cb => {
+    Array.from(sidebar.querySelectorAll('[data-year]')).forEach(cb => {
       cb.addEventListener('change', () => { toggle(activeYears, cb.dataset.year); currentPage = 1; renderFilterSidebar(); renderResults(); });
     });
-    sidebar.querySelectorAll('.filter-panel-header').forEach((h, i) => {
+    Array.from(sidebar.querySelectorAll('.filter-panel-header')).forEach((h, i) => {
       const keys = ['r', 'p', 'd', 'y'];
       h.addEventListener('click', () => {
         filterStates[keys[i]] = !filterStates[keys[i]];
