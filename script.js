@@ -281,7 +281,8 @@
     const gq = (document.getElementById('search-input')?.value || '').trim();
     const pq = (document.getElementById('publisher-input')?.value || '').trim();
     let results = [];
-    for (const game of games) {
+    const gameList = Array.isArray(games) ? games : [];
+    for (const game of gameList) {
       const gameRatings = ratingIdsFromGame(game);
       const gameDescriptors = descriptorIdsFromGame(game);
       let score = 0;
@@ -567,7 +568,8 @@
     const platformCounts = {};
     const descriptorCounts = {};
     const yearCounts = {};
-    games.forEach(g => {
+    const gameList = Array.isArray(games) ? games : [];
+    gameList.forEach(g => {
       ratingIdsFromGame(g).forEach(r => { ratingCounts[r] = (ratingCounts[r] || 0) + 1; });
       platformIdsFromGame(g).forEach(p => { platformCounts[p] = (platformCounts[p] || 0) + 1; });
       descriptorIdsFromGame(g).forEach(d => { descriptorCounts[d] = (descriptorCounts[d] || 0) + 1; });
@@ -577,13 +579,13 @@
     const topP = ['PC', 'Android', 'iOS', 'PlayStation 5', 'Nintendo Switch 2', 'Nintendo Switch', 'Web Based']
       .map(platformIdFromName)
       .filter(Number.isFinite);
-    const allPlatforms = [...new Set(games.flatMap(g => platformIdsFromGame(g)))];
+    const allPlatforms = [...new Set(gameList.flatMap(g => platformIdsFromGame(g)))];
     const platforms = [
       ...topP.filter(p => allPlatforms.includes(p)),
       ...allPlatforms.filter(p => !topP.includes(p)).sort((a, b) => pname(a).localeCompare(pname(b)))
     ];
-    const descriptorIds = [...new Set(games.flatMap(g => descriptorIdsFromGame(g)))].sort((a, b) => dname(a).localeCompare(dname(b)));
-    const years = [...new Set(games.map(g => g.releaseYear))].sort((a, b) => b - a);
+    const descriptorIds = [...new Set(gameList.flatMap(g => descriptorIdsFromGame(g)))].sort((a, b) => dname(a).localeCompare(dname(b)));
+    const years = [...new Set(gameList.map(g => g.releaseYear))].sort((a, b) => b - a);
     const hasActive = activeRatings.size + activePlatforms.size + activeDescriptors.size + activeYears.size > 0;
 
     if (!filterStates) {
@@ -1202,6 +1204,7 @@
 
   function renderHomePage() {
     if (!games || !meta) return;
+    const gameList = Array.isArray(games) ? games : [];
 
     const statGames = document.getElementById('stat-games');
     const statPub = document.getElementById('stat-publishers');
@@ -1209,9 +1212,9 @@
     const statUpdated = document.getElementById('stat-updated');
     const heroRatings = document.getElementById('hero-ratings');
 
-    if (statGames) statGames.textContent = games.length;
-    if (statPub) statPub.textContent = new Set(games.map(g => g.publisherName)).size;
-    if (statPlat) statPlat.textContent = new Set(games.flatMap(g => platformIdsFromGame(g))).size;
+    if (statGames) statGames.textContent = gameList.length;
+    if (statPub) statPub.textContent = new Set(gameList.map(g => g.publisherName)).size;
+    if (statPlat) statPlat.textContent = new Set(gameList.flatMap(g => platformIdsFromGame(g))).size;
     if (statUpdated) statUpdated.textContent = formatLocalDateTime24(meta?.meta?.generatedAt || meta?.generatedAt);
 
     if (heroRatings) {
