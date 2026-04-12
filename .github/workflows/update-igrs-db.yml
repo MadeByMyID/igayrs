@@ -27,6 +27,7 @@ jobs:
           RAW_DIR=".tmp-igrs-raw"
           WORKER_SCRIPT=".github/scripts/fetch-igrs-game.sh"
           FAILED_IDS_FILE=".failed-fetch-ids"
+          BATCH_FAILED_IDS_FILE=".batch-failed-fetch-ids"
 
           CHUNK_SIZE="${CHUNK_SIZE:-2000}"
           CONCURRENCY="${CONCURRENCY:-15}"
@@ -37,6 +38,7 @@ jobs:
           rm -rf "$RAW_DIR"
           mkdir -p "$RAW_DIR"
           > "$FAILED_IDS_FILE"
+          > "$BATCH_FAILED_IDS_FILE"
 
           echo "Starting parallel fetch in chunks of ${CHUNK_SIZE} (concurrency: ${CONCURRENCY}, batch delay: ${BATCH_DELAY_SEC}s)"
 
@@ -46,18 +48,24 @@ jobs:
 
             FILES_BEFORE="$(find "$RAW_DIR" -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')"
 
-            seq "$CURRENT_START" "$CURRENT_END" | xargs -P "$CONCURRENCY" -I {} bash "$WORKER_SCRIPT" {} "$RAW_DIR" 2>> "$FAILED_IDS_FILE" || true
+            > "$BATCH_FAILED_IDS_FILE"
+            seq "$CURRENT_START" "$CURRENT_END" | xargs -P "$CONCURRENCY" -I {} bash "$WORKER_SCRIPT" {} "$RAW_DIR" 2>> "$BATCH_FAILED_IDS_FILE" || true
 
             FILES_AFTER="$(find "$RAW_DIR" -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')"
             GAMES_ADDED=$((FILES_AFTER - FILES_BEFORE))
+            BATCH_ERROR_COUNT="$(sed -En 's/.*id=([0-9]+).*/\1/p' "$BATCH_FAILED_IDS_FILE" | sort -u | awk '$1 >= 1000' | wc -l | tr -d ' ')"
 
             echo ">>> Batch complete. Games found in this chunk: ${GAMES_ADDED}"
-
             if [ "$GAMES_ADDED" -eq 0 ]; then
               echo "No games found in batch ${CURRENT_START}-${CURRENT_END}. Assuming end."
-              echo "Purging failed IDs from this final empty batch..."
-              > "$FAILED_IDS_FILE"
+              echo "Dropping failed IDs from this final empty batch.."
               break
+            fi
+
+            if [ "$BATCH_ERROR_COUNT" -gt 0 ]; then
+              cat "$BATCH_FAILED_IDS_FILE" >> "$FAILED_IDS_FILE"
+              echo ">>> Batch had ${BATCH_ERROR_COUNT} failed IDs. Cooling down for 20s before next batch..."
+              sleep 20
             fi
 
             if [ "$BATCH_DELAY_SEC" -gt 0 ]; then
@@ -100,14 +108,30 @@ jobs:
           echo "Merged ${GAME_COUNT} games into igrs.pubdb.json"
 
           echo "Downloading ratings and descriptors..."
-          if curl --fail --show-error --silent --location --max-time 120 "https://api.igrs.id/public/ratings" -o "ratings-api.json" && \
-             curl --fail --show-error --silent --location --max-time 120 "https://api.igrs.id/public/descriptors" -o "descriptors-api.json" && \
-             jq empty "ratings-api.json" && \
-             jq empty "descriptors-api.json"; then
-            echo "Downloaded ratings and descriptors successfully"
-          else
-            echo "Failed to fetch ratings/descriptors API. Using existing."
+          RATING_DESC_ATTEMPTS=3
+          RATING_DESC_RETRY_DELAY_SEC=20
+          RATING_DESC_OK=0
+
+          for attempt in $(seq 1 "$RATING_DESC_ATTEMPTS"); do
+            echo "Ratings/descriptors fetch attempt ${attempt}/${RATING_DESC_ATTEMPTS}"
+            if curl --fail --show-error --silent --location --max-time 3600 "https://api.igrs.id/public/ratings" -o "ratings-api.json" && \
+               curl --fail --show-error --silent --location --max-time 3600 "https://api.igrs.id/public/descriptors" -o "descriptors-api.json" && \
+               jq empty "ratings-api.json" && \
+               jq empty "descriptors-api.json"; then
+              RATING_DESC_OK=1
+              echo "Downloaded ratings and descriptors successfully"
+              break
+            fi
+
             rm -f "ratings-api.json" "descriptors-api.json"
+            if [ "$attempt" -lt "$RATING_DESC_ATTEMPTS" ]; then
+              echo "Attempt ${attempt} failed. Waiting ${RATING_DESC_RETRY_DELAY_SEC}s before retry..."
+              sleep "$RATING_DESC_RETRY_DELAY_SEC"
+            fi
+          done
+
+          if [ "$RATING_DESC_OK" -ne 1 ]; then
+            echo "Failed to fetch ratings/descriptors API after ${RATING_DESC_ATTEMPTS} attempts. Using existing."
             echo "Skipping metadata regeneration."
             SKIP_META=1
           fi
