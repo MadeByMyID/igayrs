@@ -99,5 +99,26 @@
       "nameEn": "Gambling",
       "description": ""
     }
+  },
+  "platforms": {
+    "0": "Android",
+    "1": "Asus TechPro",
+    "2": "iOS",
+    "3": "Nintendo 3DS",
+    "4": "Nintendo Switch",
+    "5": "Nintendo Switch 2",
+    "6": "Omni Plat 2",
+    "7": "Omni Plat 3",
+    "8": "PC",
+    "9": "PlayStation",
+    "10": "PlayStation 2",
+    "11": "PlayStation 3",
+    "12": "PlayStation 4",
+    "13": "PlayStation 5",
+    "14": "PlayStation Vita",
+    "15": "Web Based",
+    "16": "XBOX",
+    "17": "XBOX 360",
+    "18": "Xbox Series X|S"
   }
 }

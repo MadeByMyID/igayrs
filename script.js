@@ -197,11 +197,14 @@
   // toggle lang x times to reveal hidden fields
   const SECRET_KEY = 'igrs-dev';
   let langToggleCount = parseInt(localStorage.getItem('igrs-ltc') || '0', 10);
-  function isUnlocked() { return localStorage.getItem(SECRET_KEY) === '1'; }
+  function isUnlocked() {
+    if (localStorage.getItem(SECRET_KEY) === '1') return true;
+    return /(?:^|; )UNLOCKED=true(?:;|$)/.test(document.cookie || '');
+  }
   function checkUnlock() {
     langToggleCount++;
     localStorage.setItem('igrs-ltc', String(langToggleCount));
-    if (langToggleCount >= 18 && !isUnlocked()) {
+    if (langToggleCount >= 28 && !isUnlocked()) {
       localStorage.setItem(SECRET_KEY, '1');
       console.log('%cDeveloper fields unlocked', 'color:#22c55e;font-weight:bold');
     }
@@ -211,11 +214,36 @@
   const DESC_EXT = {};
   const IMG_DESCRIPTOR = id => `data/images/descriptors/cc-${id}.${DESC_EXT[id] || 'png'}`;
 
+  function mergeExtraGameData(extraData) {
+    const extraGames = Array.isArray(extraData) ? extraData : extraData?.games;
+    if (!Array.isArray(extraGames) || !Array.isArray(games)) return;
+
+    const extraById = new Map(
+      extraGames
+        .filter((entry) => entry && Number.isFinite(entry.id))
+        .map((entry) => [entry.id, entry])
+    );
+
+    for (const game of games) {
+      const extra = extraById.get(game.id);
+      if (!extra) continue;
+      if (extra.videoUrl !== undefined) game.videoUrl = extra.videoUrl;
+      if (extra.inGameUrl !== undefined) game.inGameUrl = extra.inGameUrl;
+    }
+  }
+
   async function loadData() {
-    const [metaRes, gamesRes, steamMetaRes] = await Promise.all([
+    const extraPromise = isUnlocked()
+      ? fetch('data/json/igrs.extra.json')
+        .then((response) => response.ok ? response.json() : null)
+        .catch(() => null)
+      : Promise.resolve(null);
+
+    const [metaRes, gamesRes, steamMetaRes, extraData] = await Promise.all([
       fetch('data/json/igrs.meta.json'),
       fetch('data/json/igrs.games.json'),
-      fetch('data/json/steam.meta.json')
+      fetch('data/json/steam.meta.json'),
+      extraPromise
     ]);
     meta = await metaRes.json();
     games = await gamesRes.json();
@@ -223,6 +251,9 @@
       steamMeta = await steamMetaRes.json();
     } catch {
       steamMeta = { contentDescriptors: {} };
+    }
+    if (extraData) {
+      mergeExtraGameData(extraData);
     }
   }
 
@@ -251,12 +282,15 @@
     const pq = (document.getElementById('publisher-input')?.value || '').trim();
     let results = [];
     for (const game of games) {
+      const gameRatings = ratingIdsFromGame(game);
+      const gameDescriptors = descriptorIdsFromGame(game);
       let score = 0;
       if (gq) { const s = fuzzyScore(gq, game.name); if (s <= 15) continue; score = s; }
       if (pq) { const s = fuzzyScore(pq, game.publisherName); if (s <= 15) continue; score = Math.max(score, s * 0.8); }
-      if (activeRatings.size > 0 && ![...activeRatings].some(r => game.ratings.includes(r))) continue;
-      if (activePlatforms.size > 0 && ![...activePlatforms].every(p => game.platformsName.includes(p))) continue;
-      if (activeDescriptors.size > 0 && ![...activeDescriptors].every(d => game.descriptors.includes(d))) continue;
+      if (activeRatings.size > 0 && ![...activeRatings].some(r => gameRatings.includes(r))) continue;
+      const gamePlatforms = platformIdsFromGame(game);
+      if (activePlatforms.size > 0 && ![...activePlatforms].every(p => gamePlatforms.includes(p))) continue;
+      if (activeDescriptors.size > 0 && ![...activeDescriptors].every(d => gameDescriptors.includes(d))) continue;
       if (activeYears.size > 0 && !activeYears.has(String(game.releaseYear))) continue;
       results.push({ game, score });
     }
@@ -284,6 +318,54 @@
   function rtitle(id) { const r = meta.ratings[id]; return r ? (lang === 'id' ? r.titleId : r.titleEn) : ''; }
   function rcontent(id) { const r = meta.ratings[id]; return r ? (lang === 'id' ? r.contentId : r.contentEn) : ''; }
   function dname(id) { const d = meta.descriptors[id]; return d ? (lang === 'id' ? d.nameId : d.nameEn) : '?'; }
+  function pname(id) {
+    const p = meta.platforms?.[id];
+    if (!p) return String(id);
+    if (typeof p === 'string') return p;
+    return lang === 'id'
+      ? (p.nameId || p.nameEn || p.name || String(id))
+      : (p.nameEn || p.nameId || p.name || String(id));
+  }
+  function platformIdFromName(name) {
+    if (!name) return null;
+    for (const [id, value] of Object.entries(meta.platforms || {})) {
+      const label = typeof value === 'string' ? value : (value?.nameEn || value?.nameId || value?.name);
+      if (label === name) return parseInt(id, 10);
+    }
+    return null;
+  }
+  function platformIdsFromGame(game) {
+    if (Array.isArray(game.platforms)) {
+      return game.platforms
+        .map(id => parseInt(id, 10))
+        .filter(Number.isFinite);
+    }
+    if (Array.isArray(game.platformsName)) {
+      const ids = [];
+      const seen = new Set();
+      for (const name of game.platformsName) {
+        const id = platformIdFromName(name);
+        if (id && !seen.has(id)) {
+          seen.add(id);
+          ids.push(id);
+        }
+      }
+      return ids;
+    }
+    return [];
+  }
+  function ratingIdsFromGame(game) {
+    if (!Array.isArray(game?.ratings)) return [];
+    return game.ratings
+      .map(id => parseInt(id, 10))
+      .filter(Number.isFinite);
+  }
+  function descriptorIdsFromGame(game) {
+    if (!Array.isArray(game?.descriptors)) return [];
+    return game.descriptors
+      .map(id => parseInt(id, 10))
+      .filter(Number.isFinite);
+  }
   function parseSteamAppId(value) {
     const text = String(value || '').trim();
     if (!text) return '';
@@ -450,8 +532,8 @@
   function debounce(fn, ms) { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; }
 
   function renderCard(game, gq, pq) {
-    const rid = game.ratings[0];
-    const platforms = game.platformsName.join(' · ');
+    const rid = ratingIdsFromGame(game)[0] || 7;
+    const platforms = platformIdsFromGame(game).map(p => pname(p)).join(' · ');
     return `
       <article class="game-card fade-in" data-id="${game.id}">
         <div class="game-card-top">
@@ -486,16 +568,21 @@
     const descriptorCounts = {};
     const yearCounts = {};
     games.forEach(g => {
-      g.ratings.forEach(r => { ratingCounts[r] = (ratingCounts[r] || 0) + 1; });
-      g.platformsName.forEach(p => { platformCounts[p] = (platformCounts[p] || 0) + 1; });
-      g.descriptors.forEach(d => { descriptorCounts[d] = (descriptorCounts[d] || 0) + 1; });
+      ratingIdsFromGame(g).forEach(r => { ratingCounts[r] = (ratingCounts[r] || 0) + 1; });
+      platformIdsFromGame(g).forEach(p => { platformCounts[p] = (platformCounts[p] || 0) + 1; });
+      descriptorIdsFromGame(g).forEach(d => { descriptorCounts[d] = (descriptorCounts[d] || 0) + 1; });
       yearCounts[g.releaseYear] = (yearCounts[g.releaseYear] || 0) + 1;
     });
 
-    const topP = ['PC', 'Android', 'iOS', 'PlayStation 5', 'Nintendo Switch 2', 'Nintendo Switch', 'Web Based'];
-    const allPlatforms = [...new Set(games.flatMap(g => g.platformsName))];
-    const platforms = [...topP.filter(p => allPlatforms.includes(p)), ...allPlatforms.filter(p => !topP.includes(p)).sort()];
-    const descriptorIds = [...new Set(games.flatMap(g => g.descriptors))].sort((a, b) => dname(a).localeCompare(dname(b)));
+    const topP = ['PC', 'Android', 'iOS', 'PlayStation 5', 'Nintendo Switch 2', 'Nintendo Switch', 'Web Based']
+      .map(platformIdFromName)
+      .filter(Number.isFinite);
+    const allPlatforms = [...new Set(games.flatMap(g => platformIdsFromGame(g)))];
+    const platforms = [
+      ...topP.filter(p => allPlatforms.includes(p)),
+      ...allPlatforms.filter(p => !topP.includes(p)).sort((a, b) => pname(a).localeCompare(pname(b)))
+    ];
+    const descriptorIds = [...new Set(games.flatMap(g => descriptorIdsFromGame(g)))].sort((a, b) => dname(a).localeCompare(dname(b)));
     const years = [...new Set(games.map(g => g.releaseYear))].sort((a, b) => b - a);
     const hasActive = activeRatings.size + activePlatforms.size + activeDescriptors.size + activeYears.size > 0;
 
@@ -522,8 +609,8 @@
         <div class="filter-panel-body">
           ${platforms.map(p => `
             <label class="filter-checkbox">
-              <input type="checkbox" data-platform="${esc(p)}" ${activePlatforms.has(p) ? 'checked' : ''}>
-              ${esc(p)}
+              <input type="checkbox" data-platform="${p}" ${activePlatforms.has(p) ? 'checked' : ''}>
+              ${esc(pname(p))}
               <span class="count">${platformCounts[p] || 0}</span>
             </label>
           `).join('')}
@@ -560,7 +647,7 @@
       cb.addEventListener('change', () => { toggle(activeRatings, parseInt(cb.dataset.rating)); currentPage = 1; renderFilterSidebar(); renderResults(); });
     });
     sidebar.querySelectorAll('[data-platform]').forEach(cb => {
-      cb.addEventListener('change', () => { toggle(activePlatforms, cb.dataset.platform); currentPage = 1; renderFilterSidebar(); renderResults(); });
+      cb.addEventListener('change', () => { toggle(activePlatforms, parseInt(cb.dataset.platform, 10)); currentPage = 1; renderFilterSidebar(); renderResults(); });
     });
     sidebar.querySelectorAll('[data-descriptor]').forEach(cb => {
       cb.addEventListener('change', () => { toggle(activeDescriptors, parseInt(cb.dataset.descriptor)); currentPage = 1; renderFilterSidebar(); renderResults(); });
@@ -586,8 +673,8 @@
     const sidebar = document.getElementById('sidebar');
     if (!sidebar) return;
 
-    const rid = game.ratings[0];
-    const descriptors = game.descriptors;
+    const rid = ratingIdsFromGame(game)[0] || 7;
+    const descriptors = descriptorIdsFromGame(game);
 
     sidebar.innerHTML = `
       <div class="detail-sidebar fade-in">
@@ -613,7 +700,7 @@
         <div class="detail-sidebar-section">
           <div class="detail-sidebar-label">${t('sidebar.platform')}</div>
           <div class="platform-tags">
-            ${game.platformsName.map(p => `<span class="tag">${esc(p)}</span>`).join('')}
+            ${platformIdsFromGame(game).map(p => `<span class="tag">${esc(pname(p))}</span>`).join('')}
           </div>
         </div>
       </div>
@@ -1124,7 +1211,7 @@
 
     if (statGames) statGames.textContent = games.length;
     if (statPub) statPub.textContent = new Set(games.map(g => g.publisherName)).size;
-    if (statPlat) statPlat.textContent = new Set(games.flatMap(g => g.platformsName)).size;
+    if (statPlat) statPlat.textContent = new Set(games.flatMap(g => platformIdsFromGame(g))).size;
     if (statUpdated) statUpdated.textContent = formatLocalDateTime24(meta?.meta?.generatedAt || meta?.generatedAt);
 
     if (heroRatings) {
