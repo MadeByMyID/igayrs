@@ -725,6 +725,8 @@ body {
   line-height: 1.8;
   margin-bottom: 2.5rem;
   white-space: pre-line;
+  overflow-wrap: anywhere;
+  word-break: break-word;
   max-width: 800px;
 }
 

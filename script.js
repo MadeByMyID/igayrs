@@ -31,6 +31,7 @@
       'detail.share': '☍  Copy Link',
       'detail.openIgrs': 'Open in IGRS.id',
       'detail.searchGoogle': '🔍︎  Search on Google',
+      'detail.linksPatched': 'The IGRS team has patched this Issue, their frontend is no longer leaking links containing the offending content',
       'detail.copied': 'Copied!',
       'detail.noDesc': 'No description available.',
       'detail.noDescriptors': 'No content descriptors',
@@ -117,6 +118,7 @@
       'detail.share': '☍  Salin Link',
       'detail.openIgrs': 'Buka di IGRS.id',
       'detail.searchGoogle': '🔍︎  Cari di Google',
+      'detail.linksPatched': 'Tim IGRS sudah menambal masalah ini, frontend mereka tidak lagi membocorkan tautan yang memuat konten bermasalah',
       'detail.copied': 'Tersalin!',
       'detail.noDesc': 'Tidak ada deskripsi.',
       'detail.noDescriptors': 'Tidak ada deskriptor konten',
@@ -193,6 +195,8 @@
   let filterStates = null;
 
   const RATING_ORDER = [7, 4, 5, 28, 6, 35];
+  const EXTRA_FIELD_PATCHED_TOKEN = '__IGRS_LINKS_PATCHED__';
+  const EXTRA_FIELD_PATCHED_LEGACY_TEXT = 'The IGRS team has patched this Issue, their frontend is no longer leaking links containing the offending content';
 
   // toggle lang x times to reveal hidden fields
   const SECRET_KEY = 'igrs-dev';
@@ -214,8 +218,14 @@
   const DESC_EXT = {};
   const IMG_DESCRIPTOR = id => `data/images/descriptors/cc-${id}.${DESC_EXT[id] || 'png'}`;
 
+  function getExtraGames(extraData) {
+    if (Array.isArray(extraData)) return extraData;
+    if (Array.isArray(extraData?.games)) return extraData.games;
+    return null;
+  }
+
   function mergeExtraGameData(extraData) {
-    const extraGames = Array.isArray(extraData) ? extraData : extraData?.games;
+    const extraGames = getExtraGames(extraData);
     if (!Array.isArray(extraGames) || !Array.isArray(games)) return;
 
     const extraById = new Map(
@@ -252,6 +262,19 @@
     } catch {
       steamMeta = { contentDescriptors: {} };
     }
+
+    const extraGames = getExtraGames(extraData);
+    if (Array.isArray(extraGames) && extraGames.length === 0) {
+      for (const game of games) {
+        if (game.videoUrl === undefined || game.videoUrl === null || game.videoUrl === '') {
+          game.videoUrl = EXTRA_FIELD_PATCHED_TOKEN;
+        }
+        if (game.inGameUrl === undefined || game.inGameUrl === null || game.inGameUrl === '') {
+          game.inGameUrl = EXTRA_FIELD_PATCHED_TOKEN;
+        }
+      }
+    }
+
     if (extraData) {
       mergeExtraGameData(extraData);
     }
@@ -301,11 +324,34 @@
 
   function t(k) { return I18N[lang]?.[k] ?? I18N.en[k] ?? k; }
   function esc(s) { const d = document.createElement('div'); d.textContent = s; return d.innerHTML; }
+  function formatExtraField(value) {
+    const text = typeof value === 'string' ? value.trim() : '';
+    if (!text) return '';
+    if (text === EXTRA_FIELD_PATCHED_TOKEN || text === EXTRA_FIELD_PATCHED_LEGACY_TEXT) {
+      return esc(t('detail.linksPatched'));
+    }
+    if (/^https?:\/\//i.test(text)) {
+      return `<a href="${esc(text)}" target="_blank" rel="noopener">${esc(text)}</a>`;
+    }
+    return esc(text);
+  }
   function stripHtml(value) {
     if (!value) return '';
-    const d = document.createElement('div');
-    d.innerHTML = String(value);
-    return (d.textContent || '').replace(/\s+/g, ' ').trim();
+    const t = document.createElement('template');
+    t.innerHTML = String(value)
+      .replace(/<\s*br\s*\/?\s*>/gi, '\n')
+      .replace(/<\s*\/\s*(p|div|li|h[1-6])\s*>/gi, '\n')
+      .replace(/<\s*hr\b[^>]*>/gi, '\n');
+    t.content.querySelectorAll('script, style, noscript, iframe, object, head').forEach(el => el.remove());
+    return (t.content.textContent || '')
+      .replace(/\u00a0/g, ' ')
+      .replace(/[\u200b\u200c\u200d\ufeff]/g, '')
+      .replace(/[■□▪▫●]/g, ' ')
+      .replace(/-{4,}/g, ' ')
+      .replace(/\s*\n\s*/g, '\n')
+      .replace(/\n{3,}/g, '\n\n')
+      .replace(/[ \t]{2,}/g, ' ')
+      .trim();
   }
   function normalizeName(value) {
     return String(value || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim().replace(/\s+/g, ' ');
@@ -791,18 +837,22 @@
 
     if (unlocked) {
       if (game.videoUrl) {
+        const videoField = formatExtraField(game.videoUrl);
         gridRows += `
           <span class="detail-label">${t('detail.video')}</span>
-          <span class="detail-value"><a href="${esc(game.videoUrl)}" target="_blank" rel="noopener">${esc(game.videoUrl)}</a></span>
+          <span class="detail-value">${videoField}</span>
         `;
       }
       if (game.inGameUrl) {
+        const ingameField = formatExtraField(game.inGameUrl);
         gridRows += `
           <span class="detail-label">${t('detail.ingame')}</span>
-          <span class="detail-value"><a href="${esc(game.inGameUrl)}" target="_blank" rel="noopener">${esc(game.inGameUrl)}</a></span>
+          <span class="detail-value">${ingameField}</span>
         `;
       }
     }
+
+    const detailDescription = stripHtml(game.description) || t('detail.noDesc');
 
     dp.innerHTML = `
       <button class="detail-back" id="detail-back" type="button">${t('detail.back')}</button>
@@ -813,7 +863,7 @@
             <div class="detail-publisher">${esc(game.publisherName)}</div>
           </div>
         </div>
-        <p class="detail-description">${esc(game.description || t('detail.noDesc'))}</p>
+        <p class="detail-description">${esc(detailDescription)}</p>
         <div class="detail-grid">${gridRows}</div>
         <div class="detail-actions">
           <button class="detail-share-btn" id="detail-share" type="button">${t('detail.share')}</button>
