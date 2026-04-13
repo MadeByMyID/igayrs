@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generatedAt": "2026-04-12T02:47:41Z",
-    "totalGames": 5226
+    "generatedAt": "2026-04-13T02:26:42Z",
+    "totalGames": 5229
   },
   "ratings": {
     "7": {
@@ -103,22 +103,22 @@
   "platforms": {
     "0": "Android",
     "1": "Asus TechPro",
-    "2": "iOS",
-    "3": "Nintendo 3DS",
-    "4": "Nintendo Switch",
-    "5": "Nintendo Switch 2",
-    "6": "Omni Plat 2",
-    "7": "Omni Plat 3",
-    "8": "PC",
-    "9": "PlayStation",
-    "10": "PlayStation 2",
-    "11": "PlayStation 3",
-    "12": "PlayStation 4",
-    "13": "PlayStation 5",
-    "14": "PlayStation Vita",
-    "15": "Web Based",
-    "16": "XBOX",
-    "17": "XBOX 360",
-    "18": "Xbox Series X|S"
+    "2": "Nintendo 3DS",
+    "3": "Nintendo Switch",
+    "4": "Nintendo Switch 2",
+    "5": "Omni Plat 2",
+    "6": "Omni Plat 3",
+    "7": "PC",
+    "8": "PlayStation",
+    "9": "PlayStation 2",
+    "10": "PlayStation 3",
+    "11": "PlayStation 4",
+    "12": "PlayStation 5",
+    "13": "PlayStation Vita",
+    "14": "Web Based",
+    "15": "XBOX",
+    "16": "XBOX 360",
+    "17": "Xbox Series X|S",
+    "18": "iOS"
   }
 }

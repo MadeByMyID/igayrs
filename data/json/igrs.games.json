@@ -1,5 +1,22 @@
 [
   {
+    "id": 6912,
+    "name": "WWE Supercard - Wrestling Game",
+    "releaseYear": 2014,
+    "publisherName": "Take-Two Interactive UK Limited",
+    "description": "WWE SuperCard is a free-to-play mobile collectible card-battling game that allows players to build decks of WWE Superstars, Legends, and Hall of Famers to battle in various PVP and offline modes. Developed by Cat Daddy Games, it focuses on training, crafting, and strategically leveling up cards to dominate leaderboards.\n",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      10,
+      26
+    ],
+    "platforms": [
+      18
+    ]
+  },
+  {
     "id": 6911,
     "name": "Two Yanderes & Fatal Love",
     "releaseYear": 2026,
@@ -3848,6 +3865,20 @@
     "releaseYear": 2026,
     "publisherName": null,
     "description": "Enjoy a calm and straightforward casual arcade game set in a beautiful fantasy sky with floating islands and a dramatic sunset background. The gameplay is simple and relaxing: various objects fall from the top of the screen, and you need to tap them before they reach the bottom. Each successful tap gives you points and helps you continue playing.\nYou start with a limited number of hearts. Missing too many objects costs you one heart each time. When all hearts are lost, the round ends. The goal is to tap as many falling objects as possible and survive for as long as you can to achieve a high score. The objects fall at a steady pace, giving you enough time to react thoughtfully.\nThe visuals are rich and pleasant with warm orange and purple tones, glowing effects, and a majestic floating castle in the background. The falling objects are clearly visible and have nice animations. The overall atmosphere feels dreamy and peaceful, creating a comfortable environment for relaxed play. Controls are extremely easy - just tap anywhere on the screen where an object appears. No swiping, dragging, or complicated gestures are required. This makes the game perfect for short sessions or when you want to practice your timing and gradually improve your best score.\nThis casual game is ideal for quiet moments when you need light and focused entertainment. The sound effects are soft and satisfying, with gentle tap feedback and calm background music that keeps the mood positive without being distracting. The experience feels approachable and suitable for players of all ages who enjoy simple tapping-style arcade games.\nReturn to the floating sky world whenever you want an easy and enjoyable distraction. With its straightforward tap controls, beautiful fantasy visuals, and gentle difficulty, this casual game offers a relaxing way to collect points, manage your hearts carefully, and steadily improve your score. Tap the falling objects accurately, watch your points grow, and enjoy the calm satisfaction of steady gameplay in this pleasant arcade experience.",
+    "ratings": [
+      7
+    ],
+    "descriptors": [],
+    "platforms": [
+      0
+    ]
+  },
+  {
+    "id": 6655,
+    "name": "Paint Wars - Boya Savaşları",
+    "releaseYear": 2026,
+    "publisherName": "TU.TE",
+    "description": "A fun multiplayer painting game for 1-4 players",
     "ratings": [
       7
     ],
@@ -44201,6 +44232,23 @@
     ]
   },
   {
+    "id": 4139,
+    "name": "Ratchet & Clank: Ranger Rumble",
+    "releaseYear": 2025,
+    "publisherName": "Sony Interactive Entertainment",
+    "description": "Ratchet & Clank are now on mobile with multiplayer PvP battles!\n\nThe iconic characters from the Ratchet & Clank franchise are back in a stunning, fast-paced free to play mobile arena shooter packed with explosive weapons and larger-than-life action!",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      26
+    ],
+    "platforms": [
+      0,
+      18
+    ]
+  },
+  {
     "id": 4138,
     "name": "Gold Fish Casino Slots",
     "releaseYear": 2014,
@@ -50270,11 +50318,11 @@
       6
     ],
     "descriptors": [
-      15,
+      11,
       26,
-      2,
       12,
-      11
+      2,
+      15
     ],
     "platforms": [
       0,
@@ -51174,11 +51222,11 @@
       6
     ],
     "descriptors": [
-      26,
       5,
       10,
-      12,
-      11
+      11,
+      26,
+      12
     ],
     "platforms": [
       18
@@ -55023,6 +55071,24 @@
       7
     ],
     "descriptors": [],
+    "platforms": [
+      0,
+      18
+    ]
+  },
+  {
+    "id": 3479,
+    "name": "Wooparoo Odyssey",
+    "releaseYear": 2024,
+    "publisherName": "NHN Corporation",
+    "description": "Wooparoo Odyssey: An Exhilarating Fusion of Breeding and Building!\n■ Breeding & Diverse Wooparoos\n■ Village Decoration\n■ Joining the Battle ahead\n",
+    "ratings": [
+      5
+    ],
+    "descriptors": [
+      10,
+      26
+    ],
     "platforms": [
       0,
       18
@@ -61487,6 +61553,21 @@
       10,
       26
     ],
+    "platforms": [
+      0,
+      18
+    ]
+  },
+  {
+    "id": 3077,
+    "name": "Grand Formula Racing Pro",
+    "releaseYear": 2018,
+    "publisherName": "Monster Games Productions PTY LTD",
+    "description": "The ultimate top-speed car race game across stunning tracks with multiplayer and customize your sports car for the ultimate thrill to claim the championship?",
+    "ratings": [
+      7
+    ],
+    "descriptors": [],
     "platforms": [
       0,
       18
@@ -70230,6 +70311,20 @@
     ]
   },
   {
+    "id": 2524,
+    "name": "Monoposto",
+    "releaseYear": 2017,
+    "publisherName": "Marco Pesce",
+    "description": "Monoposto is a racing game with single seater open-wheel cars.",
+    "ratings": [
+      7
+    ],
+    "descriptors": [],
+    "platforms": [
+      18
+    ]
+  },
+  {
     "id": 2523,
     "name": "Painting and drawing game",
     "releaseYear": 2014,
@@ -74180,6 +74275,22 @@
     ],
     "platforms": [
       0,
+      18
+    ]
+  },
+  {
+    "id": 2273,
+    "name": "Friends' Game",
+    "releaseYear": 2025,
+    "publisherName": "Grappetite (pvt) ltd",
+    "description": "Friends’ Game is a local multiplayer app designed for in-person group play. Instead of taking turns, everyone competes simultaneously in various mini-games like drawing, typing challenges, and photo contests.\n\nA key feature is its accessibility: only one person needs to download the app. Others join the session instantly via a QR code or link. It includes a live leaderboard to track scores and customizable avatars, making it a streamlined tool for icebreakers or game nights.",
+    "ratings": [
+      7
+    ],
+    "descriptors": [],
+    "platforms": [
+      0,
+      14,
       18
     ]
   },
@@ -81478,11 +81589,11 @@
       6
     ],
     "descriptors": [
-      3,
-      26,
       5,
+      11,
+      26,
       12,
-      11
+      3
     ],
     "platforms": [
       7,
@@ -81500,13 +81611,13 @@
       6
     ],
     "descriptors": [
-      3,
-      26,
-      2,
       5,
       10,
+      11,
+      26,
       12,
-      11
+      3,
+      2
     ],
     "platforms": [
       0,
@@ -81699,11 +81810,11 @@
       6
     ],
     "descriptors": [
-      3,
-      26,
       5,
+      11,
+      26,
       12,
-      11
+      3
     ],
     "platforms": [
       7,
@@ -81720,12 +81831,12 @@
       6
     ],
     "descriptors": [
-      3,
-      26,
-      2,
       5,
+      11,
+      26,
       12,
-      11
+      3,
+      2
     ],
     "platforms": [
       12
@@ -82401,12 +82512,12 @@
       35
     ],
     "descriptors": [
+      15,
+      26,
+      3,
       5,
       10,
-      26,
-      12,
-      3,
-      15
+      12
     ],
     "platforms": [
       0,
@@ -82828,12 +82939,12 @@
       35
     ],
     "descriptors": [
-      5,
-      11,
-      26,
-      12,
       3,
-      2
+      26,
+      11,
+      2,
+      5,
+      12
     ],
     "platforms": [
       0
@@ -83177,11 +83288,11 @@
       6
     ],
     "descriptors": [
-      10,
-      11,
       26,
+      2,
+      10,
       12,
-      2
+      11
     ],
     "platforms": [
       7,
@@ -83218,11 +83329,11 @@
       6
     ],
     "descriptors": [
-      10,
-      11,
       26,
+      2,
+      10,
       12,
-      2
+      11
     ],
     "platforms": [
       0,
@@ -83579,11 +83690,11 @@
       6
     ],
     "descriptors": [
-      10,
-      11,
       26,
+      2,
+      10,
       12,
-      2
+      11
     ],
     "platforms": [
       7,
@@ -83796,12 +83907,12 @@
       6
     ],
     "descriptors": [
-      26,
-      3,
-      2,
       5,
+      11,
+      26,
       12,
-      11
+      3,
+      2
     ],
     "platforms": [
       7
@@ -83902,11 +84013,11 @@
       6
     ],
     "descriptors": [
-      26,
-      12,
       3,
+      15,
+      26,
       2,
-      15
+      12
     ],
     "platforms": [
       7
@@ -84121,11 +84232,11 @@
       35
     ],
     "descriptors": [
-      26,
-      11,
-      2,
       5,
-      10
+      10,
+      11,
+      26,
+      2
     ],
     "platforms": [
       0,
@@ -84224,11 +84335,11 @@
       35
     ],
     "descriptors": [
-      15,
-      3,
+      10,
       26,
+      3,
       2,
-      10
+      15
     ],
     "platforms": [
       7
