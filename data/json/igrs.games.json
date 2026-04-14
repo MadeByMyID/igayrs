@@ -1,5 +1,62 @@
 [
   {
+    "id": 6915,
+    "name": "Ball Rampage",
+    "releaseYear": 2025,
+    "publisherName": "Nicpitah Studios ",
+    "description": "Break through blue blocks to reach the finish line. Avoid the red blocks coz they explode. Enjoy",
+    "ratings": [
+      7
+    ],
+    "descriptors": [],
+    "platforms": [
+      0
+    ]
+  },
+  {
+    "id": 6914,
+    "name": "Mafia: The Old Country",
+    "releaseYear": 2025,
+    "publisherName": "Take-Two Interactive UK Limited",
+    "description": "Uncover the origins of organized crime in Mafia: The Old Country, a gritty mob story set in the brutal underworld of 1900s Sicily. Fight to survive as Enzo Favara and prove your worth to the Family in this immersive third-person action-adventure.",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      11,
+      26,
+      12,
+      3,
+      2
+    ],
+    "platforms": [
+      7,
+      12,
+      15
+    ]
+  },
+  {
+    "id": 6913,
+    "name": "Mafia Mobile",
+    "releaseYear": 2025,
+    "publisherName": "IGG SINGAPORE PTE. LTD.",
+    "description": " Enter the world of Mafia Mobile, the real-time global online mafia-theme war game! Where the gangs that were once loyal to you turned their backs. Those who called themselves your \"brothers\" harbor ill will. The city you sacrificed everything for is now in the hands of your enemy. Summon former friends to fight by your side and take back what's yours in this brand new mafia game!",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      10,
+      11,
+      26,
+      12,
+      2
+    ],
+    "platforms": [
+      0,
+      18
+    ]
+  },
+  {
     "id": 6912,
     "name": "WWE Supercard - Wrestling Game",
     "releaseYear": 2014,
@@ -5141,7 +5198,7 @@
     "publisherName": "neowiz",
     "description": "This game is a social casino featuring traditional Korean card games, Go-Stop and Matgo. Rated 19+ (Adults Only) by the Korean Game Rating Board and Google Play, it is strictly intended for South Korean nationals.\nWhile available for download in Indonesia, the service is exclusively for Korean citizens residing there and is not provided to Indonesian nationals. Full access requires a mandatory identity verification of South Korean citizenship; without this, the service cannot be used.",
     "ratings": [
-      35
+      6
     ],
     "descriptors": [
       10,
@@ -5172,7 +5229,7 @@
     "publisherName": "neowiz",
     "description": "GoStop Game for beginners and manias.\nOriginal Go-Stop Game \"Pmang Single Matgo\"\n\nIf you want to enjoy GoStop quickly without complex installations?\nEnjoy your GoStop fun with fast speed and clean screen design.\n\nDon’t worry if you tried All-in. \nEnjoy the unlimited game money we provide.\nTry the most concentrating single GoStop!",
     "ratings": [
-      35
+      6
     ],
     "descriptors": [
       10,
@@ -5189,7 +5246,7 @@
     "publisherName": "neowiz",
     "description": "GoStop Game for beginners and manias.\nOriginal Go-Stop Game \"Pmang Single Matgo\"\n\nIf you want to enjoy GoStop quickly without complex installations?\nEnjoy your GoStop fun with fast speed and clean screen design.\n\nDon’t worry if you tried All-in. \nEnjoy the unlimited game money we provide.\nTry the most concentrating single GoStop!",
     "ratings": [
-      35
+      6
     ],
     "descriptors": [
       10,
@@ -5935,7 +5992,7 @@
     "publisherName": "NEOWIZ",
     "description": "This game is a social casino featuring traditional Korean card games, Go-Stop and Matgo. Rated 19+ (Adults Only) by the Korean Game Rating Board and Google Play, it is strictly intended for South Korean nationals.\nWhile available for download in Indonesia, the service is exclusively for Korean citizens residing there and is not provided to Indonesian nationals. Full access requires a mandatory identity verification of South Korean citizenship; without this, the service cannot be used.",
     "ratings": [
-      35
+      6
     ],
     "descriptors": [
       10,
@@ -45311,11 +45368,11 @@
       6
     ],
     "descriptors": [
-      11,
       26,
-      12,
       3,
-      2
+      2,
+      12,
+      11
     ],
     "platforms": [
       0,
@@ -82512,12 +82569,12 @@
       35
     ],
     "descriptors": [
-      15,
-      26,
-      3,
       5,
       10,
-      12
+      26,
+      12,
+      3,
+      15
     ],
     "platforms": [
       0,
@@ -83288,11 +83345,11 @@
       6
     ],
     "descriptors": [
-      26,
-      2,
       10,
+      11,
+      26,
       12,
-      11
+      2
     ],
     "platforms": [
       7,
@@ -83329,11 +83386,11 @@
       6
     ],
     "descriptors": [
-      26,
-      2,
       10,
+      11,
+      26,
       12,
-      11
+      2
     ],
     "platforms": [
       0,
@@ -83690,11 +83747,11 @@
       6
     ],
     "descriptors": [
-      26,
-      2,
       10,
+      11,
+      26,
       12,
-      11
+      2
     ],
     "platforms": [
       7,
@@ -83730,12 +83787,12 @@
       6
     ],
     "descriptors": [
-      3,
-      26,
-      2,
       10,
+      11,
+      26,
       12,
-      11
+      3,
+      2
     ],
     "platforms": [
       7
@@ -84013,11 +84070,11 @@
       6
     ],
     "descriptors": [
-      3,
-      15,
       26,
+      12,
+      3,
       2,
-      12
+      15
     ],
     "platforms": [
       7
@@ -84335,11 +84392,11 @@
       35
     ],
     "descriptors": [
-      10,
-      26,
+      15,
       3,
+      26,
       2,
-      15
+      10
     ],
     "platforms": [
       7
@@ -84385,11 +84442,11 @@
       6
     ],
     "descriptors": [
-      26,
-      2,
       10,
+      11,
+      26,
       12,
-      11
+      2
     ],
     "platforms": [
       0,
@@ -84435,11 +84492,11 @@
       35
     ],
     "descriptors": [
-      3,
-      26,
       11,
-      2,
-      12
+      26,
+      12,
+      3,
+      2
     ],
     "platforms": [
       7
