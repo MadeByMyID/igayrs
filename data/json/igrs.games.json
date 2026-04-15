@@ -2030,11 +2030,9 @@
     "publisherName": "Lupiya Mujala",
     "description": "These game is about testing your reflexes against the clock.",
     "ratings": [
-      35
+      7
     ],
-    "descriptors": [
-      36
-    ],
+    "descriptors": [],
     "platforms": [
       0
     ]
@@ -3890,11 +3888,9 @@
     "publisherName": "Xiamen Sixcube Information Technology Co., Ltd.",
     "description": "exercise on various fitness equipment to make your muscles grow",
     "ratings": [
-      6
+      7
     ],
-    "descriptors": [
-      11
-    ],
+    "descriptors": [],
     "platforms": [
       0,
       18
@@ -29291,22 +29287,6 @@
     ]
   },
   {
-    "id": 5061,
-    "name": "Whiteband Arms",
-    "releaseYear": 2021,
-    "publisherName": "Daviadi Testing Baru 2",
-    "description": "Desk",
-    "ratings": [
-      6
-    ],
-    "descriptors": [
-      12
-    ],
-    "platforms": [
-      7
-    ]
-  },
-  {
     "id": 5060,
     "name": "THE NEW DENPA MEN",
     "releaseYear": 2025,
@@ -40311,12 +40291,12 @@
       6
     ],
     "descriptors": [
-      5,
-      11,
-      26,
-      12,
       3,
-      2
+      26,
+      2,
+      5,
+      12,
+      11
     ],
     "platforms": [
       11
@@ -43569,20 +43549,6 @@
       0,
       14,
       18
-    ]
-  },
-  {
-    "id": 4181,
-    "name": "Laevania of Century",
-    "releaseYear": 2021,
-    "publisherName": "Daviadi Testing Baru 2",
-    "description": "Laevania of Century is a fast-paced bullet hell action RPG where players navigate a haunting, decaying world. You must master precise movement and powerful abilities to survive intense, pattern-based combat against cosmic horrors.",
-    "ratings": [
-      7
-    ],
-    "descriptors": [],
-    "platforms": [
-      7
     ]
   },
   {
@@ -63379,24 +63345,6 @@
     ]
   },
   {
-    "id": 2964,
-    "name": "Laevinia of the Solitude",
-    "releaseYear": 2030,
-    "publisherName": "Daviadi Testing Baru 2",
-    "description": "Laevinia of the Solitude is a melancholic, atmospheric exploration game set in a crumbling, ethereal world where sound has been stolen by a cosmic silence. Players guide Laevinia, the last weaver of echoes, through the ruins of a floating civilization. To restore the world's voice, you must navigate hauntingly beautiful landscapes, solve puzzles based on resonance and light, and decide whether to rekindle the memories of the past or let the silence finally take hold.",
-    "ratings": [
-      6
-    ],
-    "descriptors": [
-      26,
-      12,
-      3
-    ],
-    "platforms": [
-      7
-    ]
-  },
-  {
     "id": 2963,
     "name": "Breaker Fun 2",
     "releaseYear": 2021,
@@ -81373,11 +81321,11 @@
       6
     ],
     "descriptors": [
-      5,
-      11,
+      3,
       26,
+      5,
       12,
-      3
+      11
     ],
     "platforms": [
       7,
@@ -81668,13 +81616,13 @@
       6
     ],
     "descriptors": [
+      3,
+      26,
+      2,
       5,
       10,
-      11,
-      26,
       12,
-      3,
-      2
+      11
     ],
     "platforms": [
       0,
@@ -81867,11 +81815,11 @@
       6
     ],
     "descriptors": [
-      5,
-      11,
+      3,
       26,
+      5,
       12,
-      3
+      11
     ],
     "platforms": [
       7,
@@ -82337,20 +82285,6 @@
     ]
   },
   {
-    "id": 1779,
-    "name": "The House of Spiders",
-    "releaseYear": 2021,
-    "publisherName": "Daviadi Testing Baru 2",
-    "description": "Deskripsi",
-    "ratings": [
-      7
-    ],
-    "descriptors": [],
-    "platforms": [
-      7
-    ]
-  },
-  {
     "id": 1778,
     "name": "Idol Meta",
     "releaseYear": 2008,
@@ -82415,11 +82349,11 @@
       6
     ],
     "descriptors": [
-      10,
-      11,
+      15,
       26,
+      10,
       12,
-      15
+      11
     ],
     "platforms": [
       0,
@@ -82547,13 +82481,13 @@
       6
     ],
     "descriptors": [
-      5,
-      11,
-      26,
-      12,
       3,
+      15,
+      26,
       2,
-      15
+      5,
+      12,
+      11
     ],
     "platforms": [
       12
@@ -82707,22 +82641,6 @@
     "descriptors": [],
     "platforms": [
       9
-    ]
-  },
-  {
-    "id": 1758,
-    "name": "Davi Test - Game 1",
-    "releaseYear": 2023,
-    "publisherName": "Daviadi Testing Baru 2",
-    "description": "Des",
-    "ratings": [
-      6
-    ],
-    "descriptors": [
-      12
-    ],
-    "platforms": [
-      10
     ]
   },
   {
@@ -82996,12 +82914,12 @@
       35
     ],
     "descriptors": [
-      3,
-      26,
-      11,
-      2,
       5,
-      12
+      11,
+      26,
+      12,
+      3,
+      2
     ],
     "platforms": [
       0
@@ -83093,14 +83011,14 @@
       6
     ],
     "descriptors": [
-      5,
-      10,
-      11,
+      2,
       26,
       12,
-      3,
-      2,
-      15
+      5,
+      15,
+      11,
+      10,
+      3
     ],
     "platforms": [
       5,
@@ -83122,26 +83040,6 @@
     ]
   },
   {
-    "id": 1735,
-    "name": "Deskmate",
-    "releaseYear": 2024,
-    "publisherName": "Daviadi Testing Baru 2",
-    "description": "Deskripsi",
-    "ratings": [
-      6
-    ],
-    "descriptors": [
-      26,
-      12,
-      3
-    ],
-    "platforms": [
-      8,
-      9,
-      10
-    ]
-  },
-  {
     "id": 1734,
     "name": "Infinity Nikki",
     "releaseYear": 2024,
@@ -83158,22 +83056,6 @@
       7,
       12,
       18
-    ]
-  },
-  {
-    "id": 1733,
-    "name": "Game Dummy Daviadi",
-    "releaseYear": 2028,
-    "publisherName": "Daviadi Testing Baru 2",
-    "description": "Deskripsi",
-    "ratings": [
-      7
-    ],
-    "descriptors": [],
-    "platforms": [
-      8,
-      9,
-      10
     ]
   },
   {
@@ -83366,11 +83248,11 @@
       6
     ],
     "descriptors": [
-      10,
-      11,
       26,
+      2,
+      10,
       12,
-      2
+      11
     ],
     "platforms": [
       7
@@ -83386,11 +83268,11 @@
       6
     ],
     "descriptors": [
-      10,
-      11,
       26,
+      2,
+      10,
       12,
-      2
+      11
     ],
     "platforms": [
       0,
@@ -83747,11 +83629,11 @@
       6
     ],
     "descriptors": [
-      10,
-      11,
       26,
+      2,
+      10,
       12,
-      2
+      11
     ],
     "platforms": [
       7,
@@ -83787,12 +83669,12 @@
       6
     ],
     "descriptors": [
-      10,
-      11,
-      26,
-      12,
       3,
-      2
+      26,
+      2,
+      10,
+      12,
+      11
     ],
     "platforms": [
       7
@@ -83964,12 +83846,12 @@
       6
     ],
     "descriptors": [
-      5,
-      11,
       26,
-      12,
       3,
-      2
+      2,
+      5,
+      12,
+      11
     ],
     "platforms": [
       7
@@ -84070,11 +83952,11 @@
       6
     ],
     "descriptors": [
-      26,
-      12,
       3,
+      15,
+      26,
       2,
-      15
+      12
     ],
     "platforms": [
       7
@@ -84289,11 +84171,11 @@
       35
     ],
     "descriptors": [
-      5,
-      10,
-      11,
       26,
-      2
+      11,
+      2,
+      5,
+      10
     ],
     "platforms": [
       0,
@@ -84442,11 +84324,11 @@
       6
     ],
     "descriptors": [
-      10,
-      11,
       26,
+      2,
+      10,
       12,
-      2
+      11
     ],
     "platforms": [
       0,
@@ -84492,11 +84374,11 @@
       35
     ],
     "descriptors": [
-      11,
-      26,
-      12,
       3,
-      2
+      26,
+      11,
+      2,
+      12
     ],
     "platforms": [
       7
