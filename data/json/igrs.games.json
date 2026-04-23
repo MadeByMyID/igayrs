@@ -479,11 +479,11 @@
       6
     ],
     "descriptors": [
-      11,
-      26,
-      12,
       3,
-      2
+      26,
+      2,
+      12,
+      11
     ],
     "platforms": [
       2,
@@ -1759,11 +1759,11 @@
       6
     ],
     "descriptors": [
-      26,
-      2,
       10,
+      11,
+      26,
       12,
-      11
+      2
     ],
     "platforms": [
       3
@@ -2070,6 +2070,21 @@
     ],
     "descriptors": [],
     "platforms": [
+      11
+    ]
+  },
+  {
+    "id": 2377,
+    "name": "Pango Land - dollhouse kids 3+",
+    "releaseYear": 2015,
+    "publisherName": "Studio Pango SAS",
+    "description": "Pangoland is an open-ended exploration game where children visit the homes of various cartoon characters and interact with objects, environments, and simple activities such as gardening, cooking, building, or seasonal play.\nThe game contains no violence, no threats, no frightening content, and no online interaction.",
+    "ratings": [
+      7
+    ],
+    "descriptors": [],
+    "platforms": [
+      0,
       11
     ]
   },
@@ -2809,6 +2824,20 @@
     "releaseYear": 2022,
     "publisherName": "HFG ENTERTAINMENTS PRIVATE LIMITED",
     "description": "Save Santa and embark on a journey of Winter Christmas eve for your family.",
+    "ratings": [
+      7
+    ],
+    "descriptors": [],
+    "platforms": [
+      11
+    ]
+  },
+  {
+    "id": 2284,
+    "name": "Brain Habit: Offline Quiz Game",
+    "releaseYear": 2025,
+    "publisherName": "Nikola Knezevic",
+    "description": "5 minutes daily. Smarter conversations. Visible results.\n\nBuild mental fitness like you build physical fitness - with consistent, science-backed training that compounds over time. Join 50,000+ professionals who use Brain Habit to sharpen their thinking and stand out in every conversation.\n\nMENTAL FITNESS FOR THE MODERN MIND\nDAILY BRAIN TRAINING THAT WORKS\n\n5-minute daily sessions that fit any schedule\nScience-based questions covering workplace skills, general knowledge, and critical thinking\n",
     "ratings": [
       7
     ],
@@ -4143,11 +4172,11 @@
       6
     ],
     "descriptors": [
-      11,
-      26,
-      12,
       3,
-      2
+      26,
+      2,
+      12,
+      11
     ],
     "platforms": [
       0,
@@ -7434,6 +7463,20 @@
     ]
   },
   {
+    "id": 1885,
+    "name": "700 Solitaire Games Collection",
+    "releaseYear": 2011,
+    "publisherName": "MobArts Ltd.",
+    "description": "Collection of 700 solitaire card games",
+    "ratings": [
+      7
+    ],
+    "descriptors": [],
+    "platforms": [
+      11
+    ]
+  },
+  {
     "id": 1884,
     "name": "Imposter Game by FlipParty",
     "releaseYear": 2025,
@@ -7606,6 +7649,21 @@
     ]
   },
   {
+    "id": 1866,
+    "name": "sundae picnic",
+    "releaseYear": 2022,
+    "publisherName": "Choi Tan",
+    "description": "Features :\n\n· Make and sell ice cream in the park!\n\nYou can make various flavors of soft ice cream from vanilla, mint, chocolate to strawberry, matcha.\nWe should also have toppings such as rainbow sprinkles, chocolate chips, wafer stick and cherries\n\n\n\n· Be friends with cats and dogs\n\nThere are cats&dogs all over the park.\nPlease make ice cream. If the animals liked the ice cream you made, they might come to the picnic\n\n",
+    "ratings": [
+      7
+    ],
+    "descriptors": [],
+    "platforms": [
+      0,
+      11
+    ]
+  },
+  {
     "id": 1865,
     "name": "Des coquins 3D",
     "releaseYear": 2015,
@@ -7663,12 +7721,12 @@
       6
     ],
     "descriptors": [
-      3,
-      26,
-      2,
       5,
+      11,
+      26,
       12,
-      11
+      3,
+      2
     ],
     "platforms": [
       3,
@@ -8065,14 +8123,35 @@
       6
     ],
     "descriptors": [
+      5,
+      11,
+      26,
+      12,
+      3
+    ],
+    "platforms": [
+      3,
+      6
+    ]
+  },
+  {
+    "id": 1807,
+    "name": "Death Stranding 2: On the Beach",
+    "releaseYear": 2025,
+    "publisherName": "Sony Interactive Entertainment",
+    "description": "Embark on an inspiring mission of human connection beyond the UCA.\n\nSam—with companions by his side—sets out on a new journey to save humanity from extinction.\n\nJoin them as they traverse a world beset by otherworldly enemies, obstacles and a haunting question: should we have connected?",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
       3,
       26,
+      2,
       5,
       12,
       11
     ],
     "platforms": [
-      3,
       6
     ]
   },
@@ -8543,11 +8622,11 @@
       6
     ],
     "descriptors": [
-      15,
-      26,
       10,
+      11,
+      26,
       12,
-      11
+      15
     ],
     "platforms": [
       0,
