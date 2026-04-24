@@ -479,11 +479,11 @@
       6
     ],
     "descriptors": [
-      3,
+      11,
       26,
-      2,
       12,
-      11
+      3,
+      2
     ],
     "platforms": [
       2,
@@ -4172,11 +4172,11 @@
       6
     ],
     "descriptors": [
-      3,
+      11,
       26,
-      2,
       12,
-      11
+      3,
+      2
     ],
     "platforms": [
       0,
@@ -6540,21 +6540,6 @@
     ]
   },
   {
-    "id": 1958,
-    "name": "Wayground ",
-    "releaseYear": 2016,
-    "publisherName": "Wayground",
-    "description": "Wayground (formerly Quizizz) is where teachers make curriculum go. Bridge district priorities and classroom realities with the supplemental curriculum platform that helps students hit grade-level standards faster. Trusted by teachers in 90% of U.S. schools and 150+ countries.\nFor teachers:\nDive into a library of resources that are standards-aligned and mapped to your curriculum\nUse AI to differentiate any material so that it’s just right for each student\n",
-    "ratings": [
-      7
-    ],
-    "descriptors": [],
-    "platforms": [
-      0,
-      11
-    ]
-  },
-  {
     "id": 1957,
     "name": "StartUp Business",
     "releaseYear": 2021,
@@ -7976,11 +7961,11 @@
       6
     ],
     "descriptors": [
-      3,
-      26,
       5,
+      11,
+      26,
       12,
-      11
+      3
     ],
     "platforms": [
       3,
@@ -8144,12 +8129,12 @@
       6
     ],
     "descriptors": [
-      3,
-      26,
-      2,
       5,
+      11,
+      26,
       12,
-      11
+      3,
+      2
     ],
     "platforms": [
       6
@@ -8754,13 +8739,13 @@
       6
     ],
     "descriptors": [
-      3,
-      15,
-      26,
-      2,
       5,
+      11,
+      26,
       12,
-      11
+      3,
+      2,
+      15
     ],
     "platforms": [
       6
