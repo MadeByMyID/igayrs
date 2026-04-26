@@ -240,6 +240,23 @@
     ]
   },
   {
+    "id": 5209,
+    "name": "Project CCTV",
+    "releaseYear": 2024,
+    "publisherName": "Akhir Pekan Studio",
+    "description": "Play as squad captain of the Critical Containment Threat Verification division and watch live surveillance feeds from CCTV to report any anomalies and survive the night.",
+    "ratings": [
+      6
+    ],
+    "descriptors": [
+      5
+    ],
+    "platforms": [
+      0,
+      3
+    ]
+  },
+  {
     "id": 5207,
     "name": "Obsessed: Night Shift",
     "releaseYear": 2024,
@@ -1223,13 +1240,13 @@
       6
     ],
     "descriptors": [
-      3,
-      15,
-      26,
-      2,
       10,
+      11,
+      26,
       12,
-      11
+      3,
+      2,
+      15
     ],
     "platforms": [
       0,
@@ -1742,11 +1759,11 @@
       6
     ],
     "descriptors": [
-      26,
-      2,
       10,
+      11,
+      26,
       12,
-      11
+      2
     ],
     "platforms": [
       3
@@ -1762,11 +1779,11 @@
       6
     ],
     "descriptors": [
-      26,
-      2,
       10,
+      11,
+      26,
       12,
-      11
+      2
     ],
     "platforms": [
       0,
@@ -1824,11 +1841,11 @@
       6
     ],
     "descriptors": [
-      26,
-      2,
       10,
+      11,
+      26,
       12,
-      11
+      2
     ],
     "platforms": [
       3,
@@ -7704,12 +7721,12 @@
       6
     ],
     "descriptors": [
-      3,
-      26,
-      2,
       5,
+      11,
+      26,
       12,
-      11
+      3,
+      2
     ],
     "platforms": [
       3,
@@ -7745,11 +7762,11 @@
       6
     ],
     "descriptors": [
-      5,
-      11,
+      3,
       26,
+      5,
       12,
-      3
+      11
     ],
     "platforms": [
       3,
@@ -7959,11 +7976,11 @@
       6
     ],
     "descriptors": [
-      5,
-      11,
+      3,
       26,
+      5,
       12,
-      3
+      11
     ],
     "platforms": [
       3,
@@ -7981,13 +7998,13 @@
       6
     ],
     "descriptors": [
+      3,
+      26,
+      2,
       5,
       10,
-      11,
-      26,
       12,
-      3,
-      2
+      11
     ],
     "platforms": [
       0,
@@ -8106,11 +8123,11 @@
       6
     ],
     "descriptors": [
-      5,
-      11,
+      3,
       26,
+      5,
       12,
-      3
+      11
     ],
     "platforms": [
       3,
