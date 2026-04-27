@@ -1841,11 +1841,11 @@
       6
     ],
     "descriptors": [
-      10,
-      11,
       26,
+      2,
+      10,
       12,
-      2
+      11
     ],
     "platforms": [
       3,
@@ -2158,20 +2158,6 @@
     "releaseYear": 2020,
     "publisherName": "HFG ENTERTAINMENTS PRIVATE LIMITED",
     "description": "101 Levels adventure mystery",
-    "ratings": [
-      7
-    ],
-    "descriptors": [],
-    "platforms": [
-      11
-    ]
-  },
-  {
-    "id": 2370,
-    "name": "Grid rush",
-    "releaseYear": 2025,
-    "publisherName": "Ugurcan Sari",
-    "description": "Small casual puzzle game for brain training",
     "ratings": [
       7
     ],
@@ -7721,12 +7707,12 @@
       6
     ],
     "descriptors": [
-      5,
-      11,
-      26,
-      12,
       3,
-      2
+      26,
+      2,
+      5,
+      12,
+      11
     ],
     "platforms": [
       3,
@@ -7998,13 +7984,13 @@
       6
     ],
     "descriptors": [
-      3,
-      26,
-      2,
       5,
       10,
+      11,
+      26,
       12,
-      11
+      3,
+      2
     ],
     "platforms": [
       0,
