@@ -479,11 +479,11 @@
       6
     ],
     "descriptors": [
-      3,
+      11,
       26,
-      2,
       12,
-      11
+      3,
+      2
     ],
     "platforms": [
       2,
@@ -1411,11 +1411,11 @@
       6
     ],
     "descriptors": [
-      3,
+      11,
       26,
-      2,
       12,
-      11
+      3,
+      2
     ],
     "platforms": [
       11
@@ -1612,11 +1612,11 @@
       6
     ],
     "descriptors": [
-      3,
-      26,
       5,
       10,
-      11
+      11,
+      26,
+      3
     ],
     "platforms": [
       0,
@@ -1820,11 +1820,11 @@
       6
     ],
     "descriptors": [
-      26,
-      2,
       10,
+      11,
+      26,
       12,
-      11
+      2
     ],
     "platforms": [
       0,
@@ -4172,11 +4172,11 @@
       6
     ],
     "descriptors": [
-      3,
+      11,
       26,
-      2,
       12,
-      11
+      3,
+      2
     ],
     "platforms": [
       0,
@@ -7976,11 +7976,11 @@
       6
     ],
     "descriptors": [
-      5,
-      11,
+      3,
       26,
+      5,
       12,
-      3
+      11
     ],
     "platforms": [
       3,
@@ -9814,15 +9814,5 @@
       3,
       11
     ]
-  },
-  {
-    "id": 0,
-    "name": "Not found",
-    "releaseYear": null,
-    "publisherName": null,
-    "description": null,
-    "ratings": [],
-    "descriptors": [],
-    "platforms": []
   }
 ]
