@@ -6,8 +6,8 @@
   <title>IGRSDB</title>
   <meta name="description"
     content="Unofficial open database of games in the IGRS registry. But the backend isnt slow.">
-  <link rel="icon" type="image/svg+xml" href="data/images/favicon.svg">
-  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/data/images/favicon.svg">
+  <link rel="stylesheet" href="assets/styles/main.css">
 </head>
 <body>
 
@@ -15,11 +15,11 @@
     <div class="header-inner">
       <div class="header-top">
         <a href="./" class="site-logo">
-          <img src="data/images/favicon.svg" alt="Logo" class="logo-mark" width="36" height="36">
+          <img src="assets/data/images/favicon.svg" alt="Logo" class="logo-mark" width="36" height="36">
           <div class="logo-text">IGRS<span>DB</span></div>
         </a>
         <button class="btn header-lang-toggle" id="lang-toggle" type="button" aria-label="Switch language">
-          🌐 <span id="lang-label">ID</span>
+          <svg class="ui-icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#globe"></use></svg><span id="lang-label">ID</span>
         </button>
       </div>
       <div class="header-actions">
@@ -32,9 +32,9 @@
 
   <main class="hero">
     <div class="hero-content">
-      <img src="data/images/favicon.svg" alt="Logo" class="hero-logo">
+      <img src="assets/data/images/favicon.svg" alt="Logo" class="hero-logo">
       <h1 class="hero-title" data-i18n="home.title">Indonesian <span
-          style="color: var(--primary)">Gay</span>me<br>Rating System</h1>
+          class="hero-title-accent">Gay</span>me<br>Rating System</h1>
       <p class="hero-subtitle" data-i18n="home.subtitle">Unofficial open database of games in the IGRS registry. But
         the backend isnt slow.</p>
       <div class="hero-stats" id="hero-stats">
@@ -65,13 +65,19 @@
   </main>
 
   <footer class="site-footer">
-    <div>
+    <div class="footer-line">
       <span data-i18n="footer.text">Data scraped from</span> <a href="https://igrs.id" target="_blank"
         rel="noopener">igrs.id</a>
-      · <span data-i18n="footer.disclaimer">A MadeByMyID Project</span>
+      <span class="footer-separator" aria-hidden="true">-</span>
+      <span class="footer-copyright">
+        <svg class="ui-icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#copyright"></use></svg>
+        <span class="sr-only">Copyright</span>
+        <span data-current-year></span>
+      </span>
+      <span data-i18n="footer.disclaimer">A MadeByMyID Project</span>
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script type="module" src="src/main.js"></script>
 </body>
 </html>

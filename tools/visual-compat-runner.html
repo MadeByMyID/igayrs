@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IGRSDB Visual Compatibility Runner</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 0;
+      padding: 1rem;
+    }
+
+    #stage {
+      left: -10000px;
+      position: fixed;
+      top: 0;
+      z-index: -1;
+    }
+
+    #stage iframe {
+      border: 0;
+      display: block;
+    }
+
+    #visual-compat-result {
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>Visual Compatibility Runner</h1>
+  <pre id="visual-compat-result">{"status":"running"}</pre>
+  <div id="stage"></div>
+
+  <script>
+    (() => {
+      'use strict';
+
+      const VIEWPORTS = [
+        { label: 'mobile-320', width: 320, height: 568 },
+        { label: 'mobile-375', width: 375, height: 667 },
+        { label: 'mobile-390', width: 390, height: 844 },
+        { label: 'mobile-430', width: 430, height: 932 },
+        { label: 'tablet-768', width: 768, height: 1024 },
+        { label: 'tablet-landscape', width: 1024, height: 768 },
+        { label: 'laptop-1280', width: 1280, height: 720 },
+        { label: 'desktop-1366', width: 1366, height: 768 },
+        { label: 'desktop-1440', width: 1440, height: 900 },
+        { label: 'desktop-1920', width: 1920, height: 1080 },
+        { label: 'wide-2560', width: 2560, height: 1440 }
+      ];
+
+      const ROUTES = [
+        { label: 'home', path: '/', ready: '#hero-ratings img' },
+        { label: 'search', path: '/search/?rating=6&page=1', ready: '.game-card, .empty-state' },
+        { label: 'ratings', path: '/ratings/', ready: '.rating-guide-card' },
+        { label: 'steamchecker', path: '/steamchecker/', ready: '.steam-checker-shell .empty-state' },
+        { label: 'not-found', path: '/missing-page-for-visual-check', ready: '#fallback-page', expectedStatus: 404 }
+      ];
+
+      const CLIP_SELECTORS = [
+        '.site-header',
+        '.header-inner',
+        '.header-actions',
+        '.btn',
+        '.hero-content',
+        '.hero-stat',
+        '.hero-btn',
+        '.app-layout',
+        '.search-section',
+        '.sidebar',
+        '.game-card',
+        '.game-card-top',
+        '.game-card-right',
+        '.pagination-controls',
+        '.page-container',
+        '.rating-card',
+        '.rating-guide-list',
+        '.rating-watch-row',
+        '.descriptor-card',
+        '.descriptor-review-line',
+        '.steam-checker-shell',
+        '.steam-checker-layout',
+        '.steam-checker-input-row',
+        '.steam-checker-sidebar',
+        '.detail-actions',
+        '.fallback-page',
+        '.fallback-card',
+        '.fallback-actions'
+      ];
+
+      const TOUCH_SELECTORS = [
+        'button',
+        'input:not([type="hidden"])',
+        'summary',
+        'a.btn',
+        'a.hero-btn',
+        '.hero-ratings a',
+        '.rating-icon-link',
+        '.detail-link-btn',
+        '.game-card[role="button"]'
+      ].join(',');
+
+      const resultNode = document.getElementById('visual-compat-result');
+      const stage = document.getElementById('stage');
+
+      function delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+      }
+
+      function publish(report) {
+        resultNode.textContent = JSON.stringify(report, null, 2);
+      }
+
+      function prepareHtml(html, route) {
+        const base = `${location.origin}/`;
+        const routeScript = `<script>try{history.replaceState(null,'',${JSON.stringify(route.path)});}catch(error){window.__VISUAL_COMPAT_ROUTE__=${JSON.stringify(route.path)};}<\/script>`;
+        return html
+          .replace(/<base\b[^>]*>/gi, '')
+          .replace(/<head([^>]*)>/i, `<head$1><base href="${base}">${routeScript}`);
+      }
+
+      async function fetchPage(route) {
+        const response = await fetch(route.path, { cache: 'no-store' });
+        const expectedStatus = route.expectedStatus || 200;
+        if (response.status !== expectedStatus) throw new Error(`HTTP ${response.status}`);
+        return response.text();
+      }
+
+      function isVisible(win, element) {
+        const style = win.getComputedStyle(element);
+        if (style.display === 'none' || style.visibility === 'hidden' || Number(style.opacity) === 0) return false;
+        const rect = element.getBoundingClientRect();
+        return rect.width > 0 && rect.height > 0;
+      }
+
+      async function waitForSelector(doc, selector, timeoutMs) {
+        const startedAt = performance.now();
+        while (performance.now() - startedAt < timeoutMs) {
+          if (doc.querySelector(selector)) return true;
+          await delay(50);
+        }
+        return false;
+      }
+
+      function minTouchTarget(element) {
+        const target = element.matches('input[type="checkbox"]')
+          ? element.closest('.filter-checkbox') || element
+          : element;
+        const rect = target.getBoundingClientRect();
+        return rect.width >= 43.5 && rect.height >= 43.5;
+      }
+
+      function checkHorizontalOverflow(doc, issues) {
+        const docEl = doc.documentElement;
+        const body = doc.body;
+        const width = docEl.clientWidth;
+        const scrollWidth = Math.max(docEl.scrollWidth, body ? body.scrollWidth : 0);
+        if (scrollWidth > width + 2) {
+          issues.push(`horizontal overflow ${Math.round(scrollWidth - width)}px`);
+        }
+      }
+
+      function checkClipping(win, doc, viewport, issues) {
+        for (const selector of CLIP_SELECTORS) {
+          const elements = Array.from(doc.querySelectorAll(selector)).slice(0, 40);
+          for (const element of elements) {
+            if (!isVisible(win, element)) continue;
+            const rect = element.getBoundingClientRect();
+            if (rect.left < -2 || rect.right > viewport.width + 2) {
+              issues.push(`${selector} clipped at ${Math.round(rect.left)}..${Math.round(rect.right)} in ${viewport.width}px`);
+              if (issues.length >= 10) return;
+            }
+          }
+        }
+      }
+
+      function checkTouchTargets(win, doc, issues) {
+        const controls = Array.from(doc.querySelectorAll(TOUCH_SELECTORS)).slice(0, 120);
+        for (const control of controls) {
+          if (!isVisible(win, control)) continue;
+          if (!minTouchTarget(control)) {
+            const label = control.getAttribute('aria-label') || control.textContent.trim() || control.className || control.tagName;
+            issues.push(`small touch target: ${label.slice(0, 48)}`);
+            if (issues.length >= 10) return;
+          }
+        }
+      }
+
+      async function runCase(route, viewport) {
+        const frame = document.createElement('iframe');
+        frame.width = String(viewport.width);
+        frame.height = String(viewport.height);
+        frame.style.width = `${viewport.width}px`;
+        frame.style.height = `${viewport.height}px`;
+        stage.appendChild(frame);
+
+        try {
+          const html = await fetchPage(route);
+          const loaded = new Promise(resolve => frame.addEventListener('load', resolve, { once: true }));
+          frame.srcdoc = prepareHtml(html, route);
+          await loaded;
+
+          const win = frame.contentWindow;
+          const doc = frame.contentDocument;
+          const ready = await waitForSelector(doc, route.ready, 8000);
+          const issues = [];
+
+          if (!ready) issues.push(`ready selector timed out: ${route.ready}`);
+          if (doc.body?.textContent.includes('Failed to load data')) issues.push('data loading error rendered');
+
+          if (doc.fonts?.ready) {
+            await Promise.race([doc.fonts.ready, delay(800)]);
+          }
+          await delay(80);
+
+          checkHorizontalOverflow(doc, issues);
+          checkClipping(win, doc, viewport, issues);
+          checkTouchTargets(win, doc, issues);
+
+          return {
+            route: route.label,
+            path: route.path,
+            viewport: viewport.label,
+            width: viewport.width,
+            height: viewport.height,
+            passed: issues.length === 0,
+            issues
+          };
+        } catch (error) {
+          return {
+            route: route.label,
+            path: route.path,
+            viewport: viewport.label,
+            width: viewport.width,
+            height: viewport.height,
+            passed: false,
+            issues: [error.message || String(error)]
+          };
+        } finally {
+          frame.remove();
+        }
+      }
+
+      async function runAll() {
+        const cases = [];
+        for (const viewport of VIEWPORTS) {
+          for (const route of ROUTES) {
+            const item = await runCase(route, viewport);
+            cases.push(item);
+            publish({
+              status: 'running',
+              cases,
+              totals: {
+                total: VIEWPORTS.length * ROUTES.length,
+                completed: cases.length,
+                failed: cases.filter(entry => !entry.passed).length
+              }
+            });
+          }
+        }
+
+        const failed = cases.filter(entry => !entry.passed).length;
+        publish({
+          status: failed ? 'fail' : 'pass',
+          generatedAt: new Date().toISOString(),
+          viewports: VIEWPORTS,
+          routes: ROUTES.map(route => ({ label: route.label, path: route.path })),
+          cases,
+          totals: {
+            total: cases.length,
+            passed: cases.length - failed,
+            failed
+          }
+        });
+      }
+
+      runAll().catch(error => {
+        publish({
+          status: 'fail',
+          generatedAt: new Date().toISOString(),
+          cases: [],
+          totals: { total: 0, passed: 0, failed: 1 },
+          error: error.message || String(error)
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

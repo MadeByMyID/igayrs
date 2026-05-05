@@ -1,0 +1,15 @@
+{
+  "name": "igrsdb",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Static local dev server for IGRSDB.",
+  "scripts": {
+    "dev": "node scripts/dev-server.js",
+    "visual:check": "node scripts/visual-compat.js",
+    "check": "node --check src/main.js && node --check src/core/constants.js && node --check src/core/data-contracts.js && node --check src/core/descriptor-guide.js && node --check src/core/icons.js && node --check src/core/i18n.js && node --check src/core/rating-guide.js && node --check src/core/safe-render.js && node --check src/core/search-index.js && node --check src/core/steam-description.js && node --check src/core/steam-search.js && node --check src/core/steam-reviews.js && node --check src/core/url-state.js && node --check scripts/dev-server.js && node --check scripts/visual-compat.js && node --check tests/github-automation.test.js && node tests/ui-consistency.test.js && node tests/logic.test.js && node tests/github-automation.test.js",
+    "test": "node tests/ui-consistency.test.js && node tests/logic.test.js && node tests/github-automation.test.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

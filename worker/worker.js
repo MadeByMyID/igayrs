@@ -1,6 +1,6 @@
 const DEFAULT_SITE_ORIGIN = 'https://igrs.madeby.my.id';
-const GAMES_PATH = '/data/json/igrs.games.json';
-const META_PATH = '/data/json/igrs.meta.json';
+const GAMES_PATH = '/assets/data/json/igrs.games.json';
+const META_PATH = '/assets/data/json/igrs.meta.json';
 const PREVIEW_BOT_RE = /(discordbot|discord|facebookexternalhit|slackbot|telegrambot|whatsapp|linkedinbot|embedly|skypeuripreview|twitterbot|pinterest|googlebot|bingbot|duckduckbot|yandexbot|crawler|spider)/i;
 
 const RATING_COLORS = {
@@ -78,10 +78,10 @@ async function servePreviewPage(siteOrigin, id, env) {
   const publisherText = game.publisherName || 'Unknown publisher';
   const yearText = game.releaseYear || 'Unknown year';
   const shortDescription = truncate(normalizeWhitespace(game.description || 'No description available.'), 170);
-  const description = `${shortDescription}\n\n𝗥𝗮𝘁𝗶𝗻𝗴: ${ratingText}\n𝗗𝗲𝘀𝗰𝗿𝗶𝗽𝘁𝗼𝗿𝘀: ${descriptorText}`;
+  const description = `${shortDescription}\n\nRating: ${ratingText}\nDescriptors: ${descriptorText}`;
   const imageUrl = ratingId !== undefined
-    ? `${siteOrigin}/data/images/ratings/${ratingId}.png`
-    : `${siteOrigin}/data/images/favicon.svg`;
+    ? `${siteOrigin}/assets/data/images/ratings/${ratingId}.png`
+    : `${siteOrigin}/assets/data/images/favicon.svg`;
   const shareUrl = `${siteOrigin}/search/#${id}`;
   const pageUrl = `${siteOrigin}/game/${id}`;
   const oembedUrl = `${siteOrigin}/game/${id}/oembed`;
@@ -180,7 +180,7 @@ function normalizeWhitespace(value) {
 function truncate(value, limit) {
   const text = normalizeWhitespace(value);
   if (text.length <= limit) return text;
-  return `${text.slice(0, Math.max(0, limit - 1)).trimEnd()}…`;
+  return `${text.slice(0, Math.max(0, limit - 3)).trimEnd()}...`;
 }
 
 function normalizeOrigin(origin) {

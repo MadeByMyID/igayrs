@@ -11,8 +11,22 @@ case "$ID" in
     ;;
 esac
 
+if [ -z "$RAW_DIR" ]; then
+  printf 'Missing raw output directory for game ID: %s\n' "$ID" >&2
+  exit 2
+fi
+
+mkdir -p "$RAW_DIR"
+
 API_URL="https://api.igrs.id/public/games/${ID}"
 TEMP_FILE="${RAW_DIR}/${ID}.json"
+DOWNLOAD_FILE="${TEMP_FILE}.download.$$"
+MINIFIED_FILE="${TEMP_FILE}.min.$$"
+
+cleanup() {
+  rm -f "$DOWNLOAD_FILE" "$MINIFIED_FILE"
+}
+trap cleanup EXIT
 
 set +e
 HTTP_STATUS="$(curl \
@@ -20,18 +34,19 @@ HTTP_STATUS="$(curl \
   --show-error \
   --globoff \
   --retry 3 \
+  --retry-all-errors \
   --retry-delay 1 \
-  --max-time 20 \
-  --output "$TEMP_FILE" \
+  --connect-timeout 10 \
+  --max-time 30 \
+  --output "$DOWNLOAD_FILE" \
   --write-out "%{http_code}" \
   "$API_URL")"
 CURL_EXIT=$?
 set -e
 
-if [ "$CURL_EXIT" -eq 0 ] && [ "$HTTP_STATUS" -eq 200 ] && jq -e '.id != null' "$TEMP_FILE" >/dev/null 2>&1; then
-  jq -c '.' "$TEMP_FILE" > "${TEMP_FILE}.min"
-  mv "${TEMP_FILE}.min" "$TEMP_FILE"
+if [ "$CURL_EXIT" -eq 0 ] && [ "$HTTP_STATUS" -eq 200 ] && jq -e --arg requestedId "$ID" '(.id | tostring) == $requestedId' "$DOWNLOAD_FILE" >/dev/null 2>&1; then
+  jq -c '.' "$DOWNLOAD_FILE" > "$MINIFIED_FILE"
+  mv "$MINIFIED_FILE" "$TEMP_FILE"
 else
   printf 'Failed to fetch IGRS game: id=%s url=%s curl_exit=%s http_status=%s\n' "$ID" "$API_URL" "$CURL_EXIT" "$HTTP_STATUS" >&2
-  rm -f "$TEMP_FILE"
 fi

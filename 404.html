@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <base href="../">
-  <title>IGRSDB | Steam Game Checker</title>
-  <meta name="description" content="Check Steam game details against IGRS ratings and content descriptors.">
+  <base href="/">
+  <title>IGRSDB | Page Not Found</title>
+  <meta name="description" content="The requested IGRSDB page could not be found.">
   <link rel="icon" type="image/svg+xml" href="assets/data/images/favicon.svg">
   <link rel="stylesheet" href="assets/styles/main.css">
 </head>
@@ -30,33 +30,19 @@
     </div>
   </header>
 
-  <main class="page-container steam-checker-page" id="steam-checker-page">
-    <section class="steam-checker-hero">
-      <div>
-        <h1 class="page-title" data-i18n="steamchecker.title">Steam Game Checker</h1>
+  <main class="page-container fallback-page" id="fallback-page">
+    <section class="fallback-card" aria-labelledby="fallback-title">
+      <div class="fallback-icon" aria-hidden="true">
+        <svg class="ui-icon" focusable="false"><use href="assets/icons.svg#alert-triangle"></use></svg>
       </div>
-    </section>
-
-    <section class="steam-checker-shell">
-      <form class="steam-checker-form" id="steam-checker-form">
-        <label class="steam-checker-label" for="steam-appid-input" data-i18n="steamchecker.appid">App ID</label>
-        <div class="steam-checker-input-row">
-          <input
-            type="text"
-            id="steam-appid-input"
-            inputmode="numeric"
-            autocomplete="off"
-            placeholder="Enter a Steam app ID, like 3557620"
-            data-i18n-placeholder="steamchecker.appid.placeholder"
-          >
-          <button class="steam-checker-submit" type="submit" data-i18n="steamchecker.check">Check Steam game</button>
-        </div>
-      </form>
-
-      <div class="steam-checker-status" id="steam-checker-status"></div>
-      <div class="steam-checker-layout">
-        <div class="steam-checker-main" id="steam-checker-results"></div>
-        <aside class="steam-checker-sidebar" id="steam-checker-sidebar"></aside>
+      <p class="fallback-kicker">404</p>
+      <h1 class="page-title" id="fallback-title" data-i18n="fallback.notFound.title">Page not found</h1>
+      <p class="page-subtitle" data-i18n="fallback.notFound.desc">The address may be mistyped, the page may have moved during a cleanup, or the link may point to content that is no longer available.</p>
+      <p class="fallback-help" data-i18n="fallback.notFound.help">Use the links below to continue from a known page. If you were opening a game, try searching by title; if you were checking age guidance, open the ratings guide.</p>
+      <div class="fallback-actions" aria-label="Fallback actions">
+        <a href="search/" class="hero-btn primary" data-i18n="fallback.search">Search games</a>
+        <a href="ratings/" class="hero-btn secondary" data-i18n="fallback.ratings">Open ratings guide</a>
+        <a href="./" class="detail-link-btn" data-i18n="fallback.home">Back home</a>
       </div>
     </section>
   </main>

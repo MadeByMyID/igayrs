@@ -6,8 +6,8 @@
   <base href="../">
   <title>IGRSDB | Search</title>
   <meta name="description" content="Unofficial open database of games in the IGRS registry. But the backend isnt slow.">
-  <link rel="icon" type="image/svg+xml" href="data/images/favicon.svg">
-  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/svg+xml" href="assets/data/images/favicon.svg">
+  <link rel="stylesheet" href="assets/styles/main.css">
 </head>
 <body>
 
@@ -15,14 +15,15 @@
     <div class="header-inner">
       <div class="header-top">
         <a href="./" class="site-logo">
-          <img src="data/images/favicon.svg" alt="Logo" class="logo-mark" width="36" height="36">
+          <img src="assets/data/images/favicon.svg" alt="Logo" class="logo-mark" width="36" height="36">
           <div class="logo-text">IGRS<span>DB</span></div>
         </a>
         <button class="btn header-lang-toggle" id="lang-toggle" type="button" aria-label="Switch language">
-          🌐 <span id="lang-label">ID</span>
+          <svg class="ui-icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#globe"></use></svg><span id="lang-label">ID</span>
         </button>
       </div>
       <div class="header-actions">
+        <a href="search/" class="btn" data-i18n="nav.search">Search Games</a>
         <a href="ratings/" class="btn" data-i18n="nav.ratings">Ratings Guide</a>
         <a href="steamchecker/" class="btn" data-i18n="nav.steamchecker">Steam Game Checker</a>
       </div>
@@ -34,15 +35,16 @@
       <section class="search-section">
         <div class="search-row">
           <div class="search-bar">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <svg class="ui-icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#search"></use></svg>
             <input type="text" id="search-input" data-i18n-placeholder="search.placeholder" placeholder="Search games..." autocomplete="off" autofocus>
           </div>
           <div class="search-bar publisher-bar">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <svg class="ui-icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#user"></use></svg>
             <input type="text" id="publisher-input" data-i18n-placeholder="search.publisher" placeholder="Filter publisher..." autocomplete="off">
           </div>
         </div>
         <div class="search-stats" id="search-stats"></div>
+        <div class="active-filter-summary" id="active-filter-summary" aria-live="polite"></div>
       </section>
 
       <div id="list-view" class="list-view">
@@ -63,13 +65,19 @@
   </div>
 
   <footer class="site-footer">
-    <div>
+    <div class="footer-line">
       <span data-i18n="footer.text">Data scraped from</span> <a href="https://igrs.id" target="_blank" rel="noopener">igrs.id</a>
-      · <span data-i18n="footer.disclaimer">A MadeByMyID Project</span>
+      <span class="footer-separator" aria-hidden="true">-</span>
+      <span class="footer-copyright">
+        <svg class="ui-icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#copyright"></use></svg>
+        <span class="sr-only">Copyright</span>
+        <span data-current-year></span>
+      </span>
+      <span data-i18n="footer.disclaimer">A MadeByMyID Project</span>
     </div>
   </footer>
 
-  <button class="scroll-top" id="scroll-top" type="button" aria-label="Scroll to top">↑</button>
-  <script src="script.js"></script>
+  <button class="scroll-top" id="scroll-top" type="button" aria-label="Scroll to top"><svg class="ui-icon" aria-hidden="true" focusable="false"><use href="assets/icons.svg#arrow-up"></use></svg></button>
+  <script type="module" src="src/main.js"></script>
 </body>
 </html>

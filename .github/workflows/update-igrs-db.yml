@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: update-igrs-db
@@ -15,6 +15,9 @@ concurrency:
 jobs:
   update-db:
     runs-on: ubuntu-latest
+    timeout-minutes: 360
+    permissions:
+      contents: write
 
     steps:
       - name: Checkout repository
@@ -137,8 +140,13 @@ jobs:
           fi
 
           echo "Normalizing and splitting database..."
-          OUTPUT_DIR="data/json"
+          OUTPUT_DIR="assets/data/json"
           mkdir -p "$OUTPUT_DIR"
+
+          if [ "${SKIP_META:-0}" -eq 1 ] && ! test -s "${OUTPUT_DIR}/igrs.meta.json"; then
+            echo "ERROR: Metadata fetch failed and no existing ${OUTPUT_DIR}/igrs.meta.json file is available." >&2
+            exit 1
+          fi
 
           PLATFORM_NORMALIZE='def normalize_platform:
             gsub("^\\s+|\\s+$"; "")
@@ -251,19 +259,23 @@ jobs:
 
           jq --argjson platformNameToId "$PLATFORM_NAME_TO_ID" "$GAMES_QUERY" "igrs.pubdb.json" > "${OUTPUT_DIR}/igrs.games.json"
           jq "$EXTRA_QUERY" "igrs.pubdb.json" > "${OUTPUT_DIR}/igrs.extra.json"
+          jq -e 'type == "array"' "${OUTPUT_DIR}/igrs.games.json" >/dev/null
+          jq -e 'type == "array"' "${OUTPUT_DIR}/igrs.extra.json" >/dev/null
+          jq -e 'type == "object" and (.meta.totalGames | type == "number")' "${OUTPUT_DIR}/igrs.meta.json" >/dev/null
 
           echo "Cleaning up raw dump files..."
           rm -f "igrs.pubdb.json"
           rm -f "ratings-api.json"
           rm -f "descriptors-api.json"
           rm -f "$FAILED_IDS_FILE"
+          rm -f "$BATCH_FAILED_IDS_FILE"
           rm -rf "$RAW_DIR"
 
           echo "Done"
 
       - name: Commit and push changes
         run: |
-          git add data/json/igrs.meta.json data/json/igrs.games.json data/json/igrs.extra.json
+          git add assets/data/json/igrs.meta.json assets/data/json/igrs.games.json assets/data/json/igrs.extra.json
           
           if git diff --cached --quiet; then
             echo "No data changes detected."
