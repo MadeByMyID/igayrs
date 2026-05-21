@@ -44,6 +44,7 @@ jobs:
           > "$BATCH_FAILED_IDS_FILE"
 
           echo "Starting parallel fetch in chunks of ${CHUNK_SIZE} (concurrency: ${CONCURRENCY}, batch delay: ${BATCH_DELAY_SEC}s)"
+          EMPTY_BATCH_COUNT=0
 
           while true; do
             CURRENT_END=$((CURRENT_START + CHUNK_SIZE - 1))
@@ -60,9 +61,15 @@ jobs:
 
             echo ">>> Batch complete. Games found in this chunk: ${GAMES_ADDED}"
             if [ "$GAMES_ADDED" -eq 0 ]; then
-              echo "No games found in batch ${CURRENT_START}-${CURRENT_END}. Assuming end."
-              echo "Dropping failed IDs from this final empty batch.."
-              break
+              EMPTY_BATCH_COUNT=$((EMPTY_BATCH_COUNT + 1))
+              echo "No games found in batch ${CURRENT_START}-${CURRENT_END}. (Consecutive empty batches: ${EMPTY_BATCH_COUNT})"
+              if [ "$EMPTY_BATCH_COUNT" -ge 3 ]; then
+                echo "Reached ${EMPTY_BATCH_COUNT} consecutive empty batches. Assuming end."
+                echo "Dropping failed IDs from this final empty batch.."
+                break
+              fi
+            else
+              EMPTY_BATCH_COUNT=0
             fi
 
             if [ "$BATCH_ERROR_COUNT" -gt 0 ]; then
@@ -117,8 +124,8 @@ jobs:
 
           for attempt in $(seq 1 "$RATING_DESC_ATTEMPTS"); do
             echo "Ratings/descriptors fetch attempt ${attempt}/${RATING_DESC_ATTEMPTS}"
-            if curl --fail --show-error --silent --location --max-time 3600 "https://api.igrs.id/public/ratings" -o "ratings-api.json" && \
-               curl --fail --show-error --silent --location --max-time 3600 "https://api.igrs.id/public/descriptors" -o "descriptors-api.json" && \
+            if curl --insecure --fail --show-error --silent --location --max-time 3600 "https://api.igrs.id/public/ratings" -o "ratings-api.json" && \
+               curl --insecure --fail --show-error --silent --location --max-time 3600 "https://api.igrs.id/public/descriptors" -o "descriptors-api.json" && \
                jq empty "ratings-api.json" && \
                jq empty "descriptors-api.json"; then
               RATING_DESC_OK=1
