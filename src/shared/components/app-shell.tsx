@@ -2,6 +2,7 @@ import { ArrowUp, Copyright, Globe } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useLanguage } from '@/app/providers/language-provider';
+import { FAVICON_URL } from '@/core/constants';
 import { useScrollTopVisibility } from '@/shared/hooks/use-scroll-top';
 
 interface AppShellProps {
@@ -19,7 +20,7 @@ export function AppShell({ children }: AppShellProps) {
         <div className="header-inner">
           <div className="header-top">
             <NavLink to="/" className="site-logo" aria-label="IGRSDB home">
-              <img src="/assets/data/images/favicon.svg" alt="" className="logo-mark" width="36" height="36" />
+              <img src={FAVICON_URL} alt="" className="logo-mark" width="36" height="36" />
               <div className="logo-text">IGRS<span>DB</span></div>
             </NavLink>
             <button className="btn header-lang-toggle" type="button" aria-label="Switch language" onClick={toggleLanguage}>

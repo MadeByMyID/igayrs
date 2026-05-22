@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { RATING_ORDER } from '@/core/constants';
+import { FAVICON_URL, RATING_ORDER } from '@/core/constants';
 import { useLanguage } from '@/app/providers/language-provider';
 import { useRequiredIgrsData } from '@/app/providers/data-provider';
 import { ErrorState, LoadingState } from '@/shared/components/data-state';
@@ -33,7 +33,7 @@ export function HomePage() {
   return (
     <main className="hero" data-route-ready="home">
       <div className="hero-content">
-        <img src="/assets/data/images/favicon.svg" alt="" className="hero-logo" />
+        <img src={FAVICON_URL} alt="" className="hero-logo" />
         <h1 className="hero-title" dangerouslySetInnerHTML={{ __html: t('home.title') }} />
         <p className="hero-subtitle">{t('home.subtitle')}</p>
 

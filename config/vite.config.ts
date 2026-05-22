@@ -40,6 +40,7 @@ function hiddenPathGuard(): Plugin {
 }
 
 export default defineConfig({
+  base: './',
   plugins: [
     hiddenPathGuard(),
     react(),

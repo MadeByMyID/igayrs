@@ -97,6 +97,7 @@ function testViteTypescriptTailwindConfigurationExists() {
   const viteConfig = read('config/vite.config.ts');
   assert(viteConfig.includes('@vitejs/plugin-react'), 'vite.config.ts: expected React plugin');
   assert(viteConfig.includes('@tailwindcss/vite'), 'vite.config.ts: expected Tailwind Vite plugin');
+  assert(viteConfig.includes("base: './'"), 'vite.config.ts: built asset URLs should be relative for GitHub project Pages');
   assert(viteConfig.includes("transformer: 'lightningcss'"), 'vite.config.ts: expected Lightning CSS transformer');
   assert(viteConfig.includes("cssMinify: 'lightningcss'"), 'vite.config.ts: expected Lightning CSS minifier');
   assert(viteConfig.includes("../public"), 'vite.config.ts: expected grouped public asset directory');
@@ -108,6 +109,33 @@ function testViteTypescriptTailwindConfigurationExists() {
   assert(appTsConfig.compilerOptions.strict === true, 'tsconfig.app.json: strict mode should be enabled');
   assert(appTsConfig.compilerOptions.jsx === 'react-jsx', 'tsconfig.app.json: expected React JSX transform');
   assert(appTsConfig.compilerOptions.noUncheckedIndexedAccess === true, 'tsconfig.app.json: expected indexed access checks');
+}
+
+function testProjectPagesAssetPathsArePortable() {
+  const constants = read('src/core/constants.ts');
+  assert(constants.includes('APP_BASE_PATH'), 'src/core/constants.ts: expected deployed app base path helper');
+  assert(constants.includes('import.meta.url'), 'src/core/constants.ts: asset base should derive from the deployed module URL');
+  assert(constants.includes("publicAssetPath('assets/data')"), 'src/core/constants.ts: public data assets should be rooted under the deployed app base');
+
+  const app = read('src/app/App.tsx');
+  assert(app.includes('basename={routerBasename}'), 'src/app/App.tsx: BrowserRouter should use the deployed app basename');
+
+  const htmlEntries = [
+    { favicon: '%BASE_URL%assets/data/images/favicon.svg', path: 'src/index.html' },
+    { favicon: '%BASE_URL%assets/data/images/favicon.svg', path: 'src/404.html' },
+    { favicon: '../assets/data/images/favicon.svg', path: 'src/search/index.html' },
+    { favicon: '../assets/data/images/favicon.svg', path: 'src/ratings/index.html' },
+    { favicon: '../assets/data/images/favicon.svg', path: 'src/steamchecker/index.html' }
+  ];
+  for (const { favicon, path: relativePath } of htmlEntries) {
+    const html = read(relativePath);
+    assert(html.includes(`href="${favicon}"`), `${relativePath}: favicon should use a path that resolves under the deployed app base`);
+    assert(!html.includes('href="/assets/data/images/favicon.svg"'), `${relativePath}: favicon should not use a domain-root asset path`);
+  }
+
+  const hardcodedAssetFiles = walkFiles('src', relativePath => /\.(ts|tsx)$/.test(relativePath))
+    .filter(relativePath => read(relativePath).includes('"/assets/data'));
+  assert(hardcodedAssetFiles.length === 0, `source files should not hard-code root /assets paths: ${hardcodedAssetFiles.join(', ')}`);
 }
 
 function testReactApplicationBoundariesExist() {
@@ -207,6 +235,7 @@ const tests = [
   testPackageUsesModernFrontendStack,
   testProjectRootStaysGrouped,
   testViteTypescriptTailwindConfigurationExists,
+  testProjectPagesAssetPathsArePortable,
   testReactApplicationBoundariesExist,
   testHtmlEntrypointsUseViteReactRoot,
   testVitePublicAssetsAreCanonical,

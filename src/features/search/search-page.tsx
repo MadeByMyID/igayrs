@@ -1,6 +1,7 @@
 import { Check, ChevronLeft, ChevronRight, Copy, Gamepad2, Search, User } from 'lucide-react';
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { IGRS_LOGO_URL } from '@/core/constants';
 import { createGameSearchIndex, filterIndexedGames, fuzzyScoreNormalized } from '@/core/search-index';
 import { buildSearchParams, readSearchState } from '@/core/url-state';
 import { safeHttpUrl } from '@/core/safe-render';
@@ -604,7 +605,7 @@ function GameDetail({
             <span>{copied ? t('detail.copied') : t('detail.share')}</span>
           </button>
           <a className="detail-link-btn" href={`https://igrs.id/game-detail/${game.id}`} target="_blank" rel="noopener noreferrer">
-            <img src="/assets/data/images/igrs.svg" alt="" aria-hidden="true" />
+            <img src={IGRS_LOGO_URL} alt="" aria-hidden="true" />
             <span>{t('detail.openIgrs')}</span>
           </a>
           <a className="detail-link-btn" href={`https://www.google.com/search?q=${encodeURIComponent(`${game.name} ${t('steamchecker.by')} ${game.publisherName}`)}`} target="_blank" rel="noopener noreferrer">
@@ -661,7 +662,7 @@ function SteamMatchPanel({ result, t }: { result: SteamSearchResult | null; t: (
             <div className="steam-match-name">{result.match.name}</div>
             <div className="steam-match-meta">App ID {result.match.appId}</div>
           </div>
-          <a className="detail-link-btn" href={`/steamchecker/?appid=${encodeURIComponent(result.match.appId)}`}>{t('detail.steamLookup.check')}</a>
+          <Link className="detail-link-btn" to={`/steamchecker/?appid=${encodeURIComponent(result.match.appId)}`}>{t('detail.steamLookup.check')}</Link>
         </div>
       </div>
     );
@@ -678,10 +679,10 @@ function SteamMatchPanel({ result, t }: { result: SteamSearchResult | null; t: (
           </div>
           <div className="steam-match-options">
             {result.candidates.map(candidate => (
-              <a className="detail-link-btn" href={`/steamchecker/?appid=${encodeURIComponent(candidate.appId)}`} key={candidate.appId}>
+              <Link className="detail-link-btn" to={`/steamchecker/?appid=${encodeURIComponent(candidate.appId)}`} key={candidate.appId}>
                 <span>{candidate.name}</span>
                 <span className="steam-match-appid">{candidate.appId}</span>
-              </a>
+              </Link>
             ))}
           </div>
         </div>
