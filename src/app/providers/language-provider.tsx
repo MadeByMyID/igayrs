@@ -52,7 +52,9 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
   }, []);
 
   const t = useCallback((key: string) => {
-    return I18N[lang]?.[key] ?? I18N.en[key] ?? key;
+    const localized = I18N[lang] as Record<string, string>;
+    const fallback = I18N.en as Record<string, string>;
+    return localized[key] ?? fallback[key] ?? key;
   }, [lang]);
 
   useEffect(() => {

@@ -3,6 +3,7 @@ export type Language = 'en' | 'id';
 export interface RatingMeta {
   name: string;
   weight?: number;
+  color?: string;
   titleEn?: string;
   titleId?: string;
   contentEn?: string;
@@ -95,6 +96,8 @@ export interface SearchIndex {
   facets: SearchFacets;
 }
 
+export type SearchSort = 'relevance' | 'title-asc' | 'title-desc' | 'year-desc' | 'year-asc' | 'rating-desc' | 'rating-asc';
+
 export interface SearchState {
   query: string;
   publisher: string;
@@ -103,6 +106,7 @@ export interface SearchState {
   descriptors: Set<number>;
   years: Set<string>;
   page: number;
+  sort: SearchSort;
 }
 
 export interface SteamSearchCandidate {

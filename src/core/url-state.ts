@@ -1,4 +1,6 @@
-import type { SearchState } from '@/shared/types';
+import type { SearchSort, SearchState } from '@/shared/types';
+
+const SEARCH_SORTS = new Set<SearchSort>(['relevance', 'title-asc', 'title-desc', 'year-desc', 'year-asc', 'rating-desc', 'rating-asc']);
 
 function toPositiveInteger(value: unknown): number | null {
   const numeric = Number(value);
@@ -33,6 +35,10 @@ function appendSet<T>(params: URLSearchParams, key: string, set: Set<T> | undefi
   params.set(key, values.join(','));
 }
 
+function parseSort(value: unknown): SearchSort {
+  return SEARCH_SORTS.has(value as SearchSort) ? value as SearchSort : 'relevance';
+}
+
 export function readSearchState(params = new URLSearchParams()): SearchState {
   const page = Number(params.get('page') || 1);
   return {
@@ -42,7 +48,8 @@ export function readSearchState(params = new URLSearchParams()): SearchState {
     platforms: parseNumberList(params, 'platform'),
     descriptors: parseNumberList(params, 'descriptor'),
     years: parseYearList(params, 'year'),
-    page: Number.isFinite(page) && page > 0 ? Math.floor(page) : 1
+    page: Number.isFinite(page) && page > 0 ? Math.floor(page) : 1,
+    sort: parseSort(params.get('sort'))
   };
 }
 
@@ -59,6 +66,7 @@ export function buildSearchParams(state: Partial<SearchState> = {}): URLSearchPa
   appendSet(params, 'descriptor', state.descriptors, toPositiveInteger);
   appendSet(params, 'year', state.years, value => (/^\d{4}$/.test(String(value)) ? String(value) : null));
   if (Number.isFinite(page) && page > 1) params.set('page', String(Math.floor(page)));
+  if (state.sort && state.sort !== 'relevance') params.set('sort', state.sort);
 
   return params;
 }

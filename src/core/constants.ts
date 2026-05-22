@@ -1,3 +1,5 @@
+import ratingMetadata from '@/core/rating-metadata.json';
+
 const APP_BASE_URL = new URL(/* @vite-ignore */ '../', import.meta.url);
 
 function normalizeBasePath(pathname: string): string {
@@ -17,6 +19,7 @@ export const JSON_BASE = `${ASSET_BASE}/json`;
 export const FAVICON_URL = `${IMAGE_BASE}/favicon.svg`;
 export const IGRS_LOGO_URL = `${IMAGE_BASE}/igrs.svg`;
 export const OFFICIAL_RATING_INFO_URL = 'https://igrs.id/rating-info';
-export const RATING_ORDER = [7, 4, 5, 28, 6, 35] as const;
+export const RATING_METADATA = ratingMetadata;
+export const RATING_ORDER = ratingMetadata.map(item => item.id);
 export const EXTRA_FIELD_PATCHED_TOKEN = '__IGRS_LINKS_PATCHED__';
 export const EXTRA_FIELD_PATCHED_LEGACY_TEXT = 'The IGRS team has patched this Issue, their frontend is no longer leaking links containing the offending content';

@@ -30,7 +30,6 @@ trap cleanup EXIT
 
 set +e
 HTTP_STATUS="$(curl \
-  --insecure \
   --silent \
   --show-error \
   --globoff \

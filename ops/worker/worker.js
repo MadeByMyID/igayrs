@@ -2,9 +2,11 @@ const DEFAULT_SITE_ORIGIN = 'https://igrs.madeby.my.id';
 const GAMES_PATH = '/assets/data/json/igrs.games.json';
 const META_PATH = '/assets/data/json/igrs.meta.json';
 const DATA_CACHE_TTL_MS = 300000;
+const DATA_FETCH_RETRIES = 1;
+const DATA_FETCH_TIMEOUT_MS = 8000;
 const PREVIEW_BOT_RE = /(discordbot|discord|facebookexternalhit|slackbot|telegrambot|whatsapp|linkedinbot|embedly|skypeuripreview|twitterbot|pinterest|googlebot|bingbot|duckduckbot|yandexbot|crawler|spider)/i;
 
-const RATING_COLORS = {
+const FALLBACK_RATING_COLORS = {
   7: '#22c55e',
   4: '#06b6d4',
   5: '#eab308',
@@ -90,7 +92,7 @@ async function servePreviewPage(siteOrigin, id, env) {
   const oembedUrl = `${siteOrigin}/game/${id}/oembed`;
   const providerText = 'Data provided by IGRS.id';
   const authorText = `${publisherText} - ${yearText}`;
-  const color = getRatingColor(ratingId);
+  const color = getRatingColor(ratingId, data.meta);
 
   return htmlResponse(`<!doctype html>
 <html lang="en">
@@ -179,16 +181,36 @@ async function loadGameData(siteOrigin, env) {
 
 async function fetchGameData(siteOrigin, env) {
   const [gamesRes, metaRes] = await Promise.all([
-    fetch(resolveUrl(siteOrigin, env?.GAMES_PATH || GAMES_PATH), { headers: { 'User-Agent': 'IGRS-Preview-Worker/1.0' } }),
-    fetch(resolveUrl(siteOrigin, env?.META_PATH || META_PATH), { headers: { 'User-Agent': 'IGRS-Preview-Worker/1.0' } }),
+    fetchJsonAsset(resolveUrl(siteOrigin, env?.GAMES_PATH || GAMES_PATH)),
+    fetchJsonAsset(resolveUrl(siteOrigin, env?.META_PATH || META_PATH)),
   ]);
 
-  if (!gamesRes.ok || !metaRes.ok) {
-    throw new Error(`Failed to load IGRS data (${gamesRes.status}/${metaRes.status})`);
-  }
+  return buildGameData(gamesRes, metaRes);
+}
 
-  const [games, meta] = await Promise.all([gamesRes.json(), metaRes.json()]);
-  return buildGameData(games, meta);
+async function fetchJsonAsset(url) {
+  for (let attempt = 0; attempt <= DATA_FETCH_RETRIES; attempt += 1) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), DATA_FETCH_TIMEOUT_MS);
+    try {
+      const response = await fetch(url, {
+        headers: { 'User-Agent': 'IGRS-Preview-Worker/1.0' },
+        signal: controller.signal,
+      });
+      if (!response.ok) throw new Error(`Failed to load IGRS data (${response.status})`);
+      return response.json();
+    } catch (error) {
+      if (attempt >= DATA_FETCH_RETRIES) throw error;
+      await delay(120 * (attempt + 1));
+    } finally {
+      clearTimeout(timeout);
+    }
+  }
+  throw new Error('Failed to load IGRS data');
+}
+
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
 function dataCacheKey(siteOrigin, env) {
@@ -209,8 +231,8 @@ function buildGameData(games, meta) {
   return { games: gameList, gamesById, meta };
 }
 
-function getRatingColor(ratingId) {
-  return RATING_COLORS[ratingId] || '#64748b';
+function getRatingColor(ratingId, meta) {
+  return meta?.ratings?.[String(ratingId)]?.color || FALLBACK_RATING_COLORS[ratingId] || '#64748b';
 }
 
 function normalizeWhitespace(value) {

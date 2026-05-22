@@ -6,17 +6,18 @@ on:
       - gh-pages
   workflow_dispatch:
 
-permissions:
-  contents: read
+permissions: {}
 
 concurrency:
   group: pages-${{ github.ref }}
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout repository
@@ -28,26 +29,37 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: 20
-          cache: npm
-          cache-dependency-path: package-lock.json
+
+      - name: Cache npm package cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-20-npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-20-npm-
+            ${{ runner.os }}-node-
 
       - name: Install npm dependencies
-        run: npm ci --ignore-scripts
+        run: npm ci
 
-      - name: Build static site
-        run: npm run build
+      - name: Run deterministic checks
+        run: npm run check
 
       - name: Preserve custom domain marker
-        run: cp CNAME dist/CNAME
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp CNAME dist/CNAME
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
           path: dist
+          retention-days: 1
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 10
 
     permissions:

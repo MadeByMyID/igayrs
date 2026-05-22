@@ -34,7 +34,13 @@ export function HomePage() {
     <main className="hero" data-route-ready="home">
       <div className="hero-content">
         <img src={FAVICON_URL} alt="" className="hero-logo" />
-        <h1 className="hero-title" dangerouslySetInnerHTML={{ __html: t('home.title') }} />
+        <h1 className="hero-title">
+          {t('home.title.prefix')}
+          <span className="hero-title-accent">{t('home.title.accent')}</span>
+          {t('home.title.suffix')}
+          <br />
+          {t('home.title.bottom')}
+        </h1>
         <p className="hero-subtitle">{t('home.subtitle')}</p>
 
         <div className="hero-stats" id="hero-stats">

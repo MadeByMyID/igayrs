@@ -1,4 +1,4 @@
-import type { IgrsGame, SearchIndex, SearchIndexItem } from '@/shared/types';
+import type { IgrsGame, SearchIndex, SearchIndexItem, SearchSort } from '@/shared/types';
 
 interface SearchExtractors {
   getDescriptorIds?: (game: IgrsGame) => unknown;
@@ -175,4 +175,34 @@ export function filterIndexedGames(
   }
 
   return results;
+}
+
+export function sortFilterResults(
+  results: FilterResult[],
+  sort: SearchSort = 'relevance',
+  ratingWeight: (ratingId: number) => number = ratingId => ratingId
+): FilterResult[] {
+  const output = [...results];
+  if (sort === 'relevance') return output;
+
+  output.sort((left, right) => {
+    if (sort === 'title-asc' || sort === 'title-desc') {
+      const comparison = left.item.nameNorm.localeCompare(right.item.nameNorm);
+      return sort === 'title-asc' ? comparison : -comparison;
+    }
+
+    if (sort === 'year-asc' || sort === 'year-desc') {
+      const leftYear = Number(left.item.year) || 0;
+      const rightYear = Number(right.item.year) || 0;
+      const comparison = leftYear - rightYear;
+      return sort === 'year-asc' ? comparison : -comparison;
+    }
+
+    const leftWeight = ratingWeight(left.item.ratingIds[0] || 0);
+    const rightWeight = ratingWeight(right.item.ratingIds[0] || 0);
+    const comparison = leftWeight - rightWeight;
+    return sort === 'rating-asc' ? comparison : -comparison;
+  });
+
+  return output;
 }

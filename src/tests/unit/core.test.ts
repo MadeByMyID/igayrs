@@ -9,6 +9,8 @@ import { buildSearchParams, readSearchState } from '@/core/url-state';
 import { getDescriptorGuideCopy } from '@/core/descriptor-guide';
 import { getRatingGuideCopy } from '@/core/rating-guide';
 import { copyTextToClipboard } from '@/shared/lib/clipboard';
+import { normalizeSteamProxyBase } from '@/shared/api/steam-api';
+import { buildSteamRatingComparison } from '@/shared/lib/domain';
 
 describe('safe rendering helpers', () => {
   it('reject unsafe links and escape labels', () => {
@@ -97,11 +99,12 @@ describe('search and URL state', () => {
   });
 
   it('round trips compact sanitized URL state', () => {
-    const state = readSearchState(new URLSearchParams('q=%20Zelda%20&publisher=Nintendo&rating=7,x,6&platform=1&descriptor=2,NaN&year=2025,abcd&page=3'));
+    const state = readSearchState(new URLSearchParams('q=%20Zelda%20&publisher=Nintendo&rating=7,x,6&platform=1&descriptor=2,NaN&year=2025,abcd&page=3&sort=year-desc'));
     expect(state.query).toBe('Zelda');
     expect([...state.ratings]).toEqual([7, 6]);
     expect([...state.descriptors]).toEqual([2]);
     expect(state.page).toBe(3);
+    expect(state.sort).toBe('year-desc');
 
     const params = buildSearchParams({
       query: 'Mario',
@@ -110,9 +113,11 @@ describe('search and URL state', () => {
       platforms: new Set([1]),
       descriptors: new Set(),
       years: new Set(['2026']),
-      page: 2
+      page: 2,
+      sort: 'title-asc'
     });
-    expect(String(params)).toBe('q=Mario&rating=6%2C7&platform=1&year=2026&page=2');
+    expect(String(params)).toBe('q=Mario&rating=6%2C7&platform=1&year=2026&page=2&sort=title-asc');
+    expect(readSearchState(new URLSearchParams('sort=not-real')).sort).toBe('relevance');
   });
 });
 
@@ -126,6 +131,13 @@ describe('rating and descriptor guide copy', () => {
 });
 
 describe('Steam helpers', () => {
+  it('requires configured Steam proxy bases to be HTTPS and allowlisted', () => {
+    expect(normalizeSteamProxyBase(undefined)).toBe('https://cors.mefi.workers.dev/');
+    expect(normalizeSteamProxyBase('https://proxy.test/base/', ['https://proxy.test/base/'])).toBe('https://proxy.test/base/');
+    expect(() => normalizeSteamProxyBase('http://proxy.test/', ['http://proxy.test/'])).toThrowError('STEAM_PROXY_INSECURE');
+    expect(() => normalizeSteamProxyBase('https://evil.test/', ['https://proxy.test/'])).toThrowError('STEAM_PROXY_NOT_ALLOWED');
+  });
+
   it('formats Steam descriptions as escaped readable sections', () => {
     const html = renderSteamDescription([
       'Start Small. Command Everything.',
@@ -163,5 +175,21 @@ describe('Steam helpers', () => {
     const result = selectSteamSearchResult({ name: 'Bioskop Simulator / Movie Cinema Simulator' }, candidates);
     expect(result.status).toBe('match');
     expect(result.match?.appId).toBe('2682120');
+  });
+
+  it('summarizes Steam, local, and computed rating differences', () => {
+    expect(buildSteamRatingComparison({
+      computedDescriptorIds: [3, 10],
+      computedRatingId: 6,
+      localDescriptorIds: [3, 10],
+      localRatingId: 6,
+      steamDescriptorIds: [3],
+      steamRatingId: 5
+    })).toEqual({
+      descriptorStatus: 'missing-steam',
+      missingFromSteamDescriptorIds: [10],
+      ratingStatus: 'mismatch',
+      unexpectedSteamDescriptorIds: []
+    });
   });
 });

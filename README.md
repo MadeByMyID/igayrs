@@ -47,6 +47,7 @@ npm run dev -- --port 8080
 | --- | --- |
 | `npm run dev` | Starts the Vite dev server against `src/`. |
 | `npm run build` | Runs TypeScript build-mode checks and creates `dist/`. |
+| `npm run build:pages-root` | Builds `dist/` and explicitly syncs branch-root Pages files for branch-source publishing. |
 | `npm run preview` | Serves the production Vite build through Vite preview. |
 | `npm run typecheck` | Runs TypeScript project-reference checks. |
 | `npm run lint` | Runs ESLint across source, scripts, tests, and Worker code. |
@@ -183,7 +184,7 @@ npm run build
 
 Deploy the generated `dist/` directory to the static host. The visible deployment domain is `igrs.madeby.my.id`, from `CNAME` and `package.json#homepage`.
 
-GitHub Pages deployment is handled by `.github/workflows/pages.yml`, which builds the app and deploys the generated `dist/` artifact. In the repository Pages settings, the publishing source must be set to GitHub Actions; branch-root publishing will show repository documentation when no root `index.html` is present.
+GitHub Pages deployment is handled by `.github/workflows/pages.yml`, which runs the deterministic project check and deploys the generated `dist/` artifact. In the repository Pages settings, the publishing source should be set to GitHub Actions. If branch-root publishing is required for a manual fallback, run `npm run build:pages-root` explicitly.
 
 The build emits route entrypoints for:
 

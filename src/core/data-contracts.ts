@@ -36,6 +36,7 @@ const MetaSchema = v.looseObject({
   ratings: v.record(v.string(), v.looseObject({
     name: v.string(),
     weight: v.optional(v.number()),
+    color: v.optional(v.string()),
     titleEn: v.optional(v.string()),
     titleId: v.optional(v.string()),
     contentEn: v.optional(v.string()),

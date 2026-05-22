@@ -1,8 +1,8 @@
 import { Check, ChevronLeft, ChevronRight, Copy, Gamepad2, Search, User } from 'lucide-react';
-import { useEffect, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
+import { useDeferredValue, useEffect, useMemo, useRef, useState, type KeyboardEvent, type ReactNode } from 'react';
 import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { IGRS_LOGO_URL } from '@/core/constants';
-import { createGameSearchIndex, filterIndexedGames, fuzzyScoreNormalized } from '@/core/search-index';
+import { createGameSearchIndex, filterIndexedGames, fuzzyScoreNormalized, sortFilterResults } from '@/core/search-index';
 import { buildSearchParams, readSearchState } from '@/core/url-state';
 import { safeHttpUrl } from '@/core/safe-render';
 import { useLanguage } from '@/app/providers/language-provider';
@@ -10,6 +10,8 @@ import { useRequiredIgrsData } from '@/app/providers/data-provider';
 import { createSteamApi } from '@/shared/api/steam-api';
 import { DescriptorIcons } from '@/shared/components/descriptor-icons';
 import { ErrorState, LoadingState } from '@/shared/components/data-state';
+import { ActiveFilterSummary, SearchSortControl, type ActiveFilter } from '@/features/search/search-controls';
+import { FilterSidebar } from '@/features/search/search-filters';
 import { copyTextToClipboard } from '@/shared/lib/clipboard';
 import {
   descriptorIdsFromGame,
@@ -76,9 +78,12 @@ export function SearchPage() {
   const [descriptors, setDescriptors] = useState(initialState.descriptors);
   const [years, setYears] = useState(initialState.years);
   const [page, setPage] = useState(initialState.page);
+  const [sort, setSort] = useState(initialState.sort);
   const [detailId, setDetailId] = useState<number | null>(null);
   const lastScrollYRef = useRef(0);
   const steamApi = useMemo(() => createSteamApi({ t }), [t]);
+  const deferredQuery = useDeferredValue(query);
+  const deferredPublisher = useDeferredValue(publisher);
 
   useEffect(() => {
     const state = readSearchState(searchParams);
@@ -89,6 +94,7 @@ export function SearchPage() {
     setDescriptors(state.descriptors);
     setYears(state.years);
     setPage(state.page);
+    setSort(state.sort);
   }, [searchParams]);
 
   useEffect(() => {
@@ -97,11 +103,11 @@ export function SearchPage() {
   }, [location.hash]);
 
   useEffect(() => {
-    const params = buildSearchParams({ query, publisher, ratings, platforms, descriptors, years, page });
+    const params = buildSearchParams({ query, publisher, ratings, platforms, descriptors, years, page, sort });
     if (params.toString() !== searchParams.toString()) {
       setSearchParams(params, { replace: true });
     }
-  }, [descriptors, page, platforms, publisher, query, ratings, searchParams, setSearchParams, years]);
+  }, [descriptors, page, platforms, publisher, query, ratings, searchParams, setSearchParams, sort, years]);
 
   const searchIndex = useMemo(() => {
     if (!data) return null;
@@ -114,15 +120,16 @@ export function SearchPage() {
 
   const filtered = useMemo(() => {
     if (!searchIndex) return [];
-    return filterIndexedGames(searchIndex.items, {
+    const results = filterIndexedGames(searchIndex.items, {
       descriptors,
       platforms,
-      publisher,
-      query,
+      publisher: deferredPublisher,
+      query: deferredQuery,
       ratings,
       years
     }, fuzzyScoreNormalized);
-  }, [descriptors, platforms, publisher, query, ratings, searchIndex, years]);
+    return sortFilterResults(results, sort, ratingId => ratingWeight(data?.meta as IgrsMeta, ratingId));
+  }, [data?.meta, deferredPublisher, deferredQuery, descriptors, platforms, ratings, searchIndex, sort, years]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PER_PAGE));
   const currentPage = Math.min(page, totalPages);
@@ -177,17 +184,67 @@ export function SearchPage() {
     window.requestAnimationFrame(() => window.scrollTo({ top: lastScrollYRef.current, behavior: 'auto' }));
   };
 
-  const activeLabels = buildActiveLabels();
+  const activeFilters = buildActiveFilters();
 
-  function buildActiveLabels(): string[] {
-    const labels: string[] = [];
-    if (query) labels.push(`${t('search.query')}: ${query}`);
-    if (publisher) labels.push(`${t('search.publisherLabel')}: ${publisher}`);
-    for (const id of sortedNumbers(ratings).sort((a, b) => ratingWeight(currentData.meta, a) - ratingWeight(currentData.meta, b))) labels.push(`${t('filter.rating')}: ${ratingName(currentData.meta, id)}`);
-    for (const id of sortedNumbers(platforms).sort((a, b) => platformName(currentData.meta, a, lang).localeCompare(platformName(currentData.meta, b, lang)))) labels.push(`${t('filter.platform')}: ${platformName(currentData.meta, id, lang)}`);
-    for (const id of sortedNumbers(descriptors).sort((a, b) => descriptorName(currentData.meta, a, lang).localeCompare(descriptorName(currentData.meta, b, lang)))) labels.push(`${t('filter.descriptor')}: ${descriptorName(currentData.meta, id, lang)}`);
-    for (const year of sortedYears(years)) labels.push(`${t('filter.year')}: ${year}`);
-    return labels;
+  function buildActiveFilters(): ActiveFilter[] {
+    const filters: ActiveFilter[] = [];
+    if (query) filters.push({
+      id: 'query',
+      label: `${t('search.query')}: ${query}`,
+      onRemove: () => {
+        setQuery('');
+        setPage(1);
+      }
+    });
+    if (publisher) filters.push({
+      id: 'publisher',
+      label: `${t('search.publisherLabel')}: ${publisher}`,
+      onRemove: () => {
+        setPublisher('');
+        setPage(1);
+      }
+    });
+    for (const id of sortedNumbers(ratings).sort((a, b) => ratingWeight(currentData.meta, a) - ratingWeight(currentData.meta, b))) {
+      filters.push({
+        id: `rating-${id}`,
+        label: `${t('filter.rating')}: ${ratingName(currentData.meta, id)}`,
+        onRemove: () => {
+          setRatings(toggleSet(ratings, id));
+          setPage(1);
+        }
+      });
+    }
+    for (const id of sortedNumbers(platforms).sort((a, b) => platformName(currentData.meta, a, lang).localeCompare(platformName(currentData.meta, b, lang)))) {
+      filters.push({
+        id: `platform-${id}`,
+        label: `${t('filter.platform')}: ${platformName(currentData.meta, id, lang)}`,
+        onRemove: () => {
+          setPlatforms(toggleSet(platforms, id));
+          setPage(1);
+        }
+      });
+    }
+    for (const id of sortedNumbers(descriptors).sort((a, b) => descriptorName(currentData.meta, a, lang).localeCompare(descriptorName(currentData.meta, b, lang)))) {
+      filters.push({
+        id: `descriptor-${id}`,
+        label: `${t('filter.descriptor')}: ${descriptorName(currentData.meta, id, lang)}`,
+        onRemove: () => {
+          setDescriptors(toggleSet(descriptors, id));
+          setPage(1);
+        }
+      });
+    }
+    for (const year of sortedYears(years)) {
+      filters.push({
+        id: `year-${year}`,
+        label: `${t('filter.year')}: ${year}`,
+        onRemove: () => {
+          setYears(toggleSet(years, year));
+          setPage(1);
+        }
+      });
+    }
+    return filters;
   }
 
   return (
@@ -230,19 +287,15 @@ export function SearchPage() {
               ? t('search.stats.filtered').replace('{count}', String(filtered.length)).replace('{total}', String(data.games.length))
               : t('search.stats').replace('{count}', String(filtered.length))}
           </div>
-          <div className="active-filter-summary" aria-live="polite">
-            {activeLabels.length ? (
-              <>
-                <span className="active-filter-label">{t('search.active')}</span>
-                <span className="active-filter-chips">
-                  {activeLabels.map(label => <span key={label}>{label}</span>)}
-                </span>
-                <button className="active-filter-clear" type="button" onClick={() => clearAll(true)}>
-                  {t('search.clearAll')}
-                </button>
-              </>
-            ) : null}
-          </div>
+          <SearchSortControl
+            sort={sort}
+            setSort={nextSort => {
+              setSort(nextSort);
+              setPage(1);
+            }}
+            t={t}
+          />
+          <ActiveFilterSummary filters={activeFilters} onClearAll={() => clearAll(true)} t={t} />
         </section>
 
         <div id="list-view" className={`list-view${selectedGame ? ' hidden' : ''}`}>
@@ -341,18 +394,11 @@ function GameCard({ game, lang, meta, onOpen, publisherQuery, query, t }: GameCa
   const descriptorIds = descriptorIdsFromGame(game).slice(0, 4);
   const platformNames = platformIdsFromGame(meta, game).map(id => platformName(meta, id, lang)).join(', ');
 
-  const onKeyDown = (event: KeyboardEvent<HTMLElement>) => {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      onOpen();
-    }
-  };
-
   return (
-    <article className="game-card fade-in" role="button" tabIndex={0} onClick={onOpen} onKeyDown={onKeyDown}>
+    <button className="game-card fade-in" type="button" onClick={onOpen}>
       <div className="game-card-top">
         <div className="game-card-info">
-          <h2 className="game-title">{highlight(game.name, query)}</h2>
+          <span className="game-title">{highlight(game.name, query)}</span>
           <div className="game-publisher">{highlight(game.publisherName, publisherQuery)}</div>
           <div className="game-card-meta">
             <div className="game-meta-group">
@@ -373,126 +419,7 @@ function GameCard({ game, lang, meta, onOpen, publisherQuery, query, t }: GameCa
           <span className="view-detail">{t('card.viewDetail')}</span>
         </div>
       </div>
-    </article>
-  );
-}
-
-interface FilterSidebarProps {
-  clearAll: () => void;
-  descriptors: Set<number>;
-  lang: 'en' | 'id';
-  meta: IgrsMeta;
-  platforms: Set<number>;
-  ratings: Set<number>;
-  searchIndex: NonNullable<ReturnType<typeof createGameSearchIndex>>;
-  setDescriptors: (next: Set<number>) => void;
-  setPlatforms: (next: Set<number>) => void;
-  setRatings: (next: Set<number>) => void;
-  setYears: (next: Set<string>) => void;
-  t: (key: string) => string;
-  years: Set<string>;
-}
-
-function FilterSidebar(props: FilterSidebarProps) {
-  const {
-    clearAll,
-    descriptors,
-    lang,
-    meta,
-    platforms,
-    ratings,
-    searchIndex,
-    setDescriptors,
-    setPlatforms,
-    setRatings,
-    setYears,
-    t,
-    years
-  } = props;
-  const hasFilters = ratings.size || platforms.size || descriptors.size || years.size;
-
-  return (
-    <>
-      <FilterPanel id="filter-rating" title={t('sidebar.rating')}>
-        {Object.entries(searchIndex.facets.ratingCounts)
-          .map(([id, count]) => ({ count, id: Number(id) }))
-          .sort((a, b) => ratingWeight(meta, a.id) - ratingWeight(meta, b.id))
-          .map(({ count, id }) => (
-            <FilterCheckbox
-              checked={ratings.has(id)}
-              count={count}
-              key={id}
-              label={ratingName(meta, id)}
-              onChange={() => setRatings(toggleSet(ratings, id))}
-            />
-          ))}
-      </FilterPanel>
-      <FilterPanel id="filter-platform" title={t('sidebar.platform')}>
-        {Object.entries(searchIndex.facets.platformCounts)
-          .map(([id, count]) => ({ count, id: Number(id) }))
-          .sort((a, b) => platformName(meta, a.id, lang).localeCompare(platformName(meta, b.id, lang)))
-          .map(({ count, id }) => (
-            <FilterCheckbox
-              checked={platforms.has(id)}
-              count={count}
-              key={id}
-              label={platformName(meta, id, lang)}
-              onChange={() => setPlatforms(toggleSet(platforms, id))}
-            />
-          ))}
-      </FilterPanel>
-      <FilterPanel id="filter-descriptor" title={t('sidebar.descriptor')}>
-        {Object.entries(searchIndex.facets.descriptorCounts)
-          .map(([id, count]) => ({ count, id: Number(id) }))
-          .sort((a, b) => descriptorName(meta, a.id, lang).localeCompare(descriptorName(meta, b.id, lang)))
-          .map(({ count, id }) => (
-            <FilterCheckbox
-              checked={descriptors.has(id)}
-              count={count}
-              key={id}
-              label={descriptorName(meta, id, lang)}
-              onChange={() => setDescriptors(toggleSet(descriptors, id))}
-            />
-          ))}
-      </FilterPanel>
-      <FilterPanel id="filter-year" title={t('filter.year')}>
-        {Object.entries(searchIndex.facets.yearCounts)
-          .sort((a, b) => Number(b[0]) - Number(a[0]))
-          .map(([year, count]) => (
-            <FilterCheckbox
-              checked={years.has(year)}
-              count={count}
-              key={year}
-              label={year}
-              onChange={() => setYears(toggleSet(years, year))}
-            />
-          ))}
-      </FilterPanel>
-      <button className={`filter-clear-btn${hasFilters ? '' : ' hidden'}`} type="button" onClick={() => clearAll()}>
-        {t('filter.clear')}
-      </button>
-    </>
-  );
-}
-
-function FilterPanel({ children, id, title }: { children: ReactNode; id: string; title: string }) {
-  return (
-    <section className="filter-panel" id={id}>
-      <div className="filter-panel-header">
-        <span>{title}</span>
-      </div>
-      <div className="filter-panel-body">{children}</div>
-    </section>
-  );
-}
-
-function FilterCheckbox({ checked, count, label, onChange }: { checked: boolean; count: number; label: string; onChange: () => void }) {
-  return (
-    <label className="filter-checkbox">
-      <input type="checkbox" checked={checked} onChange={onChange} />
-      <span>{label}</span>
-      <span className="count">{count}</span>
-    </label>
+    </button>
   );
 }
 

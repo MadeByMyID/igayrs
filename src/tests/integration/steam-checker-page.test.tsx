@@ -95,4 +95,61 @@ describe('SteamCheckerPage request ordering', () => {
       expect(screen.getByText('Newest Steam Game')).toBeInTheDocument();
     });
   });
+
+  it('aborts an older Steam details request when a newer app ID is submitted', async () => {
+    const oldRequest = deferred<SteamAppDetailsPayload>();
+    const newRequest = deferred<SteamAppDetailsPayload>();
+
+    steamApiMock.fetchSteamAppDetails.mockImplementation((appId: string) => {
+      if (appId === '111') return oldRequest.promise;
+      if (appId === '222') return newRequest.promise;
+      throw new Error(`Unexpected app ID ${appId}`);
+    });
+
+    render(
+      <MemoryRouter initialEntries={['/steamchecker/']}>
+        <SteamCheckerPage />
+      </MemoryRouter>
+    );
+
+    const input = screen.getByLabelText('steamchecker.appid');
+    const submit = screen.getByRole('button', { name: 'steamchecker.check' });
+
+    fireEvent.change(input, { target: { value: '111' } });
+    fireEvent.click(submit);
+    const firstSignal = steamApiMock.fetchSteamAppDetails.mock.calls[0]?.[1]?.signal as AbortSignal;
+
+    fireEvent.change(input, { target: { value: '222' } });
+    fireEvent.click(submit);
+
+    expect(firstSignal.aborted).toBe(true);
+
+    await act(async () => {
+      newRequest.resolve({ 222: { success: true, data: { name: 'Newest Steam Game' } } });
+      oldRequest.resolve({ 111: { success: true, data: { name: 'Stale Steam Game' } } });
+    });
+  });
+
+  it('offers a retry action after a Steam load failure', async () => {
+    steamApiMock.fetchSteamAppDetails
+      .mockRejectedValueOnce(new Error('temporary outage'))
+      .mockResolvedValueOnce({ 333: { success: true, data: { name: 'Recovered Steam Game' } } });
+
+    render(
+      <MemoryRouter initialEntries={['/steamchecker/']}>
+        <SteamCheckerPage />
+      </MemoryRouter>
+    );
+
+    const input = screen.getByLabelText('steamchecker.appid');
+    const submit = screen.getByRole('button', { name: 'steamchecker.check' });
+
+    fireEvent.change(input, { target: { value: '333' } });
+    fireEvent.click(submit);
+
+    const retry = await screen.findByRole('button', { name: 'steamchecker.retry' });
+    fireEvent.click(retry);
+
+    expect(await screen.findByText('Recovered Steam Game')).toBeInTheDocument();
+  });
 });

@@ -194,6 +194,61 @@ export function computeSteamChecker(meta: IgrsMeta, steamMeta: SteamMeta, steamG
   return { computedRatingId, descriptorIds, mappedDescriptorIds, mappedDescriptors };
 }
 
+interface SteamRatingComparisonInput {
+  computedDescriptorIds: number[];
+  computedRatingId: number | null;
+  localDescriptorIds: number[];
+  localRatingId: number | null;
+  steamDescriptorIds: number[];
+  steamRatingId: number | null;
+}
+
+export interface SteamRatingComparison {
+  descriptorStatus: 'match' | 'missing-local' | 'missing-steam' | 'mismatch' | 'unknown';
+  missingFromSteamDescriptorIds: number[];
+  ratingStatus: 'match' | 'missing-local' | 'missing-steam' | 'mismatch' | 'unknown';
+  unexpectedSteamDescriptorIds: number[];
+}
+
+function uniqueSortedNumbers(values: number[]): number[] {
+  return [...new Set(values.filter(Number.isFinite))].sort((a, b) => a - b);
+}
+
+function difference(left: number[], right: number[]): number[] {
+  const rightSet = new Set(right);
+  return left.filter(value => !rightSet.has(value));
+}
+
+export function buildSteamRatingComparison(input: SteamRatingComparisonInput): SteamRatingComparison {
+  const localDescriptors = uniqueSortedNumbers(input.localDescriptorIds);
+  const steamDescriptors = uniqueSortedNumbers(input.steamDescriptorIds.length ? input.steamDescriptorIds : input.computedDescriptorIds);
+  const missingFromSteamDescriptorIds = difference(localDescriptors, steamDescriptors);
+  const unexpectedSteamDescriptorIds = difference(steamDescriptors, localDescriptors);
+
+  let ratingStatus: SteamRatingComparison['ratingStatus'] = 'unknown';
+  if (input.localRatingId && input.steamRatingId) ratingStatus = input.localRatingId === input.steamRatingId ? 'match' : 'mismatch';
+  else if (input.localRatingId && input.computedRatingId) ratingStatus = input.localRatingId === input.computedRatingId ? 'match' : 'mismatch';
+  else if (input.localRatingId) ratingStatus = 'missing-steam';
+  else if (input.steamRatingId || input.computedRatingId) ratingStatus = 'missing-local';
+
+  let descriptorStatus: SteamRatingComparison['descriptorStatus'] = 'unknown';
+  if (localDescriptors.length || steamDescriptors.length) {
+    if (!localDescriptors.length) descriptorStatus = 'missing-local';
+    else if (!steamDescriptors.length) descriptorStatus = 'missing-steam';
+    else if (!missingFromSteamDescriptorIds.length && !unexpectedSteamDescriptorIds.length) descriptorStatus = 'match';
+    else if (missingFromSteamDescriptorIds.length && !unexpectedSteamDescriptorIds.length) descriptorStatus = 'missing-steam';
+    else if (!missingFromSteamDescriptorIds.length && unexpectedSteamDescriptorIds.length) descriptorStatus = 'missing-local';
+    else descriptorStatus = 'mismatch';
+  }
+
+  return {
+    descriptorStatus,
+    missingFromSteamDescriptorIds,
+    ratingStatus,
+    unexpectedSteamDescriptorIds
+  };
+}
+
 export function steamIgrsDescriptorIdsFromText(meta: IgrsMeta, text: unknown, lang: Language): number[] {
   if (!text || !meta.descriptors) return [];
   const lines = String(text)

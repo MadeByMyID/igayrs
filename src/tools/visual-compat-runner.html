@@ -99,7 +99,7 @@
         '.hero-ratings a',
         '.rating-icon-link',
         '.detail-link-btn',
-        '.game-card[role="button"]'
+        '.game-card'
       ].join(',');
 
       const resultNode = document.getElementById('visual-compat-result');
@@ -173,6 +173,25 @@
         }
       }
 
+      function checkFooterPlacement(doc, viewport, issues) {
+        const footer = doc.querySelector('.site-footer');
+        if (!footer) {
+          issues.push('site footer missing');
+          return;
+        }
+
+        const docEl = doc.documentElement;
+        const body = doc.body;
+        const scrollHeight = Math.max(docEl.scrollHeight, body ? body.scrollHeight : 0);
+        if (scrollHeight > viewport.height + 2) return;
+
+        const rect = footer.getBoundingClientRect();
+        const gap = viewport.height - rect.bottom;
+        if (gap > 2) {
+          issues.push(`footer floats ${Math.round(gap)}px above viewport bottom`);
+        }
+      }
+
       async function runCase(route, viewport) {
         const frame = document.createElement('iframe');
         frame.width = String(viewport.width);
@@ -202,6 +221,7 @@
           checkHorizontalOverflow(doc, issues);
           checkClipping(win, doc, viewport, issues);
           checkTouchTargets(win, doc, issues);
+          checkFooterPlacement(doc, viewport, issues);
 
           return {
             route: route.label,

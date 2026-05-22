@@ -49,7 +49,8 @@ function testPackageUsesModernFrontendStack() {
   assert(pkg.main === 'src/main.tsx', 'package.json: expected source entry metadata');
   assert(pkg.homepage === 'https://igrs.madeby.my.id/', 'package.json: expected deployed homepage metadata');
   assert(pkg.scripts.dev === 'vite --config config/vite.config.ts --host 127.0.0.1', 'package.json: dev should run Vite with grouped config');
-  assert(pkg.scripts.build === 'tsc -b config/tsconfig.json && vite --config config/vite.config.ts build && node ops/scripts/sync-pages-root.js', 'package.json: build should typecheck, run Vite, and sync branch-root Pages files');
+  assert(pkg.scripts.build === 'tsc -b config/tsconfig.json && vite --config config/vite.config.ts build', 'package.json: build should typecheck and run Vite without mutating branch-root Pages files');
+  assert(pkg.scripts['build:pages-root'] === 'npm run build && node ops/scripts/sync-pages-root.js', 'package.json: branch-root Pages sync should be explicit');
   assert(pkg.scripts.preview === 'vite --config config/vite.config.ts preview --host 127.0.0.1', 'package.json: preview should run Vite preview with grouped config');
   assert(pkg.scripts.typecheck === 'tsc -b config/tsconfig.json', 'package.json: typecheck should use TypeScript build mode');
   assert(pkg.scripts.test === 'vitest --config config/vite.config.ts run', 'package.json: test should use Vitest with grouped config');

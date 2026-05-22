@@ -124,8 +124,8 @@ jobs:
 
           for attempt in $(seq 1 "$RATING_DESC_ATTEMPTS"); do
             echo "Ratings/descriptors fetch attempt ${attempt}/${RATING_DESC_ATTEMPTS}"
-            if curl --insecure --fail --show-error --silent --location --max-time 3600 "https://api.igrs.id/public/ratings" -o "ratings-api.json" && \
-               curl --insecure --fail --show-error --silent --location --max-time 3600 "https://api.igrs.id/public/descriptors" -o "descriptors-api.json" && \
+            if curl --fail --show-error --silent --location --max-time 3600 "https://api.igrs.id/public/ratings" -o "ratings-api.json" && \
+               curl --fail --show-error --silent --location --max-time 3600 "https://api.igrs.id/public/descriptors" -o "descriptors-api.json" && \
                jq empty "ratings-api.json" && \
                jq empty "descriptors-api.json"; then
               RATING_DESC_OK=1
@@ -162,22 +162,16 @@ jobs:
               else .
               end;'
 
-          RATINGS_TRANSFORM='def assign_weight:
-            if .id == 7 then 1
-            elif .id == 4 then 2
-            elif .id == 5 then 3
-            elif .id == 28 then 4
-            elif .id == 6 then 5
-            elif .id == 35 then 6
-            else 0
-            end;
+          RATING_METADATA="$(jq 'map({key: (.id | tostring), value: {weight, color}}) | from_entries' "src/core/rating-metadata.json")"
 
+          RATINGS_TRANSFORM='
           (if type == "array" then . else [] end)
           | map({
             key: (.id | tostring),
             value: {
               name,
-              weight: assign_weight,
+              weight: ($ratingMetadata[(.id | tostring)].weight // 0),
+              color: ($ratingMetadata[(.id | tostring)].color // null),
               titleEn,
               titleId,
               contentEn,
@@ -243,7 +237,7 @@ jobs:
           ')"
 
           if [ "${SKIP_META:-0}" -ne 1 ]; then
-            RATINGS="$(jq "$RATINGS_TRANSFORM" "ratings-api.json")"
+            RATINGS="$(jq --argjson ratingMetadata "$RATING_METADATA" "$RATINGS_TRANSFORM" "ratings-api.json")"
             DESCRIPTORS="$(jq "$DESCRIPTORS_TRANSFORM" "descriptors-api.json")"
             GENERATED_AT="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 
@@ -279,6 +273,18 @@ jobs:
           rm -rf "$RAW_DIR"
 
           echo "Done"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Validate refreshed dataset
+        run: |
+          npm ci --ignore-scripts
+          npm test
 
       - name: Commit and push changes
         run: |

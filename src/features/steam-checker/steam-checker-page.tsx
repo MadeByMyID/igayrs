@@ -14,8 +14,10 @@ import { copyTextToClipboard } from '@/shared/lib/clipboard';
 import {
   computeSteamChecker,
   findGameByName,
+  buildSteamRatingComparison,
   parseSteamAppId,
   parseSteamRatingFlag,
+  descriptorName,
   ratingTitle,
   steamIgrsDescriptorIdsFromText,
   steamRatingToIgrsId,
@@ -28,7 +30,7 @@ import type { IgrsMeta, SteamMeta } from '@/shared/types';
 type CheckerState =
   | { status: 'idle' }
   | { status: 'loading'; appId: string }
-  | { status: 'error'; message: string }
+  | { status: 'error'; appId: string; message: string }
   | { status: 'success'; appId: string; reviewSummary: SteamReviewSummary | null; steamGame: SteamGameDetails };
 
 export function SteamCheckerPage() {
@@ -38,15 +40,19 @@ export function SteamCheckerPage() {
   const [input, setInput] = useState(() => parseSteamAppId(searchParams.get('appid') || '') || searchParams.get('appid') || '');
   const [checkerState, setCheckerState] = useState<CheckerState>({ status: 'idle' });
   const latestRequestIdRef = useRef(0);
+  const latestAbortControllerRef = useRef<AbortController | null>(null);
   const steamApi = useMemo(() => createSteamApi({ t }), [t]);
 
   const submitCheck = useCallback(async (rawAppId: string) => {
+    latestAbortControllerRef.current?.abort();
     const requestId = latestRequestIdRef.current + 1;
     latestRequestIdRef.current = requestId;
+    const abortController = new AbortController();
+    latestAbortControllerRef.current = abortController;
     const isLatestRequest = () => latestRequestIdRef.current === requestId;
     const appId = parseSteamAppId(rawAppId);
     if (!/^\d+$/.test(appId)) {
-      setCheckerState({ status: 'error', message: t('steamchecker.error.invalid') });
+      setCheckerState({ status: 'error', appId: rawAppId, message: t('steamchecker.error.invalid') });
       return;
     }
 
@@ -55,8 +61,8 @@ export function SteamCheckerPage() {
 
     try {
       const [payload, reviewSummary] = await Promise.all([
-        steamApi.fetchSteamAppDetails(appId),
-        steamApi.fetchSteamReviewSummary(appId)
+        steamApi.fetchSteamAppDetails(appId, { signal: abortController.signal }),
+        steamApi.fetchSteamReviewSummary(appId, { signal: abortController.signal })
       ]);
       const result = payload[appId];
       if (!result?.success || !result.data) {
@@ -68,7 +74,7 @@ export function SteamCheckerPage() {
     } catch (nextError) {
       if (!isLatestRequest()) return;
       const message = nextError instanceof Error ? nextError.message : t('steamchecker.error.load');
-      setCheckerState({ status: 'error', message });
+      setCheckerState({ status: 'error', appId, message });
     }
   }, [setSearchParams, steamApi, t]);
 
@@ -131,7 +137,7 @@ export function SteamCheckerPage() {
         </div>
         <div className="steam-checker-layout">
           <div className="steam-checker-main">
-            <SteamCheckerMain state={checkerState} t={t} />
+            <SteamCheckerMain state={checkerState} onRetry={appId => void submitCheck(appId)} t={t} />
           </div>
           <aside className="steam-checker-sidebar">
             {checkerState.status === 'success' ? (
@@ -154,7 +160,7 @@ export function SteamCheckerPage() {
   );
 }
 
-function SteamCheckerMain({ state, t }: { state: CheckerState; t: (key: string) => string }) {
+function SteamCheckerMain({ onRetry, state, t }: { onRetry: (appId: string) => void; state: CheckerState; t: (key: string) => string }) {
   if (state.status === 'idle') {
     return (
       <div className="empty-state fade-in">
@@ -179,6 +185,11 @@ function SteamCheckerMain({ state, t }: { state: CheckerState; t: (key: string) 
       <div className="empty-state fade-in">
         <div className="empty-state-title">{state.message}</div>
         <div className="empty-state-desc">{t('steamchecker.error.load')}</div>
+        {parseSteamAppId(state.appId) ? (
+          <button className="detail-link-btn empty-retry-btn" type="button" onClick={() => onRetry(state.appId)}>
+            {t('steamchecker.retry')}
+          </button>
+        ) : null}
       </div>
     );
   }
@@ -236,6 +247,14 @@ function SteamCheckerSidebar({
   const referenceRatingId = localMatch?.ratings?.[0] || null;
   const steamRatingId = steamRatingToIgrsId(steamRating);
   const steamRatingDescriptorIds = steamIgrsDescriptorIdsFromText(meta, steamRating?.descriptors || '', lang);
+  const comparison = buildSteamRatingComparison({
+    computedDescriptorIds: checker.mappedDescriptorIds,
+    computedRatingId: checker.computedRatingId,
+    localDescriptorIds: localMatch?.descriptors || [],
+    localRatingId: referenceRatingId,
+    steamDescriptorIds: steamRatingDescriptorIds,
+    steamRatingId
+  });
   const supportUrl = safeHttpUrl(steamGame.support_info?.url || '');
   const releaseDate = steamGame.release_date?.date || '';
   const steamStoreUrl = `https://store.steampowered.com/app/${appId}`;
@@ -280,6 +299,30 @@ function SteamCheckerSidebar({
         <DescriptorIcons ids={steamRatingDescriptorIds} emptyLabel={t('steamchecker.noDescriptors')} lang={lang} meta={meta} />
       </article>
 
+      <article className="rating-card fade-in steam-comparison-card">
+        <div className="rating-card-subtitle rating-card-kicker">{t('steamchecker.comparison')}</div>
+        <dl className="steam-comparison-list">
+          <div>
+            <dt>{t('detail.rating')}</dt>
+            <dd>{t(comparisonLabelKey('rating', comparison.ratingStatus))}</dd>
+          </div>
+          <div>
+            <dt>{t('detail.descriptors')}</dt>
+            <dd>{t(comparisonLabelKey('descriptor', comparison.descriptorStatus))}</dd>
+          </div>
+        </dl>
+        {comparison.missingFromSteamDescriptorIds.length ? (
+          <p className="steam-comparison-note">
+            {comparison.missingFromSteamDescriptorIds.map(id => descriptorName(meta, id, lang)).join(', ')}
+          </p>
+        ) : null}
+        {comparison.unexpectedSteamDescriptorIds.length ? (
+          <p className="steam-comparison-note">
+            {comparison.unexpectedSteamDescriptorIds.map(id => descriptorName(meta, id, lang)).join(', ')}
+          </p>
+        ) : null}
+      </article>
+
       <SteamReviewSummaryCard reviewSummary={reviewSummary} t={t} lang={lang} />
 
       <article className="rating-card fade-in">
@@ -313,9 +356,21 @@ function SteamCheckerSidebar({
           </div>
         </div>
         <DescriptorIcons ids={checker.mappedDescriptorIds} emptyLabel={t('steamchecker.noManualMapping')} lang={lang} meta={meta} />
+        <p className="steam-comparison-note">{t('steamchecker.advancedPublic')}</p>
       </article> : null}
     </>
   );
+}
+
+function comparisonLabelKey(scope: 'descriptor' | 'rating', status: 'match' | 'missing-local' | 'missing-steam' | 'mismatch' | 'unknown'): string {
+  const suffix = {
+    match: 'match',
+    'missing-local': 'missingLocal',
+    'missing-steam': 'missingSteam',
+    mismatch: 'mismatch',
+    unknown: 'unknown'
+  }[status];
+  return `steamchecker.comparison.${scope}.${suffix}`;
 }
 
 function SteamReviewSummaryCard({

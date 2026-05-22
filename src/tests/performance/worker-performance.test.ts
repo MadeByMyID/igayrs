@@ -17,11 +17,15 @@ function loadWorker(): WorkerModule {
   const context = {
     module: { exports: {} },
     exports: {},
+    AbortController,
+    AbortSignal,
     URL,
     Request,
     Response,
+    clearTimeout,
     console,
-    fetch: (...args: Parameters<typeof fetch>) => globalThis.fetch(...args)
+    fetch: (...args: Parameters<typeof fetch>) => globalThis.fetch(...args),
+    setTimeout
   };
   vm.runInNewContext(source, context, { filename: workerPath });
   return context.module.exports as WorkerModule;
@@ -95,6 +99,38 @@ describe('worker data cache', () => {
       expect((await second.json()).title).toBe('Cached OEmbed');
 
       expect(calls).toEqual(['https://site.test/games.json', 'https://site.test/meta.json']);
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+
+  it('passes abort signals to upstream dataset fetches', async () => {
+    const originalFetch = globalThis.fetch;
+    const signals: Array<AbortSignal | undefined> = [];
+    const games = [{ id: 303, name: 'Signal Preview', publisherName: 'Ops Studio', releaseYear: 2026, ratings: [7] }];
+    const meta = { ratings: { 7: { name: 'SU' } }, descriptors: {}, platforms: {} };
+
+    globalThis.fetch = (async (url: RequestInfo | URL, init?: RequestInit) => {
+      signals.push(init?.signal ?? undefined);
+      const href = String(url);
+      if (href === 'https://signal.test/games.json') return jsonResponse(games);
+      if (href === 'https://signal.test/meta.json') return jsonResponse(meta);
+      return new Response('Not found', { status: 404 });
+    }) as typeof fetch;
+
+    try {
+      const worker = loadWorker();
+      const response = await worker.fetch(new Request('https://worker.test/game/303', {
+        headers: { 'user-agent': 'Discordbot/2.0' }
+      }), {
+        SITE_ORIGIN: 'https://signal.test',
+        GAMES_PATH: '/games.json',
+        META_PATH: '/meta.json'
+      });
+
+      expect(response.status).toBe(200);
+      expect(signals).toHaveLength(2);
+      expect(signals.every(signal => signal instanceof AbortSignal)).toBe(true);
     } finally {
       globalThis.fetch = originalFetch;
     }
