@@ -9,6 +9,7 @@ module.exports = tseslint.config(
   {
     ignores: [
       'dist',
+      'assets',
       'node_modules',
       'artifacts',
       'coverage',

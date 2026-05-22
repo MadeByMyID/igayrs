@@ -8,7 +8,7 @@
   "main": "src/main.tsx",
   "scripts": {
     "dev": "vite --config config/vite.config.ts --host 127.0.0.1",
-    "build": "tsc -b config/tsconfig.json && vite --config config/vite.config.ts build",
+    "build": "tsc -b config/tsconfig.json && vite --config config/vite.config.ts build && node ops/scripts/sync-pages-root.js",
     "preview": "vite --config config/vite.config.ts preview --host 127.0.0.1",
     "typecheck": "tsc -b config/tsconfig.json",
     "lint": "eslint -c config/eslint.config.js .",

@@ -49,7 +49,7 @@ function testPackageUsesModernFrontendStack() {
   assert(pkg.main === 'src/main.tsx', 'package.json: expected source entry metadata');
   assert(pkg.homepage === 'https://igrs.madeby.my.id/', 'package.json: expected deployed homepage metadata');
   assert(pkg.scripts.dev === 'vite --config config/vite.config.ts --host 127.0.0.1', 'package.json: dev should run Vite with grouped config');
-  assert(pkg.scripts.build === 'tsc -b config/tsconfig.json && vite --config config/vite.config.ts build', 'package.json: build should typecheck before Vite build');
+  assert(pkg.scripts.build === 'tsc -b config/tsconfig.json && vite --config config/vite.config.ts build && node ops/scripts/sync-pages-root.js', 'package.json: build should typecheck, run Vite, and sync branch-root Pages files');
   assert(pkg.scripts.preview === 'vite --config config/vite.config.ts preview --host 127.0.0.1', 'package.json: preview should run Vite preview with grouped config');
   assert(pkg.scripts.typecheck === 'tsc -b config/tsconfig.json', 'package.json: typecheck should use TypeScript build mode');
   assert(pkg.scripts.test === 'vitest --config config/vite.config.ts run', 'package.json: test should use Vitest with grouped config');
@@ -75,9 +75,26 @@ function testProjectRootStaysGrouped() {
     assert(exists(relativePath), `${relativePath}: expected grouped top-level project directory`);
   }
 
-  for (const relativePath of ['app', 'tests', 'scripts', 'tools', 'worker', 'search', 'ratings', 'steamchecker']) {
+  for (const relativePath of ['app', 'tests', 'scripts', 'tools', 'worker']) {
     assert(!exists(relativePath), `${relativePath}: expected implementation details to be grouped away from the project root`);
   }
+}
+
+function testGitHubPagesBranchRootHasBuiltEntrypoint() {
+  const rootIndex = read('index.html');
+  assert(rootIndex.includes('<div id="root"></div>'), 'index.html: branch-root Pages should serve the app, not README.md');
+  assert(rootIndex.includes('src="./assets/main-'), 'index.html: branch-root Pages should load the built JS bundle');
+  assert(rootIndex.includes('href="./assets/main-'), 'index.html: branch-root Pages should load the built CSS bundle');
+  assert(exists('assets/data/json/igrs.games.json'), 'assets/data/json/igrs.games.json: branch-root Pages should include public data');
+  assert(exists('assets/data/images/favicon.svg'), 'assets/data/images/favicon.svg: branch-root Pages should include public images');
+  assert(exists('search/index.html'), 'search/index.html: branch-root Pages should include the search route entrypoint');
+  assert(exists('ratings/index.html'), 'ratings/index.html: branch-root Pages should include the ratings route entrypoint');
+  assert(exists('steamchecker/index.html'), 'steamchecker/index.html: branch-root Pages should include the Steam checker route entrypoint');
+  assert(exists('.nojekyll'), '.nojekyll: branch-root Pages should not run Jekyll processing');
+
+  const syncScript = read('ops/scripts/sync-pages-root.js');
+  assert(syncScript.includes('PUBLISH_PATHS'), 'ops/scripts/sync-pages-root.js: expected explicit publish path allowlist');
+  assert(syncScript.includes('assertInsideProject'), 'ops/scripts/sync-pages-root.js: sync should guard write paths');
 }
 
 function testViteTypescriptTailwindConfigurationExists() {
@@ -195,8 +212,8 @@ function testVitePublicAssetsAreCanonical() {
   assert(exists('public/assets/data/json/igrs.meta.json'), 'public/assets/data/json/igrs.meta.json: expected canonical metadata asset');
   assert(exists('public/assets/data/json/igrs.games.json'), 'public/assets/data/json/igrs.games.json: expected canonical games asset');
   assert(exists('public/assets/data/images/favicon.svg'), 'public/assets/data/images/favicon.svg: expected canonical favicon asset');
-  assert(!exists('assets/data/json/igrs.meta.json'), 'assets/data/json/igrs.meta.json: data assets should live under Vite public assets');
-  assert(!exists('assets/styles/main.css'), 'assets/styles/main.css: app styles should be bundled from src/styles');
+  assert(exists('assets/data/json/igrs.meta.json'), 'assets/data/json/igrs.meta.json: branch-root Pages should include generated public data');
+  assert(!exists('assets/styles/main.css'), 'assets/styles/main.css: source styles should be bundled from src/styles');
 }
 
 function testAutomationTargetsVitePublicData() {
@@ -234,6 +251,7 @@ function testRepositoryFinalizationHygiene() {
 const tests = [
   testPackageUsesModernFrontendStack,
   testProjectRootStaysGrouped,
+  testGitHubPagesBranchRootHasBuiltEntrypoint,
   testViteTypescriptTailwindConfigurationExists,
   testProjectPagesAssetPathsArePortable,
   testReactApplicationBoundariesExist,
