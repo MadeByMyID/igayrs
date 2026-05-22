@@ -1,81 +1,80 @@
 # Changelog
 
-This changelog tracks notable project changes from the current documentation baseline onward. The format is grouped by release date and change type so contributors can quickly understand user-facing changes, internal maintenance, and verification updates.
+All notable changes to this project are documented here.
 
-## Unreleased
+This file follows the Keep a Changelog section model: Added, Changed, Deprecated, Removed, Fixed, and Security. The project package version is currently `0.0.0`; the visible Git history also contains a `v0.0.1` commit message without a tag in this checkout.
+
+## [0.0.2]
 
 ### Added
 
-- Project documentation files: `readme.md`, `changelog.md`, `license.md`, `code_of_conduct.md`, and `contributing.md`.
-- Contributor guidance for local setup, test expectations, accessibility checks, security expectations, and pull request review.
-- Conservative license status documentation until the repository owner chooses an explicit open-source license.
-- Steam checker recent review summaries showing Steam's review label, total reviews, positive reviews, negative reviews, and positive percentage.
+- `SECURITY.md` with vulnerability-reporting guidance, supported-version scope, disclosure expectations, and deployer security notes.
+- README Q&A entries for setup, route structure, data files, visual checks, developer unlock behavior, Worker purpose, and version ambiguity.
+- README configuration reference for supported local script and Worker environment settings.
 
 ### Changed
 
-- Steam checker descriptions now render with structured intro paragraphs, section headings, and scannable feature lists instead of one flat text block.
-- Steam checker description parsing now keeps Steam-style list blocks together instead of treating short value lines as headings.
+- README onboarding now documents `npm run serve:static`, CI/data-refresh workflows, the static deployment target, and the current folder structure.
+- Code of conduct now uses a Contributor Covenant-inspired structure with explicit reporting and enforcement sections.
+- Contributing guidance now points security reports to `SECURITY.md`.
 
-### Verification
+### Fixed
 
-- Documentation should be reviewed for accuracy whenever routes, scripts, data locations, worker behavior, or contribution policy changes.
-- Steam checker description readability changes should run `npm run check` and `npm run visual:check`.
-- Steam review summary changes should keep review data optional so failed review fetches do not block the main Steam checker result.
+- Documentation references now use the repository's uppercase Markdown file names.
 
-## 0.0.0 - 2026-05-05
+### Security
+
+- Security reporting guidance now explicitly avoids public exploit details and marks the missing private security contact as requiring maintainer completion.
+
+## [0.0.1] - 2026-05-05
 
 ### Added
 
 - Static app pages for home, search, ratings guide, and Steam game checker.
-- Node-based static dev server with path traversal protection and basic security headers.
+- Node-based static server with path traversal protection and basic security headers.
 - Browser-native JavaScript module structure under `src/`.
 - Search index logic with normalized title, publisher, rating, platform, descriptor, and year filtering.
 - URL-backed search state for repeatable filtered search views.
 - Runtime data contract checks for local JSON payloads.
 - Rating guide copy with summaries, structured criteria, watch-for rows, and official source links.
-- Content descriptor guide copy with compact summaries and review-for cues.
+- Content descriptor guide copy with summaries and review cues.
 - Shared SVG icon sprite and icon rendering helper.
-- Responsive visual compatibility runner for mobile, tablet, laptop, desktop, and wide monitor checks.
-- Cloudflare Worker preview and redirect support under `worker/`.
+- Responsive visual compatibility runner for mobile, tablet, laptop, desktop, and wide-monitor checks.
+- Cloudflare Worker preview and redirect support for `/game/*`.
+- GitHub Actions workflow for CI checks.
+- GitHub Actions workflow for refreshing public IGRS data.
+- Project documentation files for README, changelog, license, code of conduct, and contributing guidance.
 
 ### Changed
 
-- Moved root-level assets into categorized folders:
-  - Styles under `assets/styles/`.
-  - Data JSON under `assets/data/json/`.
-  - Images under `assets/data/images/`.
-  - App source under `src/`.
-  - Tooling under `scripts/` and `tools/`.
-- Replaced legacy monolithic frontend script structure with native ES modules.
+- Moved root-level assets into categorized folders for styles, data JSON, images, app source, scripts, and tooling.
+- Replaced the legacy monolithic frontend script structure with native modules.
 - Standardized card radius, layout tokens, responsive gutters, panel padding, and focus states.
-- Replaced emoji and decorative glyph UI with shared SVG icons.
+- Replaced emoji and decorative glyph controls with shared SVG icons.
 - Added auto-updating footer year and copyright icon.
-- Improved Steam checker layout consistency and result card organization.
+- Improved Steam checker layout consistency and result-card organization.
+
+### Removed
+
+- Legacy monolithic `script.js` frontend implementation.
 
 ### Fixed
 
 - Mobile layout overflow risks in the header, search page, pagination, and footer.
 - Small touch-target issue in the mobile pagination jump input.
 - Mojibake and non-standard glyph remnants in UI-facing files.
-- Search result cards now support keyboard activation.
-- Data load failures render stable, user-safe empty/error states.
+- Search result cards support keyboard activation.
+- Data load failures render stable user-safe empty/error states.
 
-### Verification
+### Security
 
-- `npm run check` validates JavaScript syntax and runs UI and logic tests.
-- `npm run visual:check` validates 44 page and viewport combinations.
-- UI glyph scans exclude data assets and generated reports while checking user-facing source files.
+- Added static-server path traversal protection.
+- Added basic static-server security headers.
+- Added safe rendering helpers for user-visible HTML generated from data.
 
-## Changelog Policy
+## Changelog Maintenance
 
-Use these sections when adding entries:
-
-- `Added` for new features, docs, scripts, assets, or routes.
-- `Changed` for behavior, layout, copy, structure, or workflow changes.
-- `Deprecated` for supported behavior that will be removed later.
-- `Removed` for deleted behavior, files, scripts, routes, or public contracts.
-- `Fixed` for bug fixes and regressions.
-- `Security` for vulnerability fixes or hardening.
-- `Verification` for new or changed validation commands.
-
-Keep entries factual and user-facing where possible. Do not use the changelog as a commit log.
+- Add entries under `[Unreleased]` as part of the same change that introduces them.
+- Keep entries factual and grounded in code, docs, workflows, or visible history.
+- Do not use the changelog as a commit log.
+- Move `[Unreleased]` entries into a dated version section when the project owner creates a release.

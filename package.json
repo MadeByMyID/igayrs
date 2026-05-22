@@ -2,14 +2,48 @@
   "name": "igrsdb",
   "version": "0.0.0",
   "private": true,
-  "description": "Static local dev server for IGRSDB.",
+  "description": "Vite React frontend for the unofficial IGRS database.",
+  "license": "UNLICENSED",
+  "homepage": "https://igrs.madeby.my.id/",
+  "main": "src/main.tsx",
   "scripts": {
-    "dev": "node scripts/dev-server.js",
-    "visual:check": "node scripts/visual-compat.js",
-    "check": "node --check src/main.js && node --check src/core/constants.js && node --check src/core/data-contracts.js && node --check src/core/descriptor-guide.js && node --check src/core/icons.js && node --check src/core/i18n.js && node --check src/core/rating-guide.js && node --check src/core/safe-render.js && node --check src/core/search-index.js && node --check src/core/steam-description.js && node --check src/core/steam-search.js && node --check src/core/steam-reviews.js && node --check src/core/url-state.js && node --check scripts/dev-server.js && node --check scripts/visual-compat.js && node --check tests/github-automation.test.js && node tests/ui-consistency.test.js && node tests/logic.test.js && node tests/github-automation.test.js",
-    "test": "node tests/ui-consistency.test.js && node tests/logic.test.js && node tests/github-automation.test.js"
+    "dev": "vite --config config/vite.config.ts --host 127.0.0.1",
+    "build": "tsc -b config/tsconfig.json && vite --config config/vite.config.ts build",
+    "preview": "vite --config config/vite.config.ts preview --host 127.0.0.1",
+    "typecheck": "tsc -b config/tsconfig.json",
+    "lint": "eslint -c config/eslint.config.js .",
+    "serve:static": "node ops/scripts/dev-server.js --root dist",
+    "visual:check": "node ops/scripts/visual-compat.js",
+    "check": "node --check ops/scripts/dev-server.js && node --check ops/scripts/visual-compat.js && node --check ops/worker/worker.js && node src/tests/structure/stack.test.js && node src/tests/structure/github-automation.test.js && npm run lint && npm run test && npm run build",
+    "test": "vitest --config config/vite.config.ts run"
   },
   "engines": {
     "node": ">=18"
+  },
+  "dependencies": {
+    "lucide-react": "^1.16.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-router-dom": "^7.15.1",
+    "valibot": "^1.4.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@tailwindcss/vite": "^4.3.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@types/node": "^25.9.1",
+    "@types/react": "^19.2.15",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.2",
+    "eslint": "^10.4.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.6.0",
+    "jsdom": "^29.1.1",
+    "lightningcss": "^1.32.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.59.4",
+    "vite": "^8.0.14",
+    "vitest": "^4.1.7"
   }
 }

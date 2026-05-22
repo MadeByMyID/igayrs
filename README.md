@@ -1,58 +1,41 @@
 # IGRSDB
 
-IGRSDB is an unofficial, static web interface for browsing game entries from the Indonesian Game Rating System registry. It provides a searchable game database, a readable ratings guide, content descriptor explanations, and a Steam game checker that compares Steam metadata against local IGRS-oriented mappings.
+IGRSDB is an unofficial, static web interface for browsing game entries from the Indonesian Game Rating System registry. It provides a searchable game database, a ratings guide, content descriptor explanations, and a Steam checker that compares Steam metadata with local IGRS-oriented mappings.
 
-This project is designed to run without a frontend build step. The app is plain HTML, CSS, and browser-native JavaScript modules, with Node.js used only for local development and verification scripts.
+The project is a Vite React application written in TypeScript. It builds to static files in `dist/`, serves public data from `public/assets/data/`, and keeps operational scripts and Worker code under `ops/`.
 
-## Features
+## What You Can Do
 
 - Search games by title and publisher.
 - Filter results by rating, platform, content descriptor, and release year.
 - Open detailed game views with rating badges, descriptors, platform metadata, external links, and share links.
-- Read compact but informative age rating and content descriptor guidance.
+- Read age rating and content descriptor guidance.
 - Check a Steam app ID or Steam app URL against available Steam IGRS metadata and local descriptor mappings.
 - Preserve search state in the URL for repeatable filtered views.
-- Support keyboard navigation, visible focus states, touch-friendly controls, and reduced-motion preferences.
 - Run responsive compatibility checks across mobile, tablet, laptop, desktop, and wide-monitor viewports.
-
-## Tech Stack
-
-- Static HTML pages for the main routes.
-- CSS in `assets/styles/main.css`.
-- Browser-native ES modules under `src/`.
-- JSON data and image assets under `assets/data/`.
-- Node.js scripts for local serving and visual compatibility checks.
-- Cloudflare Worker code under `worker/` for preview and redirect behavior.
-- No runtime npm dependencies.
 
 ## Requirements
 
 - Node.js 18 or newer.
+- npm, using the committed `package-lock.json`.
 - A Chromium-based browser for `npm run visual:check`.
 
-The visual checker looks for Chrome, Chromium, or Microsoft Edge automatically. If it cannot find one, set `CHROME_PATH` or pass `--browser`.
+The visual checker looks for Chrome, Chromium, or Microsoft Edge automatically. If it cannot find one, set `CHROME_PATH`, set `BROWSER_PATH`, or pass `--browser`.
 
 ## Quick Start
 
-Install dependencies:
-
 ```powershell
 npm install
-```
-
-Run the local dev server:
-
-```powershell
 npm run dev
 ```
 
-Open the printed localhost URL, usually:
+Open the printed local URL, usually:
 
 ```text
 http://127.0.0.1:5173/
 ```
 
-Use another port if needed:
+Use a different Vite port when needed:
 
 ```powershell
 npm run dev -- --port 8080
@@ -62,174 +45,246 @@ npm run dev -- --port 8080
 
 | Script | Purpose |
 | --- | --- |
-| `npm run dev` | Starts the static local dev server. |
-| `npm test` | Runs the UI consistency and logic regression tests. |
-| `npm run check` | Runs JavaScript syntax checks plus the full test suite. |
-| `npm run visual:check` | Starts a temporary local server and runs responsive browser checks. |
+| `npm run dev` | Starts the Vite dev server against `src/`. |
+| `npm run build` | Runs TypeScript build-mode checks and creates `dist/`. |
+| `npm run preview` | Serves the production Vite build through Vite preview. |
+| `npm run typecheck` | Runs TypeScript project-reference checks. |
+| `npm run lint` | Runs ESLint across source, scripts, tests, and Worker code. |
+| `npm test` | Runs the Vitest unit, integration, and performance tests. |
+| `npm run check` | Runs syntax checks, structure checks, lint, tests, and production build. |
+| `npm run serve:static` | Serves `dist/` with the local Node static server. |
+| `npm run visual:check` | Starts a temporary Vite server and runs responsive browser checks. |
 
 ## Project Structure
 
 ```text
 .
-|-- index.html
-|-- search/
-|   `-- index.html
-|-- ratings/
-|   `-- index.html
-|-- steamchecker/
-|   `-- index.html
-|-- assets/
-|   |-- data/
-|   |   |-- images/
-|   |   `-- json/
-|   |-- icons.svg
-|   `-- styles/
 |-- src/
-|   |-- main.js
-|   `-- core/
-|-- scripts/
-|-- tests/
-|-- tools/
-|-- worker/
+|   |-- index.html
+|   |-- 404.html
+|   |-- search/
+|   |-- ratings/
+|   |-- steamchecker/
+|   |-- app/
+|   |-- core/
+|   |-- features/
+|   |-- shared/
+|   |-- styles/
+|   |-- tests/
+|   `-- tools/
+|-- config/
+|   |-- vite.config.ts
+|   |-- tsconfig.json
+|   |-- tsconfig.app.json
+|   |-- tsconfig.node.json
+|   |-- tsconfig.test.json
+|   |-- tailwind.config.ts
+|   `-- eslint.config.js
+|-- public/
+|   `-- assets/
+|       |-- data/
+|       |   |-- images/
+|       |   `-- json/
+|       `-- icons.svg
+|-- ops/
+|   |-- scripts/
+|   `-- worker/
 `-- .github/
 ```
 
+## Architecture Overview
+
+- `src/main.tsx` mounts the React app.
+- `src/app/App.tsx` wires React Router, shared providers, and the application shell.
+- `src/app/providers/` owns language/developer-unlock state and lazy IGRS data loading.
+- `src/features/` contains route-level UI for home, search, ratings, Steam checker, and fallback pages.
+- `src/core/` contains framework-light domain helpers for contracts, search, Steam parsing, URL state, i18n, and guide copy.
+- `src/shared/` contains shared API clients, components, hooks, formatting helpers, and types.
+- `config/vite.config.ts` sets the Vite root to `src/`, public assets to `public/`, build output to `dist/`, and HTML entries for all public routes.
+- `ops/scripts/` contains Node utilities for static serving and visual compatibility checks.
+- `ops/worker/` contains the Cloudflare Worker used for `/game/*` preview and redirect behavior.
+
+The app is static at deployment time. Runtime data is fetched from JSON files served with the site, validated at the data-loading boundary, and rendered through React components and safe formatting helpers.
+
 ## Data Files
 
-The app reads local JSON files from `assets/data/json/`:
+The app reads local JSON files from `public/assets/data/json/`, which Vite serves at `/assets/data/json/`:
 
 - `igrs.meta.json` contains ratings, platforms, descriptors, and metadata.
 - `igrs.games.json` contains game entries.
 - `steam.meta.json` contains Steam descriptor mapping metadata.
 - `igrs.extra.json` contains optional extra fields used when developer fields are unlocked.
 
-Image assets are served from `assets/data/images/`:
+Image assets are served from `public/assets/data/images/`:
 
 - Rating badges live under `ratings/`.
 - Content descriptor icons live under `descriptors/`.
 - Branding assets live at the image root.
 
-The app validates loaded data through `src/core/data-contracts.js` before rendering. Invalid or unavailable required data renders a user-safe error state instead of failing silently.
+The scheduled data workflow in `.github/workflows/update-igrs-db.yml` refreshes IGRS JSON data from public IGRS endpoints and commits changes when the generated files differ.
 
-## Main Modules
+## Configuration
 
-| File | Responsibility |
-| --- | --- |
-| `src/main.js` | App entry, page initialization, rendering, events, Steam checker flow. |
-| `src/core/constants.js` | Shared paths, rating order, and official source URLs. |
-| `src/core/data-contracts.js` | Runtime validation and normalization for JSON payloads. |
-| `src/core/descriptor-guide.js` | Localized descriptor guide summaries and review cues. |
-| `src/core/icons.js` | Shared SVG icon rendering helper. |
-| `src/core/i18n.js` | English and Indonesian UI strings. |
-| `src/core/rating-guide.js` | Localized age rating guide copy. |
-| `src/core/safe-render.js` | HTML escaping and safe external URL rendering helpers. |
-| `src/core/search-index.js` | Normalized search index, facets, and filtering. |
-| `src/core/url-state.js` | Query-string parsing and serialization for search state. |
+The main browser app does not require a committed `.env` file.
+
+<details><summary><strong>Optional local and operational settings</strong></summary>
+
+| Setting | Used by | Purpose |
+| --- | --- | --- |
+| `CHROME_PATH` | `npm run visual:check` | Explicit Chromium, Chrome, or Edge executable path. |
+| `BROWSER_PATH` | `npm run visual:check` | Fallback browser executable path. |
+| `HOST` | `npm run serve:static` | Host for the Node static server. Defaults to `127.0.0.1`. |
+| `PORT` | `npm run serve:static` | Port for the Node static server. Defaults to `5173`. |
+| `SERVE_ROOT` | `npm run serve:static` | Directory served by the Node static server. Defaults to the project root, while the npm script passes `dist`. |
+| `SITE_ORIGIN` | Cloudflare Worker | Public site origin. `ops/worker/wrangler.toml` sets `https://igrs.madeby.my.id`. |
+
+The Worker code also supports `GAMES_PATH` and `META_PATH` environment overrides for the JSON files it fetches, although those keys are not set in the checked-in Wrangler config.
+
+</details>
 
 ## Steam Checker Behavior
 
-The Steam checker accepts either a numeric app ID or a Steam app URL. It extracts the app ID, requests Steam app details through the configured CORS proxy, and compares available Steam IGRS metadata with local IGRS records.
+The Steam checker accepts either a numeric app ID or a Steam app URL. It extracts the app ID, requests Steam app details through the configured CORS proxy in `src/shared/api/steam-api.ts`, and compares available Steam IGRS metadata with local IGRS records.
 
-The checker shows:
-
-- A local IGRS reference card when a reliable generated Steam rating can be matched to a local game name.
-- A Steam rating card based on Steam-provided IGRS metadata.
-- A recent reviews summary with Steam's review label, total review count, positive count, negative count, and positive percentage.
-- A release and action card with copy, Steam, and IGRS links.
-- A manual mapping card only when developer fields are unlocked.
-
-External Steam requests use timeouts and bounded retries with backoff and jitter. Review summary data is optional; if Steam reviews cannot be loaded, the main app detail result still renders.
+External Steam requests use timeouts and bounded retries with backoff and jitter. Review summary data is optional; if Steam reviews cannot be loaded, the main app detail result can still render.
 
 ## Developer Unlock
 
-Some fields are intentionally hidden by default. The browser unlocks developer fields when either:
+Some fields are hidden by default. The browser unlocks developer fields when either:
 
 - `localStorage.igrs-dev` is set to `1`, or
 - the `UNLOCKED=true` cookie is present.
 
 The language toggle also increments a local counter and unlocks developer fields after repeated toggles. This is a frontend-only convenience gate and must not be treated as authorization for protected data.
 
-## Responsive Compatibility
+## Testing and Verification
 
-Run:
+Run the full project check before handing off a change:
+
+```powershell
+npm run check
+```
+
+Run visual checks for meaningful UI, layout, route, CSS, or responsive changes:
 
 ```powershell
 npm run visual:check
 ```
 
-The checker covers:
-
-- 320px, 375px, 390px, and 430px mobile widths.
-- 768px portrait tablet.
-- 1024px landscape tablet.
-- 1280px laptop.
-- 1366px, 1440px, and 1920px desktop widths.
-- 2560px wide monitor.
-
-It checks the home page, search page, ratings page, and Steam checker page for loading failures, horizontal overflow, clipped key elements, and small touch targets. A JSON report is written to `artifacts/visual-compat-report.json`.
-
-## Accessibility Notes
-
-- Interactive controls use visible `:focus-visible` states.
-- Touch targets are kept at or above 44px where practical.
-- Motion is reduced when `prefers-reduced-motion: reduce` is set.
-- SVG icons used for decoration are hidden from assistive technology.
-- Meaningful icon-only or icon-adjacent content has text labels or screen-reader text.
-
-## Security Notes
-
-- The local dev server rejects path traversal and unsupported HTTP methods.
-- Dev server responses include basic security headers such as `X-Content-Type-Options`, `X-Frame-Options`, and `Referrer-Policy`.
-- User-visible HTML generated from data is escaped through shared helpers.
-- External links are passed through safe URL helpers where they are generated dynamically.
-- No secrets should be committed. Use environment variables or deployment platform secrets for private configuration.
+The visual checker writes `artifacts/visual-compat-report.json`, which is ignored by Git.
 
 ## Deployment
 
-The main app can be deployed as static files from the repository root. Ensure the host serves:
+Build the app before deployment:
 
-- `.html` as `text/html`.
-- `.js` as JavaScript modules.
-- `.css` as CSS.
-- `.json` as JSON.
-- `.svg` and `.png` image assets with correct content types.
+```powershell
+npm run build
+```
 
-Search, ratings, and Steam checker routes are directory-based and expect their `index.html` files to be served at:
+Deploy the generated `dist/` directory to the static host. The visible deployment domain is `igrs.madeby.my.id`, from `CNAME` and `package.json#homepage`.
 
+The build emits route entrypoints for:
+
+- `/`
+- `/404.html`
 - `/search/`
 - `/ratings/`
 - `/steamchecker/`
 
+The Cloudflare Worker under `ops/worker/` is configured by `ops/worker/wrangler.toml` for `igrs.madeby.my.id/game/*`.
+
 ## Troubleshooting
 
-If the page shows a data loading error:
+<details><summary><strong>The page shows a data loading error.</strong></summary>
 
-- Confirm the dev server is being used instead of opening HTML files directly from disk.
-- Confirm `assets/data/json/igrs.meta.json` and `assets/data/json/igrs.games.json` exist.
-- Run `npm run check` to catch syntax and data-flow regressions covered by tests.
+- Use the dev server instead of opening HTML files directly from disk.
+- Confirm `public/assets/data/json/igrs.meta.json` and `public/assets/data/json/igrs.games.json` exist.
+- Run `npm run check` to catch syntax, data-contract, lint, test, and build regressions.
 
-If `npm run visual:check` cannot find a browser:
+</details>
+
+<details><summary><strong>The visual checker cannot find a browser.</strong></summary>
+
+Set an explicit browser path:
 
 ```powershell
 $env:CHROME_PATH = "C:\Program Files\Google\Chrome\Application\chrome.exe"
 npm run visual:check
 ```
 
-If the Steam checker cannot load data:
+Or pass it directly:
 
-- Confirm the app ID is numeric after parsing.
+```powershell
+npm run visual:check -- --browser "C:\Program Files\Google\Chrome\Application\chrome.exe"
+```
+
+</details>
+
+<details><summary><strong>The Steam checker cannot load data.</strong></summary>
+
+- Confirm the input is a numeric Steam app ID or a Steam app URL containing one.
 - Confirm network access is available.
-- Confirm the CORS proxy used in `src/main.js` is reachable.
+- Confirm the CORS proxy configured in `src/shared/api/steam-api.ts` is reachable.
+- Treat review summary failures as non-fatal; the app intentionally allows the main result to render without reviews.
+
+</details>
+
+## Q&A
+
+<details><summary><strong>Can I open `src/index.html` directly in a browser?</strong></summary>
+
+Use `npm run dev`, `npm run preview`, or `npm run serve:static` after building. The app expects Vite/static-host behavior for module loading, route entrypoints, and `/assets/...` public data URLs.
+
+</details>
+
+<details><summary><strong>Why are HTML files under `src/` while data is under `public/`?</strong></summary>
+
+`config/vite.config.ts` sets `src/` as the Vite root and `public/` as the public asset directory. HTML entrypoints belong to the Vite app, while JSON, images, and icon assets must keep stable public URLs under `/assets/...`.
+
+</details>
+
+<details><summary><strong>Which command should I run before opening a pull request?</strong></summary>
+
+Run `npm run check` for all changes. Also run `npm run visual:check` for UI, CSS, route, responsive, or layout changes.
+
+</details>
+
+<details><summary><strong>Where should I change IGRS data?</strong></summary>
+
+Generated public data lives in `public/assets/data/json/`. Keep the shapes compatible with `src/core/data-contracts.ts`. The scheduled GitHub workflow also regenerates `igrs.meta.json`, `igrs.games.json`, and `igrs.extra.json` from public IGRS endpoints.
+
+</details>
+
+<details><summary><strong>Is developer unlock an authorization mechanism?</strong></summary>
+
+No. Developer unlock is local browser state used to reveal optional fields in the static UI. It must not be used to protect private data or privileged behavior.
+
+</details>
+
+<details><summary><strong>Why does the Worker exist if the app is static?</strong></summary>
+
+The Worker handles `/game/*` preview and redirect behavior. It can serve crawler-friendly preview metadata for game links, provide oEmbed payloads, and redirect normal users to the static search page hash route.
+
+</details>
+
+<details><summary><strong>What version should I use for release notes?</strong></summary>
+
+`package.json` currently reports `0.0.0`. The visible Git history contains a `v0.0.1` commit message but no Git tag in this checkout. Confirm the intended release/version policy with a maintainer before publishing versioned release notes.
+
+</details>
+
+## Repository Documentation
+
+- `CONTRIBUTING.md` explains contribution workflow and verification expectations.
+- `CHANGELOG.md` tracks notable changes.
+- `LICENSE.md` documents the current all-rights-reserved license status.
+- `SECURITY.md` explains vulnerability reporting and deployer security notes.
+- `CODE_OF_CONDUCT.md` defines participation and enforcement expectations.
 
 ## Contributing
 
-Read `contributing.md` before opening a change. The short version is:
-
-- Keep changes focused.
-- Run `npm run check`.
-- Run `npm run visual:check` for meaningful UI or layout changes.
-- Do not commit secrets, private data, generated reports, or unrelated refactors.
+Keep changes focused, preserve the static architecture, and use existing helpers before adding new abstractions. Run `npm run check` before handoff, and run `npm run visual:check` for meaningful UI changes.
 
 ## License
 
-See `license.md`. Until the repository owner replaces it with an explicit open-source license, this project is all rights reserved.
+See `LICENSE.md`. Until the repository owner replaces it with an explicit open-source license, this project is all rights reserved.

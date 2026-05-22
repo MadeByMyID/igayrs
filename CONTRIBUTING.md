@@ -6,10 +6,11 @@ Thank you for taking the time to improve IGRSDB. This guide explains how to set 
 
 Read:
 
-- `readme.md` for project overview, setup, scripts, data files, and deployment notes.
-- `code_of_conduct.md` for participation expectations.
-- `license.md` for the current license status.
-- `changelog.md` for how to record notable changes.
+- `README.md` for project overview, setup, scripts, data files, and deployment notes.
+- `CODE_OF_CONDUCT.md` for participation expectations.
+- `SECURITY.md` for vulnerability reporting expectations.
+- `LICENSE.md` for the current license status.
+- `CHANGELOG.md` for how to record notable changes.
 
 ## Contribution Types
 
@@ -99,10 +100,12 @@ changes
 
 ## Testing Expectations
 
-Run `npm run check` for all changes. It performs JavaScript syntax checks and runs:
+Run `npm run check` for all changes. It performs syntax checks, linting, TypeScript checks, tests, and the production build. Test files live under:
 
-- `tests/ui-consistency.test.js`
-- `tests/logic.test.js`
+- `src/tests/structure/`
+- `src/tests/unit/`
+- `src/tests/integration/`
+- `src/tests/performance/`
 
 Run `npm run visual:check` when changing:
 
@@ -129,7 +132,7 @@ When changing UI:
 - Respect `prefers-reduced-motion`.
 - Avoid text overlap, clipped controls, and horizontal page overflow.
 - Avoid hardcoded viewport-specific layout hacks when shared tokens or responsive grids can solve the issue.
-- Use `assets/icons.svg` and `src/core/icons.js` for shared icons.
+- Use `public/assets/icons.svg` and existing shared React components for icons.
 - Do not reintroduce emoji or decorative glyphs for UI controls.
 
 ## JavaScript Guidelines
@@ -139,9 +142,9 @@ When changing JavaScript:
 - Prefer existing helpers and modules before adding new abstractions.
 - Escape user-visible HTML through `esc` or safe rendering helpers.
 - Validate data at loading boundaries, not repeatedly throughout rendering.
-- Keep URL state parsing and serialization in `src/core/url-state.js`.
-- Keep search normalization and filtering in `src/core/search-index.js`.
-- Keep localization strings in `src/core/i18n.js`.
+- Keep URL state parsing and serialization in `src/core/url-state.ts`.
+- Keep search normalization and filtering in `src/core/search-index.ts`.
+- Keep localization strings in `src/core/i18n.ts`.
 - Keep rating and descriptor guide copy in their dedicated core modules.
 - Use stable error codes for data contract failures.
 
@@ -164,7 +167,7 @@ When changing data files:
 - Keep IDs numeric where the app expects numeric IDs.
 - Keep rating, descriptor, platform, and year values compatible with existing filters.
 - Do not add private data, secrets, tracking identifiers, or non-public URLs.
-- Update `src/core/data-contracts.js` if the payload shape intentionally changes.
+- Update `src/core/data-contracts.ts` if the payload shape intentionally changes.
 - Add tests for new required fields or compatibility behavior.
 
 ## Steam Checker Guidelines
@@ -190,7 +193,7 @@ Do not submit:
 - Unbounded external requests.
 - New external dependencies without justification.
 
-If you find a security issue, do not publish exploit details in a public issue. Use the least public maintainer contact available and share only the minimum safe detail until triage.
+If you find a security issue, follow `SECURITY.md`. Do not publish exploit details in a public issue. Use the least public maintainer contact available and share only the minimum safe detail until triage.
 
 ## Documentation Guidelines
 
@@ -206,7 +209,7 @@ Update docs when changing:
 - Contributor workflow.
 - License or governance policy.
 
-Update `changelog.md` for notable user-facing or contributor-facing changes.
+Update `CHANGELOG.md` for notable user-facing or contributor-facing changes.
 
 ## Pull Request Checklist
 
@@ -222,4 +225,4 @@ Before requesting review:
 
 ## License Notice for Contributions
 
-By contributing, you confirm that you have the right to submit the contribution and that it can be included in this project under the current `license.md`. If you are unsure whether code, copy, data, or assets can be contributed, ask before submitting.
+By contributing, you confirm that you have the right to submit the contribution and that it can be included in this project under the current `LICENSE.md`. If you are unsure whether code, copy, data, or assets can be contributed, ask before submitting.

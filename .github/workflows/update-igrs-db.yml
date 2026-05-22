@@ -147,7 +147,7 @@ jobs:
           fi
 
           echo "Normalizing and splitting database..."
-          OUTPUT_DIR="assets/data/json"
+          OUTPUT_DIR="public/assets/data/json"
           mkdir -p "$OUTPUT_DIR"
 
           if [ "${SKIP_META:-0}" -eq 1 ] && ! test -s "${OUTPUT_DIR}/igrs.meta.json"; then
@@ -282,7 +282,7 @@ jobs:
 
       - name: Commit and push changes
         run: |
-          git add assets/data/json/igrs.meta.json assets/data/json/igrs.games.json assets/data/json/igrs.extra.json
+          git add public/assets/data/json/igrs.meta.json public/assets/data/json/igrs.games.json public/assets/data/json/igrs.extra.json
           
           if git diff --cached --quiet; then
             echo "No data changes detected."
