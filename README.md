@@ -183,6 +183,8 @@ npm run build
 
 Deploy the generated `dist/` directory to the static host. The visible deployment domain is `igrs.madeby.my.id`, from `CNAME` and `package.json#homepage`.
 
+GitHub Pages deployment is handled by `.github/workflows/pages.yml`, which builds the app and deploys the generated `dist/` artifact. In the repository Pages settings, the publishing source must be set to GitHub Actions; branch-root publishing will show repository documentation when no root `index.html` is present.
+
 The build emits route entrypoints for:
 
 - `/`

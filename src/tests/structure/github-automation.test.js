@@ -47,6 +47,30 @@ function testDatasetUpdateWorkflowHasSafeBoundsAndFallbacks() {
   assert(workflow.includes('rm -f "$BATCH_FAILED_IDS_FILE"'), `${workflowPath}: temporary failure logs should be cleaned up`);
 }
 
+function testPagesWorkflowDeploysBuiltViteArtifact() {
+  const workflowPath = '.github/workflows/pages.yml';
+  const workflow = read(workflowPath);
+
+  assert(workflow.includes('name: Deploy GitHub Pages'), `${workflowPath}: expected Pages deployment workflow name`);
+  assert(/push:\s*\n\s+branches:\s*\n\s+- gh-pages/.test(workflow), `${workflowPath}: Pages deployment should follow the gh-pages branch source`);
+  assert(workflow.includes('workflow_dispatch:'), `${workflowPath}: expected manual deployment support`);
+  assert(/permissions:\s*\n\s+contents:\s+read/.test(workflow), `${workflowPath}: default permissions should be read-only`);
+  assert(workflow.includes('uses: actions/checkout@v6'), `${workflowPath}: expected current checkout action`);
+  assert(workflow.includes('persist-credentials: false'), `${workflowPath}: build checkout should not persist push credentials`);
+  assert(workflow.includes('uses: actions/setup-node@v6'), `${workflowPath}: expected current Node setup action`);
+  assert(workflow.includes('cache: npm'), `${workflowPath}: build should cache npm dependencies`);
+  assert(workflow.includes('npm ci --ignore-scripts'), `${workflowPath}: build should install from the lockfile deterministically`);
+  assert(workflow.includes('npm run build'), `${workflowPath}: Pages artifact should come from the Vite production build`);
+  assert(workflow.includes('cp CNAME dist/CNAME'), `${workflowPath}: Pages artifact should preserve the custom domain file`);
+  assert(workflow.includes('uses: actions/upload-pages-artifact@v5'), `${workflowPath}: expected current Pages artifact upload action`);
+  assert(workflow.includes('path: dist'), `${workflowPath}: Pages artifact should upload the Vite dist directory`);
+  assert(workflow.includes('needs: build'), `${workflowPath}: deployment should wait for the build artifact`);
+  assert(/permissions:\s*\n\s+pages:\s+write\s*\n\s+id-token:\s+write/.test(workflow), `${workflowPath}: deploy job should use minimum Pages deployment permissions`);
+  assert(workflow.includes('environment:'), `${workflowPath}: Pages deployment should target an environment`);
+  assert(workflow.includes('name: github-pages'), `${workflowPath}: Pages deployment should target the github-pages environment`);
+  assert(workflow.includes('uses: actions/deploy-pages@v5'), `${workflowPath}: expected current Pages deployment action`);
+}
+
 function testIgrsFetchWorkerUsesAtomicValidatedDownloads() {
   const scriptPath = '.github/scripts/fetch-igrs-game.sh';
   const script = read(scriptPath);
@@ -72,6 +96,7 @@ function testGitHubAutomationFilesUseLfLineEndings() {
 const tests = [
   testCiWorkflowRunsProjectChecksWithReadOnlyPermissions,
   testDatasetUpdateWorkflowHasSafeBoundsAndFallbacks,
+  testPagesWorkflowDeploysBuiltViteArtifact,
   testIgrsFetchWorkerUsesAtomicValidatedDownloads,
   testGitHubAutomationFilesUseLfLineEndings
 ];
