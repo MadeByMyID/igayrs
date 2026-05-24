@@ -1,12 +1,13 @@
 {
   "meta": {
-    "generatedAt": "2026-05-22T03:12:22Z",
+    "generatedAt": "2026-05-24T03:12:24Z",
     "totalGames": 593
   },
   "ratings": {
     "7": {
       "name": "3+",
       "weight": 1,
+      "color": "#22c55e",
       "titleEn": "Age Rating 3 Years Above",
       "titleId": "Rating Usia 3 Tahun Keatas",
       "contentEn": "Game content suitable for ages 3 and above (3+) does not display references to cigarettes, alcohol, drugs, violence, blood, mutilation, cannibalism, coarse language, swearing, adult humor, nudity, pornography, gambling, or horror, and does not include online interaction features such as conversations.",
@@ -15,6 +16,7 @@
     "4": {
       "name": "7+",
       "weight": 2,
+      "color": "#06b6d4",
       "titleEn": "Age Rating 7 Years Above",
       "titleId": "Rating Usia 7 Tahun Keatas",
       "contentEn": "Game content suitable for ages 7 and above (7+) does not display references to cigarettes, alcohol, drugs, violence, mutilation, cannibalism, or unrealistic blood elements, does not use coarse language, swearing, or adult humor, does not show nudity, pornography, gambling, or horror, and does not include online interaction features such as conversations.",
@@ -23,6 +25,7 @@
     "5": {
       "name": "13+",
       "weight": 3,
+      "color": "#eab308",
       "titleEn": "Age Rating 13 Years Above",
       "titleId": "Rating Usia 13 Tahun Keatas",
       "contentEn": "Game content suitable for ages 13 and above (13+) does not display references to cigarettes, alcohol, or drugs; human mutilation or cannibalism (though blood elements may appear); adult humor with sexual connotations; nudity or pornography; gambling or intense horror, and may include limited non-hateful animated violence with unrealistic weapons and filtered online conversations.",
@@ -31,6 +34,7 @@
     "28": {
       "name": "15+",
       "weight": 4,
+      "color": "#f97316",
       "titleEn": "Age Rating 15 Years Above",
       "titleId": "Rating Usia 15 Tahun Keatas",
       "contentEn": "Game content suitable for ages 15 and above (15+) does not include references to cigarettes, alcohol, drugs, mutilation, cannibalism, nudity, pornography, gambling, or intense horror; may include limited animated violence without hatred, online interactions with language filters, blood elements, and non-sexual adult humor.",
@@ -39,6 +43,7 @@
     "6": {
       "name": "18+",
       "weight": 5,
+      "color": "#ef4444",
       "titleEn": "Age Rating 18 Years Above",
       "titleId": "Rating Usia 18 Tahun Keatas",
       "contentEn": "Game content suitable for ages 18 and over (18+) does not contain pornography, but may display references to cigarettes, alcohol, or drugs; animated violence, blood, mutilation, and cannibalism; adult humor with sexual connotations; human-like characters without showing genitals, breasts, or buttocks; gambling activities that do not involve real or digital currency; horror elements intended to provoke fear; and online conversation features.",
@@ -47,6 +52,7 @@
     "35": {
       "name": "RC",
       "weight": 6,
+      "color": "#64748b",
       "titleEn": "Refused Classification",
       "titleId": "Konten Terlarang",
       "contentEn": "The RC rating is a rating for games that contain prohibited content. The criteria for content in a game that could result in this rating include the following:\n1. Displaying and/or featuring pornography\n2. Having gameplay activities based solely on chance or any form of gambling (betting) that involves real and legal currency, foreign currency, electronic money, or intangible commodities such as digital assets that can be traded and exchanged for legal tender, and providing/supporting/facilitating a cash-out feature.\n3. Violating the laws and regulations in Indonesia.\n\n    .\n    \n    ",
