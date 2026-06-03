@@ -9,6 +9,10 @@
     "deploy": "wrangler deploy",
     "dev": "wrangler dev"
   },
+  "engines": {
+    "node": ">=22.12.0",
+    "npm": ">=9"
+  },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20250620.0",
     "typescript": "^5.8.3",

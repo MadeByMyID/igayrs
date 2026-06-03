@@ -26,9 +26,10 @@ function testCiWorkflowRunsProjectChecksWithReadOnlyPermissions() {
   assert(workflow.includes('uses: actions/checkout@v6'), `${workflowPath}: expected current pinned checkout major version`);
   assert(workflow.includes('persist-credentials: false'), `${workflowPath}: CI checkout should not persist push credentials`);
   assert(workflow.includes('uses: actions/setup-node@v6'), `${workflowPath}: expected current Node setup step`);
-  assert(workflow.includes('node-version: [18, 22]'), `${workflowPath}: expected supported Node version matrix`);
+  assert(workflow.includes('node-version: [22, 24]'), `${workflowPath}: expected supported Node version matrix`);
   assert(workflow.includes('cache: npm'), `${workflowPath}: npm dependency cache should be enabled`);
-  assert(workflow.includes('cache-dependency-path: package-lock.json'), `${workflowPath}: npm cache should be keyed by the lockfile`);
+  assert(workflow.includes('package-lock.json'), `${workflowPath}: npm cache should include the root lockfile`);
+  assert(workflow.includes('ops/worker/package-lock.json'), `${workflowPath}: npm cache should include the worker lockfile used by npm run check`);
   assert(workflow.includes('npm ci --ignore-scripts'), `${workflowPath}: expected deterministic npm install from the lockfile`);
   assert(workflow.includes('npm run check'), `${workflowPath}: expected full project check gate`);
   assert(workflow.includes('timeout-minutes:'), `${workflowPath}: CI job should have a bounded runtime`);
@@ -40,6 +41,8 @@ function testDatasetUpdateWorkflowHasSafeBoundsAndFallbacks() {
   const workflow = read(workflowPath);
 
   assert(workflow.includes('timeout-minutes:'), `${workflowPath}: update job should have a bounded runtime`);
+  assert(workflow.includes('uses: actions/setup-node@v6'), `${workflowPath}: dataset validation should use the current Node setup action`);
+  assert(workflow.includes('node-version: 22'), `${workflowPath}: dataset validation should use the project Node engine floor`);
   assert(workflow.includes('OUTPUT_DIR="public/assets/data/json"'), `${workflowPath}: dataset output should match the Vite public assets path`);
   assert(workflow.includes('src/core/rating-metadata.json'), `${workflowPath}: rating weights and colors should come from shared app metadata`);
   assert(workflow.includes('git add public/assets/data/json/igrs.meta.json public/assets/data/json/igrs.games.json public/assets/data/json/igrs.extra.json'), `${workflowPath}: commit step should stage Vite public dataset files`);
@@ -64,9 +67,10 @@ function testPagesWorkflowDeploysBuiltViteArtifact() {
   assert(workflow.includes('uses: actions/checkout@v6'), `${workflowPath}: expected current checkout action`);
   assert(workflow.includes('persist-credentials: false'), `${workflowPath}: build checkout should not persist push credentials`);
   assert(workflow.includes('uses: actions/setup-node@v6'), `${workflowPath}: expected current Node setup action`);
-  assert(workflow.includes('uses: actions/cache@v4'), `${workflowPath}: build should cache npm dependencies with explicit keys`);
-  assert(workflow.includes('key: ${{ runner.os }}-node-20-npm-${{ hashFiles(\'package-lock.json\') }}'), `${workflowPath}: npm cache key should include OS, Node version, and lockfile hash`);
-  assert(workflow.includes('restore-keys:'), `${workflowPath}: npm cache should provide restore keys`);
+  assert(workflow.includes('node-version: 22'), `${workflowPath}: Pages build should use the project Node engine floor`);
+  assert(workflow.includes('cache: npm'), `${workflowPath}: build should cache npm dependencies through setup-node`);
+  assert(workflow.includes('package-lock.json'), `${workflowPath}: npm cache should include the root lockfile`);
+  assert(workflow.includes('ops/worker/package-lock.json'), `${workflowPath}: npm cache should include the worker lockfile used by npm run check`);
   assert(workflow.includes('npm ci'), `${workflowPath}: build should install from the lockfile deterministically`);
   assert(!workflow.includes('npm ci --ignore-scripts'), `${workflowPath}: npm install should not suppress lifecycle scripts without a project-specific reason`);
   assert(workflow.includes('npm run check'), `${workflowPath}: Pages deployment should run the full deterministic project check before upload`);

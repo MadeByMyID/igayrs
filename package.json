@@ -16,11 +16,12 @@
     "lint": "eslint -c config/eslint.config.js .",
     "serve:static": "node ops/scripts/dev-server.js --root dist",
     "visual:check": "node ops/scripts/visual-compat.js",
-    "check": "node --check ops/scripts/dev-server.js && node --check ops/scripts/visual-compat.js && npm run --prefix ops/worker typecheck && node src/tests/structure/stack.test.js && node src/tests/structure/github-automation.test.js && npm run lint && npm run test && npm run build",
+    "worker:check": "npm --prefix ops/worker ci --ignore-scripts && npm run --prefix ops/worker typecheck",
+    "check": "node --check ops/scripts/dev-server.js && node --check ops/scripts/visual-compat.js && npm run worker:check && node src/tests/structure/stack.test.js && node src/tests/structure/github-automation.test.js && npm run lint && npm run test && npm run build",
     "test": "vitest --config config/vite.config.ts run"
   },
   "engines": {
-    "node": ">=18",
+    "node": ">=22.12.0",
     "npm": ">=9"
   },
   "dependencies": {

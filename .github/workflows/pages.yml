@@ -28,16 +28,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 20
-
-      - name: Cache npm package cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-20-npm-${{ hashFiles('package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-20-npm-
-            ${{ runner.os }}-node-
+          node-version: 22
+          cache: npm
+          cache-dependency-path: |
+            package-lock.json
+            ops/worker/package-lock.json
 
       - name: Install npm dependencies
         run: npm ci

@@ -57,6 +57,9 @@ function testPackageUsesModernFrontendStack() {
   assert(pkg.scripts.check.includes('npm run lint'), 'package.json: check should include linting');
   assert(pkg.scripts.check.includes('npm run test'), 'package.json: check should include tests');
   assert(pkg.scripts.check.includes('npm run build'), 'package.json: check should include production build');
+  assert(pkg.scripts.check.includes('npm run worker:check'), 'package.json: check should include the worker dependency and typecheck gate');
+  assert(pkg.scripts['worker:check'] === 'npm --prefix ops/worker ci --ignore-scripts && npm run --prefix ops/worker typecheck', 'package.json: worker check should install from the worker lockfile before typechecking');
+  assert(pkg.engines.node === '>=22.12.0', 'package.json: Node engine should satisfy both the Vite app and Worker toolchain');
 
   for (const name of ['@vitejs/plugin-react', '@tailwindcss/vite', 'lightningcss', 'typescript', 'vite', 'vitest']) {
     assert(devDependencies[name], `package.json: expected devDependency ${name}`);
@@ -237,6 +240,9 @@ function testAutomationTargetsVitePublicData() {
   const workflow = read('.github/workflows/update-igrs-db.yml');
   assert(workflow.includes('OUTPUT_DIR="public/assets/data/json"'), '.github/workflows/update-igrs-db.yml: data refresh should write to Vite public assets');
   assert(workflow.includes('git add public/assets/data/json/igrs.meta.json public/assets/data/json/igrs.games.json public/assets/data/json/igrs.extra.json'), '.github/workflows/update-igrs-db.yml: commit step should stage Vite public data assets');
+  assert(exists('ops/worker/package-lock.json'), 'ops/worker/package-lock.json: expected deterministic worker lockfile for checks and deployment');
+  const workerPackage = readJson('ops/worker/package.json');
+  assert(workerPackage.engines?.node === '>=22.12.0', 'ops/worker/package.json: Worker tooling should declare its Node engine floor');
 
   const runner = read('src/tools/visual-compat-runner.html');
   const visualScript = read('ops/scripts/visual-compat.js');
@@ -251,6 +257,9 @@ function testRepositoryFinalizationHygiene() {
   for (const token of ['node_modules/', 'dist/', 'build/', 'coverage/', '.env', '.env.local', '.DS_Store', '*.log']) {
     assert(gitignore.includes(token), `.gitignore: expected ${token}`);
   }
+
+  const eslintConfig = read('config/eslint.config.js');
+  assert(eslintConfig.includes("'.worktree'"), 'config/eslint.config.js: lint should ignore local reproduction worktrees');
 
   const productionFiles = walkFiles('src', relativePath => (
     /\.(ts|tsx|js|jsx)$/.test(relativePath)

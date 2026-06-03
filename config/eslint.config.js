@@ -11,6 +11,7 @@ module.exports = tseslint.config(
       'dist',
       'assets',
       'node_modules',
+      '.worktree',
       'artifacts',
       'coverage',
       'public/assets/data/json/*.json'
