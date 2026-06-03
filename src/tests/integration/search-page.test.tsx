@@ -46,7 +46,8 @@ vi.mock('@/app/providers/language-provider', () => ({
     lang: 'en',
     t: (key: string) => key,
     toggleLanguage: vi.fn(),
-    unlocked: false
+    unlocked: false,
+    dictionaryLoading: false
   })
 }));
 

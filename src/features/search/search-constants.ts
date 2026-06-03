@@ -1,0 +1,2 @@
+export const SEARCH_RESULTS_PER_PAGE = 30;
+export const VIRTUAL_SCROLL_THRESHOLD = 100;

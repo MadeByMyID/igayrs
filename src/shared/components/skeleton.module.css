@@ -1,0 +1,103 @@
+/* ═══════════════════════════════════════════════════════════════
+   Skeleton — Loading placeholder with shimmer animation
+   ═══════════════════════════════════════════════════════════════ */
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-skeleton-base, #e5e7eb) 25%,
+    var(--color-skeleton-highlight, #f3f4f6) 50%,
+    var(--color-skeleton-base, #e5e7eb) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1500ms ease-in-out infinite;
+  border-radius: 4px;
+  min-height: 0.5rem;
+}
+
+/* Respect prefers-reduced-motion: static background, no animation */
+@media (prefers-reduced-motion: reduce) {
+  .skeleton {
+    animation: none;
+    background: var(--color-skeleton-base, #e5e7eb);
+  }
+}
+
+/* Dark theme support */
+:global([data-theme="dark"]) .skeleton {
+  --color-skeleton-base: #374151;
+  --color-skeleton-highlight: #4b5563;
+}
+
+/* ─── GameDetailSkeleton layout ─────────────────────────────── */
+
+.detailCard {
+  background: var(--bg-card, #ffffff);
+  border: 1.5px solid var(--border, #e5e7eb);
+  border-radius: var(--radius, 12px);
+  padding: 2rem;
+  box-shadow: var(--shadow, none);
+}
+
+.detailHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.headerText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.descriptionBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-bottom: 2.5rem;
+  max-width: 800px;
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 0.85rem 1.5rem;
+  margin-bottom: 2.5rem;
+  align-items: center;
+}
+
+.iconRow {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* ─── Responsive: mobile ────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .detailCard {
+    padding: 1.25rem;
+  }
+
+  .detailHeader {
+    flex-direction: column;
+  }
+
+  .detailGrid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,95 @@
+/* ═══════════════════════════════════════════════════════════════
+   Search Controls — Sort, Active Filters, Chips
+   ═══════════════════════════════════════════════════════════════ */
+
+.sortControl {
+  align-items: center;
+  color: var(--text-muted);
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.55rem;
+  min-height: 44px;
+}
+
+.sortControl span {
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.sortControl select {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  min-height: 44px;
+  padding: 0.45rem 0.7rem;
+}
+
+/* ─── Active Filter Summary ─────────────────────────────────── */
+.filterSummary {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  min-height: 44px;
+  padding-top: 0.45rem;
+}
+
+.filterSummary:empty {
+  display: none;
+}
+
+.filterLabel {
+  color: var(--text-muted);
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.filterChips {
+  display: flex;
+  flex: 1 1 auto;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  min-width: 0;
+}
+
+.filterChip {
+  align-items: center;
+  background: var(--primary-light);
+  border: 1px solid var(--border-hover);
+  border-radius: 999px;
+  color: var(--primary);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1.2;
+  min-height: 44px;
+  padding: 0.35rem 0.65rem;
+}
+
+.filterChip:hover {
+  background: var(--bg);
+}
+
+.filterClear {
+  align-items: center;
+  background: transparent;
+  border: 0;
+  color: var(--primary);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 800;
+  min-height: 44px;
+  padding: 0 0.25rem;
+}
+
+.filterClear:hover {
+  text-decoration: underline;
+}

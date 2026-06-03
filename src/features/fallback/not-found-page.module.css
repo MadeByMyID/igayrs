@@ -1,0 +1,161 @@
+/* ═══════════════════════════════════════════════════════════════
+   Not Found (404) Page — CSS Module
+   Scoped styles for the fallback/404 page feature.
+   ═══════════════════════════════════════════════════════════════ */
+
+.pageContainer {
+  max-width: var(--layout-page);
+  margin: 0 auto;
+  padding: var(--layout-gutter);
+  flex: 1;
+  width: 100%;
+}
+
+.fallbackPage {
+  display: grid;
+  max-width: var(--layout-readable);
+  min-height: calc(100vh - 220px);
+  place-items: center;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(1.35rem, 4vw, 2.5rem);
+  text-align: center;
+  width: 100%;
+}
+
+.icon {
+  align-items: center;
+  background: var(--primary-light);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--primary);
+  display: inline-flex;
+  height: 3.25rem;
+  justify-content: center;
+  margin-bottom: 0;
+  width: 3.25rem;
+}
+
+.icon svg {
+  height: 1.55rem;
+  width: 1.55rem;
+}
+
+.kicker {
+  color: var(--primary);
+  font-size: 8rem;
+  font-weight: 800;
+  letter-spacing: 10px;
+  margin-bottom: 0.35rem;
+  text-transform: uppercase;
+}
+
+.pageTitle {
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0;
+  margin-bottom: 0.35rem;
+  color: var(--primary);
+}
+
+.pageSubtitle {
+  color: var(--text-secondary);
+  font-size: 0.88rem;
+  margin-bottom: var(--layout-gap);
+  font-weight: 400;
+  margin-inline: auto;
+  max-width: 52ch;
+}
+
+.help {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.65;
+  margin: 0.75rem auto 0;
+  max-width: 62ch;
+}
+
+.actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 1.4rem;
+}
+
+.primaryBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.7rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: inherit;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: 2px solid transparent;
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+}
+
+.primaryBtn:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+.secondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.7rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: inherit;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: 2px solid transparent;
+  background: var(--bg);
+  color: var(--primary);
+  border-color: var(--border);
+}
+
+.secondaryBtn:hover {
+  border-color: var(--primary);
+}
+
+.linkBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  min-height: 44px;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  font-family: inherit;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--bg);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+
+.linkBtn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}

@@ -1,4 +1,5 @@
-import { IMG_DESCRIPTOR, descriptorName } from '@/shared/lib/domain';
+import { IMG_DESCRIPTOR, IMG_DESCRIPTOR_WEBP, descriptorName } from '@/shared/lib/ratings';
+import { Tooltip } from '@/shared/components/tooltip';
 import type { IgrsMeta, Language } from '@/shared/types';
 
 interface DescriptorIconsProps {
@@ -18,10 +19,14 @@ export function DescriptorIcons({ emptyLabel, ids, lang, meta }: DescriptorIcons
   return (
     <div className="descriptor-icons">
       {cleanIds.map(id => (
-        <span className="descriptor-icon" key={id}>
-          <img src={IMG_DESCRIPTOR(id)} alt={descriptorName(meta, id, lang)} loading="lazy" />
-          <span className="tooltip">{descriptorName(meta, id, lang)}</span>
-        </span>
+        <Tooltip content={descriptorName(meta, id, lang)} key={id}>
+          <span className="descriptor-icon">
+            <picture>
+              <source srcSet={IMG_DESCRIPTOR_WEBP(id)} type="image/webp" />
+              <img src={IMG_DESCRIPTOR(id)} alt={descriptorName(meta, id, lang)} width={52} height={52} loading="lazy" />
+            </picture>
+          </span>
+        </Tooltip>
       ))}
     </div>
   );

@@ -5,7 +5,8 @@ import { useLanguage } from '@/app/providers/language-provider';
 import { useRequiredIgrsData } from '@/app/providers/data-provider';
 import { ErrorState, LoadingState } from '@/shared/components/data-state';
 import { ReviewTokens } from '@/shared/components/review-tokens';
-import { IMG_DESCRIPTOR, IMG_RATING, ratingContent } from '@/shared/lib/domain';
+import { IMG_DESCRIPTOR, IMG_DESCRIPTOR_WEBP, IMG_RATING, IMG_RATING_WEBP, ratingContent } from '@/shared/lib/ratings';
+import styles from './ratings-page.module.css';
 
 export function RatingsPage() {
   const { lang, t } = useLanguage();
@@ -13,7 +14,7 @@ export function RatingsPage() {
 
   if (error) {
     return (
-      <main className="page-container ratings-page" data-route-ready="ratings">
+      <main className={`${styles.pageContainer} ${styles.ratingsPage}`} data-route-ready="ratings">
         <ErrorState title={t('data.error.title')} description={t('data.error.desc')} />
       </main>
     );
@@ -21,7 +22,7 @@ export function RatingsPage() {
 
   if (loading || !data) {
     return (
-      <main className="page-container ratings-page" data-route-ready="ratings">
+      <main className={`${styles.pageContainer} ${styles.ratingsPage}`} data-route-ready="ratings">
         <LoadingState label={t('loading')} />
       </main>
     );
@@ -35,11 +36,11 @@ export function RatingsPage() {
     });
 
   return (
-    <main className="page-container ratings-page" data-route-ready="ratings">
-      <h1 className="page-title">{t('ratings.title')}</h1>
-      <p className="page-subtitle">{t('ratings.subtitle')}</p>
+    <main className={`${styles.pageContainer} ${styles.ratingsPage}`} data-route-ready="ratings">
+      <h1 className={styles.pageTitle}>{t('ratings.title')}</h1>
+      <p className={styles.pageSubtitle}>{t('ratings.subtitle')}</p>
 
-      <section id="ratings-list">
+      <section className={styles.ratingsList}>
         {RATING_ORDER.map(id => {
           const rating = data.meta.ratings[String(id)];
           if (!rating) return null;
@@ -49,35 +50,38 @@ export function RatingsPage() {
           const guide = getRatingGuideCopy(id, lang);
 
           return (
-            <article className="rating-card rating-guide-card fade-in" aria-labelledby={`rating-guide-title-${id}`} key={id}>
-              <div className="rating-card-header">
-                <img src={IMG_RATING(id)} alt={rating.name} loading="lazy" />
+            <article className={`${styles.ratingCard} ${styles.ratingGuideCard} ${styles.fadeIn}`} aria-labelledby={`rating-guide-title-${id}`} key={id}>
+              <div className={styles.ratingCardHeader}>
+                <picture>
+                  <source srcSet={IMG_RATING_WEBP(id)} type="image/webp" />
+                  <img src={IMG_RATING(id)} alt={rating.name} width={52} height={52} loading="lazy" />
+                </picture>
                 <div>
-                  <div className="rating-card-title" id={`rating-guide-title-${id}`}>{title}</div>
-                  <div className="rating-card-subtitle">{subtitle}</div>
+                  <div className={styles.ratingCardTitle} id={`rating-guide-title-${id}`}>{title}</div>
+                  <div className={styles.ratingCardSubtitle}>{subtitle}</div>
                 </div>
               </div>
-              <p className="rating-summary">{guide.summary || content}</p>
-              <dl className="rating-guide-list">
+              <p className={styles.ratingSummary}>{guide.summary || content}</p>
+              <dl className={styles.ratingGuideList}>
                 {guide.sections.map(section => (
-                  <div className="rating-guide-item" key={section.label}>
+                  <div className={styles.ratingGuideItem} key={section.label}>
                     <dt>{section.label}</dt>
                     <dd>{section.text}</dd>
                   </div>
                 ))}
               </dl>
               {guide.watchFor.length ? (
-                <div className="rating-watch-row" aria-label={t('ratings.watchFor')}>
+                <div className={styles.ratingWatchRow} aria-label={t('ratings.watchFor')}>
                   <span>{t('ratings.watchFor')}</span>
-                  <div className="rating-watch-tags">
+                  <div className={styles.ratingWatchTags}>
                     {guide.watchFor.map(item => <span key={item}>{item}</span>)}
                   </div>
                 </div>
               ) : null}
-              <details className="rating-official">
+              <details className={styles.ratingOfficial}>
                 <summary>{t('ratings.officialCriteria')}</summary>
-                <div className="rating-content">{content}</div>
-                <div className="rating-source">
+                <div className={styles.ratingContent}>{content}</div>
+                <div className={styles.ratingSource}>
                   <span>{t('ratings.source')}:</span>
                   <a href={OFFICIAL_RATING_INFO_URL} target="_blank" rel="noopener noreferrer">igrs.id/rating-info</a>
                 </div>
@@ -87,10 +91,10 @@ export function RatingsPage() {
         })}
       </section>
 
-      <section className="descriptors-section">
-        <h2 className="page-title section-title">{t('descriptors.title')}</h2>
-        <p className="page-subtitle">{t('descriptors.subtitle')}</p>
-        <div className="descriptor-grid" id="descriptor-grid">
+      <section className={styles.descriptorsSection}>
+        <h2 className={`${styles.pageTitle} ${styles.sectionTitle}`}>{t('descriptors.title')}</h2>
+        <p className={styles.pageSubtitle}>{t('descriptors.subtitle')}</p>
+        <div className={styles.descriptorGrid}>
           {descriptors.map(([id, descriptor]) => {
             const numericId = Number(id);
             const name = lang === 'id' ? descriptor.nameId || descriptor.nameEn || id : descriptor.nameEn || descriptor.nameId || id;
@@ -98,16 +102,19 @@ export function RatingsPage() {
             const guide = getDescriptorGuideCopy(numericId, lang);
 
             return (
-              <article className="descriptor-card descriptor-guide-card fade-in" aria-labelledby={`descriptor-guide-title-${id}`} key={id}>
-                <img src={IMG_DESCRIPTOR(numericId)} alt={name} loading="lazy" />
-                <div className="descriptor-card-text">
-                  <div className="descriptor-name" id={`descriptor-guide-title-${id}`}>{name}</div>
-                  <div className="descriptor-alt">{alternate}</div>
-                  <p className="descriptor-summary">{guide.summary || descriptor.description || t('descriptors.noGuide')}</p>
+              <article className={`${styles.descriptorCard} ${styles.descriptorGuideCard} ${styles.fadeIn}`} aria-labelledby={`descriptor-guide-title-${id}`} key={id}>
+                <picture>
+                  <source srcSet={IMG_DESCRIPTOR_WEBP(numericId)} type="image/webp" />
+                  <img src={IMG_DESCRIPTOR(numericId)} alt={name} width={38} height={38} loading="lazy" />
+                </picture>
+                <div className={styles.descriptorCardText}>
+                  <div className={styles.descriptorName} id={`descriptor-guide-title-${id}`}>{name}</div>
+                  <div className={styles.descriptorAlt}>{alternate}</div>
+                  <p className={styles.descriptorSummary}>{guide.summary || descriptor.description || t('descriptors.noGuide')}</p>
                   {guide.watchFor.length ? (
-                    <div className="descriptor-review-line" aria-label={t('descriptors.watchFor')}>
-                      <span className="descriptor-review-label">{t('descriptors.watchFor')}:</span>
-                      <span className="descriptor-review-items">
+                    <div className={styles.descriptorReviewLine} aria-label={t('descriptors.watchFor')}>
+                      <span className={styles.descriptorReviewLabel}>{t('descriptors.watchFor')}:</span>
+                      <span className={styles.descriptorReviewItems}>
                         <ReviewTokens items={guide.watchFor} />
                       </span>
                     </div>

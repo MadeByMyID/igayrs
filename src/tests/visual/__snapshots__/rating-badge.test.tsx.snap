@@ -1,0 +1,21 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`RatingBadge visual regression > applies custom className when provided 1`] = `"<picture><source srcset="/assets/data/images/ratings/4.webp" type="image/webp"><img class="custom-badge" alt="3+" width="60" height="60" loading="lazy" src="/assets/data/images/ratings/4.png"></picture>"`;
+
+exports[`RatingBadge visual regression > renders correctly for rating ID 4 1`] = `"<picture><source srcset="/assets/data/images/ratings/4.webp" type="image/webp"><img class="steam-rating-img" alt="3+" width="60" height="60" loading="lazy" src="/assets/data/images/ratings/4.png"></picture>"`;
+
+exports[`RatingBadge visual regression > renders correctly for rating ID 5 1`] = `"<picture><source srcset="/assets/data/images/ratings/5.webp" type="image/webp"><img class="steam-rating-img" alt="7+" width="60" height="60" loading="lazy" src="/assets/data/images/ratings/5.png"></picture>"`;
+
+exports[`RatingBadge visual regression > renders correctly for rating ID 6 1`] = `"<picture><source srcset="/assets/data/images/ratings/6.webp" type="image/webp"><img class="steam-rating-img" alt="13+" width="60" height="60" loading="lazy" src="/assets/data/images/ratings/6.png"></picture>"`;
+
+exports[`RatingBadge visual regression > renders correctly for rating ID 7 1`] = `"<picture><source srcset="/assets/data/images/ratings/7.webp" type="image/webp"><img class="steam-rating-img" alt="18+" width="60" height="60" loading="lazy" src="/assets/data/images/ratings/7.png"></picture>"`;
+
+exports[`RatingBadge visual regression > renders correctly for rating ID 28 1`] = `"<picture><source srcset="/assets/data/images/ratings/28.webp" type="image/webp"><img class="steam-rating-img" alt="SU" width="60" height="60" loading="lazy" src="/assets/data/images/ratings/28.png"></picture>"`;
+
+exports[`RatingBadge visual regression > renders correctly for rating ID 35 1`] = `"<picture><source srcset="/assets/data/images/ratings/35.webp" type="image/webp"><img class="steam-rating-img" alt="D" width="60" height="60" loading="lazy" src="/assets/data/images/ratings/35.png"></picture>"`;
+
+exports[`RatingBadge visual regression > renders fallback for null rating ID 1`] = `"<span class="steam-rating-badge steam-rating-badge-muted">?</span>"`;
+
+exports[`RatingBadge visual regression > renders fallback for undefined rating ID 1`] = `"<span class="steam-rating-badge steam-rating-badge-muted">?</span>"`;
+
+exports[`RatingBadge visual regression > renders fallback for unknown rating ID 1`] = `"<span class="steam-rating-badge steam-rating-badge-muted">?</span>"`;

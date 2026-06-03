@@ -1,6 +1,8 @@
 import type { Language } from '@/shared/types';
+import type { TranslationDictionary, AssertIdenticalKeys } from '@/core/i18n-types';
 
 const en = {
+    'nav.home': 'Home',
     'nav.ratings': 'Ratings Guide',
     'nav.search': 'Search Games',
     'nav.steamchecker': 'Steam Game Checker',
@@ -21,11 +23,17 @@ const en = {
     'search.sort.ratingAsc': 'Lowest rating',
     'search.stats': '{count} games found',
     'search.stats.filtered': '{count} of {total} games',
+    'search.showingResults': 'Showing {count} results',
     'loading': 'Loading database...',
     'data.error.title': 'Failed to load data',
     'data.error.desc': 'The local database could not be loaded. Refresh the page or try again later.',
     'empty.title': 'No games found',
     'empty.desc': 'Try a different search or clear filters.',
+    'suggestion.removeFilter': 'Try removing "{filter}" — {count} results available.',
+    'suggestion.removeAction': 'Remove filter',
+    'suggestion.clearAll': 'No single filter removal helps. Clear all filters to see {count} games.',
+    'suggestion.clearQuery': 'Clear the search query to see all {count} games.',
+    'suggestion.clearQueryAction': 'Clear query',
     'footer.text': 'Data scraped from',
     'footer.disclaimer': 'A MadeByMyID Project',
     'fallback.notFound.title': 'Page not found',
@@ -61,6 +69,7 @@ const en = {
     'detail.copied': 'Copied!',
     'detail.noDesc': 'No description available.',
     'detail.noDescriptors': 'No content descriptors',
+    'detail.relatedGames': 'Related Games',
     'card.descriptors': 'Content',
     'card.noDescriptors': 'No descriptors',
     'card.viewDetail': 'View Detail',
@@ -148,7 +157,8 @@ const en = {
     'steamchecker.by': 'by',
 } as const;
 
-const id: Record<keyof typeof en, string> = {
+const id: TranslationDictionary<typeof en> = {
+    'nav.home': 'Beranda',
     'nav.ratings': 'Panduan Rating',
     'nav.search': 'Cari Game',
     'nav.steamchecker': 'Steam Game Checker',
@@ -169,11 +179,17 @@ const id: Record<keyof typeof en, string> = {
     'search.sort.ratingAsc': 'Rating terendah',
     'search.stats': '{count} game ditemukan',
     'search.stats.filtered': '{count} dari {total} game',
+    'search.showingResults': 'Menampilkan {count} hasil',
     'loading': 'Memuat database...',
     'data.error.title': 'Gagal memuat data',
     'data.error.desc': 'Database lokal tidak dapat dimuat. Muat ulang halaman atau coba lagi nanti.',
     'empty.title': 'Tidak ada game ditemukan',
     'empty.desc': 'Coba pencarian lain atau hapus filter.',
+    'suggestion.removeFilter': 'Coba hapus "{filter}" — {count} hasil tersedia.',
+    'suggestion.removeAction': 'Hapus filter',
+    'suggestion.clearAll': 'Tidak ada filter tunggal yang membantu. Hapus semua filter untuk melihat {count} game.',
+    'suggestion.clearQuery': 'Hapus pencarian untuk melihat semua {count} game.',
+    'suggestion.clearQueryAction': 'Hapus pencarian',
     'footer.text': 'Data dari',
     'footer.disclaimer': 'Sebuah proyek dari MadeByMyID',
     'fallback.notFound.title': 'Halaman tidak ditemukan',
@@ -209,6 +225,7 @@ const id: Record<keyof typeof en, string> = {
     'detail.copied': 'Tersalin!',
     'detail.noDesc': 'Tidak ada deskripsi.',
     'detail.noDescriptors': 'Tidak ada deskriptor konten',
+    'detail.relatedGames': 'Game Terkait',
     'card.descriptors': 'Konten',
     'card.noDescriptors': 'Tidak ada deskriptor',
     'card.viewDetail': 'Lihat Detail',
@@ -298,3 +315,8 @@ const id: Record<keyof typeof en, string> = {
 
 export type I18nKey = keyof typeof en;
 export const I18N: Record<Language, Record<I18nKey, string>> = { en, id };
+
+/** Compile-time check: en and id must have identical key sets */
+type _KeysMatch = AssertIdenticalKeys<typeof en, typeof id>;
+const _assertKeysMatch: _KeysMatch = true;
+void _assertKeysMatch;

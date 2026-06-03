@@ -1,34 +1,9 @@
 // @vitest-environment node
-import fs from 'node:fs';
-import path from 'node:path';
-import vm from 'node:vm';
-import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
-
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../..');
+import workerModule from '../../../ops/worker/worker.ts';
 
 interface WorkerModule {
   fetch(request: Request, env: Record<string, string>): Promise<Response>;
-}
-
-function loadWorker(): WorkerModule {
-  const workerPath = path.join(ROOT, 'ops/worker/worker.js');
-  const source = fs.readFileSync(workerPath, 'utf8').replace('export default', 'module.exports =');
-  const context = {
-    module: { exports: {} },
-    exports: {},
-    AbortController,
-    AbortSignal,
-    URL,
-    Request,
-    Response,
-    clearTimeout,
-    console,
-    fetch: (...args: Parameters<typeof fetch>) => globalThis.fetch(...args),
-    setTimeout
-  };
-  vm.runInNewContext(source, context, { filename: workerPath });
-  return context.module.exports as WorkerModule;
 }
 
 function jsonResponse(value: unknown): Response {
@@ -82,7 +57,7 @@ describe('worker data cache', () => {
     }) as typeof fetch;
 
     try {
-      const worker = loadWorker();
+      const worker = workerModule as unknown as WorkerModule;
       const env = {
         SITE_ORIGIN: 'https://site.test',
         GAMES_PATH: '/games.json',
@@ -119,7 +94,7 @@ describe('worker data cache', () => {
     }) as typeof fetch;
 
     try {
-      const worker = loadWorker();
+      const worker = workerModule as unknown as WorkerModule;
       const response = await worker.fetch(new Request('https://worker.test/game/303', {
         headers: { 'user-agent': 'Discordbot/2.0' }
       }), {

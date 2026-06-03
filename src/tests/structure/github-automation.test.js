@@ -26,7 +26,7 @@ function testCiWorkflowRunsProjectChecksWithReadOnlyPermissions() {
   assert(workflow.includes('uses: actions/checkout@v6'), `${workflowPath}: expected current pinned checkout major version`);
   assert(workflow.includes('persist-credentials: false'), `${workflowPath}: CI checkout should not persist push credentials`);
   assert(workflow.includes('uses: actions/setup-node@v6'), `${workflowPath}: expected current Node setup step`);
-  assert(workflow.includes('node-version: 20'), `${workflowPath}: expected stable Node version`);
+  assert(workflow.includes('node-version: [18, 22]'), `${workflowPath}: expected supported Node version matrix`);
   assert(workflow.includes('cache: npm'), `${workflowPath}: npm dependency cache should be enabled`);
   assert(workflow.includes('cache-dependency-path: package-lock.json'), `${workflowPath}: npm cache should be keyed by the lockfile`);
   assert(workflow.includes('npm ci --ignore-scripts'), `${workflowPath}: expected deterministic npm install from the lockfile`);

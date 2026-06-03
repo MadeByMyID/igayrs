@@ -6,6 +6,8 @@ import {
   normalizeExtraPayload,
   normalizeSteamMetaPayload
 } from '@/core/data-contracts';
+import { normalizeSearchText } from '@/shared/lib/text';
+import { platformIdsFromGame } from '@/shared/lib/platforms';
 import type { ExtraPayload, IgrsData, IgrsGame } from '@/shared/types';
 
 const DATA_FETCH_TIMEOUT_MS = 10000;
@@ -70,6 +72,11 @@ export async function fetchJsonResource<T>(url: string, options: FetchJsonOption
       if (!required && fallback !== undefined) return fallback;
       throw createDataError('DATA_FETCH_FAILED', `Failed to load ${url}`);
     }
+    const contentType = response.headers.get('content-type') || '';
+    if (!contentType.includes('json') && !contentType.includes('octet-stream')) {
+      if (!required && fallback !== undefined) return fallback;
+      throw createDataError('DATA_FETCH_FAILED', `Unexpected content-type for ${url}`);
+    }
     return validate(await response.json());
   } catch (error) {
     if (!required && fallback !== undefined) return fallback;
@@ -105,5 +112,29 @@ export async function loadIgrsData(options: { unlocked?: boolean } = {}): Promis
   ]);
 
   const games = mergeExtraGameData(patchEmptyExtraFields(gamesPayload, extraData), extraData);
-  return { games, meta, steamMeta };
+
+  // Build O(1) lookup maps
+  const gamesById = new Map<number, IgrsGame>();
+  const gamesByNormalizedName = new Map<string, IgrsGame>();
+  const publisherSet = new Set<string>();
+  const platformSet = new Set<number>();
+
+  for (const game of games) {
+    if (Number.isFinite(game.id)) gamesById.set(game.id, game);
+    const normName = normalizeSearchText(game.name);
+    if (normName && !gamesByNormalizedName.has(normName)) {
+      gamesByNormalizedName.set(normName, game);
+    }
+    publisherSet.add(game.publisherName);
+    for (const pid of platformIdsFromGame(meta, game)) {
+      platformSet.add(pid);
+    }
+  }
+
+  const stats = {
+    publisherCount: publisherSet.size,
+    platformCount: platformSet.size
+  };
+
+  return { games, gamesById, gamesByNormalizedName, meta, steamMeta, stats };
 }

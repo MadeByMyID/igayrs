@@ -70,8 +70,16 @@ export interface SteamMeta {
 
 export interface IgrsData {
   games: IgrsGame[];
+  gamesById: Map<number, IgrsGame>;
+  /** Normalized game name → game for O(1) exact-match lookups */
+  gamesByNormalizedName: Map<string, IgrsGame>;
   meta: IgrsMeta;
   steamMeta: SteamMeta;
+  /** Pre-computed stats to avoid recalculating on every render */
+  stats: {
+    publisherCount: number;
+    platformCount: number;
+  };
 }
 
 export interface SearchIndexItem {
@@ -81,6 +89,10 @@ export interface SearchIndexItem {
   ratingIds: number[];
   descriptorIds: number[];
   platformIds: number[];
+  /** Pre-built Sets for O(1) filter lookups */
+  ratingIdSet: Set<number>;
+  descriptorIdSet: Set<number>;
+  platformIdSet: Set<number>;
   year: string;
 }
 
@@ -148,6 +160,10 @@ export interface SteamGameDetails {
   publishers?: string[];
   detailed_description?: string;
   about_the_game?: string;
+  short_description?: string;
+  header_image?: string;
+  type?: string;
+  is_free?: boolean;
   support_info?: {
     url?: string;
   };
@@ -160,6 +176,26 @@ export interface SteamGameDetails {
   content_descriptors?: {
     ids?: number[];
   };
+  genres?: Array<{ id?: string | number; description?: string }>;
+  categories?: Array<{ id?: string | number; description?: string }>;
+  platforms?: {
+    windows?: boolean;
+    mac?: boolean;
+    linux?: boolean;
+  };
+  price_overview?: {
+    currency?: string;
+    initial?: number;
+    final?: number;
+    discount_percent?: number;
+    final_formatted?: string;
+    initial_formatted?: string;
+  };
+  metacritic?: {
+    score?: number;
+    url?: string;
+  };
+  required_age?: number | string;
 }
 
 export interface SteamAppDetailsResponse {

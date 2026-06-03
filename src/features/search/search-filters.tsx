@@ -1,13 +1,37 @@
-import type { ReactNode } from 'react';
+import { type ReactNode, useState, useCallback, useSyncExternalStore } from 'react';
+import { ChevronDown } from 'lucide-react';
 import { createGameSearchIndex } from '@/core/search-index';
-import { descriptorName, platformName, ratingName, ratingWeight } from '@/shared/lib/domain';
+import { toggleSet } from '@/shared/lib/collections';
+import { descriptorName, ratingName, ratingWeight } from '@/shared/lib/ratings';
+import { platformName } from '@/shared/lib/platforms';
 import type { IgrsMeta } from '@/shared/types';
+import styles from './search-filters.module.css';
 
-function toggleSet<T>(set: Set<T>, value: T): Set<T> {
-  const next = new Set(set);
-  if (next.has(value)) next.delete(value);
-  else next.add(value);
-  return next;
+const MOBILE_BREAKPOINT = '(max-width: 767px)';
+
+function getMatchMedia() {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') return null;
+  return window.matchMedia(MOBILE_BREAKPOINT);
+}
+
+function subscribeMobileQuery(callback: () => void) {
+  const mql = getMatchMedia();
+  if (!mql) return () => {};
+  mql.addEventListener('change', callback);
+  return () => mql.removeEventListener('change', callback);
+}
+
+function getIsMobile() {
+  return getMatchMedia()?.matches ?? false;
+}
+
+function getIsMobileServer() {
+  return false;
+}
+
+/** Returns true when viewport is below 768px */
+function useIsMobile(): boolean {
+  return useSyncExternalStore(subscribeMobileQuery, getIsMobile, getIsMobileServer);
 }
 
 interface FilterSidebarProps {
@@ -43,10 +67,11 @@ export function FilterSidebar(props: FilterSidebarProps) {
     years
   } = props;
   const hasFilters = ratings.size || platforms.size || descriptors.size || years.size;
+  const isMobile = useIsMobile();
 
   return (
     <>
-      <FilterPanel id="filter-rating" title={t('sidebar.rating')}>
+      <FilterPanel id="filter-rating" title={t('sidebar.rating')} activeCount={ratings.size} isMobile={isMobile}>
         {Object.entries(searchIndex.facets.ratingCounts)
           .map(([id, count]) => ({ count, id: Number(id) }))
           .sort((a, b) => ratingWeight(meta, a.id) - ratingWeight(meta, b.id))
@@ -60,7 +85,7 @@ export function FilterSidebar(props: FilterSidebarProps) {
             />
           ))}
       </FilterPanel>
-      <FilterPanel id="filter-platform" title={t('sidebar.platform')}>
+      <FilterPanel id="filter-platform" title={t('sidebar.platform')} activeCount={platforms.size} isMobile={isMobile}>
         {Object.entries(searchIndex.facets.platformCounts)
           .map(([id, count]) => ({ count, id: Number(id) }))
           .sort((a, b) => platformName(meta, a.id, lang).localeCompare(platformName(meta, b.id, lang)))
@@ -74,7 +99,7 @@ export function FilterSidebar(props: FilterSidebarProps) {
             />
           ))}
       </FilterPanel>
-      <FilterPanel id="filter-descriptor" title={t('sidebar.descriptor')}>
+      <FilterPanel id="filter-descriptor" title={t('sidebar.descriptor')} activeCount={descriptors.size} isMobile={isMobile}>
         {Object.entries(searchIndex.facets.descriptorCounts)
           .map(([id, count]) => ({ count, id: Number(id) }))
           .sort((a, b) => descriptorName(meta, a.id, lang).localeCompare(descriptorName(meta, b.id, lang)))
@@ -88,7 +113,7 @@ export function FilterSidebar(props: FilterSidebarProps) {
             />
           ))}
       </FilterPanel>
-      <FilterPanel id="filter-year" title={t('filter.year')}>
+      <FilterPanel id="filter-year" title={t('filter.year')} activeCount={years.size} isMobile={isMobile}>
         {Object.entries(searchIndex.facets.yearCounts)
           .sort((a, b) => Number(b[0]) - Number(a[0]))
           .map(([year, count]) => (
@@ -101,30 +126,68 @@ export function FilterSidebar(props: FilterSidebarProps) {
             />
           ))}
       </FilterPanel>
-      <button className={`filter-clear-btn${hasFilters ? '' : ' hidden'}`} type="button" onClick={() => clearAll()}>
+      <button className={`${styles.clearBtn}${hasFilters ? '' : ` ${styles.clearBtnHidden}`}`} type="button" onClick={() => clearAll()}>
         {t('filter.clear')}
       </button>
     </>
   );
 }
 
-function FilterPanel({ children, id, title }: { children: ReactNode; id: string; title: string }) {
+interface FilterPanelProps {
+  children: ReactNode;
+  id: string;
+  title: string;
+  activeCount: number;
+  isMobile: boolean;
+}
+
+function FilterPanel({ children, id, title, activeCount, isMobile }: FilterPanelProps) {
+  const [isOpen, setIsOpen] = useState(!isMobile);
+  const contentId = `${id}-content`;
+
+  const handleToggle = useCallback(() => {
+    setIsOpen(prev => !prev);
+  }, []);
+
+  // On desktop, always show content (no accordion behavior)
+  const expanded = isMobile ? isOpen : true;
+
   return (
-    <section className="filter-panel" id={id}>
-      <div className="filter-panel-header">
+    <section className={styles.filterPanel} id={id}>
+      <button
+        type="button"
+        className={styles.filterPanelHeader}
+        aria-expanded={expanded}
+        aria-controls={contentId}
+        onClick={isMobile ? handleToggle : undefined}
+      >
         <span>{title}</span>
+        {isMobile && activeCount > 0 && (
+          <span className={styles.activeCount}>{activeCount}</span>
+        )}
+        {isMobile && (
+          <ChevronDown
+            className={`${styles.chevron}${expanded ? ` ${styles.chevronOpen}` : ''}`}
+            aria-hidden="true"
+          />
+        )}
+      </button>
+      <div
+        id={contentId}
+        className={`${styles.filterPanelBody}${id === 'filter-year' || id === 'filter-platform' ? ` ${styles.filterPanelBodyShort}` : ''}${!expanded ? ` ${styles.filterPanelBodyCollapsed}` : ''}`}
+      >
+        {children}
       </div>
-      <div className="filter-panel-body">{children}</div>
     </section>
   );
 }
 
 function FilterCheckbox({ checked, count, label, onChange }: { checked: boolean; count: number; label: string; onChange: () => void }) {
   return (
-    <label className="filter-checkbox">
+    <label className={`${styles.filterCheckbox} filter-checkbox`}>
       <input type="checkbox" checked={checked} onChange={onChange} />
       <span>{label}</span>
-      <span className="count">{count}</span>
+      <span className={styles.filterCount}>{count}</span>
     </label>
   );
 }

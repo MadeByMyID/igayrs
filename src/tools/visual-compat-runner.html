@@ -173,6 +173,23 @@
         }
       }
 
+      function checkGameCardSpacing(win, doc, issues) {
+        const cards = Array.from(doc.querySelectorAll('[data-visual-role="game-card"]')).filter(card => isVisible(win, card));
+        for (let index = 1; index < cards.length; index += 1) {
+          const previous = cards[index - 1].getBoundingClientRect();
+          const current = cards[index].getBoundingClientRect();
+          const verticalGap = current.top - previous.bottom;
+          if (verticalGap >= -0.5 && verticalGap < 8) {
+            issues.push(`game cards too close: ${Math.round(verticalGap)}px gap`);
+            return;
+          }
+          if (verticalGap < -0.5) {
+            issues.push(`game cards overlap: ${Math.round(Math.abs(verticalGap))}px`);
+            return;
+          }
+        }
+      }
+
       function checkFooterPlacement(doc, viewport, issues) {
         const footer = doc.querySelector('.site-footer');
         if (!footer) {
@@ -221,6 +238,7 @@
           checkHorizontalOverflow(doc, issues);
           checkClipping(win, doc, viewport, issues);
           checkTouchTargets(win, doc, issues);
+          checkGameCardSpacing(win, doc, issues);
           checkFooterPlacement(doc, viewport, issues);
 
           return {

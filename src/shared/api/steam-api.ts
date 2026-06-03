@@ -5,6 +5,7 @@ import {
   selectSteamSearchResult
 } from '@/core/steam-search';
 import { buildSteamReviewsUrl, normalizeSteamReviewSummary } from '@/core/steam-reviews';
+import { createAbortError, isAbortError } from '@/shared/lib/abort';
 import type {
   IgrsGame,
   SteamAppDetailsPayload,
@@ -81,7 +82,30 @@ export function createSteamApi(options: SteamApiOptions = {}) {
     options.proxyBase || import.meta.env.VITE_STEAM_PROXY_BASE,
     options.proxyAllowlist || DEFAULT_PROXY_ALLOWLIST
   );
-  const steamSearchCache = new Map<string, Promise<SteamSearchResult>>();
+
+  // Bounded LRU-style cache with TTL for Steam search results
+  const CACHE_MAX_SIZE = 100;
+  const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+  const steamSearchCache = new Map<string, { expiresAt: number; promise: Promise<SteamSearchResult> }>();
+
+  function getCachedResult(key: string): Promise<SteamSearchResult> | null {
+    const entry = steamSearchCache.get(key);
+    if (!entry) return null;
+    if (Date.now() > entry.expiresAt) {
+      steamSearchCache.delete(key);
+      return null;
+    }
+    return entry.promise;
+  }
+
+  function setCachedResult(key: string, promise: Promise<SteamSearchResult>): void {
+    // Evict oldest entries if at capacity
+    if (steamSearchCache.size >= CACHE_MAX_SIZE) {
+      const firstKey = steamSearchCache.keys().next().value;
+      if (firstKey !== undefined) steamSearchCache.delete(firstKey);
+    }
+    steamSearchCache.set(key, { expiresAt: Date.now() + CACHE_TTL_MS, promise });
+  }
 
   async function fetchJsonWithTimeout<T>(url: string, timeoutMs = 10000, fetchOptions: SteamFetchOptions = {}): Promise<T> {
     const retries = Number.isFinite(fetchOptions.retries) ? Math.max(0, fetchOptions.retries ?? 0) : 2;
@@ -92,8 +116,21 @@ export function createSteamApi(options: SteamApiOptions = {}) {
       try {
         const response = await fetch(url, { signal: controller.signal });
         if (!response.ok) throw new Error(translate('steamchecker.error.load'));
+
+        const contentType = response.headers.get('content-type') ?? '';
+        if (!contentType.includes('application/json')) {
+          throw new Error(
+            `Unexpected response format from proxy: expected application/json, got ${contentType || '(no content-type)'}`
+          );
+        }
+
         return await response.json() as T;
-      } catch {
+      } catch (error) {
+        if (fetchOptions.signal?.aborted) {
+          throw createAbortError();
+        }
+
+        if (isAbortError(error) && attempt >= retries) break;
         if (attempt >= retries) break;
         const jitter = Math.floor(Math.random() * 80);
         await wait(Math.min(1200, 250 * (2 ** attempt)) + jitter);
@@ -113,6 +150,7 @@ export function createSteamApi(options: SteamApiOptions = {}) {
       const payload = await fetchJsonWithTimeout<unknown>(proxiedUrl(reviewUrl, proxyBase), 8000, { retries: 1, signal: fetchOptions.signal });
       return normalizeSteamReviewSummary(payload);
     } catch (error) {
+      if (fetchOptions.signal?.aborted || isAbortError(error)) throw error;
       console.warn('Steam reviews failed:', error instanceof Error ? error.message : error);
       return null;
     }
@@ -120,13 +158,15 @@ export function createSteamApi(options: SteamApiOptions = {}) {
 
   async function findSteamMatchForGame(game: IgrsGame): Promise<SteamSearchResult> {
     const cacheKey = String(game.id || game.name || '');
-    if (cacheKey && steamSearchCache.has(cacheKey)) {
-      return steamSearchCache.get(cacheKey) as Promise<SteamSearchResult>;
+    if (cacheKey) {
+      const cached = getCachedResult(cacheKey);
+      if (cached) return cached;
     }
 
     const searchPromise = (async () => {
       const candidatesById = new Map();
       const queries = buildSteamSearchQueries(game).slice(0, 4);
+      const queryFailures: unknown[] = [];
 
       for (const query of queries) {
         const searchUrl = buildSteamStoreSearchUrl(query);
@@ -140,20 +180,126 @@ export function createSteamApi(options: SteamApiOptions = {}) {
           const current = selectSteamSearchResult(game, candidates);
           if (current.status === 'match') return current;
         } catch (error) {
-          console.warn('Steam search failed:', error instanceof Error ? error.message : error);
+          queryFailures.push(error);
         }
       }
 
-      return selectSteamSearchResult(game, [...candidatesById.values()]);
+      const result = selectSteamSearchResult(game, [...candidatesById.values()]);
+      if (result.status === 'none' && queryFailures.length) {
+        const lastFailure = queryFailures[queryFailures.length - 1];
+        console.warn('Steam search failed:', lastFailure instanceof Error ? lastFailure.message : lastFailure);
+      }
+      return result;
     })();
 
-    if (cacheKey) steamSearchCache.set(cacheKey, searchPromise);
+    if (cacheKey) setCachedResult(cacheKey, searchPromise);
     return searchPromise;
   }
 
+  /** In-flight request map for deduplicating concurrent fetchSteamAppDetails calls */
+  const inFlight = new Map<string, {
+    promise: Promise<SteamAppDetailsPayload>;
+    controller: AbortController;
+    callerCount: number;
+  }>();
+
   async function fetchSteamAppDetails(appId: string, fetchOptions: SteamFetchOptions = {}): Promise<SteamAppDetailsPayload> {
+    const key = encodeURIComponent(appId);
+    const callerSignal = fetchOptions.signal;
+
+    // If there's already an in-flight request for this app ID, share it
+    const existing = inFlight.get(key);
+    if (existing) {
+      if (existing.controller.signal.aborted || existing.callerCount <= 0) {
+        inFlight.delete(key);
+      } else {
+        existing.callerCount += 1;
+
+        return new Promise<SteamAppDetailsPayload>((resolve, reject) => {
+          let settled = false;
+
+          const onCallerAbort = () => {
+            if (settled) return;
+            settled = true;
+            existing.callerCount -= 1;
+            if (existing.callerCount <= 0) {
+              inFlight.delete(key);
+              existing.controller.abort();
+            }
+            reject(createAbortError());
+          };
+
+          if (callerSignal?.aborted) {
+            onCallerAbort();
+            return;
+          }
+
+          callerSignal?.addEventListener('abort', onCallerAbort, { once: true });
+
+          existing.promise.then(
+            (value) => {
+              if (!settled) {
+                settled = true;
+                callerSignal?.removeEventListener('abort', onCallerAbort);
+                resolve(value);
+              }
+            },
+            (error) => {
+              if (!settled) {
+                settled = true;
+                callerSignal?.removeEventListener('abort', onCallerAbort);
+                reject(error);
+              }
+            }
+          );
+        });
+      }
+    }
+
+    // No in-flight request — create a new one
+    if (callerSignal?.aborted) {
+      return Promise.reject(createAbortError());
+    }
+
+    const controller = new AbortController();
+    const entry = {
+      promise: null as unknown as Promise<SteamAppDetailsPayload>,
+      controller,
+      callerCount: 1
+    };
+
+    const onFirstCallerAbort = () => {
+      entry.callerCount -= 1;
+      if (entry.callerCount <= 0) {
+        inFlight.delete(key);
+        entry.controller.abort();
+      }
+    };
+
+    callerSignal?.addEventListener('abort', onFirstCallerAbort, { once: true });
+
     const url = `https://store.steampowered.com/api/appdetails?appids=${encodeURIComponent(appId)}`;
-    return fetchJsonWithTimeout<SteamAppDetailsPayload>(proxiedUrl(url, proxyBase), 10000, { signal: fetchOptions.signal });
+    const sharedPromise = fetchJsonWithTimeout<SteamAppDetailsPayload>(
+      proxiedUrl(url, proxyBase),
+      10000,
+      { signal: controller.signal }
+    ).then(
+      (value) => {
+        inFlight.delete(key);
+        callerSignal?.removeEventListener('abort', onFirstCallerAbort);
+        return value;
+      },
+      (error) => {
+        inFlight.delete(key);
+        callerSignal?.removeEventListener('abort', onFirstCallerAbort);
+        throw error;
+      }
+    );
+
+    entry.promise = sharedPromise;
+    inFlight.set(key, entry);
+
+    return sharedPromise;
   }
 
   return {

@@ -1,0 +1,17 @@
+{
+  "name": "igrs-preview-worker",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Cloudflare Worker for IGRS social media preview pages",
+  "main": "worker.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20250620.0",
+    "typescript": "^5.8.3",
+    "wrangler": "^4.22.0"
+  }
+}

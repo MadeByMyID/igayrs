@@ -150,6 +150,22 @@ When changing JavaScript:
 
 ## CSS Guidelines
 
+### Styling Strategy
+
+This project uses three complementary CSS approaches:
+
+1. **Global CSS** (`src/styles/global.css`): Design tokens (custom properties), CSS reset, layout shell (header, footer, app-layout, sidebar), and shared component styles (buttons, loading states, detail cards). This is where site-wide structural styles live.
+2. **CSS Modules** (`*.module.css`): Feature-scoped styles for individual pages and components. Use CSS Modules for any styles that are specific to a single feature (search cards, ratings page layout, etc.).
+3. **Tailwind CSS 4**: Provides the CSS reset baseline and utility classes. Use Tailwind utilities sparingly for one-off adjustments that don't warrant a new class (e.g., a single `flex` or `gap` override). Do not build entire component layouts with Tailwind utilities — use CSS Modules instead.
+
+**When choosing where to put a new style:**
+- Is it a design token or affects the entire site? → `global.css` `:root` variables
+- Is it a layout primitive shared across features (header, footer, cards)? → `global.css`
+- Is it specific to one feature or page? → `*.module.css` in that feature's directory
+- Is it a one-off utility (spacing tweak, single flex alignment)? → Tailwind utility class
+
+### CSS Rules
+
 When changing CSS:
 
 - Reuse tokens in `:root` before adding one-off values.

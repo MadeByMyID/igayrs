@@ -1,0 +1,6 @@
+{
+  "thresholds": {
+    "javascript": 200,
+    "css": 30
+  }
+}

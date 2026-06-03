@@ -3,6 +3,7 @@ dist/
 build/
 coverage/
 artifacts/visual-compat-report.json
+artifacts/bundle-report.html
 .worktree/
 .env
 .env.*
@@ -12,3 +13,5 @@ artifacts/visual-compat-report.json
 Thumbs.db
 *.log
 *.tmp
+.kiro
+.vscode

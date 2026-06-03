@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from 'vitest';
 import { assertGamesPayload, assertMetaPayload, normalizeExtraPayload, normalizeSteamMetaPayload } from '@/core/data-contracts';
 import { esc, safeExternalLink, safeHttpUrl } from '@/core/safe-render';
-import { createGameSearchIndex, filterIndexedGames, fuzzyScoreNormalized, normalizeSearchText } from '@/core/search-index';
+import { countIndexedGames, createGameSearchIndex, filterIndexedGames, fuzzyScoreNormalized, normalizeSearchText } from '@/core/search-index';
 import { renderSteamDescription } from '@/core/steam-description';
 import { buildSteamReviewsUrl, normalizeSteamReviewSummary } from '@/core/steam-reviews';
 import { buildSteamSearchQueries, buildSteamStoreSearchUrl, normalizeSteamSearchPayload, selectSteamSearchResult } from '@/core/steam-search';
@@ -10,7 +10,7 @@ import { getDescriptorGuideCopy } from '@/core/descriptor-guide';
 import { getRatingGuideCopy } from '@/core/rating-guide';
 import { copyTextToClipboard } from '@/shared/lib/clipboard';
 import { normalizeSteamProxyBase } from '@/shared/api/steam-api';
-import { buildSteamRatingComparison } from '@/shared/lib/domain';
+import { buildSteamRatingComparison } from '@/shared/lib/steam-domain';
 
 describe('safe rendering helpers', () => {
   it('reject unsafe links and escape labels', () => {
@@ -96,6 +96,25 @@ describe('search and URL state', () => {
     expect(results).toHaveLength(2);
     expect(results[0]?.game.id).toBe(1);
     expect(normalizeSearchText('  Astral: Hunter!! ')).toBe('astral hunter');
+  });
+
+  it('counts filtered games without changing filter semantics', () => {
+    const games = [
+      { id: 1, name: 'Astral Hunter', publisherName: 'Red Studio', releaseYear: 2026, ratings: [7], platforms: [1], descriptors: [3] },
+      { id: 2, name: 'Metro Puzzle', publisherName: 'Blue Studio', releaseYear: 2024, ratings: [6], platforms: [2], descriptors: [4] },
+      { id: 3, name: 'Hunter Academy', publisherName: 'Red Studio', releaseYear: 2026, ratings: [5], platforms: [1, 2], descriptors: [3, 4] }
+    ];
+    const index = createGameSearchIndex(games);
+    const filters = {
+      descriptors: new Set([3]),
+      platforms: new Set([1]),
+      publisher: 'red',
+      query: 'hunt',
+      ratings: new Set([7, 5]),
+      years: new Set(['2026'])
+    };
+
+    expect(countIndexedGames(index.items, filters)).toBe(filterIndexedGames(index.items, filters).length);
   });
 
   it('round trips compact sanitized URL state', () => {

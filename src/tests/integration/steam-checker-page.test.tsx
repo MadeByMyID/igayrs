@@ -1,4 +1,5 @@
 import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { StrictMode } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { SteamCheckerPage } from '@/features/steam-checker/steam-checker-page';
@@ -23,7 +24,8 @@ vi.mock('@/app/providers/language-provider', () => ({
   useLanguage: () => ({
     lang: 'en',
     t: (key: string) => key,
-    unlocked: false
+    unlocked: false,
+    dictionaryLoading: false
   })
 }));
 
@@ -151,5 +153,42 @@ describe('SteamCheckerPage request ordering', () => {
     fireEvent.click(retry);
 
     expect(await screen.findByText('Recovered Steam Game')).toBeInTheDocument();
+  });
+
+  it('recovers URL-driven lookup when StrictMode aborts the first effect replay request', async () => {
+    const firstRequest = deferred<SteamAppDetailsPayload>();
+    const secondRequest = deferred<SteamAppDetailsPayload>();
+    const requests = [firstRequest, secondRequest];
+
+    steamApiMock.fetchSteamAppDetails.mockImplementation((_appId: string, options?: { signal?: AbortSignal }) => {
+      const request = requests.shift();
+      if (!request) throw new Error('Unexpected extra Steam request');
+
+      options?.signal?.addEventListener('abort', () => {
+        request.reject(new DOMException('The operation was aborted.', 'AbortError'));
+      }, { once: true });
+
+      return request.promise;
+    });
+
+    render(
+      <StrictMode>
+        <MemoryRouter initialEntries={['/steamchecker/?appid=333']}>
+          <SteamCheckerPage />
+        </MemoryRouter>
+      </StrictMode>
+    );
+
+    await waitFor(() => {
+      expect(steamApiMock.fetchSteamAppDetails).toHaveBeenCalledTimes(2);
+    });
+    expect(screen.queryByRole('button', { name: 'steamchecker.retry' })).not.toBeInTheDocument();
+
+    await act(async () => {
+      secondRequest.resolve({ 333: { success: true, data: { name: 'StrictMode Steam Game' } } });
+    });
+
+    expect(await screen.findByText('StrictMode Steam Game')).toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'steamchecker.retry' })).not.toBeInTheDocument();
   });
 });

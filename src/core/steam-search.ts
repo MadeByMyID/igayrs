@@ -1,34 +1,7 @@
 import type { IgrsGame, ScoredSteamSearchCandidate, SteamSearchCandidate, SteamSearchResult } from '@/shared/types';
+import { ADDON_PENALTIES, STOP_WORDS, WEAK_TITLE_WORDS } from '@/shared/lib/search-constants';
 
 const STORE_SEARCH_BASE = 'https://store.steampowered.com/api/storesearch/';
-
-const WEAK_TITLE_WORDS = new Set([
-  'edition',
-  'deluxe',
-  'ultimate',
-  'standard',
-  'complete',
-  'definitive',
-  'enhanced',
-  'remastered',
-  'remake'
-]);
-
-const STOP_WORDS = new Set([
-  'a',
-  'an',
-  'and',
-  'for',
-  'of',
-  'the'
-]);
-
-const ADDON_PENALTIES = [
-  { pattern: /\b(soundtrack|ost)\b/, value: 45 },
-  { pattern: /\b(demo|trial)\b/, value: 35 },
-  { pattern: /\b(attachment|costume|item|booster|currency)\s+pack\b/, value: 30 },
-  { pattern: /\bpack\b/, value: 20 }
-];
 
 interface SteamSearchPayloadItem {
   id?: unknown;

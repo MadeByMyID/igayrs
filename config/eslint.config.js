@@ -40,7 +40,7 @@ module.exports = tseslint.config(
     }
   },
   {
-    files: ['config/*.config.js', 'ops/scripts/**/*.js', 'src/tests/**/*.js', 'ops/worker/**/*.js'],
+    files: ['config/*.config.js', 'ops/scripts/**/*.js', 'scripts/**/*.js', 'src/tests/**/*.js', 'ops/worker/**/*.js'],
     languageOptions: {
       ecmaVersion: 2022,
       globals: {

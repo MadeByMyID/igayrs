@@ -7,17 +7,11 @@
 | Current repository state and active deployment at `https://igrs.madeby.my.id/` | Yes |
 | Older commits, generated data snapshots, or unpublished local builds | No guaranteed support |
 
-The package manifest currently reports version `0.0.0`. Confirm the release policy with a maintainer before relying on version-specific support promises.
+The package manifest currently reports version `0.0.2`. Confirm the release policy with a maintainer before relying on version-specific support promises.
 
 ## Reporting a Vulnerability
 
-Use the private security contact below:
-
-```text
-[FILL IN SECURITY CONTACT]
-```
-
-No private security contact is visible in the repository. The project owner should replace this placeholder before publishing the policy as final.
+No private security contact is configured in this checkout.
 
 If GitHub private vulnerability reporting is enabled for the repository, use that channel. If no private channel is available, open a public issue with only a short non-exploit summary and ask maintainers to provide a private follow-up channel.
 
@@ -41,13 +35,7 @@ When safe to share privately, include:
 
 ## Response Expectations
 
-Maintainers should acknowledge reports within:
-
-```text
-[FILL IN RESPONSE TARGET, FOR EXAMPLE 5 BUSINESS DAYS]
-```
-
-Maintainers should keep reporters informed during triage, remediation, and disclosure planning. Public disclosure should wait until maintainers have investigated, prepared a fix or mitigation, and agreed on timing with the reporter when practical.
+No fixed acknowledgement SLA is configured in this checkout. Maintainers should publish an acknowledgement target before accepting external vulnerability reports, and should keep reporters informed during triage, remediation, and disclosure planning. Public disclosure should wait until maintainers have investigated, prepared a fix or mitigation, and agreed on timing with the reporter when practical.
 
 ## Known Security Considerations for Deployers
 

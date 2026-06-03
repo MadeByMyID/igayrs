@@ -1,13 +1,49 @@
+# =============================================================================
+# Update IGRS Database Workflow
+# =============================================================================
+# Purpose: Fetches the latest game data from the IGRS (Indonesian Game Rating
+#   System) public API, transforms it into optimized JSON files, and commits
+#   the updated data to the repository for deployment via GitHub Pages.
+#
+# Data Source: IGRS Public API (https://api.igrs.id/public/)
+#   - Individual game records: GET /public/games/{id}
+#   - Ratings metadata: GET /public/ratings
+#   - Descriptors metadata: GET /public/descriptors
+#
+# Transformation Steps:
+#   1. Parallel fetch of individual game records by sequential ID
+#   2. Merge all fetched records into a single sorted JSON array
+#   3. Fetch ratings and descriptors metadata from dedicated endpoints
+#   4. Normalize platform names (fix inconsistencies like "P C" → "PC")
+#   5. Split and reshape data into three output files
+#
+# Expected Output (committed to public/assets/data/json/):
+#   - igrs.games.json: Array of game objects with normalized fields
+#       [{id, name, releaseYear, publisherName, description, ratings: [id...],
+#         descriptors: [id...], platforms: [numericId...]}]
+#   - igrs.meta.json: Object with metadata, ratings dict, descriptors dict,
+#       and platform mapping {meta: {generatedAt, totalGames}, ratings, descriptors, platforms}
+#   - igrs.extra.json: Array of game objects with optional media URLs
+#       [{id, videoUrl?, inGameUrl?}] (only entries with at least one URL)
+#
+# Schedule: Runs daily at midnight UTC, or manually via workflow_dispatch.
+# =============================================================================
+
 name: Update IGRS Database
 
 on:
+  # Run daily at midnight UTC to keep game data fresh
   schedule:
     - cron: "0 0 * * *"
+  # Allow manual triggering for on-demand refreshes or debugging
   workflow_dispatch:
 
+# Read-only by default; write permissions granted only to the job that needs them
 permissions:
   contents: read
 
+# Prevent multiple concurrent runs from conflicting on git commits.
+# cancel-in-progress: false ensures a running refresh completes rather than being cancelled.
 concurrency:
   group: update-igrs-db
   cancel-in-progress: false
@@ -15,14 +51,48 @@ concurrency:
 jobs:
   update-db:
     runs-on: ubuntu-latest
+    # 6-hour timeout accommodates the sequential batch fetching of thousands of game IDs
     timeout-minutes: 360
     permissions:
-      contents: write
+      contents: write  # Required to push updated JSON files
+      issues: write    # Required to create failure notification issues
 
     steps:
+      # -----------------------------------------------------------------------
+      # Step 1: Checkout the repository to access scripts and existing data
+      # -----------------------------------------------------------------------
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # -----------------------------------------------------------------------
+      # Step 2: Install a pinned version of jq for reproducible JSON processing.
+      # The runner's system jq version can change between image updates, so we
+      # pin to 1.7.1 to ensure consistent behavior of all jq transformations.
+      # -----------------------------------------------------------------------
+      - name: Install pinned jq version
+        uses: dcarbone/install-jq-action@v2.1.0
+        with:
+          version: "1.7.1"
+          force: true
+
+      # -----------------------------------------------------------------------
+      # Step 3: Fetch all game data from the IGRS public API.
+      #
+      # Strategy: Games are fetched by sequential numeric ID in batches.
+      # Each batch fetches CHUNK_SIZE IDs in parallel (CONCURRENCY workers).
+      # The fetch-igrs-game.sh script handles individual game requests with
+      # retries and validation (verifies response ID matches requested ID).
+      #
+      # Termination: Stops after 3 consecutive empty batches (no new games found),
+      # indicating we've passed the highest valid game ID.
+      #
+      # After initial fetch, failed IDs are retried once to recover from
+      # transient network errors.
+      #
+      # Then: Fetches ratings and descriptors metadata from dedicated endpoints
+      # (with up to 3 retry attempts), normalizes platform names, and produces
+      # the final output JSON files in public/assets/data/json/.
+      # -----------------------------------------------------------------------
       - name: Download latest IGRS public database
         run: |
           set -euo pipefail
@@ -32,6 +102,10 @@ jobs:
           FAILED_IDS_FILE=".failed-fetch-ids"
           BATCH_FAILED_IDS_FILE=".batch-failed-fetch-ids"
 
+          # Configurable via environment variables for tuning:
+          # CHUNK_SIZE: Number of sequential IDs to attempt per batch
+          # CONCURRENCY: Max parallel curl requests per batch
+          # BATCH_DELAY_SEC: Cooldown between batches to avoid rate limiting
           CHUNK_SIZE="${CHUNK_SIZE:-2000}"
           CONCURRENCY="${CONCURRENCY:-15}"
           BATCH_DELAY_SEC="${BATCH_DELAY_SEC:-20}"
@@ -46,23 +120,28 @@ jobs:
           echo "Starting parallel fetch in chunks of ${CHUNK_SIZE} (concurrency: ${CONCURRENCY}, batch delay: ${BATCH_DELAY_SEC}s)"
           EMPTY_BATCH_COUNT=0
 
+          # Main fetch loop: iterate through ID ranges until 3 consecutive
+          # empty batches indicate we've exhausted all valid game IDs
           while true; do
             CURRENT_END=$((CURRENT_START + CHUNK_SIZE - 1))
             echo ">>> Fetching batch: IDs ${CURRENT_START} to ${CURRENT_END}"
 
             FILES_BEFORE="$(find "$RAW_DIR" -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')"
 
+            # Fetch games in parallel using xargs; failures are logged but don't stop the batch
             > "$BATCH_FAILED_IDS_FILE"
             seq "$CURRENT_START" "$CURRENT_END" | xargs -P "$CONCURRENCY" -I {} bash "$WORKER_SCRIPT" {} "$RAW_DIR" 2>> "$BATCH_FAILED_IDS_FILE" || true
 
             FILES_AFTER="$(find "$RAW_DIR" -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')"
             GAMES_ADDED=$((FILES_AFTER - FILES_BEFORE))
+            # Only count failures for IDs >= 1000 (lower IDs are expected to be mostly empty)
             BATCH_ERROR_COUNT="$(sed -En 's/.*id=([0-9]+).*/\1/p' "$BATCH_FAILED_IDS_FILE" | sort -u | awk '$1 >= 1000' | wc -l | tr -d ' ')"
 
             echo ">>> Batch complete. Games found in this chunk: ${GAMES_ADDED}"
             if [ "$GAMES_ADDED" -eq 0 ]; then
               EMPTY_BATCH_COUNT=$((EMPTY_BATCH_COUNT + 1))
               echo "No games found in batch ${CURRENT_START}-${CURRENT_END}. (Consecutive empty batches: ${EMPTY_BATCH_COUNT})"
+              # 3 consecutive empty batches = we've passed the last valid game ID
               if [ "$EMPTY_BATCH_COUNT" -ge 3 ]; then
                 echo "Reached ${EMPTY_BATCH_COUNT} consecutive empty batches. Assuming end."
                 echo "Dropping failed IDs from this final empty batch.."
@@ -72,12 +151,14 @@ jobs:
               EMPTY_BATCH_COUNT=0
             fi
 
+            # If there were failures in this batch, record them for retry and add extra cooldown
             if [ "$BATCH_ERROR_COUNT" -gt 0 ]; then
               cat "$BATCH_FAILED_IDS_FILE" >> "$FAILED_IDS_FILE"
               echo ">>> Batch had ${BATCH_ERROR_COUNT} failed IDs. Cooling down for 20s before next batch..."
               sleep 20
             fi
 
+            # Rate-limiting delay between batches to be respectful to the IGRS API
             if [ "$BATCH_DELAY_SEC" -gt 0 ]; then
               echo "Sleeping ${BATCH_DELAY_SEC}s before next batch..."
               sleep "$BATCH_DELAY_SEC"
@@ -86,6 +167,7 @@ jobs:
             CURRENT_START=$((CURRENT_START + CHUNK_SIZE))
           done
 
+          # Retry previously failed IDs once to recover from transient errors
           echo ">>> Testing previously failed IDs..."
           if [ -s "$FAILED_IDS_FILE" ]; then
             FAILED_IDS="$(sed -En 's/.*id=([0-9]+).*/\1/p' "$FAILED_IDS_FILE" | sort -u | awk '$1 >= 1000')"
@@ -100,23 +182,31 @@ jobs:
             echo "No failed IDs to retest"
           fi
 
+          # Validate that at least some games were fetched
           TOTAL_FETCHED="$(find "$RAW_DIR" -maxdepth 1 -type f -name '*.json' | wc -l | tr -d ' ')"
           if [ "$TOTAL_FETCHED" -eq 0 ]; then
             echo "ERROR: No games fetched." >&2
             exit 1
           fi
 
+          # Merge all individual game JSON files into a single sorted array.
+          # Each file contains one game object; jq -s slurps them into an array
+          # and sorts by ID for deterministic output.
           echo "Merging records into JSON array..."
           find "$RAW_DIR" -maxdepth 1 -type f -name '*.json' -print0 \
             | sort -z \
             | xargs -0 cat \
             | jq -s 'sort_by(.id)' > "igrs.pubdb.json"
 
+          # Validate the merged file is a valid JSON array
           jq -e 'type == "array"' "igrs.pubdb.json" >/dev/null
 
           GAME_COUNT="$(jq 'unique_by(.id) | length' "igrs.pubdb.json")"
           echo "Merged ${GAME_COUNT} games into igrs.pubdb.json"
 
+          # Fetch ratings and descriptors metadata from dedicated API endpoints.
+          # These provide human-readable names, descriptions, and display metadata
+          # for the numeric rating/descriptor IDs referenced in game records.
           echo "Downloading ratings and descriptors..."
           RATING_DESC_ATTEMPTS=3
           RATING_DESC_RETRY_DELAY_SEC=20
@@ -140,21 +230,28 @@ jobs:
             fi
           done
 
+          # If ratings/descriptors fetch fails, skip metadata regeneration and
+          # keep the existing igrs.meta.json (graceful degradation)
           if [ "$RATING_DESC_OK" -ne 1 ]; then
             echo "Failed to fetch ratings/descriptors API after ${RATING_DESC_ATTEMPTS} attempts. Using existing."
             echo "Skipping metadata regeneration."
             SKIP_META=1
           fi
 
+          # --- Data Transformation ---
+          # Transform raw API responses into the optimized format consumed by the frontend.
           echo "Normalizing and splitting database..."
           OUTPUT_DIR="public/assets/data/json"
           mkdir -p "$OUTPUT_DIR"
 
+          # Guard: if metadata fetch failed and no existing meta file exists, abort
           if [ "${SKIP_META:-0}" -eq 1 ] && ! test -s "${OUTPUT_DIR}/igrs.meta.json"; then
             echo "ERROR: Metadata fetch failed and no existing ${OUTPUT_DIR}/igrs.meta.json file is available." >&2
             exit 1
           fi
 
+          # Platform name normalization: fixes known inconsistencies in the API data
+          # (e.g., "P C" should be "PC", "Xbox Series X S" should be "Xbox Series X|S")
           PLATFORM_NORMALIZE='def normalize_platform:
             gsub("^\\s+|\\s+$"; "")
             | if . == "P C" then "PC"
@@ -162,8 +259,11 @@ jobs:
               else .
               end;'
 
+          # Load rating display metadata (weight for sorting, color for UI) from
+          # the local config file to enrich the ratings in igrs.meta.json
           RATING_METADATA="$(jq 'map({key: (.id | tostring), value: {weight, color}}) | from_entries' "src/core/rating-metadata.json")"
 
+          # Transform ratings API response into a keyed object {id: {name, weight, color, titles, content}}
           RATINGS_TRANSFORM='
           (if type == "array" then . else [] end)
           | map({
@@ -180,6 +280,7 @@ jobs:
           })
           | from_entries'
 
+          # Transform descriptors API response into a keyed object {id: {nameId, nameEn, description}}
           DESCRIPTORS_TRANSFORM='(if type == "array" then . else [] end)
           | map({
               key: (.id | tostring),
@@ -191,6 +292,8 @@ jobs:
             })
           | from_entries'
 
+          # Main games transformation: deduplicate, sort (newest first), normalize platforms
+          # to numeric IDs, and extract only the fields needed by the frontend
           GAMES_QUERY="${PLATFORM_NORMALIZE}
             unique_by(.id)
             | sort_by(.id)
@@ -210,6 +313,8 @@ jobs:
                   | map(\$platformNameToId[.] // empty))
               })"
 
+          # Extra data transformation: extracts optional media URLs (video, in-game)
+          # Only includes entries that have at least one non-null URL field
           EXTRA_QUERY="${PLATFORM_NORMALIZE}
             unique_by(.id)
             | sort_by(.id)
@@ -221,6 +326,9 @@ jobs:
               } | with_entries(select(.value != null)))
             | map(select(length > 1))"
 
+          # Build platform name-to-numeric-ID mapping from all unique platform names
+          # found across all games. This allows the frontend to use compact numeric
+          # IDs instead of full platform name strings.
           PLATFORMS_JSON="$(jq "${PLATFORM_NORMALIZE}
             [ .[] | (.platformsName // [])[] | normalize_platform ]
             | map(select(length > 0))
@@ -236,11 +344,14 @@ jobs:
             | from_entries
           ')"
 
+          # Generate igrs.meta.json only if ratings/descriptors were fetched successfully
           if [ "${SKIP_META:-0}" -ne 1 ]; then
             RATINGS="$(jq --argjson ratingMetadata "$RATING_METADATA" "$RATINGS_TRANSFORM" "ratings-api.json")"
             DESCRIPTORS="$(jq "$DESCRIPTORS_TRANSFORM" "descriptors-api.json")"
             GENERATED_AT="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
 
+            # Assemble igrs.meta.json: combines ratings, descriptors, platforms,
+            # and generation metadata into a single object for the frontend
             jq -n \
               --argjson ratings "$RATINGS" \
               --argjson descriptors "$DESCRIPTORS" \
@@ -258,12 +369,16 @@ jobs:
               }' > "${OUTPUT_DIR}/igrs.meta.json"
           fi
 
+          # Generate igrs.games.json and igrs.extra.json from the merged game data
           jq --argjson platformNameToId "$PLATFORM_NAME_TO_ID" "$GAMES_QUERY" "igrs.pubdb.json" > "${OUTPUT_DIR}/igrs.games.json"
           jq "$EXTRA_QUERY" "igrs.pubdb.json" > "${OUTPUT_DIR}/igrs.extra.json"
+
+          # Validate output files are well-formed and match expected structure
           jq -e 'type == "array"' "${OUTPUT_DIR}/igrs.games.json" >/dev/null
           jq -e 'type == "array"' "${OUTPUT_DIR}/igrs.extra.json" >/dev/null
           jq -e 'type == "object" and (.meta.totalGames | type == "number")' "${OUTPUT_DIR}/igrs.meta.json" >/dev/null
 
+          # Clean up temporary files (raw downloads, intermediate merged file)
           echo "Cleaning up raw dump files..."
           rm -f "igrs.pubdb.json"
           rm -f "ratings-api.json"
@@ -274,6 +389,10 @@ jobs:
 
           echo "Done"
 
+      # -----------------------------------------------------------------------
+      # Step 4: Set up Node.js for running the project's test suite.
+      # Uses npm cache to speed up dependency installation.
+      # -----------------------------------------------------------------------
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
@@ -281,11 +400,66 @@ jobs:
           cache: npm
           cache-dependency-path: package-lock.json
 
+      # -----------------------------------------------------------------------
+      # Step 5: Run the project test suite against the refreshed data to catch
+      # any schema or format regressions introduced by API changes.
+      # -----------------------------------------------------------------------
       - name: Validate refreshed dataset
         run: |
           npm ci --ignore-scripts
           npm test
 
+      # -----------------------------------------------------------------------
+      # Step 6: Data integrity check - compares new game count against the
+      # previously committed file. Fails if count drops >10% (indicates partial
+      # fetch or API issue) or if count is zero (total failure).
+      # Skips comparison if no previous file exists (first run).
+      # -----------------------------------------------------------------------
+      - name: Validate data integrity
+        run: |
+          set -euo pipefail
+
+          DATA_FILE="public/assets/data/json/igrs.games.json"
+
+          # Count entries in the newly generated games JSON
+          NEW_COUNT="$(jq 'length' "$DATA_FILE")"
+          echo "New game count: ${NEW_COUNT}"
+
+          # Fail immediately if new count is zero
+          if [ "$NEW_COUNT" -eq 0 ]; then
+            echo "::error::Data integrity check failed: new igrs.games.json contains zero entries."
+            exit 1
+          fi
+
+          # Get the previous file from the last commit (skip comparison if it doesn't exist)
+          if git show HEAD:"$DATA_FILE" > /dev/null 2>&1; then
+            PREVIOUS_COUNT="$(git show HEAD:"$DATA_FILE" | jq 'length')"
+            echo "Previous game count: ${PREVIOUS_COUNT}"
+
+            if [ "$PREVIOUS_COUNT" -eq 0 ]; then
+              echo "Previous file was empty. Skipping percentage comparison."
+            else
+              # Calculate percentage drop
+              DROP_PERCENT=$(( (PREVIOUS_COUNT - NEW_COUNT) * 100 / PREVIOUS_COUNT ))
+              echo "Count change: ${PREVIOUS_COUNT} -> ${NEW_COUNT} (drop: ${DROP_PERCENT}%)"
+
+              if [ "$DROP_PERCENT" -gt 10 ]; then
+                echo "::error::Data integrity check failed: game count dropped by ${DROP_PERCENT}% (from ${PREVIOUS_COUNT} to ${NEW_COUNT}). Threshold is 10%."
+                exit 1
+              fi
+            fi
+          else
+            echo "Previous igrs.games.json not found in repository. Skipping comparison."
+            echo "Previous game count: N/A"
+          fi
+
+          echo "Data integrity check passed."
+
+      # -----------------------------------------------------------------------
+      # Step 7: Commit and push the updated JSON files if there are changes.
+      # Only stages the three output files to avoid committing temporary artifacts.
+      # Uses the github-actions bot identity for the commit.
+      # -----------------------------------------------------------------------
       - name: Commit and push changes
         run: |
           git add public/assets/data/json/igrs.meta.json public/assets/data/json/igrs.games.json public/assets/data/json/igrs.extra.json
@@ -300,3 +474,43 @@ jobs:
 
           git commit -m "chore(data): refresh IGRS dataset"
           git push
+
+      # -----------------------------------------------------------------------
+      # Step 8: Failure notification - creates a GitHub issue when any step fails.
+      # Includes the workflow run URL and the name of the failed step so
+      # maintainers can quickly identify and investigate the problem.
+      # -----------------------------------------------------------------------
+      - name: Notify on failure
+        if: failure()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const failedSteps = (await github.rest.actions.listJobsForWorkflowRun({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              run_id: context.runId,
+            })).data.jobs
+              .flatMap(job => job.steps || [])
+              .filter(step => step.conclusion === 'failure')
+              .map(step => step.name);
+
+            const failedStepName = failedSteps.length > 0
+              ? failedSteps.join(', ')
+              : 'Unknown step';
+
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `Data refresh workflow failed: ${failedStepName}`,
+              body: [
+                '## Data Refresh Workflow Failure',
+                '',
+                `**Workflow run:** ${runUrl}`,
+                `**Failed step:** ${failedStepName}`,
+                `**Triggered at:** ${new Date().toISOString()}`,
+                '',
+                'The scheduled IGRS database refresh workflow has failed. Please investigate and re-run if needed.',
+              ].join('\n'),
+              labels: ['bug', 'data-refresh'],
+            });

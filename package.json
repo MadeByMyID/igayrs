@@ -1,12 +1,13 @@
 {
   "name": "igrsdb",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "private": true,
   "description": "Vite React frontend for the unofficial IGRS database.",
   "license": "UNLICENSED",
   "homepage": "https://igrs.madeby.my.id/",
   "main": "src/main.tsx",
   "scripts": {
+    "preinstall": "node -e \"if(!/npm/.test(process.env.npm_execpath||'')){console.error('\\x1b[31mError: This project requires npm as the package manager.\\nPlease use: npm install\\x1b[0m');process.exit(1)}\"",
     "dev": "vite --config config/vite.config.ts --host 127.0.0.1",
     "build": "tsc -b config/tsconfig.json && vite --config config/vite.config.ts build",
     "build:pages-root": "npm run build && node ops/scripts/sync-pages-root.js",
@@ -15,13 +16,16 @@
     "lint": "eslint -c config/eslint.config.js .",
     "serve:static": "node ops/scripts/dev-server.js --root dist",
     "visual:check": "node ops/scripts/visual-compat.js",
-    "check": "node --check ops/scripts/dev-server.js && node --check ops/scripts/visual-compat.js && node --check ops/worker/worker.js && node src/tests/structure/stack.test.js && node src/tests/structure/github-automation.test.js && npm run lint && npm run test && npm run build",
+    "check": "node --check ops/scripts/dev-server.js && node --check ops/scripts/visual-compat.js && npm run --prefix ops/worker typecheck && node src/tests/structure/stack.test.js && node src/tests/structure/github-automation.test.js && npm run lint && npm run test && npm run build",
     "test": "vitest --config config/vite.config.ts run"
   },
   "engines": {
-    "node": ">=18"
+    "node": ">=18",
+    "npm": ">=9"
   },
   "dependencies": {
+    "@tanstack/react-virtual": "^3.13.26",
+    "dompurify": "^3.4.7",
     "lucide-react": "^1.16.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
@@ -33,18 +37,25 @@
     "@tailwindcss/vite": "^4.3.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
+    "@types/dompurify": "^3.0.5",
     "@types/node": "^25.9.1",
     "@types/react": "^19.2.15",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.2",
+    "@vitest/coverage-v8": "^4.1.7",
+    "axe-core": "^4.11.4",
     "eslint": "^10.4.0",
     "eslint-plugin-react-hooks": "^7.1.1",
+    "fast-check": "4.8.0",
     "globals": "^17.6.0",
     "jsdom": "^29.1.1",
     "lightningcss": "^1.32.0",
+    "rollup-plugin-visualizer": "7.0.1",
+    "sharp": "^0.34.5",
     "typescript": "^6.0.3",
     "typescript-eslint": "^8.59.4",
     "vite": "^8.0.14",
-    "vitest": "^4.1.7"
+    "vitest": "^4.1.7",
+    "vitest-axe": "^0.1.0"
   }
 }

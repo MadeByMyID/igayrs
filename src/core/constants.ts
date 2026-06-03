@@ -14,6 +14,7 @@ function publicAssetPath(pathname: string): string {
 
 export const APP_BASE_PATH = normalizeBasePath(APP_BASE_URL.pathname);
 export const ASSET_BASE = publicAssetPath('assets/data');
+export const I18N_BASE = publicAssetPath('assets/i18n');
 export const IMAGE_BASE = `${ASSET_BASE}/images`;
 export const JSON_BASE = `${ASSET_BASE}/json`;
 export const FAVICON_URL = `${IMAGE_BASE}/favicon.svg`;

@@ -72,11 +72,13 @@ function testPackageUsesModernFrontendStack() {
 }
 
 function testProjectRootStaysGrouped() {
-  for (const relativePath of ['config', 'ops', 'public', 'src']) {
+  for (const relativePath of ['config', 'ops', 'public', 'scripts', 'src']) {
     assert(exists(relativePath), `${relativePath}: expected grouped top-level project directory`);
   }
 
-  for (const relativePath of ['app', 'tests', 'scripts', 'tools', 'worker']) {
+  assert(exists('scripts/check-bundle-size.js'), 'scripts/check-bundle-size.js: expected CI helper script under grouped scripts directory');
+
+  for (const relativePath of ['app', 'tests', 'tools', 'worker']) {
     assert(!exists(relativePath), `${relativePath}: expected implementation details to be grouped away from the project root`);
   }
 }
@@ -166,6 +168,7 @@ function testReactApplicationBoundariesExist() {
     'src/shared/api/steam-api.ts',
     'src/shared/components/app-shell.tsx',
     'src/shared/components/rating-badge.tsx',
+    'src/shared/hooks/use-search-index.ts',
     'src/shared/types.ts',
     'src/features/home/home-page.tsx',
     'src/features/search/search-page.tsx',
@@ -185,6 +188,12 @@ function testReactApplicationBoundariesExist() {
   assert(app.includes('react-router-dom'), 'src/app/App.tsx: expected React Router integration');
   assert(app.includes('<DataProvider>'), 'src/app/App.tsx: expected shared data provider');
   assert(app.includes('<LanguageProvider>'), 'src/app/App.tsx: expected shared language provider');
+
+  assert(!exists('src/core/use-search-index.ts'), 'src/core/use-search-index.ts: React hooks should live outside pure core modules');
+
+  const coreReactFiles = walkFiles('src/core', relativePath => /\.(ts|tsx)$/.test(relativePath))
+    .filter(relativePath => /\bfrom ['"]react['"]/.test(read(relativePath)));
+  assert(coreReactFiles.length === 0, `src/core should not import React: ${coreReactFiles.join(', ')}`);
 }
 
 function testHtmlEntrypointsUseViteReactRoot() {
@@ -215,6 +224,13 @@ function testVitePublicAssetsAreCanonical() {
   assert(exists('public/assets/data/images/favicon.svg'), 'public/assets/data/images/favicon.svg: expected canonical favicon asset');
   assert(exists('assets/data/json/igrs.meta.json'), 'assets/data/json/igrs.meta.json: branch-root Pages should include generated public data');
   assert(!exists('assets/styles/main.css'), 'assets/styles/main.css: source styles should be bundled from src/styles');
+
+  for (const fileName of ['igrs.meta.json', 'igrs.games.json', 'igrs.extra.json', 'steam.meta.json']) {
+    const publicPath = `public/assets/data/json/${fileName}`;
+    const branchRootPath = `assets/data/json/${fileName}`;
+    assert(exists(branchRootPath), `${branchRootPath}: branch-root Pages should include generated public data`);
+    assert(read(publicPath) === read(branchRootPath), `${branchRootPath}: branch-root Pages data should match ${publicPath}`);
+  }
 }
 
 function testAutomationTargetsVitePublicData() {
@@ -242,6 +258,8 @@ function testRepositoryFinalizationHygiene() {
     && !relativePath.includes('\\tests\\')
     && !relativePath.includes('/test/')
     && !relativePath.includes('\\test\\')
+    && !relativePath.includes('/coverage/')
+    && !relativePath.includes('\\coverage\\')
   ));
 
   for (const relativePath of productionFiles) {

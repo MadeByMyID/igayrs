@@ -44,13 +44,7 @@ The following behavior is not acceptable:
 
 ## Reporting Conduct Issues
 
-Report conduct issues to:
-
-```text
-[FILL IN CODE OF CONDUCT CONTACT]
-```
-
-No private conduct contact is visible in the repository. The project owner should replace this placeholder before publishing the policy as final.
+No private conduct contact is configured in this checkout.
 
 If no private channel is available, open a repository issue with only the minimum safe detail and ask for a private follow-up channel. Do not include private personal information, secrets, exploit payloads, or unrelated sensitive data in a public report.
 

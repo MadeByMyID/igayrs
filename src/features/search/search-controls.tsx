@@ -1,4 +1,5 @@
 import type { SearchSort } from '@/shared/types';
+import styles from './search-controls.module.css';
 
 export interface ActiveFilter {
   id: string;
@@ -26,18 +27,18 @@ export function ActiveFilterSummary({
   t: (key: string) => string;
 }) {
   return (
-    <div className="active-filter-summary" aria-label={t('search.active')} aria-live="polite">
+    <div className={styles.filterSummary} aria-label={t('search.active')} aria-live="polite">
       {filters.length ? (
         <>
-          <span className="active-filter-label">{t('search.active')}</span>
-          <span className="active-filter-chips">
+          <span className={styles.filterLabel}>{t('search.active')}</span>
+          <span className={styles.filterChips}>
             {filters.map(filter => (
-              <button aria-label={filter.label} className="active-filter-chip" type="button" key={filter.id} onClick={filter.onRemove}>
+              <button aria-label={filter.label} className={styles.filterChip} type="button" key={filter.id} onClick={filter.onRemove}>
                 <span>{filter.label}</span>
               </button>
             ))}
           </span>
-          <button className="active-filter-clear" type="button" onClick={onClearAll}>
+          <button className={styles.filterClear} type="button" onClick={onClearAll}>
             {t('search.clearAll')}
           </button>
         </>
@@ -56,7 +57,7 @@ export function SearchSortControl({
   t: (key: string) => string;
 }) {
   return (
-    <label className="search-sort-control">
+    <label className={styles.sortControl}>
       <span>{t('search.sort')}</span>
       <select value={sort} onChange={event => setSort(event.currentTarget.value as SearchSort)}>
         {SEARCH_SORT_OPTIONS.map(option => (

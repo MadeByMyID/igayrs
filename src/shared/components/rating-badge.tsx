@@ -1,4 +1,4 @@
-import { IMG_RATING, ratingName } from '@/shared/lib/domain';
+import { IMG_RATING, IMG_RATING_WEBP, ratingName } from '@/shared/lib/ratings';
 import type { IgrsMeta } from '@/shared/types';
 
 interface RatingBadgeProps {
@@ -13,11 +13,16 @@ export function RatingBadge({ className = 'steam-rating-img', meta, ratingId }: 
   }
 
   return (
-    <img
-      className={className}
-      src={IMG_RATING(ratingId)}
-      alt={ratingName(meta, ratingId)}
-      loading="lazy"
-    />
+    <picture>
+      <source srcSet={IMG_RATING_WEBP(ratingId)} type="image/webp" />
+      <img
+        className={className}
+        src={IMG_RATING(ratingId)}
+        alt={ratingName(meta, ratingId)}
+        width={60}
+        height={60}
+        loading="lazy"
+      />
+    </picture>
   );
 }

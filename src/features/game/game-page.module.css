@@ -1,0 +1,95 @@
+/* ═══════════════════════════════════════════════════════════════
+   Game Page — CSS Module
+   Scoped styles for the game detail page feature.
+   ═══════════════════════════════════════════════════════════════ */
+
+.pageContainer {
+  max-width: var(--layout-page);
+  margin: 0 auto;
+  padding: var(--layout-gutter);
+  flex: 1;
+  width: 100%;
+}
+
+.backButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  min-height: 44px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--primary);
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  padding: 0.5rem 0;
+  margin-bottom: var(--space-4);
+  transition: none;
+}
+
+.backButton:hover {
+  opacity: 0.7;
+}
+
+.emptyState {
+  background: rgba(255, 255, 255, 0.72);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  text-align: center;
+  padding: var(--space-12) var(--space-6);
+  color: var(--text-muted);
+}
+
+.emptyStateTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin-bottom: 0.25rem;
+}
+
+.emptyStateDesc {
+  font-size: 0.8rem;
+}
+
+.searchLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0.7rem 1.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: inherit;
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: 2px solid transparent;
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  margin-top: var(--space-4);
+}
+
+.searchLink:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+.icon {
+  display: inline-block;
+  flex: 0 0 auto;
+  width: 1rem;
+  height: 1rem;
+}
+
+.fadeIn {
+  animation: fadeIn 0.25s var(--ease);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
