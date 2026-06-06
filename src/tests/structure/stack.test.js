@@ -61,11 +61,11 @@ function testPackageUsesModernFrontendStack() {
   assert(pkg.scripts['worker:check'] === 'npm --prefix ops/worker ci --ignore-scripts && npm run --prefix ops/worker typecheck', 'package.json: worker check should install from the worker lockfile before typechecking');
   assert(pkg.engines.node === '>=22.12.0', 'package.json: Node engine should satisfy both the Vite app and Worker toolchain');
 
-  for (const name of ['@vitejs/plugin-react', '@tailwindcss/vite', 'lightningcss', 'typescript', 'vite', 'vitest']) {
+  for (const name of ['@vitejs/plugin-react', 'lightningcss', 'typescript', 'vite', 'vitest']) {
     assert(devDependencies[name], `package.json: expected devDependency ${name}`);
   }
 
-  for (const name of ['@vitejs/plugin-react', '@tailwindcss/vite']) {
+  for (const name of ['@vitejs/plugin-react']) {
     assert(!dependencies[name], `package.json: ${name} should stay out of runtime dependencies`);
   }
 
@@ -103,14 +103,13 @@ function testGitHubPagesBranchRootHasBuiltEntrypoint() {
   assert(syncScript.includes('assertInsideProject'), 'ops/scripts/sync-pages-root.js: sync should guard write paths');
 }
 
-function testViteTypescriptTailwindConfigurationExists() {
+function testViteTypescriptConfigurationExists() {
   for (const relativePath of [
     'config/vite.config.ts',
     'config/tsconfig.json',
     'config/tsconfig.app.json',
     'config/tsconfig.node.json',
     'config/tsconfig.test.json',
-    'config/tailwind.config.ts',
     'config/eslint.config.js',
     'src/vite-env.d.ts'
   ]) {
@@ -119,7 +118,6 @@ function testViteTypescriptTailwindConfigurationExists() {
 
   const viteConfig = read('config/vite.config.ts');
   assert(viteConfig.includes('@vitejs/plugin-react'), 'vite.config.ts: expected React plugin');
-  assert(viteConfig.includes('@tailwindcss/vite'), 'vite.config.ts: expected Tailwind Vite plugin');
   assert(viteConfig.includes("base: './'"), 'vite.config.ts: built asset URLs should be relative for GitHub project Pages');
   assert(viteConfig.includes("transformer: 'lightningcss'"), 'vite.config.ts: expected Lightning CSS transformer');
   assert(viteConfig.includes("cssMinify: 'lightningcss'"), 'vite.config.ts: expected Lightning CSS minifier');
@@ -280,7 +278,7 @@ const tests = [
   testPackageUsesModernFrontendStack,
   testProjectRootStaysGrouped,
   testGitHubPagesBranchRootHasBuiltEntrypoint,
-  testViteTypescriptTailwindConfigurationExists,
+  testViteTypescriptConfigurationExists,
   testProjectPagesAssetPathsArePortable,
   testReactApplicationBoundariesExist,
   testHtmlEntrypointsUseViteReactRoot,

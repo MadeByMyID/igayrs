@@ -1,11 +1,9 @@
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 import { FilterResultAnnouncement } from '@/features/search/filter-result-announcement';
-import { useLocation, useNavigate } from 'react-router-dom';
 import { buildSearchResultsModel } from '@/features/search/search-results-model';
 import { useSearchIndex } from '@/shared/hooks/use-search-index';
 import { useLanguage } from '@/app/providers/language-provider';
 import { useRequiredIgrsData } from '@/app/providers/data-provider';
-import { createSteamApi } from '@/shared/api/steam-api';
 import { ErrorState, LoadingState } from '@/shared/components/data-state';
 import { FilterSidebar } from '@/features/search/search-filters';
 import { SearchHeader } from '@/features/search/search-header';
@@ -15,6 +13,9 @@ import { GameDetailInline } from '@/features/search/game-detail-inline';
 import { buildActiveFilters } from '@/features/search/build-active-filters';
 import { computeSuggestion } from '@/features/search/search-suggestions';
 import { useSearchFilters } from '@/features/search/use-search-filters';
+import { useDetailPanel } from '@/features/search/use-detail-panel';
+import { useSearchShortcut } from '@/features/search/use-search-shortcut';
+import { useSteamApi } from '@/features/search/use-steam-api';
 import { descriptorName, ratingName } from '@/shared/lib/ratings';
 import { platformName } from '@/shared/lib/platforms';
 import pageStyles from './search-page.module.css';
@@ -22,10 +23,8 @@ import pageStyles from './search-page.module.css';
 export function SearchPage() {
   const { lang, t } = useLanguage();
   const { data, error, loading } = useRequiredIgrsData();
-  const location = useLocation();
-  const navigate = useNavigate();
-  const steamApi = useMemo(() => createSteamApi({ t }), [t]);
-  const lastScrollYRef = useRef(0);
+  const steamApi = useSteamApi();
+  const { detailId, showDetail, hideDetail } = useDetailPanel();
 
   const {
     state: { query, publisher, ratings, platforms, descriptors, years, page, sort },
@@ -37,11 +36,7 @@ export function SearchPage() {
     hasActiveFilters,
   } = useSearchFilters();
 
-  // Parse detail ID from URL hash
-  const detailId = useMemo(() => {
-    const match = location.hash.match(/^#(\d+)$/);
-    return match ? Number.parseInt(match[1] ?? '', 10) : null;
-  }, [location.hash]);
+  useSearchShortcut();
 
   const { index: searchIndex, loading: indexLoading, error: indexError, retry: retryIndex } = useSearchIndex(
     data?.games ?? null,
@@ -68,20 +63,6 @@ export function SearchPage() {
 
   // Scroll to top on page change
   useEffect(() => { if (currentPage > 1) window.scrollTo({ top: 0, behavior: 'smooth' }); }, [currentPage]);
-
-  // "/" keyboard shortcut to focus search input
-  useEffect(() => {
-    const onKeyDown = (event: globalThis.KeyboardEvent) => {
-      if (event.key === '/' && !event.ctrlKey && !event.metaKey && !event.altKey) {
-        const target = event.target as HTMLElement | null;
-        if (target?.tagName === 'INPUT' || target?.tagName === 'TEXTAREA' || target?.tagName === 'SELECT') return;
-        event.preventDefault();
-        document.getElementById('search-input')?.focus();
-      }
-    };
-    window.addEventListener('keydown', onKeyDown);
-    return () => window.removeEventListener('keydown', onKeyDown);
-  }, []);
 
   // Compute suggestion only when results are zero
   const suggestion = useMemo(() => {
@@ -114,16 +95,6 @@ export function SearchPage() {
   if (error) return <main className="app-layout" data-route-ready="search"><div className="main-content"><ErrorState title={t('data.error.title')} description={t('data.error.desc')} /></div></main>;
   if (indexError) return <main className="app-layout" data-route-ready="search"><div className="main-content"><ErrorState title={t('data.error.title')} description={indexError.message} /><button type="button" className="retry-button" onClick={retryIndex}>{t('retry') || 'Retry'}</button></div></main>;
   if (loading || !data || indexLoading || !searchIndex) return <main className="app-layout" data-route-ready="search"><div className="main-content"><LoadingState label={indexLoading ? (t('search.indexing') || 'Building search index…') : t('loading')} /></div></main>;
-
-  const showDetail = (id: number) => {
-    lastScrollYRef.current = window.scrollY;
-    navigate({ pathname: '/search/', search: location.search, hash: `#${id}` });
-  };
-
-  const hideDetail = () => {
-    navigate({ pathname: '/search/', search: location.search }, { replace: true });
-    window.requestAnimationFrame(() => window.scrollTo({ top: lastScrollYRef.current, behavior: 'auto' }));
-  };
 
   const activeFilters = buildActiveFilters({
     query, publisher, ratings, platforms, descriptors, years,

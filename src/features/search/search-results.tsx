@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import { useVirtualizer } from '@tanstack/react-virtual';
 import { Gamepad2 } from 'lucide-react';
 import { DescriptorIcons } from '@/shared/components/descriptor-icons';
@@ -30,7 +30,7 @@ interface GameCardProps {
   t: (key: string) => string;
 }
 
-function GameCard({ game, lang, meta, onOpen, publisherQuery, query, t }: GameCardProps) {
+const GameCard = memo(function GameCard({ game, lang, meta, onOpen, publisherQuery, query, t }: GameCardProps) {
   const ratingId = ratingIdsFromGame(game)[0] || null;
   const descriptorIds = descriptorIdsFromGame(game).slice(0, 4);
   const platformNames = platformIdsFromGame(meta, game).map(id => platformName(meta, id, lang)).join(', ');
@@ -62,7 +62,7 @@ function GameCard({ game, lang, meta, onOpen, publisherQuery, query, t }: GameCa
       </div>
     </button>
   );
-}
+});
 
 interface SearchResultsProps {
   /** All filtered results (full set for virtual scrolling, or paginated slice for pagination mode) */

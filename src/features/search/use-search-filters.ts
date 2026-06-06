@@ -78,8 +78,16 @@ export function useSearchFilters(): UseSearchFiltersResult {
   const deferredQuery = useDeferredValue(debouncedQuery);
   const deferredPublisher = useDeferredValue(debouncedPublisher);
 
+  // Track whether we're currently writing to prevent read-back-write loops
+  const isWritingRef = useRef(false);
+
   // Sync state from URL when searchParams change (e.g. back/forward navigation)
   useEffect(() => {
+    // Skip if we caused this searchParams change ourselves
+    if (isWritingRef.current) {
+      isWritingRef.current = false;
+      return;
+    }
     const state = readSearchState(searchParams);
     setQuery(state.query);
     setPublisher(state.publisher);
@@ -104,6 +112,7 @@ export function useSearchFilters(): UseSearchFiltersResult {
       sort,
     });
     if (params.toString() !== searchParams.toString()) {
+      isWritingRef.current = true;
       setSearchParams(params, { replace: true });
     }
   }, [debouncedQuery, debouncedPublisher, descriptors, page, platforms, ratings, searchParams, setSearchParams, sort, years]);

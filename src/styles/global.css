@@ -1467,6 +1467,34 @@ html {
   text-decoration: underline;
 }
 
+.changelog-expand-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  width: 100%;
+  padding: 0.6rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--primary-light);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background 0.15s var(--ease), border-color 0.15s var(--ease);
+}
+
+.changelog-expand-btn:hover {
+  background: var(--border);
+  border-color: var(--border-hover);
+}
+
+.changelog-expand-btn .ui-icon {
+  width: 14px;
+  height: 14px;
+}
+
 /* ═══════════════════════════════════════════════════════════════
    DARK MODE
    ═══════════════════════════════════════════════════════════════ */
@@ -1604,6 +1632,16 @@ html {
 
 [data-theme="dark"] .changelog-close:hover {
   background: var(--bg-input);
+}
+
+[data-theme="dark"] .changelog-expand-btn {
+  background: var(--bg-input);
+  border-color: var(--border);
+  color: var(--primary);
+}
+
+[data-theme="dark"] .changelog-expand-btn:hover {
+  background: var(--border);
 }
 
 [data-theme="dark"] img {

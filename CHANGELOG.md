@@ -4,10 +4,14 @@ All notable changes to this project are documented here.
 
 This file follows the Keep a Changelog section model: Added, Changed, Deprecated, Removed, Fixed, and Security. The project package version is currently `0.0.2`; the visible Git history also contains a `v0.0.1` commit message without a tag in this checkout.
 
-## [Unreleased]
+## [0.0.3]
 
 ### Added
 
+- README Q&A section with 13 collapsible entries covering setup, architecture, search, Worker, data pipeline, bundle analysis, routing, developer unlock, versioning, local Worker development, and CSS strategy.
+- README troubleshooting entries for npm package manager enforcement and TypeScript errors after pulling.
+- README link to `docs/architecture-review.md` and `docs/performance-review.md` in the additional documentation section.
+- CONTRIBUTING test directory breakdown documenting all 8 test categories (unit, integration, property, performance, a11y, security, visual, structure).
 - `ErrorBoundary` class component in `src/shared/components/error-boundary.tsx` with custom fallback render prop, `onError` callback, retry mechanism via `resetError`, and accessible default fallback UI.
 - Lazy-loaded `ChangelogModal` via `React.lazy` and `Suspense` — split into a separate 4 KB chunk, no longer included in the main bundle.
 - `ChangelogLoadingFallback` component with `role="status"` and `aria-label` for accessible loading state.
@@ -56,6 +60,8 @@ This file follows the Keep a Changelog section model: Added, Changed, Deprecated
 
 ### Changed
 
+- README troubleshooting section converted to collapsible `<details>` blocks with bold summary text for improved readability.
+- README architecture overview now links to `docs/architecture.md` for full details instead of duplicating information.
 - `ChangelogModal` converted to default export (named export preserved for backward compatibility) to support `React.lazy`.
 - `app-shell.tsx` uses `React.lazy` + `Suspense` + `ErrorBoundary` for the changelog modal instead of a static import.
 - Rating and descriptor image components now use `<picture>` elements with WebP sources instead of plain `<img>` tags.

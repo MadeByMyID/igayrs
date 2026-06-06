@@ -1,5 +1,5 @@
 import type { IgrsGame, ScoredSteamSearchCandidate, SteamSearchCandidate, SteamSearchResult } from '@/shared/types';
-import { ADDON_PENALTIES, STOP_WORDS, WEAK_TITLE_WORDS } from '@/shared/lib/search-constants';
+import { ADDON_PENALTIES, STOP_WORDS, WEAK_TITLE_WORDS } from '@/core/search-constants';
 
 const STORE_SEARCH_BASE = 'https://store.steampowered.com/api/storesearch/';
 

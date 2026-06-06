@@ -31,7 +31,7 @@ IGRS2nd is an unofficial frontend for the Indonesian Game Rating System (IGRS) p
 │    components/ → Reusable UI (shell, states, tooltips, badges)   │
 │    hooks/      → Custom hooks (debounce, search-index, steam)    │
 │    lib/        → Pure utilities (text, format, storage, etc.)    │
-│  styles/       → Global CSS tokens + Tailwind 4 integration      │
+│  styles/       → Global CSS tokens + LightningCSS                 │
 └─────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────┐

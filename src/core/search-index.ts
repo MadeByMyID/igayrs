@@ -93,20 +93,33 @@ function createFilterContext(filters: FilterOptions, scoreFn: SearchScoreFn): Fi
 }
 
 /**
- * Optimized scoring that uses pre-split query words from the filter context
- * to avoid repeated string splitting in the hot loop.
+ * Core fuzzy scoring — single implementation used by all scoring paths.
+ * Accepts pre-split query words to avoid redundant splitting in hot loops.
  */
-function scorePreNormalizedWithContext(q: string, qWords: string[], t: string): number {
+function scoreFuzzy(q: string, qWords: string[], t: string): number {
   if (!q || !t) return 0;
   if (t === q) return 100;
   if (t.startsWith(q)) return 90;
   const index = t.indexOf(q);
   if (index !== -1) return index === 0 || t[index - 1] === ' ' || t[index - 1] === '-' ? 80 : 70;
 
-  const textWords = t.split(' ');
+  // Word-prefix matching — check if query words match the start of any word in target.
+  // Avoids allocating a split array for `t` by scanning for word boundaries.
   let wordMatches = 0;
   for (const word of qWords) {
-    if (textWords.some(textWord => textWord.startsWith(word))) wordMatches += 1;
+    let found = false;
+    let searchFrom = 0;
+    while (searchFrom <= t.length - word.length) {
+      const wordIdx = t.indexOf(word, searchFrom);
+      if (wordIdx === -1) break;
+      if (wordIdx === 0 || t[wordIdx - 1] === ' ') {
+        found = true;
+        break;
+      }
+      // Skip past this occurrence to find next potential word boundary
+      searchFrom = wordIdx + 1;
+    }
+    if (found) wordMatches += 1;
   }
   if (wordMatches === qWords.length) return 60;
   if (wordMatches > 0) return 40 + (wordMatches / qWords.length) * 15;
@@ -123,6 +136,15 @@ function scorePreNormalizedWithContext(q: string, qWords: string[], t: string): 
   }
   if (queryIndex === q.length) return 20 + (q.length / t.length) * 15 + consecutiveBonus;
   return 0;
+}
+
+/**
+ * Optimized scoring that uses pre-split query words from the filter context
+ * to avoid repeated string splitting in the hot loop.
+ * Delegates to {@link scoreFuzzy} for the actual scoring algorithm.
+ */
+function scorePreNormalizedWithContext(q: string, qWords: string[], t: string): number {
+  return scoreFuzzy(q, qWords, t);
 }
 
 function matchIndexedItem(item: SearchIndexItem, context: FilterContext): number | null {
@@ -184,41 +206,26 @@ export function fuzzyScoreNormalized(query: string, text: string): number {
  * Scoring function for pre-normalized strings. Avoids redundant normalization
  * when called in hot loops where inputs are already normalized.
  *
+ * Delegates to {@link scoreFuzzy} for the actual scoring algorithm.
  * Uses the same scoring tiers as {@link fuzzyScoreNormalized} (0–100) but
  * expects both inputs to already be lowercased and stripped of special characters.
+ *
+ * Caches the last query split to avoid repeated allocations in tight loops
+ * where the same query is scored against many targets.
  *
  * @param q - Pre-normalized query string
  * @param t - Pre-normalized target string
  * @returns A score between 0 and 100 inclusive
  */
+let _lastQ = '';
+let _lastQWords: string[] = [];
+
 export function fuzzyScorePreNormalized(q: string, t: string): number {
-  if (!q || !t) return 0;
-  if (t === q) return 100;
-  if (t.startsWith(q)) return 90;
-  const index = t.indexOf(q);
-  if (index !== -1) return index === 0 || t[index - 1] === ' ' || t[index - 1] === '-' ? 80 : 70;
-
-  const queryWords = q.split(' ');
-  const textWords = t.split(' ');
-  let wordMatches = 0;
-  for (const word of queryWords) {
-    if (textWords.some(textWord => textWord.startsWith(word))) wordMatches += 1;
+  if (q !== _lastQ) {
+    _lastQ = q;
+    _lastQWords = q ? q.split(' ') : [];
   }
-  if (wordMatches === queryWords.length) return 60;
-  if (wordMatches > 0) return 40 + (wordMatches / queryWords.length) * 15;
-
-  let queryIndex = 0;
-  let consecutiveBonus = 0;
-  let lastMatch = -2;
-  for (let textIndex = 0; textIndex < t.length && queryIndex < q.length; textIndex += 1) {
-    if (t[textIndex] === q[queryIndex]) {
-      if (textIndex === lastMatch + 1) consecutiveBonus += 5;
-      lastMatch = textIndex;
-      queryIndex += 1;
-    }
-  }
-  if (queryIndex === q.length) return 20 + (q.length / t.length) * 15 + consecutiveBonus;
-  return 0;
+  return scoreFuzzy(q, _lastQWords, t);
 }
 
 /**

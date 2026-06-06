@@ -1,107 +1,94 @@
-import { X } from 'lucide-react';
-import { useEffect } from 'react';
+import { ChevronDown, X } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
+import changelogRaw from '../../../CHANGELOG.md?raw';
 
 const GITHUB_REPO = 'https://github.com/NatsumeAoii/IGRS2nd';
 
-interface ChangelogEntry {
-  version: string;
-  date?: string;
-  sections: { title: string; items: string[] }[];
+/** Number of versions shown before the "show more" expand. */
+const INITIAL_VISIBLE_COUNT = 2;
+
+// ---------------------------------------------------------------------------
+// Changelog parsing (same logic runs once on modal mount)
+// ---------------------------------------------------------------------------
+
+interface ChangelogSection {
+  title: string;
+  items: string[];
 }
 
-/**
- * Static changelog data for the latest 2 versions.
- * Update this when releasing a new version.
- */
-const CHANGELOG: ChangelogEntry[] = [
-  {
-    version: '0.0.2',
-    date: 'Unreleased',
-    sections: [
-      {
-        title: 'Added',
-        items: [
-          'Dark/light theme toggle with system preference detection',
-          '/game/:id route for deep-linkable game detail pages',
-          'Recently Viewed section on the home page',
-          'Steam Checker: genres, categories, platforms, Metacritic, pricing, header image',
-          'SteamDB link in Steam Checker results',
-          'Keyboard shortcut "/" to focus search input',
-          'Data preload on nav link hover',
-          'Footer links: GitHub, Report Issue, Changelog'
-        ]
-      },
-      {
-        title: 'Changed',
-        items: [
-          'Worker redirects to /game/:id instead of /search/#id',
-          'Steam Checker always attempts local game match',
-          'Search uses pre-normalized scoring for faster filtering',
-          'Domain logic split into focused modules (ratings, platforms, steam-domain, html)',
-          'Steam Checker sidebar extracted to its own file'
-        ]
-      },
-      {
-        title: 'Fixed',
-        items: [
-          'Data provider race condition when unlocked state changes mid-request',
-          'Recently viewed infinite render loop',
-          'Descriptor icon sizing inconsistency',
-          'Tooltip not styled in dark mode',
-          'Back button exits app on direct /game/:id navigation'
-        ]
-      },
-      {
-        title: 'Security',
-        items: [
-          'Steam header image URLs validated before rendering',
-          'Steam app ID extraction restricted to known Steam domains',
-          'Content-Type validation on JSON fetches'
-        ]
+interface ChangelogEntry {
+  version: string;
+  date: string | null;
+  sections: ChangelogSection[];
+}
+
+function parseChangelog(content: string): ChangelogEntry[] {
+  const lines = content.split('\n');
+  const entries: ChangelogEntry[] = [];
+  let currentEntry: ChangelogEntry | null = null;
+  let currentSection: ChangelogSection | null = null;
+
+  for (const line of lines) {
+    const versionMatch = line.match(/^## \[([^\]]+)\](?:\s*-\s*(.+))?/);
+    if (versionMatch) {
+      if (currentEntry) {
+        if (currentSection && currentSection.items.length > 0) {
+          currentEntry.sections.push(currentSection);
+        }
+        entries.push(currentEntry);
       }
-    ]
-  },
-  {
-    version: '0.0.1',
-    date: '2026-05-05',
-    sections: [
-      {
-        title: 'Added',
-        items: [
-          'Static app pages: home, search, ratings guide, Steam game checker',
-          'Search index with fuzzy matching, filters, and URL-backed state',
-          'Rating guide with summaries, criteria, and official source links',
-          'Content descriptor guide with review cues',
-          'Cloudflare Worker for /game/* preview and redirect',
-          'GitHub Actions CI and data refresh workflows',
-          'Responsive visual compatibility runner'
-        ]
-      },
-      {
-        title: 'Changed',
-        items: [
-          'Restructured from monolithic script to native ES modules',
-          'Standardized layout tokens, card radius, and focus states'
-        ]
-      },
-      {
-        title: 'Fixed',
-        items: [
-          'Mobile layout overflow in header, search, pagination, footer',
-          'Search result cards support keyboard activation',
-          'Data load failures render stable error states'
-        ]
+      currentEntry = {
+        version: versionMatch[1] ?? '',
+        date: versionMatch[2]?.trim() || null,
+        sections: [],
+      };
+      currentSection = null;
+      continue;
+    }
+
+    const sectionMatch = line.match(/^### (.+)/);
+    if (sectionMatch && currentEntry) {
+      if (currentSection && currentSection.items.length > 0) {
+        currentEntry.sections.push(currentSection);
       }
-    ]
+      currentSection = {
+        title: sectionMatch[1] ?? '',
+        items: [],
+      };
+      continue;
+    }
+
+    const itemMatch = line.match(/^- (.+)/);
+    if (itemMatch && currentSection) {
+      currentSection.items.push(itemMatch[1] ?? '');
+    }
   }
-];
+
+  if (currentEntry) {
+    if (currentSection && currentSection.items.length > 0) {
+      currentEntry.sections.push(currentSection);
+    }
+    entries.push(currentEntry);
+  }
+
+  return entries;
+}
+
+// ---------------------------------------------------------------------------
+// Modal component
+// ---------------------------------------------------------------------------
 
 interface ChangelogModalProps {
   onClose: () => void;
 }
 
 export function ChangelogModal({ onClose }: ChangelogModalProps) {
-  // Close on Escape key
+  const [expanded, setExpanded] = useState(false);
+  const entries = useMemo(() => parseChangelog(changelogRaw), []);
+  const hasMore = entries.length > INITIAL_VISIBLE_COUNT;
+  const hiddenCount = entries.length - INITIAL_VISIBLE_COUNT;
+  const visibleEntries = expanded ? entries : entries.slice(0, INITIAL_VISIBLE_COUNT);
+
   useEffect(() => {
     const handler = (event: KeyboardEvent) => {
       if (event.key === 'Escape') onClose();
@@ -110,7 +97,6 @@ export function ChangelogModal({ onClose }: ChangelogModalProps) {
     return () => window.removeEventListener('keydown', handler);
   }, [onClose]);
 
-  // Prevent body scroll while modal is open
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => { document.body.style.overflow = ''; };
@@ -126,9 +112,22 @@ export function ChangelogModal({ onClose }: ChangelogModalProps) {
           </button>
         </div>
         <div className="changelog-body">
-          {CHANGELOG.map(entry => (
+          {visibleEntries.map(entry => (
             <ChangelogVersion key={entry.version} entry={entry} />
           ))}
+
+          {hasMore && !expanded && (
+            <button
+              className="changelog-expand-btn"
+              type="button"
+              onClick={() => setExpanded(true)}
+              aria-expanded={false}
+            >
+              <ChevronDown className="ui-icon" aria-hidden="true" />
+              <span>Show {hiddenCount} older {hiddenCount === 1 ? 'version' : 'versions'}</span>
+            </button>
+          )}
+
           <div className="changelog-footer-link">
             <a href={`${GITHUB_REPO}/blob/main/CHANGELOG.md`} target="_blank" rel="noopener noreferrer">
               View full changelog on GitHub →
@@ -141,10 +140,14 @@ export function ChangelogModal({ onClose }: ChangelogModalProps) {
 }
 
 function ChangelogVersion({ entry }: { entry: ChangelogEntry }) {
+  const displayVersion = entry.version.toLowerCase() === 'unreleased'
+    ? 'Unreleased'
+    : `v${entry.version}`;
+
   return (
     <article className="changelog-version">
       <div className="changelog-version-header">
-        <span className="changelog-version-tag">v{entry.version}</span>
+        <span className="changelog-version-tag">{displayVersion}</span>
         {entry.date ? <span className="changelog-version-date">{entry.date}</span> : null}
       </div>
       {entry.sections.map(section => (

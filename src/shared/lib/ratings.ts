@@ -2,7 +2,9 @@
  * Rating and descriptor helpers for IGRS metadata lookups.
  */
 import { IMAGE_BASE } from '@/core/constants';
-import type { IgrsGame, IgrsMeta, Language } from '@/shared/types';
+import type { IgrsMeta, Language } from '@/shared/types';
+
+export { descriptorIdsFromGame, ratingIdsFromGame } from '@/core/game-extractors';
 
 export const IMG_RATING = (id: number): string => `${IMAGE_BASE}/ratings/${id}.png`;
 export const IMG_RATING_WEBP = (id: number): string => `${IMAGE_BASE}/ratings/${id}.webp`;
@@ -39,14 +41,4 @@ export function descriptorName(meta: IgrsMeta, id: number, lang: Language): stri
   return lang === 'id'
     ? descriptor.nameId || descriptor.nameEn || '?'
     : descriptor.nameEn || descriptor.nameId || '?';
-}
-
-export function ratingIdsFromGame(game: IgrsGame): number[] {
-  if (!Array.isArray(game.ratings)) return [];
-  return game.ratings.map(id => Number(id)).filter(Number.isFinite);
-}
-
-export function descriptorIdsFromGame(game: IgrsGame): number[] {
-  if (!Array.isArray(game.descriptors)) return [];
-  return game.descriptors.map(id => Number(id)).filter(Number.isFinite);
 }

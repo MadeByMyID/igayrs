@@ -102,10 +102,14 @@ changes
 
 Run `npm run check` for all changes. It performs syntax checks, linting, TypeScript checks, tests, and the production build. Test files live under:
 
-- `src/tests/structure/`
-- `src/tests/unit/`
-- `src/tests/integration/`
-- `src/tests/performance/`
+- `src/tests/unit/` — Isolated logic tests
+- `src/tests/integration/` — Cross-module and component tests
+- `src/tests/property/` — Property-based tests (fast-check)
+- `src/tests/performance/` — Budget-based performance tests
+- `src/tests/a11y/` — Accessibility tests (axe-core)
+- `src/tests/security/` — XSS and injection vector tests
+- `src/tests/visual/` — Visual regression and layout tests
+- `src/tests/structure/` — Codebase structure and CI validation tests
 
 Run `npm run visual:check` when changing:
 
@@ -152,17 +156,15 @@ When changing JavaScript:
 
 ### Styling Strategy
 
-This project uses three complementary CSS approaches:
+This project uses two complementary CSS approaches:
 
 1. **Global CSS** (`src/styles/global.css`): Design tokens (custom properties), CSS reset, layout shell (header, footer, app-layout, sidebar), and shared component styles (buttons, loading states, detail cards). This is where site-wide structural styles live.
 2. **CSS Modules** (`*.module.css`): Feature-scoped styles for individual pages and components. Use CSS Modules for any styles that are specific to a single feature (search cards, ratings page layout, etc.).
-3. **Tailwind CSS 4**: Provides the CSS reset baseline and utility classes. Use Tailwind utilities sparingly for one-off adjustments that don't warrant a new class (e.g., a single `flex` or `gap` override). Do not build entire component layouts with Tailwind utilities — use CSS Modules instead.
 
 **When choosing where to put a new style:**
 - Is it a design token or affects the entire site? → `global.css` `:root` variables
 - Is it a layout primitive shared across features (header, footer, cards)? → `global.css`
 - Is it specific to one feature or page? → `*.module.css` in that feature's directory
-- Is it a one-off utility (spacing tweak, single flex alignment)? → Tailwind utility class
 
 ### CSS Rules
 

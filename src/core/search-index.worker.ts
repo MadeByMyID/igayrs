@@ -4,8 +4,7 @@
  * the serialized result (Sets converted to arrays for structured clone).
  */
 import { createGameSearchIndex } from '@/core/search-index';
-import { descriptorIdsFromGame, ratingIdsFromGame } from '@/shared/lib/ratings';
-import { platformIdsFromGame } from '@/shared/lib/platforms';
+import { descriptorIdsFromGame, platformIdsFromGame, ratingIdsFromGame } from '@/core/game-extractors';
 import type { IgrsGame, IgrsMeta, SearchFacets } from '@/shared/types';
 
 export interface WorkerMessage {

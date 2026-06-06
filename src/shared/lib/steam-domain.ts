@@ -183,11 +183,23 @@ export function steamIgrsDescriptorIdsFromText(meta: IgrsMeta, text: unknown, la
         .map(value => normalizeSearchText(value))
         .filter(Boolean);
       if (!variants.length) continue;
-      if (variants.some(variant => variant === line || variant.includes(line) || line.includes(variant))) {
+      // Match if any variant equals the line, or the line contains the variant
+      // as a complete word (bounded by start/end or spaces)
+      if (variants.some(variant => variant === line || isWholeWordMatch(line, variant))) {
         const numericId = Number(id);
         if (Number.isFinite(numericId) && !ids.includes(numericId)) ids.push(numericId);
       }
     }
   }
   return ids.sort((a, b) => descriptorName(meta, a, lang).localeCompare(descriptorName(meta, b, lang)));
+}
+
+/** Returns true if `needle` appears in `haystack` as a whole word (bounded by spaces or string edges). */
+function isWholeWordMatch(haystack: string, needle: string): boolean {
+  if (!needle || !haystack) return false;
+  const index = haystack.indexOf(needle);
+  if (index === -1) return false;
+  const before = index === 0 || haystack[index - 1] === ' ';
+  const after = (index + needle.length) === haystack.length || haystack[index + needle.length] === ' ';
+  return before && after;
 }

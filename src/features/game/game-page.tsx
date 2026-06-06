@@ -1,5 +1,5 @@
 import { ChevronLeft } from 'lucide-react';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useLanguage } from '@/app/providers/language-provider';
 import { useRequiredIgrsData } from '@/app/providers/data-provider';
@@ -15,7 +15,10 @@ export function GamePage() {
   const { lang, t } = useLanguage();
   const { data, error, loading } = useRequiredIgrsData();
   const navigate = useNavigate();
-  const steamApi = useMemo(() => createSteamApi({ t }), [t]);
+
+  // Use useState with lazy initializer so the Steam API instance (and its
+  // internal LRU cache) is created exactly once and persists across re-renders.
+  const [steamApi] = useState(() => createSteamApi({ t }));
 
   const gameId = Number(id);
   const game = data?.gamesById.get(gameId) || null;

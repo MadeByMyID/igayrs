@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import { IMG_DESCRIPTOR, IMG_DESCRIPTOR_WEBP, descriptorName } from '@/shared/lib/ratings';
 import { Tooltip } from '@/shared/components/tooltip';
 import type { IgrsMeta, Language } from '@/shared/types';
@@ -9,11 +10,19 @@ interface DescriptorIconsProps {
   meta: IgrsMeta;
 }
 
-export function DescriptorIcons({ emptyLabel, ids, lang, meta }: DescriptorIconsProps) {
-  const cleanIds = [...new Set((ids || []).map(id => Number(id)).filter(Number.isFinite))];
-
-  if (!cleanIds.length) {
+export const DescriptorIcons = memo(function DescriptorIcons({ emptyLabel, ids, lang, meta }: DescriptorIconsProps) {
+  if (!ids || ids.length === 0) {
     return <div className="detail-no-descriptors">{emptyLabel}</div>;
+  }
+
+  // Deduplicate — game data may contain duplicate descriptor IDs
+  const seen = new Set<number>();
+  const cleanIds: number[] = [];
+  for (const id of ids) {
+    if (!seen.has(id)) {
+      seen.add(id);
+      cleanIds.push(id);
+    }
   }
 
   return (
@@ -30,4 +39,4 @@ export function DescriptorIcons({ emptyLabel, ids, lang, meta }: DescriptorIcons
       ))}
     </div>
   );
-}
+});

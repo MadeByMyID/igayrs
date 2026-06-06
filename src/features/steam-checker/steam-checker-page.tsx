@@ -5,7 +5,7 @@ import { renderSteamDescription } from '@/core/steam-description';
 import { safeHttpUrl } from '@/core/safe-render';
 import { useLanguage } from '@/app/providers/language-provider';
 import { useRequiredIgrsData } from '@/app/providers/data-provider';
-import { createSteamApi } from '@/shared/api/steam-api';
+import { createSteamApi, isSteamProxyError } from '@/shared/api/steam-api';
 import { ErrorState, LoadingState } from '@/shared/components/data-state';
 import { isAbortError } from '@/shared/lib/abort';
 import { parseSteamAppId } from '@/shared/lib/steam-domain';
@@ -17,7 +17,7 @@ import type { SteamGameDetails, SteamReviewSummary } from '@/shared/types';
 type CheckerState =
   | { status: 'idle' }
   | { status: 'loading'; appId: string }
-  | { status: 'error'; appId: string; message: string }
+  | { status: 'error'; appId: string; message: string; isProxyError?: boolean }
   | { status: 'success'; appId: string; reviewSummary: SteamReviewSummary | null; steamGame: SteamGameDetails };
 
 export function SteamCheckerPage() {
@@ -67,7 +67,7 @@ export function SteamCheckerPage() {
       if (isAbortError(nextError)) return;
       if (!isLatestRequest()) return;
       const message = nextError instanceof Error ? nextError.message : t('steamchecker.error.load');
-      setCheckerState({ status: 'error', appId, message });
+      setCheckerState({ status: 'error', appId, message, isProxyError: isSteamProxyError(nextError) });
     }
   }, [setSearchParams, steamApi, t]);
 
@@ -193,8 +193,14 @@ function SteamCheckerMain({ onRetry, state, t }: { onRetry: (appId: string) => v
   if (state.status === 'error') {
     return (
       <div className={`${styles.emptyState} ${styles.fadeIn}`}>
-        <div className={styles.emptyStateTitle}>{state.message}</div>
-        <div className={styles.emptyStateDesc}>{t('steamchecker.error.load')}</div>
+        <div className={styles.emptyStateTitle}>
+          {state.isProxyError ? 'Steam data temporarily unavailable' : state.message}
+        </div>
+        <div className={styles.emptyStateDesc}>
+          {state.isProxyError
+            ? 'The Steam proxy service may be experiencing issues. Please try again later.'
+            : t('steamchecker.error.load')}
+        </div>
         {parseSteamAppId(state.appId) ? (
           <button className={`detail-link-btn ${styles.emptyRetryBtn}`} type="button" onClick={() => onRetry(state.appId)}>
             {t('steamchecker.retry')}

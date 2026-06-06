@@ -13,6 +13,18 @@ import type {
   SteamSearchResult
 } from '@/shared/types';
 
+export class SteamProxyError extends Error {
+  readonly code = 'STEAM_PROXY_UNAVAILABLE' as const;
+  constructor(message: string) {
+    super(message);
+    this.name = 'SteamProxyError';
+  }
+}
+
+export function isSteamProxyError(error: unknown): error is SteamProxyError {
+  return error instanceof SteamProxyError;
+}
+
 const DEFAULT_PROXY_BASE = 'https://cors.mefi.workers.dev/';
 const DEFAULT_PROXY_ALLOWLIST = [DEFAULT_PROXY_BASE];
 
@@ -24,7 +36,7 @@ interface SteamApiOptions {
   t?: Translate;
 }
 
-interface SteamFetchOptions {
+export interface SteamFetchOptions {
   retries?: number;
   signal?: AbortSignal;
 }
@@ -126,21 +138,34 @@ export function createSteamApi(options: SteamApiOptions = {}) {
 
         return await response.json() as T;
       } catch (error) {
+        // Always propagate user-initiated abort immediately
         if (fetchOptions.signal?.aborted) {
           throw createAbortError();
         }
 
-        if (isAbortError(error) && attempt >= retries) break;
         if (attempt >= retries) break;
-        const jitter = Math.floor(Math.random() * 80);
-        await wait(Math.min(1200, 250 * (2 ** attempt)) + jitter);
+        if (!isAbortError(error)) {
+          // Non-abort, non-final error — retry with backoff
+          const jitter = Math.floor(Math.random() * 80);
+          await wait(Math.min(1200, 250 * (2 ** attempt)) + jitter);
+        } else {
+          // Abort from internal timeout — retry
+          const jitter = Math.floor(Math.random() * 80);
+          await wait(Math.min(1200, 250 * (2 ** attempt)) + jitter);
+        }
       } finally {
         window.clearTimeout(timeout);
         cleanup();
       }
     }
 
-    throw new Error(translate('steamchecker.error.load'));
+    // Final check: if the caller's signal was aborted during the last iteration,
+    // propagate abort instead of a generic proxy error
+    if (fetchOptions.signal?.aborted) {
+      throw createAbortError();
+    }
+
+    throw new SteamProxyError(translate('steamchecker.error.load'));
   }
 
   async function fetchSteamReviewSummary(appId: string, fetchOptions: SteamFetchOptions = {}): Promise<SteamReviewSummary | null> {

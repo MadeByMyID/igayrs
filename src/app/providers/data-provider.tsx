@@ -1,7 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { loadIgrsData } from '@/shared/api/data-service';
+import { createIgrsDataClient } from '@/shared/api/igrs-data-client';
 import { useLanguage } from '@/app/providers/language-provider';
-import { createDataCache } from '@/shared/api/data-cache';
 import type { IgrsData } from '@/shared/types';
 
 interface DataContextValue {
@@ -13,106 +12,52 @@ interface DataContextValue {
 
 const DataContext = createContext<DataContextValue | null>(null);
 
-/**
- * Module-level cache keyed by unlocked state.
- * Persists across component unmounts within the same browser session.
- */
-const cacheByUnlocked = {
-  locked: createDataCache<IgrsData>(),
-  unlocked: createDataCache<IgrsData>(),
-};
-
-function getCacheForState(unlocked: boolean) {
-  return unlocked ? cacheByUnlocked.unlocked : cacheByUnlocked.locked;
-}
+/** Module-level singleton — persists across component unmounts within the same browser session. */
+const client = createIgrsDataClient();
 
 export function DataProvider({ children }: { children: ReactNode }) {
   const { unlocked } = useLanguage();
-  const [data, setData] = useState<IgrsData | null>(null);
+  const [data, setData] = useState<IgrsData | null>(() => client.getCached({ unlocked }));
   const [error, setError] = useState<Error | null>(null);
   const [loading, setLoading] = useState(false);
   const loadedUnlockedRef = useRef<boolean | null>(null);
-  const pendingRef = useRef<{ promise: Promise<IgrsData>; unlocked: boolean } | null>(null);
-  const dataRef = useRef<IgrsData | null>(null);
-  const revalidatingRef = useRef(false);
+
+  // Sync React state when the client emits new data
+  useEffect(() => {
+    const unsubscribe = client.subscribe(nextData => {
+      setData(nextData);
+    });
+    return unsubscribe;
+  }, []);
 
   const ensureData = useCallback(async () => {
-    const cache = getCacheForState(unlocked);
-    const cached = cache.get();
+    const cached = client.getCached({ unlocked });
 
-    // If we have fresh cached data matching the current unlocked state, return immediately
-    if (cached && cache.isFresh() && loadedUnlockedRef.current === unlocked) {
-      return cached.data;
+    // Fresh or stale cache for current unlocked state → delegate to client (no loading state)
+    if (cached && loadedUnlockedRef.current === unlocked) {
+      return client.getData({ unlocked });
     }
 
-    // If cache exists but is stale, serve cached data immediately and revalidate in background
-    if (cached && cache.isStale() && loadedUnlockedRef.current === unlocked) {
-      // Serve stale data immediately
-      if (dataRef.current !== cached.data) {
-        dataRef.current = cached.data;
-        setData(cached.data);
-      }
-
-      // Revalidate in background (only if not already revalidating)
-      if (!revalidatingRef.current) {
-        revalidatingRef.current = true;
-        loadIgrsData({ unlocked })
-          .then(nextData => {
-            cache.set(nextData);
-            loadedUnlockedRef.current = unlocked;
-            dataRef.current = nextData;
-            setData(nextData);
-          })
-          .catch(() => {
-            // On revalidation failure: retain cached data, no error surfaced
-          })
-          .finally(() => {
-            revalidatingRef.current = false;
-          });
-      }
-
-      return cached.data;
-    }
-
-    // Return cached data if it matches the current unlocked state (fresh, already loaded)
-    if (dataRef.current && loadedUnlockedRef.current === unlocked) return dataRef.current;
-
-    // Return in-flight request only if it matches the current unlocked state
-    if (pendingRef.current && pendingRef.current.unlocked === unlocked) {
-      return pendingRef.current.promise;
-    }
-
+    // No cache for current state → show loading indicator
     setLoading(true);
     setError(null);
-    const request = loadIgrsData({ unlocked })
-      .then(nextData => {
-        // Store in module-level cache on successful fetch
-        cache.set(nextData);
-        loadedUnlockedRef.current = unlocked;
-        dataRef.current = nextData;
-        setData(nextData);
-        return nextData;
-      })
-      .catch((nextError: unknown) => {
-        const normalized = nextError instanceof Error ? nextError : new Error(String(nextError));
-        setError(normalized);
-        throw normalized;
-      })
-      .finally(() => {
-        // Only clear pending if this is still the active request
-        if (pendingRef.current?.promise === request) {
-          pendingRef.current = null;
-        }
-        setLoading(false);
-      });
-
-    pendingRef.current = { promise: request, unlocked };
-    return request;
+    try {
+      const nextData = await client.getData({ unlocked });
+      loadedUnlockedRef.current = unlocked;
+      setData(nextData);
+      return nextData;
+    } catch (nextError: unknown) {
+      const normalized = nextError instanceof Error ? nextError : new Error(String(nextError));
+      setError(normalized);
+      throw normalized;
+    } finally {
+      setLoading(false);
+    }
   }, [unlocked]);
 
-  // Re-fetch when unlocked state changes and we have stale data
+  // Re-fetch when unlocked state changes and data was loaded for a different state
   useEffect(() => {
-    if (!dataRef.current || loadedUnlockedRef.current === unlocked) return;
+    if (loadedUnlockedRef.current === null || loadedUnlockedRef.current === unlocked) return;
     void ensureData().catch(() => undefined);
   }, [ensureData, unlocked]);
 

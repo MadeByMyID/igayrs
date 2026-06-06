@@ -43,6 +43,8 @@ export function findRelatedGames(
 
   // Score candidates: games sharing ≥1 rating AND ≥1 descriptor
   const scored: Array<{ game: IgrsGame; score: number }> = [];
+  // Track the minimum score in our top-N to enable early pruning
+  let minKeptScore = 0;
 
   for (const game of allGames) {
     // Exclude the current game itself
@@ -74,7 +76,18 @@ export function findRelatedGames(
     }
     if (sharedDescriptorCount === 0) continue;
 
+    // Skip candidates that can't make it into the top-N
+    if (scored.length >= maxResults && sharedDescriptorCount < minKeptScore) continue;
+
     scored.push({ game, score: sharedDescriptorCount });
+
+    // Maintain a bounded result set: sort and trim periodically
+    // to keep minKeptScore accurate without sorting on every insert.
+    if (scored.length >= maxResults * 3) {
+      scored.sort((a, b) => b.score - a.score);
+      scored.length = maxResults;
+      minKeptScore = scored[scored.length - 1]!.score;
+    }
   }
 
   // Sort by descriptor overlap descending

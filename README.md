@@ -4,7 +4,7 @@ IGRSDB is an unofficial, static web interface for browsing game entries from the
 
 ## Prerequisites
 
-- Node.js 18 or newer
+- Node.js 22.12.0 or newer
 - npm 9 or newer (using the committed `package-lock.json`)
 - A Chromium-based browser for `npm run visual:check` (optional)
 
@@ -39,7 +39,7 @@ Open the printed local URL (usually `http://127.0.0.1:5173/`).
 ```text
 .github/          GitHub Actions workflows (CI, Pages deploy, data refresh)
 artifacts/        Generated reports (bundle analysis, visual compat) — gitignored
-config/           Build configuration (Vite, TypeScript, ESLint, Tailwind, bundle-size thresholds)
+config/           Build configuration (Vite, TypeScript, ESLint, bundle-size thresholds)
 docs/             Project documentation (architecture, bundle analysis, image optimization, cache strategy)
 ops/              Operational code — deployment scripts and Cloudflare Worker
   ops/scripts/    Node utilities for static serving, WebP conversion, visual checks
@@ -52,7 +52,7 @@ src/              Application source code
   src/features/   Route-level UI (home, search, game, ratings, steam-checker, fallback)
   src/shared/     Shared API clients, reusable components, hooks, and utility libraries
   src/styles/     Global CSS (tokens, reset, typography) and feature CSS modules
-  src/tests/      Unit, integration, property-based, and structure tests
+  src/tests/      Unit, integration, property-based, performance, a11y, security, visual, and structure tests
 ```
 
 ## Architecture Overview
@@ -72,6 +72,8 @@ IGRSDB is a single-page application deployed as static files to GitHub Pages. Th
 │  oEmbed responses   │
 └─────────────────────┘
 ```
+
+For full architecture details including data flow, deployment topology, and key decisions, see [docs/architecture.md](./docs/architecture.md).
 
 ## Deployment
 
@@ -124,11 +126,11 @@ Run visual checks for UI, layout, or responsive changes:
 npm run visual:check
 ```
 
-The test suite includes unit tests, integration tests, property-based tests (fast-check), and structure tests.
+The test suite includes unit tests, integration tests, property-based tests (fast-check), performance tests, accessibility tests (axe-core), security tests (XSS vectors), visual compatibility tests, and structure tests.
 
 ## Troubleshooting
 
-<details><summary>The page shows a data loading error</summary>
+<details><summary><strong>The page shows a data loading error</strong></summary>
 
 - Use the dev server (`npm run dev`) instead of opening HTML files directly.
 - Confirm `public/assets/data/json/igrs.meta.json` and `igrs.games.json` exist.
@@ -136,20 +138,131 @@ The test suite includes unit tests, integration tests, property-based tests (fas
 
 </details>
 
-<details><summary>The visual checker cannot find a browser</summary>
+<details><summary><strong>The visual checker cannot find a browser</strong></summary>
 
 Set an explicit browser path:
 
-```bash
-CHROME_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe" npm run visual:check
+```powershell
+$env:CHROME_PATH = "C:\Program Files\Google\Chrome\Application\chrome.exe"
+npm run visual:check
 ```
+
+On macOS/Linux:
+
+```bash
+CHROME_PATH="/usr/bin/google-chrome" npm run visual:check
+```
+
+The script searches common Chromium/Chrome/Edge paths on Windows, macOS, and Linux. If none are found, pass the path explicitly.
 
 </details>
 
-<details><summary>The Steam checker cannot load data</summary>
+<details><summary><strong>The Steam checker cannot load data</strong></summary>
 
 - Confirm the input is a numeric Steam app ID or a Steam app URL.
 - Confirm network access and that the CORS proxy is reachable.
+- The CORS proxy is configured in `src/shared/api/steam-api.ts`.
+
+</details>
+
+<details><summary><strong>npm install fails or uses wrong package manager</strong></summary>
+
+This project enforces npm via a `preinstall` script. If you see an error about package managers, confirm you are running `npm install` and not `yarn`, `pnpm`, or `bun`.
+
+</details>
+
+<details><summary><strong>TypeScript errors after pulling changes</strong></summary>
+
+Run `npm install` to ensure dependencies are current, then `npm run typecheck`. The project uses TypeScript 6 with strict mode, `noUncheckedIndexedAccess`, and project references (see `config/tsconfig.json`).
+
+</details>
+
+## Q&A
+
+<details><summary><strong>What Node.js version do I need?</strong></summary>
+
+Node.js 22.12.0 or newer. The `engines` field in `package.json` enforces this. CI tests on Node 22 and 24.
+
+</details>
+
+<details><summary><strong>Why does the project use multiple HTML entry points?</strong></summary>
+
+Vite is configured with multiple rollup inputs (`src/index.html`, `src/404.html`, `src/ratings/index.html`, `src/search/index.html`, `src/steamchecker/index.html`). Each maps to a route that GitHub Pages can serve directly, enabling deep-link navigation without server-side rewriting. All entry points render the same React app but at different base paths.
+
+</details>
+
+<details><summary><strong>How does the search work without a backend?</strong></summary>
+
+The SPA fetches `igrs.games.json` at runtime, posts the array to a Web Worker (`src/core/search-index.worker.ts`), which builds a normalized in-memory index. Filtering and scoring happen client-side with pre-normalized strings and pre-built Sets for O(1) filter checks. The index supports fuzzy matching, multi-field filtering, and faceted counts.
+
+</details>
+
+<details><summary><strong>What is the Cloudflare Worker for?</strong></summary>
+
+Social media bots (Discord, Slack, Telegram, Twitter) do not execute JavaScript. The Worker at `ops/worker/` intercepts `/game/:id` requests from bots and returns server-rendered HTML with Open Graph and oEmbed metadata. Normal browsers get a 302 redirect to the SPA. Deploy with `wrangler deploy` from the `ops/worker/` directory.
+
+</details>
+
+<details><summary><strong>How does the data refresh pipeline work?</strong></summary>
+
+A daily GitHub Actions cron (`.github/workflows/update-igrs-db.yml`) fetches all games from the IGRS public API in parallel batches (15 concurrent, chunked by ID range), normalizes data with `jq`, runs the project test suite against the new data, validates integrity (fails if game count drops >10%), and commits the resulting JSON files. If any step fails, an issue is created automatically.
+
+</details>
+
+<details><summary><strong>How do I generate a bundle analysis report?</strong></summary>
+
+```powershell
+$env:ANALYZE = "true"
+npm run build
+```
+
+This produces `artifacts/bundle-report.html` (treemap visualization) via `rollup-plugin-visualizer`. See `docs/bundle-analysis.md` for the latest findings.
+
+</details>
+
+<details><summary><strong>What are the bundle size limits?</strong></summary>
+
+Configured in `config/bundle-size.json`: JavaScript < 200 KB gzip, CSS < 30 KB gzip. CI runs `scripts/check-bundle-size.js` which measures all files in `dist/assets/` and fails if thresholds are exceeded.
+
+</details>
+
+<details><summary><strong>How do I add a new page/route?</strong></summary>
+
+1. Create a feature directory under `src/features/`.
+2. Add an HTML entry point under `src/` if the route needs a direct GitHub Pages path (e.g., `src/newpage/index.html`).
+3. Register the route in `src/app/App.tsx` (use `React.lazy` for code splitting).
+4. Add the HTML entry to `config/vite.config.ts` → `build.rollupOptions.input`.
+5. Update navigation in the app shell if needed.
+
+</details>
+
+<details><summary><strong>What is the "developer unlock" / extra data?</strong></summary>
+
+`igrs.extra.json` contains optional media URLs (video, in-game screenshots). The app conditionally loads this file based on local UI state. This is a frontend convenience for development visibility — it has no authorization or security significance.
+
+</details>
+
+<details><summary><strong>Why is the version still 0.0.2?</strong></summary>
+
+The project has not cut a formal release beyond the initial versions. The `package.json` version is `0.0.2`. Changes are tracked in the `[Unreleased]` section of `CHANGELOG.md` and will be promoted to a dated version when the maintainer creates a release.
+
+</details>
+
+<details><summary><strong>How do I work on the Cloudflare Worker locally?</strong></summary>
+
+```bash
+cd ops/worker
+npm install
+npm run dev
+```
+
+This starts `wrangler dev` for local Worker development. The Worker has its own `package.json`, `tsconfig.json`, and `wrangler.toml`. Type-check with `npm run typecheck` from within the `ops/worker/` directory.
+
+</details>
+
+<details><summary><strong>Why are there CSS Modules AND global CSS?</strong></summary>
+
+Global CSS (`src/styles/global.css`) handles design tokens, CSS reset, typography, and site-wide layout. CSS Modules (`*.module.css`) handle feature-scoped styles. See the "Styling Strategy" section in `CONTRIBUTING.md` for guidance on when to use each approach.
 
 </details>
 
@@ -165,9 +278,11 @@ See [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md) for community participation and e
 - [LICENSE.md](./LICENSE.md) — License (all rights reserved until replaced)
 - [SECURITY.md](./SECURITY.md) — Vulnerability reporting
 - [docs/architecture.md](./docs/architecture.md) — System architecture details
+- [docs/architecture-review.md](./docs/architecture-review.md) — Architecture review findings
 - [docs/bundle-analysis.md](./docs/bundle-analysis.md) — Bundle composition and optimization
 - [docs/image-optimization.md](./docs/image-optimization.md) — WebP conversion and serving pattern
 - [docs/cache-strategy.md](./docs/cache-strategy.md) — Caching approach
+- [docs/performance-review.md](./docs/performance-review.md) — Performance optimization details
 
 ## License
 

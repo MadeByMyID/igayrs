@@ -48,7 +48,9 @@ vi.mock('@/app/providers/data-provider', () => ({
 }));
 
 vi.mock('@/shared/api/steam-api', () => ({
-  createSteamApi: () => steamApiMock
+  createSteamApi: () => steamApiMock,
+  isSteamProxyError: (error: unknown) => error instanceof Error && error.message.includes('STEAM_PROXY_UNAVAILABLE'),
+  SteamProxyError: class SteamProxyError extends Error { readonly code = 'STEAM_PROXY_UNAVAILABLE' as const; constructor(msg: string) { super(msg); this.name = 'SteamProxyError'; } }
 }));
 
 describe('SteamCheckerPage request ordering', () => {

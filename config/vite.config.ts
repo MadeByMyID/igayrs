@@ -1,14 +1,24 @@
-import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { readFileSync } from 'node:fs';
 import { fileURLToPath, URL } from 'node:url';
 import { defineConfig, type Plugin } from 'vitest/config';
 
-const pkg = JSON.parse(
-  readFileSync(fileURLToPath(new URL('../package.json', import.meta.url)), 'utf-8')
-);
-
 const analyze = process.env.ANALYZE === 'true';
+
+// Extract version from CHANGELOG.md at build time (just the version string).
+// The full changelog content is imported via ?raw only in the lazy-loaded modal.
+const changelogPath = fileURLToPath(new URL('../CHANGELOG.md', import.meta.url));
+const changelogContent = readFileSync(changelogPath, 'utf-8');
+const versionPattern = /^## \[([^\]]+)\]/gm;
+let detectedVersion = '0.0.0';
+let versionMatch: RegExpExecArray | null;
+while ((versionMatch = versionPattern.exec(changelogContent)) !== null) {
+  const v = versionMatch[1];
+  if (v && v.toLowerCase() !== 'unreleased') {
+    detectedVersion = v;
+    break;
+  }
+}
 
 const sourceRootUrl = new URL('../src/', import.meta.url);
 const root = fileURLToPath(sourceRootUrl);
@@ -59,12 +69,11 @@ export default defineConfig(async () => {
   return {
     base: './',
     define: {
-      APP_VERSION: JSON.stringify(pkg.version),
+      APP_VERSION: JSON.stringify(detectedVersion),
     },
     plugins: [
       hiddenPathGuard(),
-      react(),
-      tailwindcss()
+      react()
     ],
     publicDir: fileURLToPath(new URL('../public', import.meta.url)),
     resolve: {
@@ -116,10 +125,10 @@ export default defineConfig(async () => {
       coverage: {
         provider: 'v8' as const,
         thresholds: {
-          statements: 55,
-          branches: 45,
-          functions: 59,
-          lines: 59,
+          statements: 70,
+          branches: 60,
+          functions: 70,
+          lines: 70,
         },
         reporter: ['text', 'lcov'],
       } as Record<string, unknown>,
